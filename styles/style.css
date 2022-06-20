@@ -213,6 +213,14 @@ a{
     justify-content: space-around;
 }
 
+.education-code-container{
+    border: solid 2px var(--color-line);
+    padding: 2rem;
+    border-radius: 25px;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+}
+
 .education-logo{
     width: 10rem;
     background-color: white;
