@@ -19,8 +19,8 @@ html{
 }
 
 .cv-container{
-    width: 21.59cm;
-    height: 27.94cm;
+    width: 21cm;
+    height: 29.7cm;
     background-color: var(--color-bg-main);
     display: flex;
     margin: 0 auto;
@@ -113,7 +113,7 @@ html{
 .cv--profession-container h1{
     font-size: 2rem;
     line-height: 2.5rem;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
 }
 
 .cv--profession-container h2{
@@ -135,6 +135,7 @@ html{
     font-size: 1.3rem;
     line-height: 1.8rem;
     text-align: justify;
+    margin-top: .3rem;
     /* list-style: none; */
 }
 
