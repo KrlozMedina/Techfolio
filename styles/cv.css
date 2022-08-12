@@ -1,0 +1,145 @@
+:root{
+    --color-bg-aside: #242935;
+    --color-bg-main: #ffffff;
+    --color-font-aside: white;
+    --color-font-main: #242935;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    background-color: #0c3746;
+}
+
+.cv-container{
+    width: 21cm;
+    height: 29.7cm;
+    background-color: var(--color-bg-main);
+    display: flex;
+    margin: 0 auto;
+}
+
+.cv--info-container{
+    width: 30%;
+    /* height: 28cm; */
+    background-color: var(--color-bg-aside);
+    color: var(--color-font-aside);
+    padding: 4rem;
+}
+
+.cv--info-container article{
+    width: 100%;
+    text-align: center;
+    margin: 2rem auto;
+}
+
+.cv--info-container article img{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+}
+
+.cv--info-container article h1{
+    font-size: 2.5rem;
+    border-bottom: 1px solid var(--color-font-aside);
+    font-weight: 500;
+}
+
+.cv--info-container article h2{
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+.cv--info-container section{
+    width: 100%;
+    margin: 1rem auto;
+    /* display: inline-flex;
+    flex-direction: column; */
+}
+
+.cv--info-container section h3{
+    /* width: 1rem; */
+    height: fit-content;
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    line-height: 2.5rem;
+    font-weight: 500;
+}
+
+.cv--info-container section p{
+    font-size: 1.5rem;
+    line-height: 2rem;
+    /* margin-bottom: 1rem; */
+}
+
+.container--links{
+    display: flex;
+    flex-direction: column;
+}
+
+.container--links a{
+    width: fit-content;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: var(--color-font-aside);
+    line-height: 2rem;
+}
+
+.box{
+    width: 100%;
+    height: 1rem;
+    margin-bottom: 1rem;
+    border: solid 2px rgb(41, 40, 40);
+    background-color: gray;
+    color: antiquewhite;
+}
+::-webkit-progress-value{
+    background-color: var(--color-font-aside);
+}
+
+.cv--profession-container{
+    width: 70%;
+    padding: 1rem 3rem;
+}
+
+.cv--profession-container h1{
+    font-size: 2rem;
+    line-height: 2.5rem;
+    margin-top: 2.5rem;
+}
+
+.cv--profession-container h2{
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    line-height: 2rem;
+}
+
+.cv--profession-container h3{
+    font-size: 1.2rem;
+    /* margin-top: 1rem; */
+    line-height: 1.7rem;
+    color: gray;
+    font-weight: 100;
+}
+
+.cv--profession-container p,
+.cv--profession-container li{
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+    text-align: justify;
+    margin-top: .3rem;
+    /* list-style: none; */
+}
+
+.cv--profession-container li{
+    margin-left: 3rem;
+    list-style: circle;
+}
