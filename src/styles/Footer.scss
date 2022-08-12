@@ -1,0 +1,53 @@
+@import './vars';
+
+.footer{
+    width: 100%;
+    height: fit-content;
+    border-top: solid 2px $color-line;
+    background-color: $color-box1;
+}
+
+.footer-container{
+    width: 100%;
+    max-width: 50rem;
+    /* height: fit-content; */
+    display: flex;
+    margin: 0 auto;
+}
+
+.footer-logo{
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 1.5rem auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.linkedin{    
+    background-image: url('@icons/LinkedIn.png');
+}
+
+.github{
+    background-image: url('@icons/GitHub.png');
+}
+
+.youtube{
+    background-image: url('@icons/youtube.png');
+}
+
+.twitter{
+    background-image: url('@icons/Twitter.png');
+}
+
+.facebook{
+    background-image: url('@icons/Facebook.png');
+}
+
+.instagram{
+    background-image: url('@icons/Instagram.png');
+}
+
+.tiktok{
+    background-image: url('@icons/TikTok.png');
+}

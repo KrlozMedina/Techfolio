@@ -1,7 +1,15 @@
-$base-color: #c6538c;
-$color: rgba(black, 0.88);
+@import './vars';
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    font-size: 62.5%;
+}
 
 body{
-    background-color: $base-color;
-    color: $color;
+    background-color: $color-background;
 }

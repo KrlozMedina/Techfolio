@@ -1,26 +1,24 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
-  // mode: 'development',
+  mode: 'production',
   entry: './src/index.js',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: "/",
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-    alias: {
-      '@components': path.resolve(__dirname, 'src/components'),
-      '@styles': path.resolve(__dirname, 'src/styles')
+    alias:{
+      '@styles': path.resolve(__dirname, '/src/styles'),
+      '@images': path.resolve(__dirname, '/src/assets/images'),
+      '@icons': path.resolve(__dirname, './src/assets/icons'),
+      '@components': path.resolve(__dirname, './src/components'),
+      '@pages': path.resolve(__dirname, './src/pages')
     }
   },
-  mode: 'production',
   module: {
     rules: [
       {
@@ -43,17 +41,22 @@ module.exports = {
           'css-loader',
           'sass-loader'
         ]
+      },
+      {
+        test:/\.(png|svg|jpg)$/,
+        type: 'asset/resource',
+
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"]
+          }
+        }
       }
-      // {
-      //   test: /\.m?js$/,
-      //   exclude: /node_modules/,
-      //   use: {
-      //     loader: "babel-loader",
-      //     options: {
-      //       presets: ["@babel/preset-env", "@babel/preset-react"]
-      //     }
-      //   }
-      // }
     ]
   },
   plugins: [
@@ -63,14 +66,6 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css'
-    }),
-    new CleanWebpackPlugin()
-  ],
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new CssMinimizerPlugin(),
-      new TerserPlugin()
-    ]
-  }
+    })
+  ]
 };

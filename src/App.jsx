@@ -1,5 +1,27 @@
 import React from "react";
+import { Routes, Route, Link, BrowserRouter } from "react-router-dom";
 
-const App = () => <h1>Hello React!!!!!</h1>
+import Header from "./components/Header";
+import Footer from "./components/Footer"
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+
+const App = () => {
+  return (
+    <>
+      <Header />
+
+      <BrowserRouter>
+          <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/hola" element={<h1>Hola Navegator</h1>} />
+          </Routes>
+      </BrowserRouter>
+
+      <Footer />      
+    </>
+  );
+};
 
 export default App;
