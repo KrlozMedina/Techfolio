@@ -1,46 +1,34 @@
 @import './vars';
 
 .header{
-    width: 100%;
-    padding: 0 5rem;
+    width: $width-container;
+    min-width: $min-width-container;
+    height: 8vh;
+    // padding: 2rem 1rem;
     background-color: $color-box1;
     color: $color-sign;
-    border-bottom: solid 2px $color-line;
-    display: inline-flex;
-    justify-content: space-between;
-}
-
-.header--logo{
-    width: max-content;
-    font-family: var(--font-title);
-    font-size: 3rem;
-    font-weight: bold;
-    text-align: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.header-logo{
-    width: 5rem;
-    height: 5rem;
-    margin: 1rem;
+    justify-content: space-between;
+    margin: 0 auto;
 }
 
 .header--nav{
-    width: 50%;
+    width: 100%;
     display: flex;
-    justify-content: right;
+    justify-content: left;
     align-items: center;
-    margin: 0 1rem;
     font-size: 2.5rem;
+    gap: 20px;
 }
 
 .header--nav li{
+    width: 100%;
     list-style: none;
 }
 
 .header--nav li a{
+    margin: 0 1rem;
+    width: max-content;
     text-decoration: none;
     color: var(--color-sign);
 }

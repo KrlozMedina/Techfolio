@@ -1,0 +1,49 @@
+@import './vars';
+
+.main-education-container{
+    width: 100%;
+    background-color: $color-box1;
+}
+
+.education-logos-container,
+.education-code-container{
+    width: 100%;
+    display: flex;
+    margin: 2.5rem auto;
+    gap: 2rem;
+    justify-content: space-around;
+}
+
+.education-code-container{
+    border: solid 2px $color-line;
+    padding: 2rem;
+    border-radius: 25px;
+    flex-wrap: wrap;
+}
+
+.education-logo{
+    width: 10rem;
+    background-color: white;
+    border-radius: 25px;
+    border: solid 2px $color-line;
+}
+
+.education-code{
+    width: 3rem;
+}
+
+.cronometro{
+    background-image: url('@images/Cronometro.png');
+}
+
+.batatabit{
+    background-image: url('@images/BatataBit.png');
+}
+
+.randomdogs{
+    background-image: url('@images/RandomDogs.png');
+}
+
+.portafolio{
+    background-image: url('@images/Portafolio.png');
+}

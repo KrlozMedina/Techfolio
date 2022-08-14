@@ -11,5 +11,51 @@ html{
 }
 
 body{
-    background-color: $color-background;
+  width: 100%;
+  height: 100vh;
+  background-color: $color-background-main;
+  background-image: linear-gradient(135deg,#2C3333,#395B64);
+  // background: radial-gradient(circle closest-side,$color-background, #2C3333 60%, #395B64 40%);
+  background-size: 400%;
+  animation: bganimation 15s infinite;
+            
+}
+
+.background{
+  width: 100%;
+  height: 90vh;
+  position: absolute;
+  background-image: url('@images/EraDigital.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  top: 0;
+  border: none;
+  // padding: 0;
+  // margin: 0;
+}
+
+@keyframes bganimation {
+    0%{
+      background-position: 0% 50%;
+    }
+    33%{
+      background-position: 50% 100%;
+    }
+    66%{
+      background-position: 100% 50%;
+    }
+    100%{
+      background-position: 0% 50%;
+    }
+}
+
+@media (max-width: 425px) {
+  .header--nav li{
+    // height: min-content;
+    display: flex;
+    flex-wrap: wrap;
+    // flex-direction: column;
+  }
 }
