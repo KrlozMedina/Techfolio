@@ -20,7 +20,7 @@ const Header = () => {
             <a href="#aboutme" onClick={() => setMenu(false)}>About me</a>
             <a href="#projects" onClick={() => setMenu(false)}>Projects</a>
             <a href="#education" onClick={() => setMenu(false)}>Education</a>
-            {/* <a href="">Contact me</a> */}
+            <a href="#contactme" onClick={() => setMenu(false)}>Contact me</a>
           </li>
         </ul>
       </nav>

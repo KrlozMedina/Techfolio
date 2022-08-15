@@ -1,7 +1,7 @@
 import React from 'react'
 import '@styles/Projects.scss'
 
-const Projects = () => {
+const Projects = (children) => {
   return (
      <section id='projects' className="main-projects-container">
         <h2>MIS PROYECTOS</h2>

@@ -6,27 +6,68 @@
     padding: 5rem 1rem;
 }
 
-.education-logos-container,
+.education-cards-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 2.5rem auto;
+    gap: 5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-education{
+    width: 28rem;
+    height: 30rem;
+    border: 2px solid $color-line;
+    border-radius: 20px;
+    background-color: $color-background-container;
+    // padding: 1rem;
+}
+
+.card-education div{
+    width: 100%;
+    display: flex;
+    background-color: $color-background-title;
+    border-radius: 20px 20px 0 0;
+    padding: 0.5rem 1rem;
+    align-items: center;
+}
+
+.education-logo{
+    width: 7rem;
+    background-color: white;
+    border-radius: 50%;
+    border: solid 2px $color-line;
+}
+
+.card-education h3{
+    width: calc(100% - 7rem);
+    font-size: 2rem;
+    text-align: center;
+    margin: 0 1rem;
+}
+
+.card-education p{
+    width: 100%;
+    padding: 1rem;
+    color: white;
+    font-size: 1.7rem;
+    // background-color: $color-background-container;
+    // border-radius: 0 0 20px 20px;
+}
+
 .education-code-container{
     width: 100%;
     display: flex;
     margin: 2.5rem auto;
     gap: 2rem;
     justify-content: space-around;
-}
-
-.education-code-container{
     border: solid 2px $color-line;
     padding: 2rem;
     border-radius: 25px;
     flex-wrap: wrap;
-}
-
-.education-logo{
-    width: 10rem;
-    background-color: white;
-    border-radius: 25px;
-    border: solid 2px $color-line;
 }
 
 .education-code{

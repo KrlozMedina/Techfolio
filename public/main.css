@@ -1,30 +1,21 @@
-:root{
-  --color-title: #2a6479;
-  --color-text: rgb(167, 165, 165);
-  --color-background-container: rgba(0, 0, 0, 0.8);
+.container-main{
+  width: 70%;
+  min-width: 32rem;
+  max-width: 110rem;
+  margin: 0 auto;
+  border: 0.5px outset black;
+  box-shadow: 0 0 100px black;
+  /* border-radius: 50px; */
 }
 
 .myName{
-  width: 80%;
-  min-width: 32rem;
-
+  width: 100%;
   margin: 0 auto;
   padding: 2rem 0;
-  font-size: 3.5rem;
+  font-size: 4rem;
   text-align: center;
-  color: var(--color-title);
-  background-color: var(--color-background-container);
-}
-
-.container-main{
-  width: 80%;
-  min-width: 32rem;
-  margin: 0 auto;
-  border-right: 3px solid black;
-  border-left: 3px solid black;
-  box-shadow: black 50px;
-
-  /* border-top: none; */
+  color: black;
+  text-shadow: 0 0 10px white;
 }
 
 .main-title-container{
@@ -32,12 +23,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  background-color: var(--color-background-container);
   padding: 5rem 0;
 }
 
 .main-title--text{
-  width: 100%;
+  width: 80%;
   max-width: 70rem;
   padding: 1rem;
   margin: 0 auto;
@@ -45,16 +35,7 @@
   align-items: center;
 }
 
-.main-title--text p{
-  color: var(--color-text);
-}
-
-.main-title--text span{
-  color: white;
-}
-
 .main-title--description{
-  color: var(--color-text);
   font-size: 3.5rem;
 }
 
@@ -62,18 +43,27 @@
   width: 50%;
   min-width: 31rem;
   max-width: 40rem;
-  margin: 0 auto;
+  margin: 0 0 0 auto;
 }
 
 .main-aboutme-container{
   width: 100%;
-  background-color: var(--color-background-container);
-  padding: 5rem 1rem;
-  /* margin: 5rem auto; */
+  padding: 5rem 0;
+}
+
+.main-aboutme-container h2{
+  padding: 0 1rem;
 }
 
 .main-aboutme--text{
-  font-size: 2rem;
+  font-size: 2.3rem;
   margin: 2rem auto;
   text-align: justify;
+  padding: 0 1rem;
+}
+
+@media (max-width: 1260px) {
+  .main-title--photo{
+    margin: 0 auto;
+  }
 }
