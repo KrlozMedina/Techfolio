@@ -8,22 +8,37 @@
 
 html{
     font-size: 62.5%;
+    font-family: 'Joan', serif;
+    color: $color-text;
 }
 
 body{
   width: 100%;
-  height: 100vh;
+  // height: 100vh;
   background-color: $color-background-main;
-  background-image: linear-gradient(135deg,#2C3333,#395B64);
+  background-image: linear-gradient(135deg, $color-background-main,#2C3333,#395B64);
   // background: radial-gradient(circle closest-side,$color-background, #2C3333 60%, #395B64 40%);
   background-size: 400%;
   animation: bganimation 15s infinite;
             
 }
 
-.background{
+a{
+  text-decoration: none;
+}
+
+h2{
+  font-size: 2rem;
+  color: white;
+}
+
+h3{
+  color: white;
+}
+
+.background--image{
   width: 100%;
-  height: 90vh;
+  height: 100vh;
   position: absolute;
   background-image: url('@images/EraDigital.jpeg');
   background-size: cover;
@@ -32,9 +47,28 @@ body{
   z-index: -1;
   top: 0;
   border: none;
-  // padding: 0;
-  // margin: 0;
+  filter: drop-shadow(0 200px 50px rgba(132, 17, 17, 0.7));
+  // box-shadow: 0 0 -1000px rgba(147, 14, 14, 0.7);
+  // transform:;
 }
+
+.background--gradient{
+  width: 100%;
+  height: 50vh;
+  background-image: linear-gradient( rgb(13, 19, 20) 50%, $color-background-main);
+  // background-image: linear-gradient(90deg, red, white);
+  position: absolute;
+  top: 90vh;
+  z-index: -1;
+
+}
+
+// .main-title--photo{
+//   background-image: url('@images/Fotografia.png');
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   background-position: center;
+// }
 
 @keyframes bganimation {
     0%{
@@ -51,11 +85,11 @@ body{
     }
 }
 
-@media (max-width: 425px) {
-  .header--nav li{
-    // height: min-content;
-    display: flex;
-    flex-wrap: wrap;
-    // flex-direction: column;
-  }
-}
+// @media (max-width: 550px) {
+//   .header--nav li{
+//     // height: min-content;
+//     display: flex;
+//     flex-wrap: wrap;
+//     // flex-direction: column;
+//   }
+// }
