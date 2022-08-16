@@ -29,6 +29,7 @@
 .main-title--text{
   width: 80%;
   max-width: 70rem;
+  min-width: 30rem;
   padding: 1rem;
   margin: 0 auto;
   display: flex;
