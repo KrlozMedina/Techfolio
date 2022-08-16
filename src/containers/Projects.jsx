@@ -40,12 +40,12 @@ const Projects = (children) => {
           </article>
 
           <article className="project-card">
-            <a href="https://krlozmedina.github.io/Portafolio/">
-              <div className="project-card--image portafolio" />
-              <h3 className="project-card--title">Portafolio</h3>
-              <p className="project-card--description">Portafolio personal</p>
+            <a href="https://mypokedesk.herokuapp.com/">
+              <div className="project-card--image pokemon" />
+              <h3 className="project-card--title">Pokemon</h3>
+              <p className="project-card--description">Minijuego usando la API de Pokemon</p>
             </a>
-            <a className="project--code-link" href="https://github.com/KrlozMedina/Portafolio">
+            <a className="project--code-link" href="https://github.com/KrlozMedina/MyPokedesk">
               <div className="code-logo" /> Code
             </a>
           </article>
