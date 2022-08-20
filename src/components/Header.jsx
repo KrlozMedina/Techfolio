@@ -11,7 +11,11 @@ const Header = () => {
 
   return (
     <div className="header">
-      <span onClick={() => handlerMenu()}>🌖</span>
+      <span onClick={() => handlerMenu()}>
+        <span className="material-symbols-outlined">
+          menu
+        </span>
+      </span>
 
       <nav className={menu ? 'header--nav' : 'header--nav-none'}>
         <ul>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Marker+Hatch&display=swap');
+
 .container-main{
   width: 70%;
   min-width: 32rem;
@@ -12,10 +14,12 @@
   width: 100%;
   margin: 0 auto;
   padding: 2rem 0;
-  font-size: 4rem;
+  font-size: 7rem;
   text-align: center;
   color: black;
   text-shadow: 0 0 10px white;
+  font-family: 'Rubik Marker Hatch', cursive;
+
 }
 
 .main-title-container{
@@ -44,7 +48,8 @@
   width: 50%;
   min-width: 31rem;
   max-width: 40rem;
-  margin: 0 0 0 auto;
+  margin: 0 auto;
+  /* transform: opacity(1.5); */
 }
 
 .main-aboutme-container{
@@ -58,7 +63,7 @@
 
 .main-aboutme--text{
   font-size: 2.3rem;
-  margin: 2rem auto;
+  margin: 2rem 1.5rem;
   text-align: justify;
   padding: 0 1rem;
 }

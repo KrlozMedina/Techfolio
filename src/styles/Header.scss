@@ -3,6 +3,7 @@
 .header{
     width: 70%;
     min-width: 32rem;
+    max-width: 110rem;
     height: 8vh;
     margin: 0 auto;
     position: relative;
@@ -55,7 +56,9 @@
         left: 1rem;
         position: absolute;
         z-index: 2;
-        opacity: 50%;
+        // opacity: 50%;
+        color: white;
+        font-size: 3rem;
         cursor: pointer;
     }
 
