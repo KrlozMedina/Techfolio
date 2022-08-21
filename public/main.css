@@ -5,9 +5,8 @@
   min-width: 32rem;
   max-width: 110rem;
   margin: 0 auto;
-  border: 0.5px outset black;
+  border: 2.5px solid black;
   box-shadow: 0 0 100px black;
-  /* border-radius: 50px; */
 }
 
 .myName{
@@ -49,7 +48,6 @@
   min-width: 31rem;
   max-width: 40rem;
   margin: 0 auto;
-  /* transform: opacity(1.5); */
 }
 
 .main-aboutme-container{

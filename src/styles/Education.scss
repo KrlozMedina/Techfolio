@@ -19,7 +19,7 @@
 
 .card-education{
     width: 28rem;
-    height: 30rem;
+    // height: 30rem;
     border: 2px solid $color-line;
     border-radius: 20px;
     background-color: $color-background-container;
@@ -30,7 +30,8 @@
     width: 100%;
     display: flex;
     background-color: $color-background-title;
-    border-radius: 20px 20px 0 0;
+    // border-radius: 20px 20px 0 0;
+    border-radius: 20px;
     padding: 0.5rem 1rem;
     align-items: center;
 }
@@ -70,6 +71,20 @@
     flex-wrap: wrap;
 }
 
-.education-code{
-    width: 3rem;
+.education-code-container article{
+    width: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.education-code-logo{
+    width: 4rem;
+    height: 4rem;
+    margin: 0.5rem auto;
+}
+
+.education-code-name{
+    font-size: 1.2rem;
+    text-align: center;
 }

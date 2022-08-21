@@ -12,17 +12,15 @@
     padding: 0 1rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: end;
 }
 
-.contactme-info{
-    width: 35%;
-    min-width: 25rem;
-    font-size: 1.8rem;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
-    margin: 5rem auto;
+.contactme-img{
+    width: 20%;
+    height: 20%;
+    min-width: 10rem;
+    margin: auto;
+    opacity: 85%;
 }
 
 .contactme-form{
@@ -74,7 +72,6 @@
     .contactme-form div{
         display: flex;
         flex-direction: column;
-        // justify-content: center;
         align-items: flex-end;
     }
 }

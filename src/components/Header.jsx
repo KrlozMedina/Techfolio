@@ -20,11 +20,11 @@ const Header = () => {
       <nav className={menu ? 'header--nav' : 'header--nav-none'}>
         <ul>
           <li>
-            <a href="#home" onClick={() => setMenu(false)}>Home</a>
-            <a href="#aboutme" onClick={() => setMenu(false)}>About me</a>
-            <a href="#projects" onClick={() => setMenu(false)}>Projects</a>
-            <a href="#education" onClick={() => setMenu(false)}>Education</a>
-            <a href="#contactme" onClick={() => setMenu(false)}>Contact me</a>
+            <a href="#home" onClick={() => setMenu(false)}>Inicio</a>
+            <a href="#aboutme" onClick={() => setMenu(false)}>Sobre mi</a>
+            <a href="#projects" onClick={() => setMenu(false)}>Proyectos</a>
+            <a href="#education" onClick={() => setMenu(false)}>Educacion</a>
+            <a href="#contactme" onClick={() => setMenu(false)}>Contactarme</a>
           </li>
         </ul>
       </nav>
