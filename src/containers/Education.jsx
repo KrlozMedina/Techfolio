@@ -12,7 +12,7 @@ import iconPlatzi from "@icons/platzi.png"
 const Education = () => {
   return (
     <section id='education' className="main-education-container">
-      <h2>MI EDUCACION</h2>
+      <h2>EDUCACION</h2>
 
       <div className="education-cards-container">
         <a href="https://www.udistrital.edu.co/inicio">

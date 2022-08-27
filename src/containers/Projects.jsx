@@ -4,7 +4,7 @@ import '@styles/Projects.scss'
 const Projects = (children) => {
   return (
      <section id='projects' className="main-projects-container">
-        <h2>MIS PROYECTOS</h2>
+        <h2>PROYECTOS</h2>
         <div className="projects-cards-container">
           <article className="project-card">
             <a href="https://krlozmedina.github.io/Cronometro/">

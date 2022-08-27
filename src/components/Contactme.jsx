@@ -11,7 +11,7 @@ const Contactme = () => {
   return (
     <div className='contactme'>
         <section id="contactme" className="main-contactme-container">
-            <h2>ENVIAME UN MENSAJE</h2>
+            <h2>CONTACTARME</h2>
 
             <div className='contactme--info-container'>
                 <img className='contactme-img' src={sendMe}/>
