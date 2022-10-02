@@ -1,12 +1,22 @@
-import React from 'react'
-import axios from 'axios'
+import React from 'react';
+import axios from 'axios';
+import emailjs from '@emailjs/browser';
 
 import '@styles/Contactme.scss'
 import sendMe from '@images/SendMe.png'
 
 const Contactme = () => {
-    // let name =  this.name;
-    // console.log('email', name)
+    const sendEmail = (event) => {
+        event.preventDefault();
+
+        emailjs.sendForm('service_77nat4q', 'template_oeicj1e', event.target, 'p65YoBfR9VhH5xx58')
+        .then(response => {
+            if (response.status === 200) {
+                alert('Mensaje enviado correctamente')
+            }
+        })
+        .catch(error => console.log(error))
+    }
 
   return (
     <div className='contactme'>
@@ -16,15 +26,15 @@ const Contactme = () => {
             <div className='contactme--info-container'>
                 <img className='contactme-img' src={sendMe}/>
 
-                <form className='contactme-form' action="submit">
+                <form className='contactme-form' onSubmit={sendEmail}>
                     <div>
                         <label htmlFor="name">Nombre</label>
-                        <input name='name' type="text" />
+                        <input name='user_name' type="text" />
                     </div>
 
                     <div>
                         <label htmlFor="email">Correo electronico</label>
-                        <input name='email' type="email" />
+                        <input name='user_email' type="email" />
                     </div>
 
                     <div>
@@ -32,7 +42,7 @@ const Contactme = () => {
                         <input name='subject' type="text" />
                     </div>
 
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <textarea name="message" id="" cols="30" rows="10"></textarea>
 
                     <button>Enviar mensaje</button>
                 </form>

@@ -14,6 +14,7 @@
   "author": "KrlozMedina",
   "license": "MIT",
   "dependencies": {
+    "@emailjs/browser": "^3.7.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "react": "^17.0.2",
