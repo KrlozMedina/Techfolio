@@ -16,6 +16,8 @@ const Contactme = () => {
             }
         })
         .catch(error => console.log(error))
+
+        event.target.reset();
     }
 
   return (
