@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Cronometro",
+        "url-project": "https://krlozmedina.github.io/Cronometro/",
+        "url-project-code": "https://github.com/KrlozMedina/Cronometro",
+        "image": "cronometro",
+        "description": "Cronometro y temporizador en una sola aplicacion web"
+    },
+    {
+        "title": "Clon Batata Bit",
+        "url-project": "https://krlozmedina.github.io/BatataBit/",
+        "url-project-code": "https://github.com/KrlozMedina/BatataBit",
+        "image": "batatabit",
+        "description": "Clone de la pagina Batata Bit"
+    },
+    {
+        "title": "Random Dogs",
+        "url-project": "https://krlozmedina.github.io/RandomDogs/",
+        "url-project-code": "https://github.com/KrlozMedina/Randomdogs",
+        "image": "randomdogs",
+        "description": "Consumo de API de perros"
+    },
+    {
+        "title": "Pokemon",
+        "url-project": "https://mypokedesk.herokuapp.com/",
+        "url-project-code": "https://github.com/KrlozMedina/MyPokedesk",
+        "image": "pokemon",
+        "description": "Minijuego usando la API de Pokemon"
+    },
+    {
+        "title": "Rick&Morty",
+        "url-project": "https://rickandmorty-krlozmedina.netlify.app/",
+        "url-project-code": "https://github.com/KrlozMedina/Rick-Morty",
+        "image": "rick-morty",
+        "description": "Cronometro y temporizador en una sola aplicacion web"
+    }
+]

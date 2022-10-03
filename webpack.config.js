@@ -15,6 +15,7 @@ module.exports = {
       '@styles': path.resolve(__dirname, '/src/styles'),
       '@images': path.resolve(__dirname, '/src/assets/images'),
       '@icons': path.resolve(__dirname, './src/assets/icons'),
+      '@storage': path.resolve(__dirname, './src/storage'),
       '@components': path.resolve(__dirname, './src/components'),
       '@pages': path.resolve(__dirname, './src/pages'),
       '@containers': path.resolve(__dirname, './src/containers'),
