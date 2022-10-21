@@ -3,7 +3,7 @@ import axios from 'axios';
 import emailjs from '@emailjs/browser';
 
 import '@styles/Contactme.scss'
-import sendMe from '@images/SendMe.png'
+// import sendMe from 'https://i.imgur.com/ZZVTY1J.png'
 
 const Contactme = () => {
     const sendEmail = (event) => {
@@ -26,7 +26,7 @@ const Contactme = () => {
             <h2>CONTACTARME</h2>
 
             <div className='contactme--info-container'>
-                <img className='contactme-img' src={sendMe}/>
+                <img className='contactme-img' src="https://i.imgur.com/ZZVTY1J.png"/>
 
                 <form className='contactme-form' onSubmit={sendEmail}>
                     <div>
