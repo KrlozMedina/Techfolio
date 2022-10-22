@@ -1,6 +1,6 @@
 import React from 'react'
-import Projects from '@containers/Projects'
-import Education from '@containers/Education'
+import Projects from '@components/Projects'
+import Education from '@components/Education'
 import ContactMe from '@components/Contactme'
 import '@styles/_vars.scss'
 
