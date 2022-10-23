@@ -28,6 +28,12 @@
     gap: 2rem;
     padding: 0 2rem;
 }
+.projects-cards-container::-webkit-scrollbar {
+    height: 1rem;
+}
+.projects-cards-container::-webkit-scrollbar-thumb {
+    background-color: $color-background-container-soft;
+}
 
 .project-card{
     width: 26rem;
@@ -36,7 +42,7 @@
     margin: 3rem auto;
     border-radius: 15px;
     scroll-snap-align: center;
-    ;position: relative;
+    position: relative;
 }
 
 .project-card--image{
