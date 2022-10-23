@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
-import Footer from "./components/Footer"
-import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
+import Footer from "@components/Footer"
+import Home from "@pages/Home";
+import NotFound from "@pages/NotFound";
 
 import '@styles/_vars.scss'
 
@@ -20,7 +20,7 @@ const App = () => {
           </Routes>
       </BrowserRouter>
       {/* </React.StrictMode> */}
-      <Footer />      
+      {/* <Footer />       */}
     </>
   );
 };

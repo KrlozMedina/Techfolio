@@ -2,9 +2,16 @@
 
 .main-projects-container{
     width: 100%;
+    // min-width: 32rem;
+    // max-width: 110rem;
+    margin: 0 auto;
     padding: 5rem 0;
     // padding: 1rem;
     background-color: $color-background-container-soft;
+    // border: 2.5px solid black;
+    // border-bottom: none;
+    // border-top: none;
+    // box-shadow: 0 0 100px black;
 }
 
 .main-projects-container h2{

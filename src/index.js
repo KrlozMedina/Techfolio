@@ -1,9 +1,23 @@
 import React from 'react';
 import reactDom from 'react-dom';
-import App from './App';
-import Header from '@components/Header'
-import '@styles/global.scss';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './routes/App';
+// import Header from '@components/Header';
+import { LenguajeContextProvider } from './context/LenguajeContext';
 
-reactDom.render(<Header />, document.getElementById('header'));
-reactDom.render(<App />, document.getElementById('app'));
+import '@styles/global.scss';
+
+// reactDom.render(
+//     <LenguajeContextProvider>
+//         <Header />
+//     </LenguajeContextProvider>,
+//     document.getElementById('header')
+// );
+
+reactDom.render(
+    <LenguajeContextProvider>
+        {/* <Header /> */}
+        <App />
+    </LenguajeContextProvider>,
+    document.getElementById('app'),
+    // document.getElementById('header')
+);

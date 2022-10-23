@@ -1,11 +1,12 @@
-import React from 'react';
-import axios from 'axios';
+import React, {useContext} from 'react';
 import emailjs from '@emailjs/browser';
+import LenguajeContext from '@context/LenguajeContext'
 
 import '@styles/Contactme.scss'
-// import sendMe from 'https://i.imgur.com/ZZVTY1J.png'
 
 const Contactme = () => {
+    const {spanish, setSpanish} = useContext(LenguajeContext)
+
     const sendEmail = (event) => {
         event.preventDefault();
 
@@ -23,30 +24,30 @@ const Contactme = () => {
   return (
     <div className='contactme'>
         <section id="contactme" className="main-contactme-container">
-            <h2>CONTACTARME</h2>
+            <h2>{spanish ? "CONTACTAME" : "CONTACT ME"}</h2>
 
             <div className='contactme--info-container'>
                 <img className='contactme-img' src="https://i.imgur.com/ZZVTY1J.png"/>
 
                 <form className='contactme-form' onSubmit={sendEmail}>
                     <div>
-                        <label htmlFor="name">Nombre</label>
+                        <label htmlFor="name">{spanish ? "Nombre" : "Name"}</label>
                         <input name='user_name' type="text" />
                     </div>
 
                     <div>
-                        <label htmlFor="email">Correo electronico</label>
+                        <label htmlFor="email">{spanish ? "Correo electronico" : "Email"}</label>
                         <input name='user_email' type="email" />
                     </div>
 
                     <div>
-                        <label htmlFor="subject">Asunto</label>
+                        <label htmlFor="subject">{spanish ? "Asunto" : "Subject"}</label>
                         <input name='subject' type="text" />
                     </div>
 
                     <textarea name="message" id="" cols="30" rows="10"></textarea>
 
-                    <button>Enviar mensaje</button>
+                    <button>{spanish ? "Enviar mensaje" : "Send message"}</button>
                 </form>
             </div>
         </section>
