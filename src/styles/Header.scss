@@ -37,6 +37,18 @@
     color: $color-text;
 }
 
+.header--buttonLenguaje{
+    width: 10rem;
+    height: 4rem;
+    margin: auto;
+    font-size: 2rem;
+    background-color: $color-background-container;
+    color: $color-text;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
 @media (max-width: 1020px) {
     .header{
         border: none;
@@ -80,5 +92,10 @@
         width: max-content;
         text-decoration: none;
         color: $color-text;
+    }
+
+    .header--buttonLenguaje{
+        margin-top: 1.5rem;
+        margin-right: 2rem;
     }
 }

@@ -2,8 +2,15 @@
 
 .main-education-container{
     width: 100%;
+    // min-width: 32rem;
+    // max-width: 110rem;
+    margin: 0 auto;
     background-color: $color-background-container;
     padding: 5rem 1rem;
+    // border: 2.5px solid black;
+    // border-bottom: none;
+    // border-top: none;
+    // box-shadow: 0 0 100px black;
 }
 
 .education-cards-container{
