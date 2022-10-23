@@ -13,11 +13,11 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias:{
       '@styles': path.resolve(__dirname, './src/styles'),
-      '@storage': path.resolve(__dirname, './src/storage'),
+      '@data': path.resolve(__dirname, './src/data'),
       '@components': path.resolve(__dirname, './src/components'),
       '@pages': path.resolve(__dirname, './src/pages'),
       '@containers': path.resolve(__dirname, './src/containers'),
-      '@hooks': path.resolve(__dirname, './src/hooks')
+      '@context': path.resolve(__dirname, './src/context')
     }
   },
   module: {

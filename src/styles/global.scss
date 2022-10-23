@@ -123,3 +123,13 @@ h3{
 .main-aboutme-container{
   background-color: $color-background-container;
 }
+
+.container-home{
+  width: 70%;
+  min-width: 32rem;
+  max-width: 110rem;
+  margin: 0 auto;
+  border: 2.5px solid black;
+  border-bottom: none;
+  box-shadow: 0 0 100px black;
+}

@@ -1,12 +1,15 @@
+@import './vars';
+
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Marker+Hatch&display=swap');
 
 .container-main{
-  width: 70%;
-  min-width: 32rem;
-  max-width: 110rem;
+  width: 100%;
+  // min-width: 32rem;
+  // max-width: 110rem;
   margin: 0 auto;
-  border: 2.5px solid black;
-  box-shadow: 0 0 100px black;
+  // border: 2.5px solid black;
+  // border-bottom: none;
+  // box-shadow: 0 0 100px black;
 }
 
 .myName{
