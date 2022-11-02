@@ -49,9 +49,9 @@ const Aboutme = () => {
                         {
                             spanish
                                 ?
-                                "Tecnólogo en Electrónica, pronto a graduarme como Ingeniero en Control y Automatización, con conocimiento de varios lenguajes de programación y fortaleciendo el lenguaje en desarrollo web. Ejerciendo actualmente el cargo de operador de centro de reparación en una multinacional de soluciones de pagos digitales, y con experiencia en el sector energético, sistemas interrumpidos (UPS) y con conocimientos de energía renovables."
+                                "Ingeniero en Control y Automatización, con conocimiento de varios lenguajes de programación y fortaleciendo el lenguaje en desarrollo web. Ejerciendo actualmente el cargo de operador de centro de reparación en una multinacional de soluciones de pagos digitales, y con experiencia en el sector energético, sistemas interrumpidos (UPS) y con conocimientos de energía renovables."
                                 :
-                                "Electronics Technologist, soon to graduate as a Control and Automation Engineer, with knowledge of several programming languages ​​and strengthening the language in web development. Currently holding the position of repair center operator in a multinational of digital payment solutions, and with experience in the energy sector, interrupted systems (UPS) and with knowledge of renewable energy."
+                                "Control and Automation Engineer, with knowledge of several programming languages ​​and strengthening the language in web development. Currently holding the position of repair center operator in a multinational of digital payment solutions, and with experience in the energy sector, interrupted systems (UPS) and with knowledge of renewable energy."
                         }
                     </p>
                     <p class="main-aboutme--text">
