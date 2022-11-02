@@ -15,8 +15,8 @@ const Aboutme = () => {
                             ?
                             <p class="main-title--description">
                                 Hola! Soy
-                                <span> Carlos Alidio Medina López </span>
-                                , Tecnólogo en Electrónica, culminando mi carrera profesional como
+                                <span> Carlos Alidio Medina López</span>
+                                ,
                                 <span> Ingeniero </span>
                                 en
                                 <span> Control </span>
@@ -28,8 +28,8 @@ const Aboutme = () => {
                             :
                             <p class="main-title--description">
                                 Hi! I'm
-                                <span> Carlos Alidio Medina López </span>
-                                , Electronics Technologist, culminating my professional career as
+                                <span> Carlos Alidio Medina López</span>
+                                ,
                                 <span> Control </span>
                                 and
                                 <span> Automatization Enginer </span>
