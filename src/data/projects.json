@@ -6,7 +6,7 @@
         "url-project": "https://krlozmedina.github.io/Cronometro/",
         "url-project-code": "https://github.com/KrlozMedina/Cronometro",
         "image": "cronometro",
-        "descripcion": "Cronometro y temporizador en una sola aplicacion web",
+        "descripcion": "Cronometro y temporizador en una sola aplicación web",
         "description": "Stopwatch and timer in a single web application"
     },
     {
@@ -16,7 +16,7 @@
         "url-project": "https://krlozmedina.github.io/BatataBit/",
         "url-project-code": "https://github.com/KrlozMedina/BatataBit",
         "image": "batatabit",
-        "descripcion": "Clone de la pagina Batata Bit",
+        "descripcion": "Clon de la pagina Batata Bit",
         "description": "Clone of the page Batata Bit"
     },
     {
@@ -36,8 +36,8 @@
         "url-project": "https://mypokedesk.herokuapp.com/",
         "url-project-code": "https://github.com/KrlozMedina/MyPokedesk",
         "image": "pokemon",
-        "descripcion": "Minijuego usando la API de Pokemon",
-        "description": "Minigame using the Pokemon API"
+        "descripcion": "Mini juego usando la API de Pokemon",
+        "description": "Mini game using the Pokemon API"
     },
     {
         "id": 5,

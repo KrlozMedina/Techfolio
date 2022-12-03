@@ -1,9 +1,9 @@
 import React from 'react'
 import Header from '@components/Header'
-import Aboutme from '../components/Aboutme'
+import About from '../components/About'
 import Projects from '@components/Projects'
 import Education from '@components/Education'
-import ContactMe from '@components/Contactme'
+import Contact from '@components/Contact'
 import Footer from '@components/Footer'
 // import '@styles/_vars.scss'
 
@@ -12,13 +12,13 @@ const Home = () => {
     <div>
       <section>
         <Header />
-        <h1 id="home" class="myName">Krloz Medina</h1>
+        <h1 id="home" className="myName">Krloz Medina</h1>
       </section>
       <section className='container-home'>
-        <Aboutme />
+        <About />
         <Projects />
         <Education />
-        <ContactMe />
+        <Contact />
         <Footer />
       </section>
     </div>

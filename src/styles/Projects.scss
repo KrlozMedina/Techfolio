@@ -2,16 +2,9 @@
 
 .main-projects-container{
     width: 100%;
-    // min-width: 32rem;
-    // max-width: 110rem;
     margin: 0 auto;
     padding: 5rem 0;
-    // padding: 1rem;
     background-color: $color-background-container-soft;
-    // border: 2.5px solid black;
-    // border-bottom: none;
-    // border-top: none;
-    // box-shadow: 0 0 100px black;
 }
 
 .main-projects-container h2{
@@ -28,16 +21,19 @@
     gap: 2rem;
     padding: 0 2rem;
 }
-.projects-cards-container::-webkit-scrollbar {
-    height: 1rem;
-}
-.projects-cards-container::-webkit-scrollbar-thumb {
-    background-color: $color-background-container-soft;
-}
 
 .project-card{
     width: 26rem;
     height: 40rem;
+    background-color: $color-background-container;
+    margin: 3rem auto;
+    border-radius: 15px;
+    scroll-snap-align: center;
+    position: relative;
+}
+
+.video-card{
+    width: 26rem;
     background-color: $color-background-container;
     margin: 3rem auto;
     border-radius: 15px;
@@ -54,12 +50,31 @@
     background-repeat: no-repeat;
 }
 
+.video-card--image{
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
 .project-card--title{
     width: 26rem;
     font-size: 2.5rem;
     text-align: center;
     background-color: $color-background-title;
     padding: 1rem 0;
+}
+
+.video-card--title{
+    width: 26rem;
+    height: 10rem;
+    display: flex;
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 1rem 0;
+    align-items: center;
+    justify-content: center;
 }
 
 .project-card--description{

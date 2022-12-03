@@ -1,5 +1,4 @@
 @import './vars';
-// @import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;1,300&display=swap');
 
 *{
@@ -16,12 +15,10 @@ html{
 
 body{
   width: 100%;
-  // height: 100vh;
   background-color: black;
   background-image: linear-gradient(135deg, $color-background-main,#395B64);
   background-size: 400%;
   animation: bganimation 15s infinite;
-  // font-family: 'Aboreto', cursive;
   font-family: 'Raleway', sans-serif;
 
             
@@ -54,7 +51,6 @@ h3{
   border: none;
   opacity: 80%;
   transform: rotate(180deg);
-  // style="top: 0vh; transform: rotate(180deg) scaleX(-1);"
 }
 
 .background--intersection{
@@ -81,20 +77,6 @@ h3{
     }
 }
 
-
-
-// @media (max-width: 550px) {
-//   .header--nav li{
-//     // height: min-content;
-//     display: flex;
-//     flex-wrap: wrap;
-//     // flex-direction: column;
-//   }
-// }
-
-
-
-
 .main-title-container{
   background-color: $color-background-container;
 }
@@ -120,7 +102,7 @@ h3{
   color: $color-text;
 }
 
-.main-aboutme-container{
+.main-about-container{
   background-color: $color-background-container;
 }
 

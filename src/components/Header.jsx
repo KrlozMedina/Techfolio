@@ -5,16 +5,15 @@ import LenguajeContext from "@context/LenguajeContext";
 const Header = () => {
   const [menu, setMenu] = useState(false)
 
-  const {spanish, setSpanish} = useContext(LenguajeContext);
+  const {isSpanish, setIsSpanish} = useContext(LenguajeContext);
 
   function handlerMenu() {
-    // console.log(menu)
     setMenu(!menu)
   }
 
   const handlerLenguaje = () => {
-    setSpanish(!spanish)
-    console.log(spanish)
+    setIsSpanish(!isSpanish)
+    console.log(isSpanish)
   }
 
   return (
@@ -28,17 +27,17 @@ const Header = () => {
       <nav className={menu ? 'header--nav' : 'header--nav-none'}>
         <ul>
           <li>
-            <a href="#home" onClick={() => setMenu(false)}>{spanish ? "Inicio" : "Home"}</a>
-            <a href="#aboutme" onClick={() => setMenu(false)}>{spanish ? "Sobre mi" : "About me"}</a>
-            <a href="#projects" onClick={() => setMenu(false)}>{spanish ? "Proyectos" : "Projects"}</a>
-            <a href="#education" onClick={() => setMenu(false)}>{spanish ? "Educacion" : "Education"}</a>
-            <a href="#contactme" onClick={() => setMenu(false)}>{spanish ? "Contactame" : "Contact me"}</a>
+            <a href="#home" onClick={() => setMenu(false)}>{isSpanish ? "Inicio" : "Home"}</a>
+            <a href="#about" onClick={() => setMenu(false)}>{isSpanish ? "Sobre mi" : "About me"}</a>
+            <a href="#projects" onClick={() => setMenu(false)}>{isSpanish ? "Proyectos" : "Projects"}</a>
+            <a href="#education" onClick={() => setMenu(false)}>{isSpanish ? "Educación" : "Education"}</a>
+            <a href="#contact" onClick={() => setMenu(false)}>{isSpanish ? "Contacta me" : "Contact me"}</a>
           </li>
         </ul>
       </nav>
 
       <button className="header--buttonLenguaje" onClick={() => handlerLenguaje()}>
-        {spanish ? "Ingles" : "Spanish"}
+        {isSpanish ? "Ingles" : "Spanish"}
       </button>
     </div>
   );

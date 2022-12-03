@@ -16,7 +16,7 @@ const App = () => {
           <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/hola" element={<h1>Hola Navegator</h1>} />
+          <Route path="/hola" element={<h1>Hola Navegador</h1>} />
           </Routes>
       </BrowserRouter>
       {/* </React.StrictMode> */}

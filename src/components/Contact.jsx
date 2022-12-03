@@ -2,10 +2,10 @@ import React, {useContext} from 'react';
 import emailjs from '@emailjs/browser';
 import LenguajeContext from '@context/LenguajeContext'
 
-import '@styles/Contactme.scss'
+import '@styles/Contact.scss'
 
-const Contactme = () => {
-    const {spanish, setSpanish} = useContext(LenguajeContext)
+const Contact = () => {
+    const {isSpanish, setIsSpanish} = useContext(LenguajeContext)
 
     const sendEmail = (event) => {
         event.preventDefault();
@@ -22,32 +22,32 @@ const Contactme = () => {
     }
 
   return (
-    <div className='contactme'>
-        <section id="contactme" className="main-contactme-container">
-            <h2>{spanish ? "CONTACTAME" : "CONTACT ME"}</h2>
+    <div className='contact'>
+        <section id="contact" className="main-contact-container">
+            <h2>{isSpanish ? "CONTACTA ME" : "CONTACT ME"}</h2>
 
-            <div className='contactme--info-container'>
-                <img className='contactme-img' src="https://i.imgur.com/ZZVTY1J.png"/>
+            <div className='contact--info-container'>
+                <img className='contact-img' src="https://i.imgur.com/ZZVTY1J.png"/>
 
-                <form className='contactme-form' onSubmit={sendEmail}>
+                <form className='contact-form' onSubmit={sendEmail}>
                     <div>
-                        <label htmlFor="name">{spanish ? "Nombre" : "Name"}</label>
+                        <label htmlFor="name">{isSpanish ? "Nombre" : "Name"}</label>
                         <input name='user_name' type="text" />
                     </div>
 
                     <div>
-                        <label htmlFor="email">{spanish ? "Correo electronico" : "Email"}</label>
+                        <label htmlFor="email">{isSpanish ? "Correo electrónico" : "Email"}</label>
                         <input name='user_email' type="email" />
                     </div>
 
                     <div>
-                        <label htmlFor="subject">{spanish ? "Asunto" : "Subject"}</label>
+                        <label htmlFor="subject">{isSpanish ? "Asunto" : "Subject"}</label>
                         <input name='subject' type="text" />
                     </div>
 
                     <textarea name="message" id="" cols="30" rows="10"></textarea>
 
-                    <button>{spanish ? "Enviar mensaje" : "Send message"}</button>
+                    <button>{isSpanish ? "Enviar mensaje" : "Send message"}</button>
                 </form>
             </div>
         </section>
@@ -55,4 +55,4 @@ const Contactme = () => {
   )
 }
 
-export default Contactme
+export default Contact

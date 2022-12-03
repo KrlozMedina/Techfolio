@@ -7,20 +7,20 @@ const educationData = require('@data/education.json')
 const codeData = require('@data/code.json')
 
 const Education = () => {
-  const {spanish, setSpanish} = useContext(LenguajeContext)
+  const {isSpanish, setIsSpanish} = useContext(LenguajeContext)
 
   return (
     <section id='education' className="main-education-container">
-      <h2>{spanish ? "EDUCACIÓN" : "EDUCATION"}</h2>
+      <h2>{isSpanish ? "EDUCACIÓN" : "EDUCATION"}</h2>
 
       <div className="education-cards-container">
         {
           educationData.map(education => (
-            <a href={education.url}>
-              <article className='card-education' key={education.id}>
+            <a href={education.url} key={education.id}>
+              <article className='card-education'>
                 <div>
                   <img className='education-logo' src={education.logo} alt={education.alt} />
-                  <h3>{spanish ? education.titulo : education.title}</h3>
+                  <h3>{isSpanish ? education.titulo : education.title}</h3>
                 </div>
               </article>
             </a>
