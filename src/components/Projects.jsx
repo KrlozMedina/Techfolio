@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import '@styles/Projects.scss'
 import LenguajeContext from '@context/LenguajeContext';
 
-const API = 'https://youtube-v31.p.rapidapi.com/search?channelId=UCwr2Oy0BSvLWbukMAi_Nk7g&part=snippet%2Cid&order=date&maxResults=10';
+const API = 'https://youtube-v31.p.rapidapi.com/search?channelId=UCwr2Oy0BSvLWbukMAi_Nk7g&part=snippet%2Cid&order=date&maxResults=20';
 const options = {
   method: 'GET',
   headers: {
