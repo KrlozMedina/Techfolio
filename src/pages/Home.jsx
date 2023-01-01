@@ -1,11 +1,12 @@
 import React from 'react'
 import Header from '../components/Header'
 import About from '../components/About'
-// import Projects from '../components/Projects'
-// import Education from '../components/Education'
+import Projects from '../components/Projects'
+import Education from '../components/Education'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
-// import '@styles/_vars.scss'
+
+// import '../styles/_vars.css'
 
 const Home = () => {
   return (
@@ -16,8 +17,8 @@ const Home = () => {
       </section>
       <section className='container-home'>
         <About />
-        {/* <Projects /> */}
-        {/* <Education /> */}
+        <Projects />
+        <Education />
         <Contact />
         <Footer />
       </section>

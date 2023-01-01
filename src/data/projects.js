@@ -1,4 +1,4 @@
-[
+var projectsData = [
     {
         "id": 1,
         "titulo": "Cronometro",
@@ -50,3 +50,5 @@
         "description": "Find any Rick&Morty character"
     }
 ]
+
+export default projectsData;

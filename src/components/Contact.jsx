@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import LenguajeContext from '../context/LenguajeContext'
 
 // import '@styles/Contact.scss'
+import '../styles/Contact.css'
 
 const Contact = () => {
     const {isSpanish, setIsSpanish} = useContext(LenguajeContext)

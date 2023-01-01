@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;1,300&display=swap');
+
+:root{
+  --color-background-main: #2C3333;
+  --color-background-secondary: #395B64;
+  --color-background-container: rgba(0, 0, 0, 0.7);
+  --color-background-container-soft: rgba(0, 0, 0, 0.4);
+  --color-background-title: rgb(53, 51, 51);
+  
+  --color-line: rgb(79, 78, 78);
+  
+  --color-text: rgb(167, 165, 165);
+  --color-text-bold: rgb(210, 210, 210);
+  --color-title: #2a6479;
+  --font-title: 'Joan', serif;
+  --font-text: 'Roboto', sans-serif;
+}
+
+*,
+*::after,
+*::before{
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+html{
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: 'Joan', serif;
+  color: var(--color-text);
+}
+
+body{
+  width: 100%;
+  background-color: black;
+  background-image: linear-gradient(135deg, var(--color-background-main),#395B64);
+  background-size: 400%;
+  animation: bgAnimation 15s infinite;
+  font-family: 'Raleway', sans-serif;
+}
+
+a{
+  text-decoration: none;
+}
+
+h2{
+  font-size: 2rem;
+  color: var(--color-text-bold);
+}
+
+h3{
+  color: var(--color-text-bold);
+}
+
+.background--image{
+  width: 100%;
+  height: 80vh;
+  position: absolute;
+  background-image: url('https://i.imgur.com/AlGnoYS.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  top: 0;
+  border: none;
+  opacity: 80%;
+  transform: rotate(180deg);
+}
+
+.background--intersection{
+  width: 100%;
+  height: 150vh;
+  background-image: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0) 15%, rgba(0, 0, 0, 0.01));
+  position: absolute;
+  top: 50vh;
+  z-index: -1;
+}
+
+@keyframes bgAnimation {
+    0%{
+      background-position: 0% 50%;
+    }
+    33%{
+      background-position: 50% 100%;
+    }
+    66%{
+      background-position: 100% 50%;
+    }
+    100%{
+      background-position: 0% 50%;
+    }
+}
+
+.main-title-container{
+  background-color: var(--color-background-container);
+}
+
+.main-title--text{
+  width: 60%;
+  max-width: 70rem;
+  padding: 1rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.main-title--text p{
+  color: var(--color-text);
+}
+
+.main-title--text span{
+  color: var(--color-text-bold);
+}
+
+.main-title--description{
+  color: var(--color-text);
+}
+
+.main-about-container{
+  background-color: var(--color-background-container);
+}
+
+.container-home{
+  width: 90%;
+  min-width: 32rem;
+  max-width: 110rem;
+  margin: 0 auto;
+  border: 2.5px solid black;
+  border-bottom: none;
+  box-shadow: 0 0 100px black;
+}

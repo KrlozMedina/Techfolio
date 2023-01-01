@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import LenguajeContext from '../context/LenguajeContext'
 
-// import '@styles/About.scss'
+import '../styles/About.css'
 
 const About = () => {
     const { isSpanish, setIsSpanish } = useContext(LenguajeContext)

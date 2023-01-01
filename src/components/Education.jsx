@@ -2,9 +2,65 @@ import React, { useContext } from 'react'
 import LenguajeContext from '../context/LenguajeContext'
 
 // import '@styles/Education.scss'
+import '../styles/Education.css'
 
-const educationData = require('@data/education.json')
-const codeData = require('@data/code.json')
+const educationData = [
+  {
+      "id": 1,
+      "url": "https://www.udistrital.edu.co/inicio",
+      "alt": "UD",
+      "logo": "https://i.imgur.com/Hkn5iBH.png",
+      "titulo": "Tecnologo en Electronica",
+      "title": "Electronic Technologist"
+  },
+  {
+      "id": 2,
+      "url": "https://www.udistrital.edu.co/inicio",
+      "alt": "UD",
+      "logo": "https://i.imgur.com/Hkn5iBH.png",
+      "titulo": "Ingeniero en Control y Automatización",
+      "title": "Control and Automation Engineer"
+  },
+  {
+      "id": 3,
+      "url": "https://platzi.com/home",
+      "alt": "Platzi",
+      "logo": "https://i.imgur.com/Rd2SS4U.png",
+      "titulo": "Desarrollador FrontEnd",
+      "title": "FrontEnd Developer"
+  }
+]
+
+const codeData = [
+  {
+      "id": 4,
+      "name": "HTML5",
+      "logo": "https://i.imgur.com/JgltpME.png"
+  },
+  {
+      "id": 5,
+      "name": "CSS3",
+      "logo": "https://i.imgur.com/Kpd0zcY.png"
+  },
+  {  
+      "id": 6,
+      "name": "JavaScript",
+      "logo": "https://i.imgur.com/CHg6SwF.png"
+  },
+  {
+      "id": 7,
+      "name": "C++",
+      "logo": "https://i.imgur.com/kQm8upj.png"
+  },
+  {
+      "id": 8,
+      "name": "Matlab",
+      "logo": "https://i.imgur.com/tlE0JYH.png"
+  }
+]
+
+// const educationData = require('@data/education.json')
+// const codeData = require('@data/code.json')
 
 const Education = () => {
   const {isSpanish, setIsSpanish} = useContext(LenguajeContext)

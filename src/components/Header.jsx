@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
-// import '@styles/Header.scss'
 import LenguajeContext from "../context/LenguajeContext";
+
+import '../styles/Header.css'
 
 const Header = () => {
   const [menu, setMenu] = useState(false)
@@ -13,7 +14,6 @@ const Header = () => {
 
   const handlerLenguaje = () => {
     setIsSpanish(!isSpanish)
-    console.log(isSpanish)
   }
 
   return (
@@ -36,7 +36,7 @@ const Header = () => {
         </ul>
       </nav>
 
-      <button className="header--buttonLenguaje" onClick={() => handlerLenguaje()}>
+      <button className="header--buttonLenguaje" onClick={handlerLenguaje}>
         {isSpanish ? "Ingles" : "Spanish"}
       </button>
     </div>

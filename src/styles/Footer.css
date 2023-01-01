@@ -1,10 +1,16 @@
-@import './vars';
+/* @import './vars'; */
 
 .footer{
     width: 100%;
+    /* // min-width: 32rem; */
+    /* // max-width: 110rem; */
     margin: 0 auto;
     height: max-content;
-    /* background-color: $color-background-container; */
+    /* // border-top: solid 2px $color-line; */
+    background-color: var(--color-background-container);
+    /* // border: 2.5px solid black; */
+    /* // border-top: none; */
+    /* // box-shadow: 0 0 100px black; */
 }
 
 .footer-container{
