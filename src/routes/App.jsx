@@ -1,6 +1,7 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import Home from '../pages/Home'
+import NotFound from '../pages/NotFound'
 
 function App() {
   return (
@@ -8,11 +9,7 @@ function App() {
       <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="*" element={
-              <div>
-                <h1>Error 404, not found</h1>
-              </div>
-            } />
+            <Route path="*" element={<NotFound />} />
           </Routes>
       </BrowserRouter>
     </>
