@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
-import LenguajeContext from '../context/LenguajeContext'
+import LenguajeContext from '../../context/LenguajeContext'
 
-// import '@styles/Education.scss'
-import '../styles/Education.css'
+import Banner from '../molecules/Banner'
+
+import '../../styles/components/organisms/Education.css'
 
 const educationData = [
   {
@@ -59,9 +60,6 @@ const codeData = [
   }
 ]
 
-// const educationData = require('@data/education.json')
-// const codeData = require('@data/code.json')
-
 const Education = () => {
   const {isSpanish, setIsSpanish} = useContext(LenguajeContext)
 
@@ -72,14 +70,7 @@ const Education = () => {
       <div className="education-cards-container">
         {
           educationData.map(education => (
-            <a href={education.url} key={education.id}>
-              <article className='card-education'>
-                <div>
-                  <img className='education-logo' src={education.logo} alt={education.alt} />
-                  <h3>{isSpanish ? education.titulo : education.title}</h3>
-                </div>
-              </article>
-            </a>
+            <Banner key={education.id}>{education}</Banner>
           ))
         }
       </div>

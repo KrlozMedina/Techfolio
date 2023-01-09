@@ -1,0 +1,62 @@
+.projects{
+    width: 100%;
+    margin: 0 auto;
+    padding: 5rem 0;
+    background-color: var(--color-background-container-soft);
+}
+
+.projects__title{
+    margin-left: 1rem;
+}
+
+.projects__cards{
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+
+
+.video-card{
+    width: 26rem;
+    background-color: var(--color-background-container);
+    margin: 3rem auto;
+    border-radius: 15px;
+    scroll-snap-align: center;
+    position: relative;
+}
+
+
+
+.video-card--image{
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+
+
+.video-card--title{
+    width: 26rem;
+    height: 10rem;
+    display: flex;
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 1rem 0;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+
+

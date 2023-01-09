@@ -1,20 +1,23 @@
 import React from 'react'
-import Header from '../components/Header'
-import About from '../components/About'
-import Projects from '../components/Projects'
-import Education from '../components/Education'
-import Contact from '../components/Contact'
-import Footer from '../components/Footer'
+// import Navbar from '../components/molecules/Navbar'
+import About from '../components/organisms/About'
+import Projects from '../components/organisms/Projects'
+import Education from '../components/organisms/Education'
+import Contact from '../components/organisms/Contact'
+import Footer from '../components/organisms/Footer'
+import Popup from '../components/Popup'
 
-// import '../styles/_vars.css'
+import '../styles/components/pages/Home.css'
+import Header from '../components/organisms/Header'
 
 const Home = () => {
   return (
     <div>
-      <section>
+      <span className="background__intersection"></span>
+      {/* <section> */}
         <Header />
-        <h1 id="home" className="myName">Krloz Medina</h1>
-      </section>
+        {/* <Navbar /> */}
+      {/* </section> */}
       <section className='container-home'>
         <About />
         <Projects />
@@ -22,6 +25,7 @@ const Home = () => {
         <Contact />
         <Footer />
       </section>
+        <Popup />
     </div>
   )
 }

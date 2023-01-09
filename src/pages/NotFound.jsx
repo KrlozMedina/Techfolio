@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../components/Header'
+// import Header from '../components/Header'
 import bot from '../assets/Bot.png'
 
-import '../styles/pages/NotFound.css'
+import '../styles/components/pages/NotFound.css'
 
 const NotFound = () => {
   return (

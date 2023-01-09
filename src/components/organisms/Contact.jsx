@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
 import emailjs from '@emailjs/browser';
-import LenguajeContext from '../context/LenguajeContext'
+import LenguajeContext from '../../context/LenguajeContext'
 
 // import '@styles/Contact.scss'
-import '../styles/Contact.css'
+import '../../styles/components/organisms/Contact.css'
 
 const Contact = () => {
     const {isSpanish, setIsSpanish} = useContext(LenguajeContext)
@@ -22,38 +22,36 @@ const Contact = () => {
         event.target.reset();
     }
 
-  return (
-    <div className='contact'>
-        <section id="contact" className="main-contact-container">
-            <h2>{isSpanish ? "CONTACTA ME" : "CONTACT ME"}</h2>
+    return (
+        <form id='contact' className='contact-form' onSubmit={sendEmail}>
+            <fieldset className="main-contact-container" >
+                <legend>{isSpanish ? "CONTACTA ME" : "CONTACT ME"}</legend>
 
-            <div className='contact--info-container'>
                 <img className='contact-img' src="https://i.imgur.com/ZZVTY1J.png"/>
-
-                <form className='contact-form' onSubmit={sendEmail}>
+                
+                <div className='contact--info-container'>
                     <div>
                         <label htmlFor="name">{isSpanish ? "Nombre" : "Name"}</label>
-                        <input name='user_name' type="text" />
+                        <input name='user_name' type="text" required/>
                     </div>
 
                     <div>
                         <label htmlFor="email">{isSpanish ? "Correo electrónico" : "Email"}</label>
-                        <input name='user_email' type="email" />
+                        <input name='user_email' type="email" required />
                     </div>
 
                     <div>
                         <label htmlFor="subject">{isSpanish ? "Asunto" : "Subject"}</label>
-                        <input name='subject' type="text" />
+                        <input name='subject' type="text" required />
                     </div>
 
                     <textarea name="message" id="" cols="30" rows="10"></textarea>
 
-                    <button>{isSpanish ? "Enviar mensaje" : "Send message"}</button>
-                </form>
-            </div>
-        </section>
-    </div>
-  )
+                    <input type="submit" value={isSpanish ? "Enviar" : "Send"}/>
+                </div>
+            </fieldset>
+        </form>
+    )
 }
 
 export default Contact
