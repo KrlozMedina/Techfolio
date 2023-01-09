@@ -1,9 +1,0 @@
-.container-home{
-    width: var(--width-container);
-    min-width: 32rem;
-    max-width: var(--max-width-container);
-    margin: 0 auto;
-    border: 2.5px solid black;
-    border-bottom: none;
-    box-shadow: 0 0 100px black;
-}

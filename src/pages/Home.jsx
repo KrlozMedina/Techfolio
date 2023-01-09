@@ -7,7 +7,7 @@ import Contact from '../components/organisms/Contact'
 import Footer from '../components/organisms/Footer'
 import Popup from '../components/Popup'
 
-import '../styles/components/pages/Home.css'
+import '../styles/pages/Home.css'
 import Header from '../components/organisms/Header'
 
 const Home = () => {
