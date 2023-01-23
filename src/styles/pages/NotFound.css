@@ -1,0 +1,87 @@
+.not-found{
+    width: 90%;
+    min-width: 32rem;
+    max-width: 102.4rem;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.not-found__image{
+    padding: 2rem 5rem;
+    width: 50%;
+    min-width: 32rem;
+    max-width: 48rem;
+    margin: 0 auto;
+    /* text-align: center; */
+}
+
+.not-found__title{
+    font-size: 5rem;
+    /* font-weight: bold; */
+    color: rgb(116, 8, 8);
+    text-align: center;
+    font-family: 'Rubik Marker Hatch', cursive;
+}
+
+.not-found__description{
+    font-size: 2.4rem;
+    width: 50%;
+    min-width: 28rem;
+    max-width: max-content;
+    margin: 0 auto;
+    /* color: var(--color-text-bold); */
+    /* text-align: center; */
+    /* font-weight: bold; */
+    /* margin-top: 2rem; */
+    /* background-color: rgba(0, 0, 0, 0.50); */
+    padding: 1rem;
+}
+
+.not-found__p{
+    display: inline-flex;
+    font-weight: bold;
+}
+
+.not-found__sign{
+    display: block;
+    color: gainsboro;
+}
+
+.not-found__tag{
+    color: blue;
+    width: 100%;
+    display: flex;
+}
+
+.not-found__ref{
+    margin-left: 1rem;
+    color: rgb(0, 204, 255);
+}
+
+.not-found__text{
+    color: white;
+    margin-left: 5rem;
+}
+
+.not-found__link:hover{
+    color: purple;
+}
+
+@media (min-width: 768px) {
+    .not-found__title{
+        font-size: 8rem;
+    }
+
+    .not-found__description{
+        font-size: 4rem;
+    }
+
+    .not-found{
+        max-height: 100vh;
+    }
+}

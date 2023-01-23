@@ -28,7 +28,7 @@ const Card = (props) => {
             </a>
             
             {type==="youtube" ? <span /> : 
-                <a className="card__code--link" href={children['url-project-code']}>
+                <a className="card__code--link" href={children['link-code']}>
                     <div className="code__logo" /> {isSpanish ? "Código" : "Code"}
                 </a>
             }

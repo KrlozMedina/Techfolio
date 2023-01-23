@@ -42,7 +42,7 @@ const About = () => {
             </section>
 
             <section id="about" className="about__description">
-                <h2 className='about__description--title'>{isSpanish ? "SOBRE MI" : "ABOUT ME"}</h2>
+                <h2 className='title'>{isSpanish ? "Sobre mi" : "About me"}</h2>
 
                 <p className="about__description--text">
                     {

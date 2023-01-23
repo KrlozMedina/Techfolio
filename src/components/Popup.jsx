@@ -6,7 +6,7 @@ import '../styles/components/Popup.css'
 
 const Popup = () => {
     return (
-        <div className='container'>
+        <div className='popup'>
             <button>{"<"}</button>
             {/* <ButtonLenguaje /> */}
         </div>

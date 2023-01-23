@@ -24,8 +24,9 @@ const Navbar = () => {
           <ButtonLenguaje />
         </div>
         <div>
-          <a href="/#projects" onClick={() => setMenu(false)}>{isSpanish ? "Proyectos" : "Projects"}</a>
-          <a href="/#contact" onClick={() => setMenu(false)}>{isSpanish ? "Contacta me" : "Contact me"}</a>
+          <a href="/" onClick={() => setMenu(false)}>{isSpanish ? "Inicio" : "Home"}</a>
+          <a href="/projects" onClick={() => setMenu(false)}>{isSpanish ? "Proyectos" : "Projects"}</a>
+          {/* <a href="/#contact" onClick={() => setMenu(false)}>{isSpanish ? "Contacta me" : "Contact me"}</a> */}
         </div>
         
       </nav>

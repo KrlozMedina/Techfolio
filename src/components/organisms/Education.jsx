@@ -65,7 +65,7 @@ const Education = () => {
 
   return (
     <section id='education' className="main-education-container">
-      <h2>{isSpanish ? "EDUCACIÓN" : "EDUCATION"}</h2>
+      <h2 className='title'>{isSpanish ? "Educación" : "Education"}</h2>
 
       <div className="education-cards-container">
         {

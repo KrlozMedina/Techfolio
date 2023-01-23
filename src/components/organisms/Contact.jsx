@@ -25,7 +25,7 @@ const Contact = () => {
     return (
         <form id='contact' className='contact-form' onSubmit={sendEmail}>
             <fieldset className="main-contact-container" >
-                <legend>{isSpanish ? "CONTACTA ME" : "CONTACT ME"}</legend>
+                <legend className='title'>{isSpanish ? "Contactarme" : "Contact me"}</legend>
 
                 <img className='contact-img' src="https://i.imgur.com/ZZVTY1J.png"/>
                 
