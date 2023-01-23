@@ -1,0 +1,13 @@
+.footer{
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 25%;
+    background-color: var(--color-background-container);
+    display: inline-flex;
+    justify-content: space-evenly;
+}
+
+.footer__icon{
+    font-size: 2.8rem;
+    color: var(--color-text);
+}

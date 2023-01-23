@@ -1,26 +1,31 @@
 import React from 'react'
-import Header from '@components/Header'
-import About from '../components/About'
-import Projects from '@components/Projects'
-import Education from '@components/Education'
-import Contact from '@components/Contact'
-import Footer from '@components/Footer'
-// import '@styles/_vars.scss'
+// import Navbar from '../components/molecules/Navbar'
+import About from '../components/organisms/About'
+import Application from '../components/organisms/Application'
+import Education from '../components/organisms/Education'
+import Contact from '../components/organisms/Contact'
+import Footer from '../components/organisms/Footer'
+import Popup from '../components/Popup'
+
+import '../styles/pages/Home.css'
+import Header from '../components/organisms/Header'
 
 const Home = () => {
   return (
     <div>
-      <section>
-        <Header />
-        <h1 id="home" className="myName">Krloz Medina</h1>
-      </section>
-      <section className='container-home'>
+      {/* <span className="background__intersection"></span> */}
+      {/* <section> */}
+        {/* <Header /> */}
+        {/* <Navbar /> */}
+      {/* </section> */}
+      <section className='container'>
         <About />
-        <Projects />
+        <Application />
         <Education />
         <Contact />
         <Footer />
       </section>
+        <Popup />
     </div>
   )
 }

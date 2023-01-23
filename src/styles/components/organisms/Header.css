@@ -1,0 +1,33 @@
+.header{
+    width: var(--width-container);
+    max-width: var(--max-width-container);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+}
+
+.header__logo{
+    display: inline-flex;
+    align-items: center;
+}
+
+.header__logo--image{
+    width: 6rem;
+}
+
+.header__logo--text{
+    width: min-content;
+    /* margin: 0 auto; */
+    /* padding: 2rem 0; */
+    font-size: 3.6rem;
+    /* text-align: center; */
+    color: black;
+    text-shadow: 0 0 10px white;
+    font-family: 'Rubik Marker Hatch', cursive;
+}
+
+/* .config{
+    display: block;
+} */

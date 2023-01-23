@@ -1,34 +1,25 @@
-import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
-import Footer from "@components/Footer"
-import Header from "@components/Header"
-import Home from "@pages/Home";
-import NotFound from "@pages/NotFound";
+import Header from "../components/organisms/Header";
+import Home from '../pages/Home'
+import Projects from "../pages/Projects";
+import NotFound from '../pages/NotFound'
 
-import '@styles/_vars.scss'
-
-const App = () => {
+function App() {
   return (
     <>
-      {/* <Header /> */}
-      {/* <React.StrictMode> */}
+      <Header />
+      <span className="background__intersection"></span>
+
       <BrowserRouter>
           <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/hola" element={
-            <div>
-              <Header />
-              <h1>Hola Navegador</h1>
-            </div>
-          } />
+            <Route path="/" element={<Home />} />
+            <Route path="/Projects" element={<Projects />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
       </BrowserRouter>
-      {/* </React.StrictMode> */}
-      {/* <Footer />       */}
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App
