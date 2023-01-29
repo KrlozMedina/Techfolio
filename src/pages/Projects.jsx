@@ -1,19 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react'
-import LenguajeContext from '../context/LenguajeContext';
-
+import React, { useEffect, useState } from 'react'
+import Header from '../components/organisms/Header';
 import Hero from '../components/molecules/Hero';
 import Application from '../components/organisms/Application';
-import Card from '../components/molecules/Card';
 import Footer from '../components/organisms/Footer';
-
+import Slider from '../components/organisms/Slider';
 import img from '../assets/projects.webp'
-import '../styles/components/organisms/Application.css'
+import Contact from '../components/organisms/Contact';
 
 const projectsData = [
     {
         "id": 1,
-        "titulo": "Cronometro",
-        "title": "Chronometer",
+        "spanish": {
+            "title": "Cronometro",
+            "description": "Cronometro y temporizador en una sola aplicación web",
+        },
+        "english": {
+            "title": "Chronometer",
+            "description": "Stopwatch and timer in a single web application"
+        },
         "link": "https://krlozmedina.github.io/Cronometro/",
         "link-code": "https://github.com/KrlozMedina/Cronometro",
         "thumbnails": {
@@ -21,13 +25,18 @@ const projectsData = [
                 "url": "https://i.imgur.com/f7pXh08.png",
             }
         },
-        "descripcion": "Cronometro y temporizador en una sola aplicación web",
-        "description": "Stopwatch and timer in a single web application"
+        "type": "project"
     },
     {
         "id": 2,
-        "titulo": "Clon Batata Bit",
-        "title": "Clone Batata Bit",
+        "spanish": {
+            "title": "Clon Batata Bit",
+            "description": "Clon de la pagina Batata Bit",
+        },
+        "english":{
+            "title": "Clone Batata Bit",
+            "description": "Clone of the page Batata Bit",
+        },
         "link": "https://krlozmedina.github.io/BatataBit/",
         "link-code": "https://github.com/KrlozMedina/BatataBit",
         "thumbnails": {
@@ -35,13 +44,18 @@ const projectsData = [
                 "url": "https://i.imgur.com/srOyMs3.png",
             }
         },
-        "descripcion": "Clon de la pagina Batata Bit",
-        "description": "Clone of the page Batata Bit"
+        "type": "project"
     },
     {
         "id": 3,
-        "titulo": "Perros aleatorios",
-        "title": "Random Dogs",
+        "spanish": {
+            "title": "Perros aleatorios",
+            "description": "Consumo de API de perros",
+        },
+        "english": {
+            "title": "Random Dogs",
+            "description": "API consumption of dogs",
+        },
         "link": "https://krlozmedina.github.io/RandomDogs/",
         "link-code": "https://github.com/KrlozMedina/Randomdogs",
         "thumbnails": {
@@ -49,27 +63,18 @@ const projectsData = [
                 "url": "https://i.imgur.com/hmeeYqQ.png",
             }
         },
-        "descripcion": "Consumo de API de perros",
-        "description": "API consumption of dogs"
+        "type": "project"
     },
     {
         "id": 4,
-        "titulo": "Pokemon",
-        "title": "Pokemon",
-        "link": "https://pokemon-32ua.onrender.com/",
-        "link-code": "https://github.com/KrlozMedina/MyPokedesk",
-        "thumbnails": {
-            "medium": {
-                "url": "https://i.imgur.com/DKlA2ut.png",
-            }
+        "spanish": {
+            "title": "Rick&Morty",
+            "description": "Encuentra cualquier personaje de Rick&Morty",
         },
-        "descripcion": "Mini juego usando la API de Pokemon",
-        "description": "Mini game using the Pokemon API"
-    },
-    {
-        "id": 5,
-        "titulo": "Rick&Morty",
-        "title": "Rick&Morty",
+        "english": {
+            "title": "Rick&Morty",
+            "description": "Find any Rick&Morty character",
+        },
         "link": "https://rickandmorty-krlozmedina.netlify.app/",
         "link-code": "https://github.com/KrlozMedina/Rick-Morty",
         "thumbnails": {
@@ -77,8 +82,7 @@ const projectsData = [
                 "url": "https://i.imgur.com/8dloLlb.png",
             }
         },
-        "descripcion": "Encuentra cualquier personaje de Rick&Morty",
-        "description": "Find any Rick&Morty character"
+        "type": "project"
     }
 ]
 
@@ -92,8 +96,8 @@ const options = {
 };
 
 const Projects = () => {
+    document.title = 'Projects'
     const [videos, setVideos] = useState([])
-    const {isSpanish, setIsSpanish} = useContext(LenguajeContext);
 
     useEffect(() => {
         fetch(API, options)
@@ -101,52 +105,66 @@ const Projects = () => {
             .then(data => setVideos(data.items))
     }, [])
 
+    let videosYoutube = [];
+
+    videos.map(video => {
+        video.snippet.link = `https://www.youtube.com/watch?v=${video.id.videoId}`;
+        video.snippet.type = 'video';
+        video.snippet.descripcion = video.snippet.description;
+        video.snippet.id = video.id.videoId;
+        videosYoutube.push(video.snippet)
+    })
+
     return (
-        <div className='container'>
-            <Hero>
-                {{
-                    "frase": "Las recompensas y la motivación son un cambio de aceite para los motores del proyecto. Hazlo regularmente y con frecuencia.",
-                    "phrase": "Rewards and motivation are an oil change for project engines. Do it regularly and often.",
-                    "author": "Woody Williams",
-                    "img": img,
-                    "alt": "Proyectos"
-                }}
-            </Hero>
+        <>
+            <span className="background__intersection"></span>
+            <Header />
+            <section className='container'>
+                <Hero>
+                    {{
+                        "english": {
+                            "phrase": "Rewards and motivation are an oil change for project engines. Do it regularly and often.",
+                            "alt": "Projects"
+                        },
+                        "spanish": {
+                            "phrase": "Las recompensas y la motivación son un cambio de aceite para los motores del proyecto. Hazlo regularmente y con frecuencia.",
+                            "alt": "Proyectos"
+                        },
+                        "author": "Woody Williams",
+                        "img": img,
+                    }}
+                </Hero>
 
-            <Application />
-            
-            <div className="projects">
-                <h1 className='title'>{isSpanish ? "Proyectos" : "Projects"}</h1>
-                <div className="projects__cards">
-                    {
-                        projectsData.map(project => (
-                            <Card key={project.id}>{project}</Card>
-                        ))
-                    }
-                </div>
-            </div>
+                <Application />
 
-            <div className="projects">
-                <h1 className='title'>{isSpanish ? "Videos" : "Videos"}</h1>
-                <div className="projects__cards">
-                    {
-                        videos.map(video => (
-                            <div key={video.id.videoId}>
-                                <span className='none'>
-                                    {video.snippet.link = `https://www.youtube.com/watch?v=${video.id.videoId}`}
-                                    {video.snippet.type = 'youtube'}
-                                    {video.snippet.descripcion = video.snippet.description}
-                                </span>
+                <Slider>
+                    {{
+                        "spanish": {
+                            "title": "Proyectos"
+                        },
+                        "english": {
+                            "title": "projects"
+                        },
+                        "data": projectsData
+                    }}
+                </Slider>
 
-                                <Card>{video.snippet}</Card>
-                            </div>
-                        ))
-                    }
-                </div>
-            </div>
+                <Slider>
+                    {{
+                        "spanish": {
+                            "title": "Videos"
+                        },
+                        "english": {
+                            "title": "Videos"
+                        },
+                        "data": videosYoutube
+                    }}
+                </Slider>
 
-            <Footer />
-        </div>
+                <Contact />
+                <Footer />
+            </section>
+        </>
     )
 }
 

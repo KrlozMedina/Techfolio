@@ -8,12 +8,12 @@
 }
 
 .hero__phrase{
-    width: 50%;
+    width: 65%;
+    /* flex: 0 0 calc(65% - 2rem); */
     max-width: 70rem;
     min-width: 30rem;
     padding: 1rem;
     margin: auto;
-    /* display: flex; */
     align-items: center;
     font-size: 3.2rem;
 }
@@ -22,7 +22,6 @@
     display: block;
     color: var(--color-text-bold);
     text-align: end;
-    /* padding: 0 5rem; */
 }
 
 .hero__phrase p{
@@ -30,8 +29,10 @@
 }
 
 .hero__image{
-    width: 50%;
+    width: 35%;
+    /* flex: 0 0 calc(35% - 2rem); */
     min-width: 31rem;
     max-width: 40rem;
     margin: 0 auto;
+    border-radius: 25% 50%;
 }

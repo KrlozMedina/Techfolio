@@ -1,7 +1,4 @@
 import React from 'react'
-
-import ButtonLenguaje from './atoms/ButtonLenguaje'
-
 import '../styles/components/Popup.css'
 
 const Popup = () => {

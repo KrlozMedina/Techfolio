@@ -8,8 +8,8 @@ import NotFound from '../pages/NotFound'
 function App() {
   return (
     <>
-      <Header />
-      <span className="background__intersection"></span>
+      {/* <Header />
+      <span className="background__intersection"></span> */}
 
       <BrowserRouter>
           <Routes>

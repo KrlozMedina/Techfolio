@@ -29,7 +29,7 @@
     width: 100%;
     min-width: 30rem;
     text-align: end;
-    background-color: var(--color-background-container-soft);
+    /* background-color: var(--color-background-container-soft); */
     padding: 5rem 1rem;
 }
 

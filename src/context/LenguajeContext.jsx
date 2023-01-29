@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-const LenguajeContext = React.createContext({})
+const LenguajeContext = React.createContext(null)
 
 export function LenguajeContextProvider({ children }) {
-    const [isSpanish, setIsSpanish] = useState(false);
+    const [isSpanish, setIsSpanish] = useState(true);
 
     return(
         <LenguajeContext.Provider value={{isSpanish, setIsSpanish}}>

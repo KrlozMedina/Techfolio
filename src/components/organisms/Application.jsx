@@ -1,15 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
-import LenguajeContext from '../../context/LenguajeContext';
-
-import Card from '../molecules/Card';
-
-import '../../styles/components/organisms/Application.css'
+import React from 'react'
+import Slider from './Slider';
 
 const applicationsData = [
   {
     "id": 1,
-    "titulo": "Transformación digital",
-    "title": "Digital transformation",
+    "spanish": {
+      "title": "Transformación digital",
+      "description": "Implementación de herramientas 4.0 para capturar datos de una planta de producción",
+    },
+    "english": {
+      "title": "Digital transformation",
+      "description": "Implementation of 4.0 tools to capture data from a production plant",
+    },
     "link": "https://grado.onrender.com/",
     "link-code": "https://github.com/Tranformacion-Digital",
     "thumbnails": {
@@ -17,13 +19,18 @@ const applicationsData = [
         "url": "https://i.imgur.com/f5yemqI.png"
       }
     },
-    "descripcion": "Implementación de herramientas 4.0 para capturar datos de una planta de producción",
-    "description": "Implementation of 4.0 tools to capture data from a production plant"
+    "type": "application"
   },
   {
     "id": 2,
-    "titulo": "Control laboratorio",
-    "title": "Laboratory control",
+    "spanish": {
+      "title": "Control laboratorio",
+      "description": "Control de registros y usuarios de un laboratorio de electronica",
+    },
+    "english": {
+      "title": "Laboratory control",
+      "description": "Control of records and users of an electronics laboratory",
+    },
     "link": "https://tubular-profiterole-64b7dd.netlify.app/records",
     "link-code": "https://github.com/Laboratorio-Electronica",
     "thumbnails": {
@@ -31,27 +38,45 @@ const applicationsData = [
         "url": "https://i.imgur.com/86z5FBN.png"
       }
     },
-    "descripcion": "Control de registros y usuarios de un laboratorio de electronica",
-    "description": "Control of records and users of an electronics laboratory"
-  }
+    "type": "application"
+  },
+  {
+    "id": 3,
+    "spanish": {
+        "title": "Pokemon",
+        "description": "Mini juego usando la API de Pokemon",
+    },
+    "english": {
+        "title": "Pokemon",
+        "description": "Mini game using the Pokemon API",
+    },
+    "link": "https://pokemon-32ua.onrender.com/",
+    "link-code": "https://github.com/KrlozMedina/MyPokedesk",
+    "thumbnails": {
+        "medium": {
+            "url": "https://i.imgur.com/DKlA2ut.png",
+        }
+    },
+    "type": "project"
+},
 ]
 
-const Projects = () => {
-  const {isSpanish, setIsSpanish} = useContext(LenguajeContext);
-
+const Application = () => {
   return (
-    <section className="projects">
-      <h2 className='title'>{isSpanish ? "Aplicaciones" : "Applications"}</h2>
-        
-      <div className='projects__cards'>
-        {
-          applicationsData.map(app => (
-            <Card key={app.id}>{app}</Card>
-          ))
-        }
-      </div>
-    </section>
+    <>
+      <Slider>
+        {{
+          "english": {
+            "title": "Applications"
+          },
+          "spanish": {
+            "title": "Aplicaciones"
+          },
+          "data": applicationsData
+        }}
+      </Slider>
+    </>
   )
 }
 
-export default Projects
+export default Application

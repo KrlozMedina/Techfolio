@@ -6,9 +6,9 @@ import './styles/global.css'
 import { LenguajeContextProvider } from './context/LenguajeContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
-  <LenguajeContextProvider>
-    <App />
-  </LenguajeContextProvider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <LenguajeContextProvider>
+      <App />
+    </LenguajeContextProvider>
+  </React.StrictMode>
 )

@@ -23,6 +23,8 @@ const Contact = () => {
     }
 
     return (
+        <section>
+
         <form id='contact' className='contact-form' onSubmit={sendEmail}>
             <fieldset className="main-contact-container" >
                 <legend className='title'>{isSpanish ? "Contactarme" : "Contact me"}</legend>
@@ -51,6 +53,7 @@ const Contact = () => {
                 </div>
             </fieldset>
         </form>
+        </section>
     )
 }
 
