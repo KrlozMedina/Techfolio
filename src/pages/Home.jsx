@@ -9,6 +9,7 @@ import Popup from '../components/Popup'
 import Banner from '../components/molecules/Banner'
 import '../styles/pages/Home.css'
 
+document.title = "KrlozMedina";
 
 const educationData = [
   {
