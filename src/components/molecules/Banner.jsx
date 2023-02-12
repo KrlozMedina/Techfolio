@@ -7,7 +7,7 @@ const Banner = ( props ) => {
   const {isSpanish, setIsSpanish} = useContext(LenguajeContext)
     const { url, logo, alt, titulo, title } = props.children
   return (
-        <a href={url}>
+        <a href={url} target="_blank" rel="noopener noreferrer">
             <article className='card-education'>
             <div>
                 <img className='education-logo' src={logo} alt={alt} />

@@ -36,7 +36,7 @@ const educationData = [
   },
   {
       "id": 4,
-      "url": "https://platzi.com/home",
+      "url": "https://app.aluracursos.com/",
       "alt": "Alura Latam",
       "logo": "https://i.imgur.com/DSl3dDo.png",
       "titulo": "Desarrollador BackEnd",
