@@ -1,9 +1,10 @@
 import React from 'react';
 import '../styles/pages/NotFound.css'
 
-document.title = "Not Found";
 
 const NotFound = () => {  
+  document.title = "Not Found";
+  
   return (
     <section className='not-found'>
       <img className='not-found__image' src="https://i.imgur.com/GMDwQGM.png" alt="Bot not found" />
