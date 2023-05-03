@@ -89,11 +89,11 @@ const Home = () => {
         <Hero>
           {{
             "english": {
-              "phrase": "Hi! I'm Carlos Alidio Medina López, Control and Automatization Engineer adn forming myself as Developer Web",
+              "phrase": "Hi! I'm Carlos Alidio Medina López, Control and Automatization Engineer adn forming myself as Developer FullStack",
               "alt": "Personal photo"
             },
             "spanish": {
-              "phrase": "Hola! Soy Carlos Alidio Medina López, Ingeniero en control y automatización y formándome como Desarrollador Web",
+              "phrase": "Hola! Soy Carlos Alidio Medina López, Ingeniero en control y automatización y formándome como Desarrollador FullStack",
               "alt": "Foto personal"
             },
             "img": "https://i.imgur.com/LKFGgrC.png",
@@ -169,7 +169,6 @@ const Home = () => {
         <Contact />
         <Footer />
       </section>
-      
       <Popup />
     </>
   )

@@ -3,7 +3,8 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Header from "../components/organisms/Header";
 import Home from '../pages/Home'
 import Projects from "../pages/Projects";
-import NotFound from '../pages/NotFound'
+import Certificates from "../pages/Certificates";
+import NotFound from '../pages/NotFound';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/Projects" element={<Projects />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/certificates" element={<Certificates />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
       </BrowserRouter>

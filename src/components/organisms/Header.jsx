@@ -52,6 +52,7 @@ const Header = () => {
           <div>
             <a href="/" onClick={() => setMenu(false)}>{isSpanish ? "Inicio" : "Home"}</a>
             <a href="/projects" onClick={() => setMenu(false)}>{isSpanish ? "Proyectos" : "Projects"}</a>
+            {/* <a href="/certificates" onClick={() => setMenu(false)}>{isSpanish ? 'Certificados' : 'Certificates'}</a> */}
             <a onClick={downloadCV}>CV</a>
           </div>
         </nav>
