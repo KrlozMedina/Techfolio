@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Slider from './Slider';
 
 const applicationsData = [
@@ -62,6 +62,14 @@ const applicationsData = [
 ]
 
 const Application = () => {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/projects")
+        .then(res => res.json())
+        .then(data => setProjects(data.content))
+}, [])
+
   return (
     <>
       <Slider>
@@ -72,7 +80,7 @@ const Application = () => {
           "spanish": {
             "title": "Aplicaciones"
           },
-          "data": applicationsData
+          "data": projects
         }}
       </Slider>
     </>
