@@ -6,7 +6,7 @@ import '../../styles/components/molecules/Cards.css'
 
 
 export const CardProject = (props) => {
-  console.log(props.children)
+  // console.log(props.children)
   const { isSpanish } = useContext(LenguajeContext);
   const { link, thumbnail, english, spanish } = props.children;
 

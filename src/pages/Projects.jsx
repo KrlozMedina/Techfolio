@@ -20,7 +20,7 @@ const projectsData = [
         },
         "link": "https://krlozmedina.github.io/Cronometro/",
         "link-code": "https://github.com/KrlozMedina/Cronometro",
-        "thumbnails": {
+        "thumbnail": {
             "medium": {
                 "url": "https://i.imgur.com/f7pXh08.png",
             }
@@ -39,7 +39,7 @@ const projectsData = [
         },
         "link": "https://krlozmedina.github.io/BatataBit/",
         "link-code": "https://github.com/KrlozMedina/BatataBit",
-        "thumbnails": {
+        "thumbnail": {
             "medium": {
                 "url": "https://i.imgur.com/srOyMs3.png",
             }
@@ -58,7 +58,7 @@ const projectsData = [
         },
         "link": "https://krlozmedina.github.io/RandomDogs/",
         "link-code": "https://github.com/KrlozMedina/Randomdogs",
-        "thumbnails": {
+        "thumbnail": {
             "medium": {
                 "url": "https://i.imgur.com/hmeeYqQ.png",
             }
@@ -77,7 +77,7 @@ const projectsData = [
         },
         "link": "https://rickandmorty-krlozmedina.netlify.app/",
         "link-code": "https://github.com/KrlozMedina/Rick-Morty",
-        "thumbnails": {
+        "thumbnail": {
             "medium": {
                 "url": "https://i.imgur.com/8dloLlb.png",
             }
