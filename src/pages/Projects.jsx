@@ -25,7 +25,7 @@ const projectsData = [
                 "url": "https://i.imgur.com/f7pXh08.png",
             }
         },
-        "type": "project"
+        "type": "PROJECT"
     },
     {
         "id": 2,
@@ -44,7 +44,7 @@ const projectsData = [
                 "url": "https://i.imgur.com/srOyMs3.png",
             }
         },
-        "type": "project"
+        "type": "PROJECT"
     },
     {
         "id": 3,
@@ -63,7 +63,7 @@ const projectsData = [
                 "url": "https://i.imgur.com/hmeeYqQ.png",
             }
         },
-        "type": "project"
+        "type": "PROJECT"
     },
     {
         "id": 4,
@@ -82,7 +82,7 @@ const projectsData = [
                 "url": "https://i.imgur.com/8dloLlb.png",
             }
         },
-        "type": "project"
+        "type": "PROJECT"
     }
 ]
 
