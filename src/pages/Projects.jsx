@@ -7,84 +7,84 @@ import Slider from '../components/organisms/Slider';
 import img from '../assets/projects.webp'
 import Contact from '../components/organisms/Contact';
 
-const projectsData = [
-    {
-        "id": 1,
-        "spanish": {
-            "title": "Cronometro",
-            "description": "Cronometro y temporizador en una sola aplicación web",
-        },
-        "english": {
-            "title": "Chronometer",
-            "description": "Stopwatch and timer in a single web application"
-        },
-        "link": "https://krlozmedina.github.io/Cronometro/",
-        "link-code": "https://github.com/KrlozMedina/Cronometro",
-        "thumbnail": {
-            "medium": {
-                "url": "https://i.imgur.com/f7pXh08.png",
-            }
-        },
-        "type": "PROJECT"
-    },
-    {
-        "id": 2,
-        "spanish": {
-            "title": "Clon Batata Bit",
-            "description": "Clon de la pagina Batata Bit",
-        },
-        "english":{
-            "title": "Clone Batata Bit",
-            "description": "Clone of the page Batata Bit",
-        },
-        "link": "https://krlozmedina.github.io/BatataBit/",
-        "link-code": "https://github.com/KrlozMedina/BatataBit",
-        "thumbnail": {
-            "medium": {
-                "url": "https://i.imgur.com/srOyMs3.png",
-            }
-        },
-        "type": "PROJECT"
-    },
-    {
-        "id": 3,
-        "spanish": {
-            "title": "Perros aleatorios",
-            "description": "Consumo de API de perros",
-        },
-        "english": {
-            "title": "Random Dogs",
-            "description": "API consumption of dogs",
-        },
-        "link": "https://krlozmedina.github.io/RandomDogs/",
-        "link-code": "https://github.com/KrlozMedina/Randomdogs",
-        "thumbnail": {
-            "medium": {
-                "url": "https://i.imgur.com/hmeeYqQ.png",
-            }
-        },
-        "type": "PROJECT"
-    },
-    {
-        "id": 4,
-        "spanish": {
-            "title": "Rick&Morty",
-            "description": "Encuentra cualquier personaje de Rick&Morty",
-        },
-        "english": {
-            "title": "Rick&Morty",
-            "description": "Find any Rick&Morty character",
-        },
-        "link": "https://rickandmorty-krlozmedina.netlify.app/",
-        "link-code": "https://github.com/KrlozMedina/Rick-Morty",
-        "thumbnail": {
-            "medium": {
-                "url": "https://i.imgur.com/8dloLlb.png",
-            }
-        },
-        "type": "PROJECT"
-    }
-]
+// const projectsData = [
+//     {
+//         "id": 1,
+//         "spanish": {
+//             "title": "Cronometro",
+//             "description": "Cronometro y temporizador en una sola aplicación web",
+//         },
+//         "english": {
+//             "title": "Chronometer",
+//             "description": "Stopwatch and timer in a single web application"
+//         },
+//         "link": "https://krlozmedina.github.io/Cronometro/",
+//         "link-code": "https://github.com/KrlozMedina/Cronometro",
+//         "thumbnail": {
+//             "medium": {
+//                 "url": "https://i.imgur.com/f7pXh08.png",
+//             }
+//         },
+//         "type": "PROJECT"
+//     },
+//     {
+//         "id": 2,
+//         "spanish": {
+//             "title": "Clon Batata Bit",
+//             "description": "Clon de la pagina Batata Bit",
+//         },
+//         "english":{
+//             "title": "Clone Batata Bit",
+//             "description": "Clone of the page Batata Bit",
+//         },
+//         "link": "https://krlozmedina.github.io/BatataBit/",
+//         "link-code": "https://github.com/KrlozMedina/BatataBit",
+//         "thumbnail": {
+//             "medium": {
+//                 "url": "https://i.imgur.com/srOyMs3.png",
+//             }
+//         },
+//         "type": "PROJECT"
+//     },
+//     {
+//         "id": 3,
+//         "spanish": {
+//             "title": "Perros aleatorios",
+//             "description": "Consumo de API de perros",
+//         },
+//         "english": {
+//             "title": "Random Dogs",
+//             "description": "API consumption of dogs",
+//         },
+//         "link": "https://krlozmedina.github.io/RandomDogs/",
+//         "link-code": "https://github.com/KrlozMedina/Randomdogs",
+//         "thumbnail": {
+//             "medium": {
+//                 "url": "https://i.imgur.com/hmeeYqQ.png",
+//             }
+//         },
+//         "type": "PROJECT"
+//     },
+//     {
+//         "id": 4,
+//         "spanish": {
+//             "title": "Rick&Morty",
+//             "description": "Encuentra cualquier personaje de Rick&Morty",
+//         },
+//         "english": {
+//             "title": "Rick&Morty",
+//             "description": "Find any Rick&Morty character",
+//         },
+//         "link": "https://rickandmorty-krlozmedina.netlify.app/",
+//         "link-code": "https://github.com/KrlozMedina/Rick-Morty",
+//         "thumbnail": {
+//             "medium": {
+//                 "url": "https://i.imgur.com/8dloLlb.png",
+//             }
+//         },
+//         "type": "PROJECT"
+//     }
+// ]
 
 const API = 'https://youtube-v31.p.rapidapi.com/search?channelId=UCwr2Oy0BSvLWbukMAi_Nk7g&part=snippet%2Cid&order=date&maxResults=12';
 const options = {
@@ -97,6 +97,23 @@ const options = {
 
 const Projects = () => {
     document.title = 'Projects'
+
+    const [projectsData, setProjectsData] = useState([]);
+
+    useEffect(() => {
+        fetch("https://portafolioapi-production.up.railway.app/projects")
+            .then(res => res.json())
+            .then(data => setProjectsData(data.content))
+    }, [])
+
+    const projects = []
+
+    projectsData.forEach(project => {
+    if (project.type === 'PROJECT') {
+        projects.push(project)
+    }
+    })
+
     const [videos, setVideos] = useState([])
 
     useEffect(() => {
@@ -145,7 +162,7 @@ const Projects = () => {
                         "english": {
                             "title": "projects"
                         },
-                        "data": projectsData
+                        "data": projects
                     }}
                 </Slider>
 
