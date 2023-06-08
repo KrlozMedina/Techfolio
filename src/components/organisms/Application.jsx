@@ -65,7 +65,7 @@ const Application = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/projects")
+    fetch("http://localhost:8081/projects")
         .then(res => res.json())
         .then(data => setProjects(data.content))
 }, [])

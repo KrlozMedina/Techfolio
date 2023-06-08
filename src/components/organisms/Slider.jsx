@@ -16,9 +16,9 @@ const Slider = (props) => {
         {
           data.map(element => (
             // console.log(element.type)
-            (element.type=="application" && <CardProject key={element.id}>{element}</CardProject>) ||
-            (element.type=="project" && <CardProject key={element.id}>{element}</CardProject>) ||
-            (element.type=="video" && <CardVideo key={element.id}>{element}</CardVideo>)
+            (element.type=="APPLICATION" && <CardProject key={element.id}>{element}</CardProject>) ||
+            (element.type=="PROJECT" && <CardProject key={element.id}>{element}</CardProject>) ||
+            (element.type=="VIDEO" && <CardVideo key={element.id}>{element}</CardVideo>)
           ))
         }
       </div>

@@ -11,6 +11,6 @@
     scroll-snap-type: x proximity;
     overscroll-behavior-x: contain;
     scroll-snap-type: x proximity;
-    gap: 2rem;
+    gap: 1rem;
     padding: 0 2rem;
 }
