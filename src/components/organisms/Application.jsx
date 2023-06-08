@@ -65,7 +65,7 @@ const Application = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetch("http://portafolioapi-production.up.railway.app/projects")
+    fetch("https://portafolioapi-production.up.railway.app/projects")
         .then(res => res.json())
         .then(data => setProjects(data.content))
 }, [])
