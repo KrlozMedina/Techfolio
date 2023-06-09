@@ -61,32 +61,39 @@ import Slider from './Slider';
 // },
 // ]
 
+const API = "https://portafolioapi-production.up.railway.app/projects";
+// const API = "http://localhost:8081/projects";
+
 const Application = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetch("https://portafolioapi-production.up.railway.app/projects")
+    fetch(API)
         .then(res => res.json())
         .then(data => setProjects(data.content))
 }, [])
 
+// console.log(projects)
+
 const applications = []
 
 projects.forEach(project => {
-  if (project.type === 'APPLICATION') {
+  if (project.app === 'WEB') {
     applications.push(project)
   }
 })
+
+// console.log(applications)
 
   return (
     <>
       <Slider>
         {{
           "english": {
-            "title": "Applications"
+            "title": "Applications Web"
           },
           "spanish": {
-            "title": "Aplicaciones"
+            "title": "Aplicaciones Web"
           },
           "data": applications
         }}

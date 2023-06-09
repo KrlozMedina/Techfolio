@@ -95,13 +95,16 @@ const options = {
     }
 };
 
+const projectsAPI = "https://portafolioapi-production.up.railway.app/projects";
+// const projectsAPI = "http://localhost:8081/projects";
+
 const Projects = () => {
     document.title = 'Projects'
 
     const [projectsData, setProjectsData] = useState([]);
 
     useEffect(() => {
-        fetch("https://portafolioapi-production.up.railway.app/projects")
+        fetch(projectsAPI)
             .then(res => res.json())
             .then(data => setProjectsData(data.content))
     }, [])
@@ -109,7 +112,7 @@ const Projects = () => {
     const projects = []
 
     projectsData.forEach(project => {
-    if (project.type === 'PROJECT') {
+    if (project.app === 'DESKTOP') {
         projects.push(project)
     }
     })
@@ -157,10 +160,10 @@ const Projects = () => {
                 <Slider>
                     {{
                         "spanish": {
-                            "title": "Proyectos"
+                            "title": "Aplicaciones de escritorio"
                         },
                         "english": {
-                            "title": "projects"
+                            "title": "Applications desktop"
                         },
                         "data": projects
                     }}
