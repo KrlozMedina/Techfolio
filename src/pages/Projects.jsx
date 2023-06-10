@@ -6,6 +6,9 @@ import Footer from '../components/organisms/Footer';
 import Slider from '../components/organisms/Slider';
 import img from '../assets/projects.webp'
 import Contact from '../components/organisms/Contact';
+import ApplicationWeb from '../components/organisms/ApplicationWeb';
+import ApplicationDesktop from '../components/organisms/ApplicationDesktop';
+import ApplicationMobile from '../components/organisms/ApplicationMobile';
 
 const videoAPI = 'https://youtube-v31.p.rapidapi.com/search?channelId=UCwr2Oy0BSvLWbukMAi_Nk7g&part=snippet%2Cid&order=date&maxResults=12';
 const options = {
@@ -22,44 +25,28 @@ const API = "https://portafolioapi-production.up.railway.app/projects";
 const Projects = () => {
     document.title = 'Projects'
 
-    const [applicationsWeb, setApplicationsWeb] = useState([]);
-    const [applicationsDesktop, setApplicationsDesktop] = useState([]);
-    const [applicationsMobile, setApplicationsMobile] = useState([]);
-    const [videos, setVideos] = useState([])
+    // const [videos, setVideos] = useState([])
 
-    useEffect(() => {
-        fetch(API + "/WEB")
-            .then(res => res.json())
-            .then(data => setApplicationsWeb(data.content))
-    }, [])
+    
 
-    useEffect(() => {
-        fetch(API + "/DESKTOP")
-            .then(res => res.json())
-            .then(data => setApplicationsDesktop(data.content))
-    })
+    console.log("publicando")
+    
 
-    useEffect(() => {
-        fetch(API + "/MOBILE")
-            .then(res => res.json())
-            .then(data => setApplicationsMobile(data.content))
-    })
-
-    useEffect(() => {
-        fetch(videoAPI, options)
-            .then(res => res.json())
-            .then(data => setVideos(data.items))
-    }, [])
+    // useEffect(() => {
+    //     fetch(videoAPI, options)
+    //         .then(res => res.json())
+    //         .then(data => setVideos(data.items))
+    // }, [])
 
     let videosYoutube = [];
 
-    videos.map(video => {
-        video.snippet.link = `https://www.youtube.com/watch?v=${video.id.videoId}`;
-        video.snippet.type = 'video';
-        video.snippet.descripcion = video.snippet.description;
-        video.snippet.id = video.id.videoId;
-        videosYoutube.push(video.snippet)
-    })
+    // videos.map(video => {
+    //     video.snippet.link = `https://www.youtube.com/watch?v=${video.id.videoId}`;
+    //     video.snippet.type = 'video';
+    //     video.snippet.descripcion = video.snippet.description;
+    //     video.snippet.id = video.id.videoId;
+    //     videosYoutube.push(video.snippet)
+    // })
 
     return (
         <>
@@ -81,41 +68,11 @@ const Projects = () => {
                     }}
                 </Hero>
 
-                <Slider>
-                    {{
-                        "spanish": {
-                            "title": "Aplicaciones web"
-                        },
-                        "english": {
-                            "title": "Applications web"
-                        },
-                        "data": applicationsWeb
-                    }}
-                </Slider>
+                <ApplicationWeb />
 
-                <Slider>
-                    {{
-                        "spanish": {
-                            "title": "Aplicaciones de escritorio"
-                        },
-                        "english": {
-                            "title": "Applications desktop"
-                        },
-                        "data": applicationsDesktop
-                    }}
-                </Slider>
+                <ApplicationDesktop />
 
-                <Slider>
-                    {{
-                        "spanish": {
-                            "title": "Aplicaciones mobiles"
-                        },
-                        "english": {
-                            "title": "Applications mobile"
-                        },
-                        "data": applicationsMobile
-                    }}
-                </Slider>
+                <ApplicationMobile />
 
                 <Slider>
                     {{
