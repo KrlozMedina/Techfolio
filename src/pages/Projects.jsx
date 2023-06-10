@@ -7,86 +7,7 @@ import Slider from '../components/organisms/Slider';
 import img from '../assets/projects.webp'
 import Contact from '../components/organisms/Contact';
 
-// const projectsData = [
-//     {
-//         "id": 1,
-//         "spanish": {
-//             "title": "Cronometro",
-//             "description": "Cronometro y temporizador en una sola aplicación web",
-//         },
-//         "english": {
-//             "title": "Chronometer",
-//             "description": "Stopwatch and timer in a single web application"
-//         },
-//         "link": "https://krlozmedina.github.io/Cronometro/",
-//         "link-code": "https://github.com/KrlozMedina/Cronometro",
-//         "thumbnail": {
-//             "medium": {
-//                 "url": "https://i.imgur.com/f7pXh08.png",
-//             }
-//         },
-//         "type": "PROJECT"
-//     },
-//     {
-//         "id": 2,
-//         "spanish": {
-//             "title": "Clon Batata Bit",
-//             "description": "Clon de la pagina Batata Bit",
-//         },
-//         "english":{
-//             "title": "Clone Batata Bit",
-//             "description": "Clone of the page Batata Bit",
-//         },
-//         "link": "https://krlozmedina.github.io/BatataBit/",
-//         "link-code": "https://github.com/KrlozMedina/BatataBit",
-//         "thumbnail": {
-//             "medium": {
-//                 "url": "https://i.imgur.com/srOyMs3.png",
-//             }
-//         },
-//         "type": "PROJECT"
-//     },
-//     {
-//         "id": 3,
-//         "spanish": {
-//             "title": "Perros aleatorios",
-//             "description": "Consumo de API de perros",
-//         },
-//         "english": {
-//             "title": "Random Dogs",
-//             "description": "API consumption of dogs",
-//         },
-//         "link": "https://krlozmedina.github.io/RandomDogs/",
-//         "link-code": "https://github.com/KrlozMedina/Randomdogs",
-//         "thumbnail": {
-//             "medium": {
-//                 "url": "https://i.imgur.com/hmeeYqQ.png",
-//             }
-//         },
-//         "type": "PROJECT"
-//     },
-//     {
-//         "id": 4,
-//         "spanish": {
-//             "title": "Rick&Morty",
-//             "description": "Encuentra cualquier personaje de Rick&Morty",
-//         },
-//         "english": {
-//             "title": "Rick&Morty",
-//             "description": "Find any Rick&Morty character",
-//         },
-//         "link": "https://rickandmorty-krlozmedina.netlify.app/",
-//         "link-code": "https://github.com/KrlozMedina/Rick-Morty",
-//         "thumbnail": {
-//             "medium": {
-//                 "url": "https://i.imgur.com/8dloLlb.png",
-//             }
-//         },
-//         "type": "PROJECT"
-//     }
-// ]
-
-const API = 'https://youtube-v31.p.rapidapi.com/search?channelId=UCwr2Oy0BSvLWbukMAi_Nk7g&part=snippet%2Cid&order=date&maxResults=12';
+const videoAPI = 'https://youtube-v31.p.rapidapi.com/search?channelId=UCwr2Oy0BSvLWbukMAi_Nk7g&part=snippet%2Cid&order=date&maxResults=12';
 const options = {
     method: 'GET',
     headers: {
@@ -95,32 +16,37 @@ const options = {
     }
 };
 
-const projectsAPI = "https://portafolioapi-production.up.railway.app/projects";
+const API = "https://portafolioapi-production.up.railway.app/projects";
 // const projectsAPI = "http://localhost:8081/projects";
 
 const Projects = () => {
     document.title = 'Projects'
 
-    const [projectsData, setProjectsData] = useState([]);
-
-    useEffect(() => {
-        fetch(projectsAPI)
-            .then(res => res.json())
-            .then(data => setProjectsData(data.content))
-    }, [])
-
-    const projects = []
-
-    projectsData.forEach(project => {
-    if (project.app === 'DESKTOP') {
-        projects.push(project)
-    }
-    })
-
+    const [applicationsWeb, setApplicationsWeb] = useState([]);
+    const [applicationsDesktop, setApplicationsDesktop] = useState([]);
+    const [applicationsMobile, setApplicationsMobile] = useState([]);
     const [videos, setVideos] = useState([])
 
     useEffect(() => {
-        fetch(API, options)
+        fetch(API + "/WEB")
+            .then(res => res.json())
+            .then(data => setApplicationsWeb(data.content))
+    }, [])
+
+    useEffect(() => {
+        fetch(API + "/DESKTOP")
+            .then(res => res.json())
+            .then(data => setApplicationsDesktop(data.content))
+    })
+
+    useEffect(() => {
+        fetch(API + "/MOBILE")
+            .then(res => res.json())
+            .then(data => setApplicationsMobile(data.content))
+    })
+
+    useEffect(() => {
+        fetch(videoAPI, options)
             .then(res => res.json())
             .then(data => setVideos(data.items))
     }, [])
@@ -155,7 +81,17 @@ const Projects = () => {
                     }}
                 </Hero>
 
-                <Application />
+                <Slider>
+                    {{
+                        "spanish": {
+                            "title": "Aplicaciones web"
+                        },
+                        "english": {
+                            "title": "Applications web"
+                        },
+                        "data": applicationsWeb
+                    }}
+                </Slider>
 
                 <Slider>
                     {{
@@ -165,7 +101,19 @@ const Projects = () => {
                         "english": {
                             "title": "Applications desktop"
                         },
-                        "data": projects
+                        "data": applicationsDesktop
+                    }}
+                </Slider>
+
+                <Slider>
+                    {{
+                        "spanish": {
+                            "title": "Aplicaciones mobiles"
+                        },
+                        "english": {
+                            "title": "Applications mobile"
+                        },
+                        "data": applicationsMobile
                     }}
                 </Slider>
 
@@ -181,7 +129,6 @@ const Projects = () => {
                     }}
                 </Slider>
 
-                <Contact />
                 <Footer />
             </section>
         </>
