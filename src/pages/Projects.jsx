@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/organisms/Header';
 import Hero from '../components/molecules/Hero';
-import Application from '../components/organisms/Application';
 import Footer from '../components/organisms/Footer';
 import Slider from '../components/organisms/Slider';
 import img from '../assets/projects.webp'
-import Contact from '../components/organisms/Contact';
 import ApplicationWeb from '../components/organisms/ApplicationWeb';
 import ApplicationDesktop from '../components/organisms/ApplicationDesktop';
 import ApplicationMobile from '../components/organisms/ApplicationMobile';
