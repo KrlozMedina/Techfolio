@@ -82,10 +82,6 @@ const MenuAside = () => {
       <a href='/contactme'>
         <BiMessageDots className='icon'/>
       </a>
-
-      <a href='/contactm'  className='icon'>
-        X
-      </a>
     </div>
   )
 }
