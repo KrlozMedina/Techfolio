@@ -1,0 +1,10 @@
+.logo{
+    font-family: var(--font-logo);
+    font-size: 6.4rem;
+}
+
+@media (max-width: 425px) {
+    .logo{
+        font-size: 4.8rem;
+    }
+}

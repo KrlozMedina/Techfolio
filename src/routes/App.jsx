@@ -1,10 +1,11 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
-import Header from "../components/organisms/Header";
+// import Header from "../components/organisms/Header";
 import Home from '../pages/Home'
 import Projects from "../pages/Projects";
-import Certificates from "../pages/Certificates";
+import Education from "../pages/Education";
 import NotFound from '../pages/NotFound';
+import AboutMe from "../pages/AboutMe";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/certificates" element={<Certificates />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/aboutme" element={<AboutMe />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
       </BrowserRouter>

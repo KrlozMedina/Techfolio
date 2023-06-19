@@ -1,12 +1,121 @@
-.container{
-    width: var(--width-container);
-    min-width: 32rem;
-    max-width: var(--max-width-container);
-    margin: 0 auto;
-    border: 2.5px solid black;
-    border-bottom: none;
-    box-shadow: 0 0 100px black;
+/* NEW */
+
+.home--container{
+    width: 100%;
+    display: flex;
 }
+
+.home__info{
+    width: 100%;
+    height: 100vh;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 20rem;
+    /* align-items: last baseline; */
+}
+
+.home__info--description{
+    width: 100%;
+}
+
+.description{
+    font-family: var(--font-text);
+    /* margin-left: 0.8rem; */
+    margin: 2.8rem 0.8rem;
+    font-size: 3.2rem;
+    /* margin: 1.2rem 0; */
+}
+
+.menu{
+    display: none;
+}
+
+.menuPhone{
+    display: none;
+}
+
+
+@media (max-width: 425px) {
+    .home__info--menu{
+        display: none;
+    }
+
+    .description{
+        font-size: 2rem;
+    }
+
+    .aside{
+        display: none;
+    }
+
+    .menu{
+        display: none;
+    }
+
+    .language{
+        display: none;
+    }
+
+    .menuPhone{
+        display: initial;
+    }
+}
+
+@media (min-width: 1024px) {
+    .aside{
+        display: none;
+    }
+
+    .home__info{
+        flex-direction: row;
+        align-items: last baseline;
+        gap: 0;
+        justify-content: space-between;
+    }
+
+    .home__info--description{
+        width: 50%;
+    }
+
+    .menu{
+        display: initial;
+    }
+}
+
+
+
+
+
+
+
+/* .header__phone{
+    display: flex;
+}
+
+.logo__text{
+    font-family: var(--font-logo);
+    font-size: 4rem;
+    color: white;
+}
+
+.menu{
+    font-size: 6rem;
+} */
+
+
+
+/* OLD */
+
+
+
+
+
+
+
+
+
 
 .container section:nth-child(2n+1){
     background-color: var(--color-background-container-soft);
@@ -19,7 +128,7 @@
 
 /* About */
 
-.about{
+/* .about{
     width: 100%;
     margin: 0 auto;
 }
@@ -30,7 +139,6 @@
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 5rem 0;
-    /* background-color: var(--color-background-container); */
 }
 
 .about__title--text{
@@ -50,7 +158,6 @@
 .about__title--description{
     font-size: 3.5rem;
     color: var(--color-text);
-    /* text-align: justify; */
 }
 
 .about__title--photo{
@@ -66,7 +173,6 @@
 
 .about__description{
     padding: 5rem 0;
-    /* background-color: var(--color-background-container); */
 }
 
 .about__description--text{
@@ -74,11 +180,11 @@
     margin: 2rem 1.5rem;
     text-align: justify;
     padding: 0 1rem;
-}
+} */
 
 /* Education */
 
-.main-education-container{
+/* .main-education-container{
     width: 100%;
     margin: 0 auto;
     padding: 5rem 1rem;
@@ -123,4 +229,4 @@
 .education-code-name{
     font-size: 1.2rem;
     text-align: center;
-}
+} */

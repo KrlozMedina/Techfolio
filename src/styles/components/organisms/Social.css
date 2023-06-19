@@ -1,0 +1,7 @@
+.social{
+    width: 100%;
+    /* margin: 0 auto; */
+    padding: 0 25%;
+    display: inline-flex;
+    justify-content: space-evenly;
+}

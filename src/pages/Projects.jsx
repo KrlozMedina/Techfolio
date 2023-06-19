@@ -1,93 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import Header from '../components/organisms/Header';
-import Hero from '../components/molecules/Hero';
-import Footer from '../components/organisms/Footer';
-import Slider from '../components/organisms/Slider';
-import img from '../assets/projects.webp'
-import ApplicationWeb from '../components/organisms/ApplicationWeb';
-import ApplicationDesktop from '../components/organisms/ApplicationDesktop';
-import ApplicationMobile from '../components/organisms/ApplicationMobile';
+import React, { useContext } from 'react'
+import LenguajeContext from '../context/LenguajeContext'
+import Page from '../components/templates/Page'
+import ApplicationWeb from '../components/organisms/ApplicationWeb'
+import ApplicationDesktop from '../components/organisms/ApplicationDesktop'
+import ApplicationMobile from '../components/organisms/ApplicationMobile'
 
-const videoAPI = 'https://youtube-v31.p.rapidapi.com/search?channelId=UCwr2Oy0BSvLWbukMAi_Nk7g&part=snippet%2Cid&order=date&maxResults=12';
-const options = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': '22dab2bc01msh2310900cbcea451p119d45jsna7f9a371b8e2',
-        'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
-    }
-};
-
-const API = "https://portafolioapi-production.up.railway.app/projects";
-// const projectsAPI = "http://localhost:8081/projects";
+import '../styles/pages/Projects.css'
 
 const Projects = () => {
-    document.title = 'Projects'
+  const { isSpanish } = useContext(LenguajeContext)
 
-    // const [videos, setVideos] = useState([])
+  return (
+    <div>
+      <Page>
+        <p className='phrase'>
+          {
+            isSpanish
+            ? "Las recompensas y la motivación son un cambio de aceite para los motores del proyecto. Hazlo regularmente y con frecuencia."
+            : "Rewards and motivation are an oil change for the engines of a project. Do it regularly and frequently."
+          }
+        </p>
 
-    
+        <p className='author'>Woody Williams</p>
 
-    console.log("publicando")
-    
-
-    // useEffect(() => {
-    //     fetch(videoAPI, options)
-    //         .then(res => res.json())
-    //         .then(data => setVideos(data.items))
-    // }, [])
-
-    let videosYoutube = [];
-
-    // videos.map(video => {
-    //     video.snippet.link = `https://www.youtube.com/watch?v=${video.id.videoId}`;
-    //     video.snippet.type = 'video';
-    //     video.snippet.descripcion = video.snippet.description;
-    //     video.snippet.id = video.id.videoId;
-    //     videosYoutube.push(video.snippet)
-    // })
-
-    return (
-        <>
-            <span className="background__intersection"></span>
-            <Header />
-            <section className='container'>
-                <Hero>
-                    {{
-                        "english": {
-                            "phrase": "Rewards and motivation are an oil change for project engines. Do it regularly and often.",
-                            "alt": "Projects"
-                        },
-                        "spanish": {
-                            "phrase": "Las recompensas y la motivación son un cambio de aceite para los motores del proyecto. Hazlo regularmente y con frecuencia.",
-                            "alt": "Proyectos"
-                        },
-                        "author": "Woody Williams",
-                        "img": img,
-                    }}
-                </Hero>
-
-                <ApplicationWeb />
-
-                <ApplicationDesktop />
-
-                <ApplicationMobile />
-
-                <Slider>
-                    {{
-                        "spanish": {
-                            "title": "Videos"
-                        },
-                        "english": {
-                            "title": "Videos"
-                        },
-                        "data": videosYoutube
-                    }}
-                </Slider>
-
-                <Footer />
-            </section>
-        </>
-    )
+        <ApplicationWeb />
+        <ApplicationDesktop />
+        <ApplicationMobile />
+      </Page>
+    </div>
+  )
 }
 
 export default Projects

@@ -1,0 +1,11 @@
+.phrase{
+    width: 50%;
+    font-size: 2rem;
+    margin: 0 1.6rem 0 auto;
+}
+
+.author{
+    text-align: end;
+    font-size: 2.4rem;
+    margin: 0 1.6rem 0 auto;
+}
