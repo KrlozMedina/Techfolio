@@ -1,90 +1,16 @@
 import React, { useContext } from 'react'
-import LenguajeContext from '../context/LenguajeContext'
-// import Header from '../components/organisms/Header'
-// import Hero from '../components/molecules/Hero'
-// import Application from '../components/organisms/Application'
-// import Contact from '../components/organisms/Contact'
-// import Footer from '../components/organisms/Social'
-// import Popup from '../components/Popup'
-// import Banner from '../components/molecules/Banner'
-import '../styles/pages/Home.css'
 
 import Social from "../components/organisms/Social"
-import Lenguaje from '../components/molecules/Language'
+import Language from '../components/molecules/Language'
 import Logo from '../components/atom/Logo'
-// import MenuPhone from '../components/organisms/MenuPhone'
 import { Menu, MenuPhone, MenuAside } from '../components/organisms/Menu'
 
-// const educationData = [
-//   {
-//       "id": 1,
-//       "url": "https://www.udistrital.edu.co/inicio",
-//       "alt": "UD",
-//       "logo": "https://i.imgur.com/Hkn5iBH.png",
-//       "titulo": "Tecnologo en Electronica",
-//       "title": "Electronic Technologist"
-//   },
-//   {
-//       "id": 2,
-//       "url": "https://www.udistrital.edu.co/inicio",
-//       "alt": "UD",
-//       "logo": "https://i.imgur.com/Hkn5iBH.png",
-//       "titulo": "Ingeniero en Control y Automatización",
-//       "title": "Control and Automation Engineer"
-//   },
-//   {
-//       "id": 3,
-//       "url": "https://platzi.com/home",
-//       "alt": "Platzi",
-//       "logo": "https://i.imgur.com/Rd2SS4U.png",
-//       "titulo": "Desarrollador FrontEnd",
-//       "title": "FrontEnd Developer"
-//   },
-//   {
-//       "id": 4,
-//       "url": "https://app.aluracursos.com/",
-//       "alt": "Alura Latam",
-//       "logo": "https://i.imgur.com/DSl3dDo.png",
-//       "titulo": "Desarrollador BackEnd",
-//       "title": "BackEnd Developer"
-//   }
-// ]
+import LanguageContext from '../context/LanguageContext'
 
-// const codeData = [
-//   {
-//       "id": 4,
-//       "name": "HTML5",
-//       "logo": "https://i.imgur.com/JgltpME.png"
-//   },
-//   {
-//       "id": 5,
-//       "name": "CSS3",
-//       "logo": "https://i.imgur.com/Kpd0zcY.png"
-//   },
-//   {  
-//       "id": 6,
-//       "name": "JavaScript",
-//       "logo": "https://i.imgur.com/CHg6SwF.png"
-//   },
-//   {
-//       "id": 7,
-//       "name": "C++",
-//       "logo": "https://i.imgur.com/kQm8upj.png"
-//   },
-//   {
-//       "id": 8,
-//       "name": "Matlab",
-//       "logo": "https://i.imgur.com/tlE0JYH.png"
-//   },
-//   {
-//       "id": 9,
-//       "name": "React",
-//       "logo": "https://i.imgur.com/FFG1qVn.png"
-//   }
-// ]
+import '../styles/pages/Home.css'
 
 const Home = () => {
-  const { isSpanish } = useContext(LenguajeContext)
+  const { isSpanish } = useContext(LanguageContext)
 
   return (
     <div className='home--container'>
@@ -93,7 +19,7 @@ const Home = () => {
       </div>
 
       <div className='language'>
-        <Lenguaje />
+        <Language />
       </div>
 
       <main className='home__info'>

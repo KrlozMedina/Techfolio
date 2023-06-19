@@ -47,3 +47,182 @@
         font-size: 1.6rem;
     }
 }
+
+/* BANNER */
+
+.card-education{
+    width: 28rem;
+    border: 2px solid var(--color-line);
+    border-radius: 20px;
+    background-color: var(--color-background-container);
+}
+
+.card-education div{
+    width: 100%;
+    display: flex;
+    background-color: var(--color-background-title);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    align-items: center;
+}
+
+.education-logo{
+    width: 7rem;
+    background-color: white;
+    border-radius: 50%;
+    border: solid 2px var(--color-line);
+}
+
+.card-education h3{
+    width: calc(100% - 7rem);
+    font-size: 2rem;
+    text-align: center;
+    margin: 0 1rem;
+}
+
+.card-education p{
+    width: 100%;
+    padding: 1rem;
+    color: var(--color-text);
+    font-size: 1.7rem;
+}
+
+/* CARDS */
+
+.card__project{
+    width: 28rem;
+    height: 52rem;
+    background-color: var(--color-background-container);
+    margin: 3rem auto;
+    border-radius: 15px;
+    scroll-snap-align: center;
+    position: relative;
+    border: solid 0.1rem var(--color-line);
+}
+
+.card__project--link,
+.card__video--link{
+    padding: 0;
+}
+
+.card__project--image{
+    width: 100%;
+    height: 20rem;
+    max-height: 50%;
+    border-radius: 15px 15px 0 0;
+    object-fit: cover;
+    object-position: top;
+}
+
+.card__project--title{
+    width: 28rem;
+    height: 8rem;
+    font-size: 2.5rem;
+    text-align: center;
+    background-color: var(--color-background-title);
+    padding: 1rem;
+}
+
+.card__project--description{
+    width: 100%;
+    color: var(--color-text);
+    font-size: 1.6rem;
+    padding: 2rem;
+    text-align: justify;
+}
+
+.card__project--code{
+    width: auto;
+    display: flex;
+    justify-content: end;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    align-items: center;
+    gap: .5rem;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.card__video{
+    width: 52rem;
+    /* height: 24rem; */
+    background-color: var(--color-background-container);
+    margin: 3rem auto;
+    border-radius: 15px;
+    scroll-snap-align: center;
+    position: relative;
+    border: solid 0.1rem var(--color-line);
+}
+
+.card__video div{
+    width: 100%;
+    display: flex;
+}
+
+.card__video--title{
+    width: 52rem;
+    height: 8rem;
+    font-size: 2.5rem;
+    text-align: center;
+    background-color: var(--color-background-title);
+    padding: 1rem 0;
+    border-radius: 0 0 15px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__video--description{
+    color: var(--color-text);
+    font-size: 2rem;
+    padding: 2rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__video--image{
+    width: 50%;
+    border-radius: 15px 15px 0 0;
+    object-fit: cover;
+    object-position: top;
+}
+
+/* @media (max-width: 768px) {
+    .card__video{
+        width: 26rem;
+        height: 40rem;
+        background-color: var(--color-background-container);
+        margin: 3rem auto;
+        border-radius: 15px;
+        scroll-snap-align: center;
+        position: relative;
+        border: solid 0.1rem var(--color-line);
+    }
+
+    .card__video--title{
+        width: 26rem;
+        font-size: 2.5rem;
+        text-align: center;
+        background-color: var(--color-background-title);
+        padding: 1rem 0;
+    }
+
+    .card__video--description{
+        width: 100%;
+        color: var(--color-text);
+        font-size: 2rem;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .card__video--image{
+        width: 100%;
+        height: 50%;
+        border-radius: 15px 15px 0 0;
+        object-fit: cover;
+        object-position: top;
+    }
+} */

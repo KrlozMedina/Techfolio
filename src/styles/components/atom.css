@@ -1,6 +1,6 @@
 .logo{
     font-family: var(--font-logo);
-    font-size: 6.4rem;
+    font-size: 4.4rem;
 }
 
 @media (max-width: 425px) {

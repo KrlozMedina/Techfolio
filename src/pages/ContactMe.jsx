@@ -1,11 +1,10 @@
 import React, { useContext } from 'react'
-import LenguajeContext from '../context/LenguajeContext'
+import LanguageContext from '../context/LanguageContext'
 import Page from '../components/templates/Page'
-// import Contact from '../components/organisms/Contact'
 import '../styles/pages/ContactMe.css'
 
 const ContactMe = () => {
-  const {isSpanish, setIsSpanish} = useContext(LenguajeContext)
+  const {isSpanish} = useContext(LanguageContext)
 
   const sendEmail = (event) => {
       event.preventDefault();

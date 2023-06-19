@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import LenguajeContext from '../context/LenguajeContext'
+import LanguageContext from '../context/LanguageContext'
 import Page from '../components/templates/Page'
 import ApplicationWeb from '../components/organisms/ApplicationWeb'
 import ApplicationDesktop from '../components/organisms/ApplicationDesktop'
@@ -8,7 +8,7 @@ import ApplicationMobile from '../components/organisms/ApplicationMobile'
 import '../styles/pages/Projects.css'
 
 const Projects = () => {
-  const { isSpanish } = useContext(LenguajeContext)
+  const { isSpanish } = useContext(LanguageContext)
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import LenguajeContext from '../../context/LenguajeContext';
+import LenguajeContext from '../../context/LanguageContext';
 import { BiCaretDown, BiCaretUp } from 'react-icons/bi';
 import "../../styles/components/molecules.css"
 

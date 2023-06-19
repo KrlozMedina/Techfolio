@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import LenguajeContext from '../../context/LenguajeContext';
+import React, { useContext } from 'react';
+import LanguageContext from '../../context/LanguageContext';
 import { CardVideo, CardProject } from '../molecules/Cards';
 
-import '../../styles/components/organisms/Slider.css'
+import '../../styles/components/organisms.css'
 
 const Slider = (props) => {
-  // console.log(props.children)
-  const {isSpanish, setIsSpanish} = useContext(LenguajeContext);
+  const {isSpanish} = useContext(LanguageContext);
   const {spanish, english, data} = props.children;
   
   return (
@@ -15,7 +14,6 @@ const Slider = (props) => {
       <div className='slider__cards'>
         {
           data.map(element => (
-            // console.log(element.type)
             (element.app=="WEB" && <CardProject key={element.id}>{element}</CardProject>) ||
             (element.app=="DESKTOP" && <CardProject key={element.id}>{element}</CardProject>) ||
             (element.app=="VIDEO" && <CardVideo key={element.id}>{element}</CardVideo>)

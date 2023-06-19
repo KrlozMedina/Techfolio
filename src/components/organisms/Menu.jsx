@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import LenguajeContext from '../../context/LenguajeContext'
+import LenguajeContext from '../../context/LanguageContext'
 
 import { TiInfoLarge } from 'react-icons/ti';
 import { IoIosSchool } from 'react-icons/io';
@@ -7,7 +7,6 @@ import { SiPolymerproject} from 'react-icons/si';
 import { BiMessageDots } from 'react-icons/bi';
 import { TfiMenuAlt } from 'react-icons/tfi';
 import { AiOutlineClose, AiFillHome } from 'react-icons/ai'
-// import { GrHomeRounded } from 'react-icons/gr'
 
 import Lenguaje from '../molecules/Language';
 
@@ -82,6 +81,10 @@ const MenuAside = () => {
 
       <a href='/contactme'>
         <BiMessageDots className='icon'/>
+      </a>
+
+      <a href='/contactm'  className='icon'>
+        X
       </a>
     </div>
   )

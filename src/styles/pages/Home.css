@@ -1,5 +1,3 @@
-/* NEW */
-
 .home--container{
     width: 100%;
     display: flex;
@@ -13,7 +11,6 @@
     flex-direction: column;
     justify-content: flex-end;
     gap: 20rem;
-    /* align-items: last baseline; */
 }
 
 .home__info--description{
@@ -22,10 +19,8 @@
 
 .description{
     font-family: var(--font-text);
-    /* margin-left: 0.8rem; */
     margin: 2.8rem 0.8rem;
     font-size: 3.2rem;
-    /* margin: 1.2rem 0; */
 }
 
 .menu{
@@ -35,6 +30,10 @@
 .menuPhone{
     display: none;
 }
+
+/* .logo{
+    font-size: 6.4rem;
+} */
 
 
 @media (max-width: 425px) {
@@ -84,149 +83,11 @@
     }
 }
 
-
-
-
-
-
-
-/* .header__phone{
-    display: flex;
-}
-
-.logo__text{
-    font-family: var(--font-logo);
-    font-size: 4rem;
-    color: white;
-}
-
-.menu{
-    font-size: 6rem;
-} */
-
-
-
-/* OLD */
-
-
-
-
-
-
-
-
-
-
-.container section:nth-child(2n+1){
+/* .container section:nth-child(2n+1){
     background-color: var(--color-background-container-soft);
 }
 
 .container section:first-child,
 .container section:nth-child(2n){
     background-color: var(--color-background-container);
-}
-
-/* About */
-
-/* .about{
-    width: 100%;
-    margin: 0 auto;
-}
-
-.about__title{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 5rem 0;
-}
-
-.about__title--text{
-    width: 60%;
-    max-width: 70rem;
-    min-width: 30rem;
-    padding: 1rem;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-}
-
-.about__title--text span{
-    color: var(--color-text-bold);
-}
-
-.about__title--description{
-    font-size: 3.5rem;
-    color: var(--color-text);
-}
-
-.about__title--photo{
-    width: 50%;
-    min-width: 31rem;
-    max-width: 40rem;
-    margin: 0 auto;
-}
-
-.about__description--title{
-    padding: 0 1rem;
-}
-
-.about__description{
-    padding: 5rem 0;
-}
-
-.about__description--text{
-    font-size: 2.3rem;
-    margin: 2rem 1.5rem;
-    text-align: justify;
-    padding: 0 1rem;
-} */
-
-/* Education */
-
-/* .main-education-container{
-    width: 100%;
-    margin: 0 auto;
-    padding: 5rem 1rem;
-}
-
-.education-cards-container{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 2.5rem auto;
-    gap: 5rem;
-    align-items: center;
-    justify-content: center;
-}
-
-.education-code-container{
-    width: 100%;
-    display: flex;
-    margin: 2.5rem auto;
-    gap: 2rem;
-    justify-content: space-around;
-    border: solid 2px var(--color-line);
-    padding: 2rem;
-    border-radius: 25px;
-    flex-wrap: wrap;
-}
-
-.education-code-container article{
-    width: 6rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.education-code-logo{
-    width: 4rem;
-    height: 4rem;
-    margin: 0.5rem auto;
-}
-
-.education-code-name{
-    font-size: 1.2rem;
-    text-align: center;
 } */

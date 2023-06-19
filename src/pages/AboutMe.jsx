@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import LenguajeContext from '../context/LenguajeContext'
+import LanguageContext from '../context/LanguageContext'
 import Page from '../components/templates/Page'
 import '../styles/pages/AboutMe.css'
 
 const AboutMe = () => {
   document.title = 'About me'
-  const { isSpanish } = useContext(LenguajeContext)
+  const { isSpanish } = useContext(LanguageContext)
 
   return (
     <div>

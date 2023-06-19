@@ -1,6 +1,5 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
-// import Header from "../components/organisms/Header";
 import Home from '../pages/Home'
 import Projects from "../pages/Projects";
 import Education from "../pages/Education";
@@ -11,9 +10,6 @@ import ContactMe from '../pages/ContactMe'
 function App() {
   return (
     <>
-      {/* <Header />
-      <span className="background__intersection"></span> */}
-
       <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />

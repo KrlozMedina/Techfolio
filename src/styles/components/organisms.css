@@ -77,3 +77,22 @@
         background-color: var(--color-background-container);
     }
 }
+
+/* SLIDER */
+
+.slider{
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.slider__cards{
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    gap: 1rem;
+    padding: 0 2rem;
+}

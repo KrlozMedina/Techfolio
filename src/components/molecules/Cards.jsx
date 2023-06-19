@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
-import LenguajeContext from '../../context/LenguajeContext';
+import LanguageContext from '../../context/LanguageContext';
 import { FaCode } from 'react-icons/fa';
 
-import '../../styles/components/molecules/Cards.css'
+import '../../styles/components/molecules.css'
 
 
 export const CardProject = (props) => {
-  // console.log(props.children)
-  const { isSpanish } = useContext(LenguajeContext);
+  const { isSpanish } = useContext(LanguageContext);
   const { linkDeploy, linkCode, thumbnails, english, spanish } = props.children;
 
   return (
@@ -27,7 +26,7 @@ export const CardProject = (props) => {
 
 
 export const CardVideo = (props) => {
-  const { isSpanish } = useContext(LenguajeContext);
+  const { isSpanish } = useContext(LanguageContext);
   const { descripcion, description, link, title, titulo, thumbnails, type } = props.children;
 
   return (

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import LenguajeContext from '../context/LenguajeContext'
+import LanguageContext from '../context/LanguageContext'
 import Page from '../components/templates/Page'
 import Banner from '../components/molecules/Banner'
 import '../styles/pages/Education.css'
@@ -73,7 +73,7 @@ const codeData = [
 ]
 
 const Education = () => {
-  const { isSpanish } = useContext(LenguajeContext)
+  const { isSpanish } = useContext(LanguageContext)
 
   return (
     <Page>

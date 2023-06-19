@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import LenguajeContext from '../../context/LenguajeContext'
+import LanguageContext from '../../context/LanguageContext'
 
-import '../../styles/components/molecules/Banner.css'
+import '../../styles/components/molecules.css'
 
 const Banner = ( props ) => {
-  const {isSpanish, setIsSpanish} = useContext(LenguajeContext)
+  const {isSpanish, setIsSpanish} = useContext(LanguageContext)
     const { url, logo, alt, titulo, title } = props.children
   return (
         <a href={url} target="_blank" rel="noopener noreferrer">
