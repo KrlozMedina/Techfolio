@@ -1,0 +1,71 @@
+.certificate--image{
+    width: 32rem;
+}
+
+.main-education-container{
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 2rem;
+}
+
+.education-cards-container{
+    width: 32rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 2rem;
+    gap: 2rem;
+    align-items: start;
+    justify-content: center;
+}
+
+.education-code-container{
+    width: 100%;
+    display: flex;
+    margin: 2.5rem auto;
+    gap: 2rem;
+    justify-content: space-around;
+    border: solid 2px var(--color-line);
+    padding: 2rem;
+    border-radius: 25px;
+    flex-wrap: wrap;
+}
+
+.education-code-container article{
+    width: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.education-code-logo{
+    width: 4rem;
+    height: 4rem;
+    margin: 0.5rem auto;
+}
+
+.education-code-name{
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.main-education{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.diploma{
+    width: calc(100% - 32rem);
+    max-width: 60rem;
+    /* height: 36rem; */
+    /* background-color: aliceblue; */
+    margin: auto;
+}
+
+@media (max-width: 768px) {
+    .diploma{
+        display: none;
+    }
+}
