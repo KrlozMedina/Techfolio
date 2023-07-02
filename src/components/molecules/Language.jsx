@@ -1,44 +1,61 @@
 import React, { useContext, useState } from 'react';
-import LenguajeContext from '../../context/LanguageContext';
+import LanguageContext from '../../context/LanguageContext';
 import { BiCaretDown, BiCaretUp } from 'react-icons/bi';
 import "../../styles/components/molecules.css"
 
-const Lenguaje = () => {
-  const {isSpanish, setIsSpanish} = useContext(LenguajeContext);
+const Language = () => {
+  const {isSpanish, setIsSpanish} = useContext(LanguageContext);
 
-  const [menuLenguaje, setMenuLenguaje] = useState(false)
+  const [menuLanguage, setMenuLanguage] = useState(false)
   
-  function handlerMenuLenguaje() {
-    setMenuLenguaje(!menuLenguaje);
+  function handlerMenuLanguage() {
+    setMenuLanguage(!menuLanguage);
   }
 
-  function setLenguaje(lenguajeSpanish) {
-    setIsSpanish(lenguajeSpanish)
-    localStorage.setItem('isSpanish', lenguajeSpanish)
+  function setLanguage(languageSpanish) {
+    setIsSpanish(languageSpanish)
+    localStorage.setItem('isSpanish', languageSpanish)
+    handlerMenuLanguage()
   }
 
   return (
-    <div className='lenguaje__container'>
-      <button className='lenguaje__button' onClick={() => handlerMenuLenguaje()}>
+    <div className='language__container'>
+      <button className='language__button' onClick={() => handlerMenuLanguage()}>
         {
           isSpanish
             ? "Idioma"
             : "Language"
         }
         {
-          menuLenguaje
-            ? <BiCaretUp className='lenguaje__deploy' />
-            : <BiCaretDown className='lenguaje__deploy' />
+          menuLanguage
+            ? <BiCaretUp className='language__deploy' />
+            : <BiCaretDown className='language__deploy' />
         }
         
       </button>
       
-      <div className={menuLenguaje ? 'lenguaje__item--container' : 'none'}>
-        <p className='lenguaje__item' onClick={() => setLenguaje(true)}>Espanol</p>
-        <p className='lenguaje__item' onClick={() => setLenguaje(false)}>English</p>
+      <div className={menuLanguage ? 'language__item--container' : 'none'}>
+        <p className='language__item' onClick={() => setLanguage(true)}>Español</p>
+        <p className='language__item' onClick={() => setLanguage(false)}>English</p>
       </div>
     </div>
   )
 }
 
-export default Lenguaje
+const LanguagePhone = () => {
+  const {isSpanish, setIsSpanish} = useContext(LanguageContext);
+
+  function setLanguage(languageSpanish) {
+    setIsSpanish(languageSpanish)
+    localStorage.setItem('isSpanish', languageSpanish)
+  }
+
+  return (
+    <div className='language__item--container'>
+      <p className='language__item' onClick={() => setLanguage(true)}>Espanol</p>
+      <p className='language__item' onClick={() => setLanguage(false)}>English</p>
+    </div>
+  )
+}
+
+export { Language, LanguagePhone }

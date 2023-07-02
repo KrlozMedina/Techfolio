@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 
 import Social from "../components/organisms/Social"
-import Language from '../components/molecules/Language'
-import Logo from '../components/atom/Logo'
+import { Language } from '../components/molecules/Language'
+import { Logo } from '../components/atom/Logo'
 import { Menu, MenuPhone, MenuAside } from '../components/organisms/Menu'
 
 import LanguageContext from '../context/LanguageContext'
@@ -14,33 +14,36 @@ const Home = () => {
 
   return (
     <div className='home--container'>
-      <div className='menuPhone'>
-        <MenuPhone />
-      </div>
+      <MenuPhone />
+      <Language />
 
-      <div className='language'>
-        <Language />
-      </div>
-
-      <main className='home__info'>
-        <section className='home__info--description'>
+      <main className='home__main'>
+        <section className='home__main--info'>
           <Logo />
 
-          <p className='description'>{
-            isSpanish
-              ? "Hola! Soy Carlos Alidio Medina López, Ingeniero en control y automatización y desarrollador de software en formación"
-              : "Hello! I'm Carlos Alidio Medina López, an engineer in control and automation and a software developer in training."
-          }</p>
+          <p>
+            {
+              isSpanish
+              ? "Hola! 👋🏼"
+              : "Hi! 👋🏼"
+            }
+          </p>
+
+          <p>
+            {
+              isSpanish
+              ? "Soy Carlos Alidio Medina López, Desarrollador de Software e Ingeniero en Control y Automatización"
+              : "I'm Carlos Alidio Medina López, Software Developer and Engineer in Control and Automation"
+            }
+          </p>
           
           <Social />
         </section>
-        
-        <section className='menu'>
-          <Menu />
-        </section>
+
+        <Menu />
       </main>
 
-      <aside className='aside'>
+      <aside className='home__aside'>
         <MenuAside />
       </aside>
 

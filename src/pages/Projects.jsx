@@ -1,11 +1,7 @@
 import React, { useContext } from 'react'
 import LanguageContext from '../context/LanguageContext'
 import Page from '../components/templates/Page'
-import ApplicationWeb from '../components/organisms/ApplicationWeb'
-import ApplicationDesktop from '../components/organisms/ApplicationDesktop'
-import ApplicationMobile from '../components/organisms/ApplicationMobile'
-
-import '../styles/pages/Projects.css'
+import { ApplicationDesktop, ApplicationMobile, ApplicationWeb } from '../components/organisms/Applications'
 
 const Projects = () => {
   const { isSpanish } = useContext(LanguageContext)

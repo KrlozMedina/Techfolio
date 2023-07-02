@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import LanguageContext from '../../context/LanguageContext';
-import { CardVideo, CardProject } from '../molecules/Cards';
+import { CardProject } from '../molecules/Cards';
+import { BsServer } from 'react-icons/bs'
 
 import '../../styles/components/organisms.css'
 
@@ -10,14 +11,12 @@ const Slider = (props) => {
   
   return (
     <section className="slider">
-      <h2 className='title'>{isSpanish ? spanish.title : english.title}</h2>
+      {(data == null || data.length != 0) && <h2 className='title'>{isSpanish ? spanish.title : english.title}</h2>}
       <div className='slider__cards'>
         {
-          data.map(element => (
-            (element.app=="WEB" && <CardProject key={element.id}>{element}</CardProject>) ||
-            (element.app=="DESKTOP" && <CardProject key={element.id}>{element}</CardProject>) ||
-            (element.app=="VIDEO" && <CardVideo key={element.id}>{element}</CardVideo>)
-          ))
+          data == null
+          ? <span className='slider__error'><BsServer /> {'<Error 500 /> Server offline'}</span>
+          : data.map(element => (<CardProject key={element.id}>{element}</CardProject>))
         }
       </div>
     </section>

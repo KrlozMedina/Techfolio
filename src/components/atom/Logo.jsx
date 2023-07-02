@@ -1,10 +1,18 @@
 import React from 'react'
 import "../../styles/components/atom.css"
 
+const label = "Krloz Medina </>";
+
 const Logo = () => {
   return (
-    <h1 className='logo'>{"Krloz Medina </>"}</h1>
+    <h1 className='logo'>{label}</h1>
   )
 }
 
-export default Logo
+const LogoHeader = () => {
+  return (
+    <h1 className='logo-header'>{label}</h1>
+  )
+}
+
+export { LogoHeader, Logo }

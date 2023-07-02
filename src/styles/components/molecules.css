@@ -1,4 +1,4 @@
-.lenguaje__container{
+.language__container{
     width: max-content;
     display: block;
     color: var(--color-text);
@@ -11,7 +11,7 @@
     text-align: end;
 }
 
-.lenguaje__button{
+.language__button{
     display: flex;
     align-items: center;
     background-color: rgba(0, 0, 0, 0);
@@ -19,46 +19,58 @@
     font-size: 2.4rem;
 }
 
-.lenguaje__deploy{
+.language__deploy{
     /* margin-left: 1.2rem; */
     font-weight: bold;
 }
 
-.lenguaje__item--container{
+.language__item--container{
     display: block;
     margin: 1.2rem;
 }
 
-.lenguaje__item{
+.language__item{
     margin: 0 0.8rem;
     cursor: pointer;
 }
 
 @media (max-width: 425px) {
-    .lenguaje__container{
+    .language__button{
+        display: none;
+    }
+
+    .language__item--container{
+        font-size: 2rem;
+        text-align: end;
+    }
+}
+
+/* @media (max-width: 425px) {
+    .language__container{
         top: auto;
     }
 
-    .lenguaje__button{
+    .language__button{
         font-size: 2.4rem;
     }
 
-    .lenguaje__container{
+    .language__container{
         font-size: 1.6rem;
     }
-}
+} */
 
 /* BANNER */
 
 .card-education{
-    width: 28rem;
+    /* width: 28rem; */
     border: 2px solid var(--color-line);
     border-radius: 20px;
     background-color: var(--color-background-container);
 }
 
 .card-education div{
-    width: 100%;
+    width: 32rem;
+    height: 8rem;
     display: flex;
     background-color: var(--color-background-title);
     border-radius: 20px;
@@ -91,9 +103,9 @@
 
 .card__project{
     width: 28rem;
-    height: 52rem;
+    height: 56rem;
     background-color: var(--color-background-container);
-    margin: 3rem auto;
+    margin: 0.8rem auto;
     border-radius: 15px;
     scroll-snap-align: center;
     position: relative;
@@ -117,10 +129,10 @@
 .card__project--title{
     width: 28rem;
     height: 8rem;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     text-align: center;
     background-color: var(--color-background-title);
-    padding: 1rem;
+    padding: 0.8rem 0;
 }
 
 .card__project--description{

@@ -52,17 +52,28 @@
 .main-education{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    margin: 1.2rem auto;
 }
 
 .diploma{
-    width: calc(100% - 32rem);
-    max-width: 60rem;
-    /* height: 36rem; */
+    width: calc(100% - 36rem);
+    max-width: 70rem;
+    /* height: 44rem; */
     /* background-color: aliceblue; */
     margin: auto;
+    object-fit: cover;
+    /* scale: 50%; */
 }
+
+/* .react-pdf__Page__annotations{
+    display: none;
+}
+
+.react-pdf__Page__textContent{
+    display: none;
+} */
 
 @media (max-width: 768px) {
     .diploma{

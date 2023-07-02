@@ -1,0 +1,22 @@
+.pdf-container{
+    width: 95%;
+    max-width: 100rem;
+    /* min-width: 30rem; */
+    margin: 0 auto;
+}
+
+/* @media (max-width: 425px) {
+    .pdf-container{
+        width: 30rem;
+    }
+}
+
+@media (min-width: 425px) and (max-width: 768px) {
+    .pdf-container{
+        width: 55rem;
+    }
+} */
+
+.diplomaImagen{
+    width: 300rem;
+}

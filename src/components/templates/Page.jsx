@@ -1,6 +1,6 @@
 import React from 'react'
-import Language from '../molecules/Language'
-import Logo from '../atom/Logo'
+import { Language } from '../molecules/Language'
+import { LogoHeader } from '../atom/Logo'
 import { MenuAside, MenuPhone } from '../organisms/Menu'
 import '../../styles/components/template.css'
 
@@ -16,7 +16,7 @@ const Page = (props) => {
       </div>
       
       <div className='template__main'>
-        <Logo className='logo' />
+        <LogoHeader />
         {props.children}
       </div>
 

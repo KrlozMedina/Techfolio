@@ -25,20 +25,20 @@ export const CardProject = (props) => {
 }
 
 
-export const CardVideo = (props) => {
-  const { isSpanish } = useContext(LanguageContext);
-  const { descripcion, description, link, title, titulo, thumbnails, type } = props.children;
+// export const CardVideo = (props) => {
+//   const { isSpanish } = useContext(LanguageContext);
+//   const { descripcion, description, link, title, titulo, thumbnails, type } = props.children;
 
-  return (
-    <article className="card__video">
-      <a className='card__video--link' href={link} target="_blank" rel="noopener noreferrer">
-        <div>
-          <img src={thumbnails.medium.url} className={'card__video--image'} />
-          <p className="card__video--description">{isSpanish ? descripcion : description}</p>
-        </div>
+//   return (
+//     <article className="card__video">
+//       <a className='card__video--link' href={link} target="_blank" rel="noopener noreferrer">
+//         <div>
+//           <img src={thumbnails.medium.url} className={'card__video--image'} />
+//           <p className="card__video--description">{isSpanish ? descripcion : description}</p>
+//         </div>
         
-        <p className="card__video--title">{title}</p>
-      </a>
-    </article>
-  )
-}
+//         <p className="card__video--title">{title}</p>
+//       </a>
+//     </article>
+//   )
+// }
