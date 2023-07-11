@@ -1,92 +1,88 @@
 import React, { useContext } from 'react'
-import LenguajeContext from '../context/LenguajeContext'
-import Header from '../components/organisms/Header'
-import Hero from '../components/molecules/Hero'
-import Application from '../components/organisms/Application'
-import Contact from '../components/organisms/Contact'
-import Footer from '../components/organisms/Footer'
-import Popup from '../components/Popup'
-import Banner from '../components/molecules/Banner'
+
+import Social from "../components/organisms/Social"
+import { Language } from '../components/molecules/Language'
+import { Logo } from '../components/atom/Logo'
+import { Menu, MenuPhone, MenuAside } from '../components/organisms/Menu'
+
+import LanguageContext from '../context/LanguageContext'
+
 import '../styles/pages/Home.css'
 
-const educationData = [
-  {
-      "id": 1,
-      "url": "https://www.udistrital.edu.co/inicio",
-      "alt": "UD",
-      "logo": "https://i.imgur.com/Hkn5iBH.png",
-      "titulo": "Tecnologo en Electronica",
-      "title": "Electronic Technologist"
-  },
-  {
-      "id": 2,
-      "url": "https://www.udistrital.edu.co/inicio",
-      "alt": "UD",
-      "logo": "https://i.imgur.com/Hkn5iBH.png",
-      "titulo": "Ingeniero en Control y Automatización",
-      "title": "Control and Automation Engineer"
-  },
-  {
-      "id": 3,
-      "url": "https://platzi.com/home",
-      "alt": "Platzi",
-      "logo": "https://i.imgur.com/Rd2SS4U.png",
-      "titulo": "Desarrollador FrontEnd",
-      "title": "FrontEnd Developer"
-  },
-  {
-      "id": 4,
-      "url": "https://app.aluracursos.com/",
-      "alt": "Alura Latam",
-      "logo": "https://i.imgur.com/DSl3dDo.png",
-      "titulo": "Desarrollador BackEnd",
-      "title": "BackEnd Developer"
-  }
-]
-
-const codeData = [
-  {
-      "id": 4,
-      "name": "HTML5",
-      "logo": "https://i.imgur.com/JgltpME.png"
-  },
-  {
-      "id": 5,
-      "name": "CSS3",
-      "logo": "https://i.imgur.com/Kpd0zcY.png"
-  },
-  {  
-      "id": 6,
-      "name": "JavaScript",
-      "logo": "https://i.imgur.com/CHg6SwF.png"
-  },
-  {
-      "id": 7,
-      "name": "C++",
-      "logo": "https://i.imgur.com/kQm8upj.png"
-  },
-  {
-      "id": 8,
-      "name": "Matlab",
-      "logo": "https://i.imgur.com/tlE0JYH.png"
-  },
-  {
-      "id": 9,
-      "name": "React",
-      "logo": "https://i.imgur.com/FFG1qVn.png"
-  }
-]
-
 const Home = () => {
-  const { isSpanish } = useContext(LenguajeContext)
+  const { isSpanish } = useContext(LanguageContext)
 
   return (
-    <>
-      <div className="background__intersection"></div>
-      <Header />
+    <div className='home--container'>
+      <MenuPhone />
+      <Language />
 
-      <section className='container'>
-        <Hero>
+      <main className='home__main'>
+        <section className='home__main--info'>
+          <Logo />
+
+          <p>
+            {
+              isSpanish
+              ? "Hola! 👋🏼"
+              : "Hi! 👋🏼"
+            }
+          </p>
+
+          <p>
+            {
+              isSpanish
+              ? "Soy Carlos Alidio Medina López, Desarrollador de Software e Ingeniero en Control y Automatización"
+              : "I'm Carlos Alidio Medina López, Software Developer and Engineer in Control and Automation"
+            }
+          </p>
+          
+          <Social />
+        </section>
+
+        <Menu />
+      </main>
+
+      <aside className='home__aside'>
+        <MenuAside />
+      </aside>
+
+      
+
+
+
+
+
+
+      {/* <div className="background__intersection"></div> */}
+      {/* <Header /> */}
+
+      {/* <section className='container'> */}
+
+
+
+
+
+        {/* <div className='header__phone'>
+          <h1 className='logo__text'>{"Krloz Medina </>"}</h1>
+          <RiMenuFoldFill className='menu' />
+        </div>
+        
+        <p className='description'>
+          {
+            isSpanish
+              ? "Hola! Soy Carlos Alidio Medina López, Ingeniero en control y automatización y desarrollador de software en formacion"
+              : "Hello! I'm Carlos Alidio Medina López, an engineer in control and automation and a software developer in training."
+          }
+        </p>
+
+        <Social /> */}
+
+
+
+
+
+        {/* <Hero>
           {{
             "english": {
               "phrase": "Hi! I'm Carlos Alidio Medina López, Control and Automatization Engineer adn forming myself as Developer FullStack",
@@ -98,9 +94,9 @@ const Home = () => {
             },
             "img": "https://i.imgur.com/LKFGgrC.png",
           }}
-        </Hero>
+        </Hero> */}
 
-        <section className="about__description">
+        {/* <section className="about__description">
           <h2 className='title'>{isSpanish ? "Sobre mi" : "About me"}</h2>
 
           <p className="about__description--text">
@@ -139,11 +135,11 @@ const Home = () => {
                 "My long-term goal is to continue growing professionally and contribute to the success of digital transformation projects that have a positive impact on society. I am committed to using my skills and knowledge, including my ability to solve problems and analyze data, to optimize production processes and achieve outstanding results."
             }
           </p>
-        </section>
+        </section> */}
 
-        <Application />
+        {/* <Application /> */}
         
-        <section id='education' className="main-education-container">
+        {/* <section id='education' className="main-education-container">
           <h2 className='title'>{isSpanish ? "Educación" : "Education"}</h2>
 
           <div className="education-cards-container">
@@ -164,13 +160,13 @@ const Home = () => {
               ))
             }
           </div>
-        </section>
+        </section> */}
 
-        <Contact />
-        <Footer />
-      </section>
-      <Popup />
-    </>
+        {/* <Contact /> */}
+        {/* <Footer /> */}
+      {/* </section> */}
+      {/* <Popup /> */}
+    </div>
   )
 }
 

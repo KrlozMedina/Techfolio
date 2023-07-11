@@ -1,24 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
-import LenguajeContext from '../../context/LenguajeContext';
-import { CardVideo, CardProject } from '../molecules/Cards';
+import React, { useContext } from 'react';
+import LanguageContext from '../../context/LanguageContext';
+import { CardProject } from '../molecules/Cards';
+import { BsServer } from 'react-icons/bs'
 
-import '../../styles/components/organisms/Slider.css'
+import '../../styles/components/organisms.css'
 
 const Slider = (props) => {
-  // console.log(props.children)
-  const {isSpanish, setIsSpanish} = useContext(LenguajeContext);
+  const {isSpanish} = useContext(LanguageContext);
   const {spanish, english, data} = props.children;
   
   return (
     <section className="slider">
-      <h2 className='title'>{isSpanish ? spanish.title : english.title}</h2>
+      {(data == null || data.length != 0) && <h2 className='title'>{isSpanish ? spanish.title : english.title}</h2>}
       <div className='slider__cards'>
         {
-          data.map(element => (
-            (element.type=="application" && <CardProject key={element.id}>{element}</CardProject>) ||
-            (element.type=="project" && <CardProject key={element.id}>{element}</CardProject>) ||
-            (element.type=="video" && <CardVideo key={element.id}>{element}</CardVideo>)
-          ))
+          data == null
+          ? <span className='slider__error'><BsServer /> {'<Error 500 /> Server offline'}</span>
+          : data.map(element => (<CardProject key={element.id}>{element}</CardProject>))
         }
       </div>
     </section>

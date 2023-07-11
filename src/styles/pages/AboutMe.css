@@ -1,0 +1,41 @@
+.aboutme__photo{
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.title{
+    font-size: 2.8rem;
+    padding: 0 2.5%;
+}
+
+.text{
+    /* width: calc(100% - 20rem); */
+    font-size: 2rem;
+    /* padding: 0 5%; */
+    text-align: justify;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.icon{
+    color: aliceblue;
+}
+
+.section-text{
+    width: 100%;
+    padding: 0 5%;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+}
+
+.text__title{
+    font-size: 2.4rem;
+    font-weight: bold;
+    /* display: none; */
+}
+
+.section-text li{
+    margin-left: 5%;
+}

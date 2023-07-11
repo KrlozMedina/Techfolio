@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-const LenguajeContext = React.createContext(null)
+const LanguageContext = React.createContext(null)
 
-export function LenguajeContextProvider({ children }) {
+export function LanguageContextProvider({ children }) {
     const valueIsSpanish = localStorage.getItem('isSpanish');
     let valueLocal;
     valueIsSpanish && (valueIsSpanish == 'false' ? valueLocal = false : valueLocal = true)
@@ -10,10 +10,10 @@ export function LenguajeContextProvider({ children }) {
     const [isSpanish, setIsSpanish] = useState(valueLocal);
 
     return(
-        <LenguajeContext.Provider value={{isSpanish, setIsSpanish}}>
+        <LanguageContext.Provider value={{isSpanish, setIsSpanish}}>
             {children}
-        </LenguajeContext.Provider>
+        </LanguageContext.Provider>
     );
 }
 
-export default LenguajeContext;
+export default LanguageContext;

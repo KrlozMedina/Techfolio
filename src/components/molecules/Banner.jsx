@@ -1,20 +1,21 @@
 import React, { useContext } from 'react'
-import LenguajeContext from '../../context/LenguajeContext'
+import LanguageContext from '../../context/LanguageContext'
 
-import '../../styles/components/molecules/Banner.css'
+import '../../styles/components/molecules.css'
 
 const Banner = ( props ) => {
-  const {isSpanish, setIsSpanish} = useContext(LenguajeContext)
+  const {isSpanish, setIsSpanish} = useContext(LanguageContext)
     const { url, logo, alt, titulo, title } = props.children
   return (
-        <a href={url} target="_blank" rel="noopener noreferrer">
-            <article className='card-education'>
-            <div>
-                <img className='education-logo' src={logo} alt={alt} />
-                <h3>{isSpanish ? titulo : title}</h3>
-            </div>
-            </article>
-        </a>
+    // <a onClick={localStorage.setItem('diploma', logo)}>
+    <a href={'/education'} onClick={localStorage.setItem('diploma', logo)} target="_blank" rel="noopener noreferrer">
+      <article className='card-education'>
+      <div>
+        <img className='education-logo' src={logo} alt={alt} />
+        <h3>{isSpanish ? titulo : title}</h3>
+      </div>
+      </article>
+    </a>
   )
 }
 

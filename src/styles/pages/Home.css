@@ -1,126 +1,124 @@
-.container{
-    width: var(--width-container);
-    min-width: 32rem;
-    max-width: var(--max-width-container);
-    margin: 0 auto;
-    border: 2.5px solid black;
-    border-bottom: none;
-    box-shadow: 0 0 100px black;
+.home--container{
+    width: 100%;
+    display: flex;
 }
 
-.container section:nth-child(2n+1){
+/* .home__main{
+    width: 100%;
+    height: 100vh;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 20rem;
+} */
+
+.home__main{
+    width: 100%;
+    height: 100vh;
+    padding: 4%;
+    display: flex;
+    flex-direction: row;
+    align-items: last baseline;
+    justify-content: space-between;
+}
+
+.home__main--info{
+    width: 50%;
+}
+
+.home__main--info p{
+    margin: 2.8rem 0.8rem;
+    font-size: 3.2rem;
+}
+
+.menu{
+    display: none;
+}
+
+.menuPhone{
+    display: none;
+}
+
+.home__aside{
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .home__main{
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .home__main--info{
+        width: 100%;
+        /* margin-bottom: 16rem; */
+    }
+
+    .home__aside{
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media (max-width: 425px) {
+    .home__main--info p{
+        font-size: 2rem;
+    }
+}
+
+/* @media (max-width: 425px) {
+    .home__info--menu{
+        display: none;
+    }
+
+    .description{
+        font-size: 2rem;
+    }
+
+    .aside{
+        display: none;
+    }
+
+    .menu{
+        display: none;
+    }
+
+    .language{
+        display: none;
+    }
+
+    .menuPhone{
+        display: initial;
+    }
+} */
+
+/* @media (min-width: 1024px) {
+    .aside{
+        display: none;
+    }
+
+    .home__info{
+        flex-direction: row;
+        align-items: last baseline;
+        gap: 0;
+        justify-content: space-between;
+    }
+
+    .home__info--description{
+        width: 50%;
+    }
+
+    .menu{
+        display: initial;
+    }
+} */
+
+/* .container section:nth-child(2n+1){
     background-color: var(--color-background-container-soft);
 }
 
 .container section:first-child,
 .container section:nth-child(2n){
     background-color: var(--color-background-container);
-}
-
-/* About */
-
-.about{
-    width: 100%;
-    margin: 0 auto;
-}
-
-.about__title{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 5rem 0;
-    /* background-color: var(--color-background-container); */
-}
-
-.about__title--text{
-    width: 60%;
-    max-width: 70rem;
-    min-width: 30rem;
-    padding: 1rem;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-}
-
-.about__title--text span{
-    color: var(--color-text-bold);
-}
-
-.about__title--description{
-    font-size: 3.5rem;
-    color: var(--color-text);
-    /* text-align: justify; */
-}
-
-.about__title--photo{
-    width: 50%;
-    min-width: 31rem;
-    max-width: 40rem;
-    margin: 0 auto;
-}
-
-.about__description--title{
-    padding: 0 1rem;
-}
-
-.about__description{
-    padding: 5rem 0;
-    /* background-color: var(--color-background-container); */
-}
-
-.about__description--text{
-    font-size: 2.3rem;
-    margin: 2rem 1.5rem;
-    text-align: justify;
-    padding: 0 1rem;
-}
-
-/* Education */
-
-.main-education-container{
-    width: 100%;
-    margin: 0 auto;
-    padding: 5rem 1rem;
-}
-
-.education-cards-container{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 2.5rem auto;
-    gap: 5rem;
-    align-items: center;
-    justify-content: center;
-}
-
-.education-code-container{
-    width: 100%;
-    display: flex;
-    margin: 2.5rem auto;
-    gap: 2rem;
-    justify-content: space-around;
-    border: solid 2px var(--color-line);
-    padding: 2rem;
-    border-radius: 25px;
-    flex-wrap: wrap;
-}
-
-.education-code-container article{
-    width: 6rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.education-code-logo{
-    width: 4rem;
-    height: 4rem;
-    margin: 0.5rem auto;
-}
-
-.education-code-name{
-    font-size: 1.2rem;
-    text-align: center;
-}
+} */

@@ -1,9 +1,0 @@
-.popup{
-    width: max-content;
-    font-size: 2.4rem;
-    /* background-color: var( --color-background-container-soft); */
-    padding: 0.5rem 1rem;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-}
