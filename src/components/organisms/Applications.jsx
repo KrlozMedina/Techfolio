@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Slider from './Slider';
 
-const API = "https://portafolioapi-production.up.railway.app/projects";
+const API = "https://api-production-85f8.up.railway.app/projects";
+// const API = "http://192.168.20.81:8081/projects";
 
 const ApplicationDesktop = () => {
   const [applicationsDesktop, setApplicationsDesktop] = useState([]);
@@ -10,6 +11,7 @@ const ApplicationDesktop = () => {
     fetch(API + "/DESKTOP")
       .then(res => res.json())
       .then(data => setApplicationsDesktop(data.content))
+      // .then(data => console.log(data.content))
       .catch(() => setApplicationsDesktop(null))
   }, [])
 

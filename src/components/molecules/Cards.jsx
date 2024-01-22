@@ -6,15 +6,20 @@ import '../../styles/components/molecules.css'
 
 
 export const CardProject = (props) => {
+
+  // console.log(props)
+
   const { isSpanish } = useContext(LanguageContext);
-  const { linkDeploy, linkCode, thumbnails, english, spanish } = props.children;
+  const { linkDeploy, linkCode, image, title, description } = props.children;
 
   return (
     <article className="card__project">
       <a className='card__project--link' href={linkDeploy} target="_blank" rel="noopener noreferrer">
-        <img src={thumbnails.url} className={"card__project--image"} />
-        <h3 className="card__project--title">{isSpanish ? spanish.title : english.title}</h3>
-        <p className="card__project--description">{isSpanish ? spanish.description : english.description}</p>
+        <img src={image} className={"card__project--image"} />
+        {/* <h3 className="card__project--title">{isSpanish ? spanish.title : english.title}</h3> */}
+        <h3 className="card__project--title">{title}</h3>
+        {/* <p className="card__project--description">{isSpanish ? spanish.description : english.description}</p> */}
+        <p className="card__project--description">{description}</p>
       </a>
 
       <a className="card__project--code" href={linkCode} target="_blank" rel="noopener noreferrer">
