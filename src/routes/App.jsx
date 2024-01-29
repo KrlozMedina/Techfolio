@@ -7,6 +7,7 @@ import NotFound from '../pages/NotFound';
 import AboutMe from "../pages/AboutMe";
 import ContactMe from '../pages/ContactMe'
 import CV from "../pages/CV";
+import Register from "../pages/Register";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/aboutme" element={<AboutMe />} />
             <Route path="/contactme" element={<ContactMe />} />
             <Route path="/cv" element={<CV />} />
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
       </BrowserRouter>
