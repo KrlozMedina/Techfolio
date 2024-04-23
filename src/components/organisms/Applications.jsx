@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Slider from './Slider';
 
 // const API = "https://portafolioapi-production.up.railway.app/projects";
-const API = "https://api-production-85f8.up.railway.app/projects";
+const API = "https://true-nut-production.up.railway.app/projects";
 
 
 const ApplicationDesktop = () => {
