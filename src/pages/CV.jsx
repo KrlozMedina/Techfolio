@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Page from '../components/templates/Page'
-import { Viewer, Worker } from '@react-pdf-viewer/core';
-import '@react-pdf-viewer/core/lib/styles/index.css'
+// import { Viewer, Worker } from '@react-pdf-viewer/core';
+// import '@react-pdf-viewer/core/lib/styles/index.css'
 import '../styles/pages/CV.css'
 import LanguageContext from '../context/LanguageContext'
 import { FaFileDownload } from 'react-icons/fa'

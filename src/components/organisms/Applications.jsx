@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Slider from './Slider';
 
-const API = "https://api-production-3f4e.up.railway.app/projects";
+const API = "https://dossierapi-production.up.railway.app/projects";
 // const API = "http://192.168.20.81:8081/projects";
 
 const ApplicationDesktop = () => {
