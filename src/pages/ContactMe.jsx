@@ -12,8 +12,13 @@ const ContactMe = () => {
 
   const sendEmail = (event) => {
     event.preventDefault();
+    // alert("Mensaje enviado")
 
-    emailjs.sendForm('service_77nat4q', 'template_oeicj1e', event.target, 'p65YoBfR9VhH5xx58')
+    const serviceId = 'service_s7cwc3b';
+    const templateId = 'template_oeicj1e';
+    const publicKey = 'r80WPDf83UhY4J-em';
+
+    emailjs.sendForm(serviceId, templateId, event.target, publicKey)
     .then(response => {
       if (response.status === 200) {
         alert('Mensaje enviado correctamente')
@@ -43,7 +48,7 @@ const ContactMe = () => {
           {/* <img className='contact-img' src="https://i.imgur.com/ZZVTY1J.png"/> */}
 
           <section className='contact--data'>
-            <span><ImWhatsapp className='icon' /> +57 3028526314</span>
+            <span><ImWhatsapp className='icon' /> +57 3504312615</span>
             <span><MdEmail className='icon' /> kamedinal16@outlook.com</span>
             <span><MdLocationOn className='icon' /> Bogota, Colombia</span>
             <br />

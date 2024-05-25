@@ -88,34 +88,40 @@ const MenuPhone = () => {
 }
 
 const MenuAside = () => {
+  const [hoverHome, setHoverHome] = useState(false);
+  const [hoverProjects, setHoverProjects] = useState(false);
+  const [hoverAbout, setHoverAbout] = useState(false);
+  const [hoverEducation, setHoverEducation] = useState(false);
+  const [hoverContact, setHoverContact] = useState(false);
+  const [hoverCv, setHoverCv] = useState(false);
   return (
     <div className='menu-aside__container'>
-      <a href='/'>
-        <AiFillHome className='icon' />
+      <a href='/' onMouseOver={() => setHoverHome(true)} onMouseLeave={() => setHoverHome(false)}>
+        {hoverHome ? <p className='text-icon'>Home</p> : <AiFillHome className='icon' />}
       </a>
 
-      <a href='/projects'>
-        <SiPolymerproject className='icon'/>
+      <a href='/projects' onMouseOver={() => setHoverProjects(true)} onMouseLeave={() => setHoverProjects(false)}>
+        {hoverProjects ? <p className='text-icon'>Projects</p> : <SiPolymerproject className='icon'/>}
       </a>
 
-      <a href='/aboutme'>
-        <TiInfoLarge className='icon'/>
+      <a href='/aboutme' onMouseOver={() => setHoverAbout(true)} onMouseLeave={() => setHoverAbout(false)}>
+        {hoverAbout ? <p className='text-icon'>About</p> : <TiInfoLarge className='icon'/>}
       </a>
 
-      <a href='/education'>
-        <IoIosSchool className='icon'/>
+      <a href='/education' onMouseOver={() => setHoverEducation(true)} onMouseLeave={() => setHoverEducation(false)}>
+        {hoverEducation ? <p className='text-icon'>Education</p> : <IoIosSchool className='icon'/>}
       </a>
 
-      <a href='/contactme'>
-        <BiMessageDots className='icon'/>
+      <a href='/contactme' onMouseOver={() => setHoverContact(true)} onMouseLeave={() => setHoverContact(false)}>
+        {hoverContact ? <p className='text-icon'>Contact</p> : <BiMessageDots className='icon'/>}
       </a>
 
       {/* <a onClick={() => downloadCV()}>
         <FaFileDownload className='icon' />
       </a> */}
 
-      <a href='cv'>
-        <MdDocumentScanner className='icon' />
+      <a href='cv' onMouseOver={() => setHoverCv(true)} onMouseLeave={() => setHoverCv(false)}>
+        {hoverCv ? <p className='text-icon'>CV</p> : <MdDocumentScanner className='icon' />}
       </a>
     </div>
   )

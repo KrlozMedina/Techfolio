@@ -60,6 +60,24 @@ a{
   color: var(--color-text);
 }
 
+.text-icon{
+  font-size: 2.8rem;
+  /* color: var(--color-text); */
+  background-color: var(--color-background-container);
+  padding: 0.8rem;
+  border-radius: 1rem;
+}
+
+.logo-imagen{
+  width: 80%;
+  /* height: 20rem; */
+}
+
+.logo-imagen2{
+  width: 20rem;
+  min-width: 20rem;
+}
+
 .container{
   width: var(--width-container);
   min-width: 32rem;
@@ -102,3 +120,9 @@ a{
     font-size: 2.4rem;
   }
 }
+
+/* @media (max-width: 768px) {
+  .logo-imagen{
+    width: 60%;
+  }
+} */

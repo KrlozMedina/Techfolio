@@ -10,8 +10,8 @@ const Slider = (props) => {
   const {spanish, english, data} = props.children;
   
   return (
-    <section className="slider">
-      {(data == null || data.length != 0) && <h2 className='title'>{isSpanish ? spanish.title : english.title}</h2>}
+    <section className={data == null || data.length != 0 ? 'slider' : 'none'}>
+      <h2 className='title'>{isSpanish ? spanish.title : english.title}</h2>
       <div className='slider__cards'>
         {
           data == null

@@ -9,6 +9,8 @@ import LanguageContext from '../context/LanguageContext'
 
 import '../styles/pages/Home.css'
 
+import logo from '../assets/Logo.png'
+
 const Home = () => {
   const { isSpanish } = useContext(LanguageContext)
 
@@ -19,7 +21,9 @@ const Home = () => {
 
       <main className='home__main'>
         <section className='home__main--info'>
-          <Logo />
+          {/* <Logo /> */}
+          {/* <div className='logo-imagen'></div> */}
+          <img src={logo} alt="logo" className='logo-imagen'/>
 
           <p>
             {

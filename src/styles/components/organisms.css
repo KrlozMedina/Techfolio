@@ -24,7 +24,7 @@
 }
 
 .menu-aside__container{
-    width: min-content;
+    width: 76px;
     height: min-content;
     /* max-height: 30rem; */
     /* margin-top: 24rem; */
@@ -35,6 +35,7 @@
     border-radius: 3.2rem 0 0 3.2rem;
     gap: 1.2rem;
     justify-content: space-between;
+    align-items: end;
 }
 
 .menu__container a,

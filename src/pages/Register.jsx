@@ -16,7 +16,7 @@ const customStyles = {
         },
     };
 
-document.title = "Registry"
+// document.title = "Registry"
 Modal.setAppElement('#root');
 
 const Register = () => {
