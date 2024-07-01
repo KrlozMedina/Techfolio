@@ -4,7 +4,7 @@ import LanguageContext from '../context/LanguageContext'
 import axios from 'axios'
 import Modal from 'react-modal';
 
-const API = "https://dossierapi-production.up.railway.app/"
+const API = "https://dossier-api.grayground-a5b47aa0.eastus.azurecontainerapps.io/projects/"
 const customStyles = {
     content: {
         top: '50%',
