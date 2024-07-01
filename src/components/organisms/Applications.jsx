@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Slider from './Slider';
 
-const API = "https://dossierapi-production.up.railway.app/projects";
+const API = "https://dossier-api.grayground-a5b47aa0.eastus.azurecontainerapps.io/projects";
 
 const ApplicationDesktop = () => {
   const [applicationsDesktop, setApplicationsDesktop] = useState([]);
