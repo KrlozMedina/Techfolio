@@ -3463,13 +3463,13 @@ snapshots:
   path2d-polyfill@2.0.1:
     optional: true
 
-  # pdfjs-dist@3.11.174:
-  #   optionalDependencies:
-  #     canvas: 2.11.2
-  #     path2d-polyfill: 2.0.1
-  #   transitivePeerDependencies:
-  #     - encoding
-  #     - supports-color
+  pdfjs-dist@3.11.174:
+    optionalDependencies:
+      # canvas: 2.11.2
+      path2d-polyfill: 2.0.1
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
 
   picocolors@1.1.1: {}
 
