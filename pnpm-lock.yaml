@@ -569,9 +569,9 @@ packages:
   caniuse-lite@1.0.30001683:
     resolution: {integrity: sha512-iqmNnThZ0n70mNwvxpEC2nBJ037ZHZUoBI5Gorh1Mw6IlEAZujEoU1tXA628iZfzm7R9FvFzxbfdgml82a3k8Q==}
 
-  canvas@2.11.2:
-    resolution: {integrity: sha512-ItanGBMrmRV7Py2Z+Xhs7cT+FNt5K0vPL4p9EZ/UX/Mu7hFbkxSjKF2KVtPwX7UYWp7dRKnrTvReflgrItJbdw==}
-    engines: {node: '>=6'}
+  # canvas@2.11.2:
+  #   resolution: {integrity: sha512-ItanGBMrmRV7Py2Z+Xhs7cT+FNt5K0vPL4p9EZ/UX/Mu7hFbkxSjKF2KVtPwX7UYWp7dRKnrTvReflgrItJbdw==}
+  #   engines: {node: '>=6'}
 
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
@@ -2422,15 +2422,15 @@ snapshots:
 
   caniuse-lite@1.0.30001683: {}
 
-  canvas@2.11.2:
-    dependencies:
-      '@mapbox/node-pre-gyp': 1.0.11
-      nan: 2.22.0
-      simple-get: 3.1.1
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-    optional: true
+  # canvas@2.11.2:
+  #   dependencies:
+  #     '@mapbox/node-pre-gyp': 1.0.11
+  #     nan: 2.22.0
+  #     simple-get: 3.1.1
+  #   transitivePeerDependencies:
+  #     - encoding
+  #     - supports-color
+  #   optional: true
 
   chalk@4.1.2:
     dependencies:
@@ -3463,13 +3463,13 @@ snapshots:
   path2d-polyfill@2.0.1:
     optional: true
 
-  pdfjs-dist@3.11.174:
-    optionalDependencies:
-      canvas: 2.11.2
-      path2d-polyfill: 2.0.1
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
+  # pdfjs-dist@3.11.174:
+  #   optionalDependencies:
+  #     canvas: 2.11.2
+  #     path2d-polyfill: 2.0.1
+  #   transitivePeerDependencies:
+  #     - encoding
+  #     - supports-color
 
   picocolors@1.1.1: {}
 
