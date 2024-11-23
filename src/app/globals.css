@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap'); */
+
+:root{
+  --font-logo: 'Rubik Glitch', cursive;
+  --font-text: 'JetBrains Mono', monospace;
+  --color-text: #CCCCCC;
+  --color-background-container: rgba(0, 0, 0, 0.7);
+  --width-container: 90%;
+  --max-width-container: 110rem;
+  --color-background-title: rgb(53, 51, 51);
+}
+
+*,
+*::after,
+*::before{
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+html{
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: var(--font-text);
+  color: var(--color-text);
+}
+
+body{
+  width: 100%;
+  background-color: black;
+  background-image: linear-gradient(135deg, #2C3333,#395B64);
+  background-size: 400%;
+  animation: bgAnimation 15s infinite;
+  /* font-family: var(--font-text); */
+}
+
+button{
+  width: max-content;
+  padding: 0 0.8rem;
+  /* height: 3.6rem; */
+  margin: 0 auto;
+  font-size: 2.4rem;
+  background-color: var(--color-background-container);
+  color: var(--color-text);
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-family: var(--font-text);
+}
+
+a{
+  text-decoration: none;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.icon{
+  font-size: 3.6rem;
+  color: var(--color-text);
+}
+
+.text-icon{
+  font-size: 2.8rem;
+  /* color: var(--color-text); */
+  background-color: var(--color-background-container);
+  padding: 0.8rem;
+  border-radius: 1rem;
+}
+
+.logo-imagen{
+  width: 80%;
+  /* height: 20rem; */
+}
+
+.logo-imagen2{
+  width: 20rem;
+  min-width: 20rem;
+}
+
+.container{
+  width: var(--width-container);
+  min-width: 32rem;
+  max-width: var(--max-width-container);
+  height: 100vh;
+  margin: 0 auto;
+  /* border: 2.5px solid black; */
+  border-bottom: none;
+  /* box-shadow: 0 0 100px black; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.background__image{
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background-image: url('https://i.imgur.com/mJqosp9.jpg');
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
+  top: 0;
+  border: none;
+  opacity: 75%;
+  transform: rotate(180deg);
+}
+
+.none{
+  display: none;
+}
+
+.title{
+  text-transform: uppercase;
+}
+
+@media (max-width: 425px) {
+  .icon{
+    font-size: 2.4rem;
+  }
+}
+
+/* @media (max-width: 768px) {
+  .logo-imagen{
+    width: 60%;
+  }
+} */
