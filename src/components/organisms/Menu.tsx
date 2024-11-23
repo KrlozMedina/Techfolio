@@ -9,26 +9,27 @@ import { AiOutlineClose, AiFillHome } from 'react-icons/ai'
 import { MdDocumentScanner } from 'react-icons/md'
 import { LanguagePhone } from '@/components/molecules/Language';
 import '@/styles/components/organisms.css';
+import Link from 'next/link'
 
 // Tipo para el contexto
 interface LanguageContextType {
   isSpanish: boolean;
 }
 
-let menu: boolean, setMenu: any
+let menu: boolean, setMenu: React.Dispatch<React.SetStateAction<boolean>>
 
 // Función para descargar el CV
-const downloadCV = (): void => {
-  fetch('CV.pdf').then((response) => {
-    response.blob().then((blob) => {
-      const fileURL = window.URL.createObjectURL(blob);
-      const alink = document.createElement('a');
-      alink.href = fileURL;
-      alink.download = 'Carlos Alidio Medina Lopez.pdf';
-      alink.click();
-    });
-  });
-};
+// const downloadCV = (): void => {
+//   fetch('CV.pdf').then((response) => {
+//     response.blob().then((blob) => {
+//       const fileURL = window.URL.createObjectURL(blob);
+//       const alink = document.createElement('a');
+//       alink.href = fileURL;
+//       alink.download = 'Carlos Alidio Medina Lopez.pdf';
+//       alink.click();
+//     });
+//   });
+// };
 
 // Componente Menu
 const Menu: React.FC = () => {
@@ -42,35 +43,35 @@ const Menu: React.FC = () => {
 
   return (
     <div className={menu ? 'menu__container--phone' : 'menu__container'}>
-      <a href="/">
+      <Link href="/">
         <AiFillHome className="icon" />
         {isSpanish ? 'Inicio' : 'Home'}
-      </a>
+      </Link>
 
-      <a href="/projects">
+      <Link href="/projects">
         <SiPolymerproject className="icon" />
         {isSpanish ? 'Proyectos' : 'Projects'}
-      </a>
+      </Link>
 
-      <a href="/aboutme">
+      <Link href="/aboutme">
         <TiInfoLarge className="icon" />
         {isSpanish ? 'Sobre mi' : 'About me'}
-      </a>
+      </Link>
 
-      <a href="/education">
+      <Link href="/education">
         <IoIosSchool className="icon" />
         {isSpanish ? 'Educación' : 'Education'}
-      </a>
+      </Link>
 
-      <a href="/contactme">
+      <Link href="/contactme">
         <BiMessageDots className="icon" />
         {isSpanish ? 'Contactarme' : 'Contact me'}
-      </a>
+      </Link>
 
-      <a href="cv">
+      <Link href="cv">
         <MdDocumentScanner className="icon" />
         CV
-      </a>
+      </Link>
     </div>
   );
 };
@@ -126,53 +127,53 @@ const MenuAside: React.FC = () => {
 
   return (
     <div className="menu-aside__container">
-      <a
+      <Link
         href="/"
         onMouseOver={() => handleMouseOver('home')}
         onMouseLeave={() => handleMouseLeave('home')}
       >
         {hoverState.home ? <p className="text-icon">{isSpanish ? "Inicio" : "Home"}</p> : <AiFillHome className="icon" />}
-      </a>
+      </Link>
 
-      <a
+      <Link
         href="/projects"
         onMouseOver={() => handleMouseOver('projects')}
         onMouseLeave={() => handleMouseLeave('projects')}
       >
         {hoverState.projects ? <p className="text-icon">{isSpanish ? "Proyectos" : "Projects"}</p> : <SiPolymerproject className="icon" />}
-      </a>
+      </Link>
 
-      <a
+      <Link
         href="/aboutme"
         onMouseOver={() => handleMouseOver('about')}
         onMouseLeave={() => handleMouseLeave('about')}
       >
         {hoverState.about ? <p className="text-icon">{isSpanish ? "Sobre mi" : "About me"}</p> : <TiInfoLarge className="icon" />}
-      </a>
+      </Link>
 
-      <a
+      <Link
         href="/education"
         onMouseOver={() => handleMouseOver('education')}
         onMouseLeave={() => handleMouseLeave('education')}
       >
         {hoverState.education ? <p className="text-icon">{isSpanish ? "Educación" : "Education"}</p> : <IoIosSchool className="icon" />}
-      </a>
+      </Link>
 
-      <a
+      <Link
         href="/contactme"
         onMouseOver={() => handleMouseOver('contact')}
         onMouseLeave={() => handleMouseLeave('contact')}
       >
         {hoverState.contact ? <p className="text-icon">{isSpanish ? "Contacto" : "Contact"}</p> : <BiMessageDots className="icon" />}
-      </a>
+      </Link>
 
-      <a
+      <Link
         href="cv"
         onMouseOver={() => handleMouseOver('cv')}
         onMouseLeave={() => handleMouseLeave('cv')}
       >
         {hoverState.cv ? <p className="text-icon">CV</p> : <MdDocumentScanner className="icon" />}
-      </a>
+      </Link>
     </div>
   );
 };

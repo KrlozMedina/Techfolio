@@ -48,7 +48,7 @@ const Language: React.FC = () => {
 };
 
 const LanguagePhone: React.FC = () => {
-  const { isSpanish, setIsSpanish } = useContext(LanguageContext) as LanguageContextType;
+  const { setIsSpanish } = useContext(LanguageContext) as LanguageContextType;
 
   const setLanguage = (languageSpanish: boolean) => {
     setIsSpanish(languageSpanish);

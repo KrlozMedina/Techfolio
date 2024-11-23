@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import LanguageContext from '../../context/LanguageContext';
 import { FaCode } from 'react-icons/fa';
 

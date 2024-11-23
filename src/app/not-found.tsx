@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react'
 import '@/styles/pages/NotFound.css'
+import Link from 'next/link';
 
 const NotFound: React.FC = () => {  
   useEffect(() => {
@@ -37,13 +38,13 @@ const NotFound: React.FC = () => {
           <p className='not-found__ref'>href</p>
           <p>=</p>
           <p className='not-found__tag'>{"{"}</p>
-          <a className='not-found__link' href='/'>/</a>
+          <Link className='not-found__link' href='/'>/</Link>
           <p className='not-found__tag'>{"}"}</p>
           <p className='not-found__sign'>{">"}</p>
         </div>
 
         <p className='not-found__text'>
-          <a className='not-found__link' href="/">Return to home</a>
+          <Link className='not-found__link' href="/">Return to home</Link>
         </p>
         
         <div className='not-found__p'>

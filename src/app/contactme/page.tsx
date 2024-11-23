@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useContext, FormEvent } from 'react'
+import React, { useContext } from 'react'
 import LanguageContext from '@/context/LanguageContext'
 import Page from '@/components/templates/Page'
 import '@/styles/pages/ContactMe.css'

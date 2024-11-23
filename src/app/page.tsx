@@ -3,7 +3,7 @@
 import React, { useContext } from 'react'
 import Social from "@/components/organisms/Social"
 import { Language } from '@/components/molecules/Language'
-import { Logo } from '@/components/atom/Logo'
+// import { Logo } from '@/components/atom/Logo'
 import { Menu, MenuPhone, MenuAside } from '@/components/organisms/Menu'
 
 import LanguageContext from '@/context/LanguageContext'

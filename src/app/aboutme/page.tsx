@@ -18,7 +18,7 @@ const AboutMe: React.FC = () => {
     setIsSpanish: (language: boolean) => void;
   };
 
-  const { isSpanish, setIsSpanish } = useContext(LanguageContext) as LanguageContextType;
+  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
   return (
     <Page>

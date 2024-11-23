@@ -12,15 +12,15 @@ interface Application {
   // Add any other fields based on the response
 }
 
-interface SliderData {
-  spanish: {
-    title: string;
-  };
-  english: {
-    title: string;
-  };
-  data: Application[] | null; // data will either be an array of applications or null if the fetch fails
-}
+// interface SliderData {
+//   spanish: {
+//     title: string;
+//   };
+//   english: {
+//     title: string;
+//   };
+//   data: Application[] | null; // data will either be an array of applications or null if the fetch fails
+// }
 
 const ApplicationDesktop: React.FC = () => {
   const [applicationsDesktop, setApplicationsDesktop] = useState<Application[] | null>(null);
