@@ -12,11 +12,11 @@
     "@emailjs/browser": "^3.10.0",
     "axios": "^1.6.7",
     "emailjs": "^4.0.1",
+    "mongoose": "^8.8.2",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "react-icons": "^4.7.1",
-    "react-modal": "^3.16.1",
     "react-router": "^7.0.1",
     "react-router-dom": "^6.6.1"
   },
