@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react'
 import '@/styles/pages/NotFound.css'
 import Link from 'next/link';
+import Image from 'next/image';
 
 const NotFound: React.FC = () => {  
   useEffect(() => {
@@ -11,7 +12,7 @@ const NotFound: React.FC = () => {
 
   return (
     <section className='not-found'>
-      <img className='not-found__image' src="https://i.imgur.com/GMDwQGM.png" alt="Bot not found" />
+      <Image className='not-found__image' src="https://i.imgur.com/GMDwQGM.png" alt="Bot not found" />
 
       <div className='not-found__description'>
         <h1 className='not-found__title'>{"<404/>"}</h1>

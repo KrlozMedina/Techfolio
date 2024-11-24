@@ -19,17 +19,17 @@ interface LanguageContextType {
 let menu: boolean, setMenu: React.Dispatch<React.SetStateAction<boolean>>
 
 // Función para descargar el CV
-// const downloadCV = (): void => {
-//   fetch('CV.pdf').then((response) => {
-//     response.blob().then((blob) => {
-//       const fileURL = window.URL.createObjectURL(blob);
-//       const alink = document.createElement('a');
-//       alink.href = fileURL;
-//       alink.download = 'Carlos Alidio Medina Lopez.pdf';
-//       alink.click();
-//     });
-//   });
-// };
+const downloadCV = (): void => {
+  fetch('CV.pdf').then((response) => {
+    response.blob().then((blob) => {
+      const fileURL = window.URL.createObjectURL(blob);
+      const alink = document.createElement('a');
+      alink.href = fileURL;
+      alink.download = 'Carlos Alidio Medina Lopez.pdf';
+      alink.click();
+    });
+  });
+};
 
 // Componente Menu
 const Menu: React.FC = () => {
@@ -68,10 +68,10 @@ const Menu: React.FC = () => {
         {isSpanish ? 'Contactarme' : 'Contact me'}
       </Link>
 
-      <Link href="cv">
+      <a onClick={downloadCV}>
         <MdDocumentScanner className="icon" />
         CV
-      </Link>
+      </a>
     </div>
   );
 };
@@ -167,13 +167,14 @@ const MenuAside: React.FC = () => {
         {hoverState.contact ? <p className="text-icon">{isSpanish ? "Contacto" : "Contact"}</p> : <BiMessageDots className="icon" />}
       </Link>
 
-      <Link
-        href="cv"
+      <a
+        // href="cv"
+        onClick={downloadCV}
         onMouseOver={() => handleMouseOver('cv')}
         onMouseLeave={() => handleMouseLeave('cv')}
       >
         {hoverState.cv ? <p className="text-icon">CV</p> : <MdDocumentScanner className="icon" />}
-      </Link>
+      </a>
     </div>
   );
 };

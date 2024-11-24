@@ -1,4 +1,130 @@
-.not-found{
+/* Estilos para el contenedor principal de la página "No encontrado" */
+.not-found {
+    width: 90%;
+    min-width: 32rem;
+    max-width: 102.4rem;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Cambié a columna para apilar los elementos en dispositivos más pequeños */
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2rem;  /* Añadí un padding para evitar que el contenido se quede pegado a los bordes */
+}
+
+/* Estilo para la imagen */
+.not-found__image {
+    padding: 2rem 5rem;
+    width: 100%;  /* Ajusté a 100% para que ocupe el contenedor de manera flexible */
+    max-width: 48rem;
+    min-width: 32rem;
+    margin: 0 auto;
+}
+
+/* Estilo para el título */
+.not-found__title {
+    font-size: 5rem;
+    color: rgb(116, 8, 8);
+    text-align: center;
+    font-family: 'Rubik Marker Hatch', cursive;
+    margin: 1rem 0;  /* Añadí margen superior e inferior para un espaciado adecuado */
+}
+
+/* Descripción */
+.not-found__description {
+    font-size: 2.4rem;
+    width: 100%; /* Ajusté el ancho a 100% para que ocupe el contenedor disponible */
+    min-width: 28rem;
+    max-width: 80%;  /* Limitación del tamaño para que no se vea demasiado ancha */
+    margin: 1rem auto;
+    padding: 0 2rem;
+    text-align: center;  /* Centré el texto de la descripción */
+}
+
+/* Párrafo dentro de la descripción */
+.not-found__p {
+    display: inline-flex;
+    font-weight: bold;
+}
+
+/* Estilo para el texto con color */
+.not-found__sign {
+    display: block;
+    color: gainsboro;
+}
+
+.not-found__tag {
+    color: blue;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centré el contenido dentro del contenedor */
+}
+
+.not-found__ref {
+    margin-left: 1rem;
+    color: rgb(0, 204, 255);
+}
+
+.not-found__text {
+    color: white;
+    margin-left: 5rem;
+}
+
+/* Estilo del enlace */
+.not-found__link {
+    padding: 0 1rem;
+}
+
+.not-found__link:hover {
+    color: purple;
+}
+
+/* Media query para pantallas más grandes (a partir de 768px) */
+@media (min-width: 768px) {
+    .not-found__title {
+        font-size: 8rem;  /* Aumento del tamaño de la fuente para pantallas más grandes */
+    }
+
+    .not-found__description {
+        font-size: 4rem;  /* Aumento del tamaño de la fuente de la descripción */
+    }
+
+    .not-found {
+        max-height: 100vh;
+    }
+
+    .not-found__image {
+        width: 60%;  /* Reduje el tamaño de la imagen para pantallas más grandes */
+    }
+
+    .not-found__description {
+        max-width: 50%; /* Limité el ancho para mejorar la legibilidad */
+    }
+}
+
+/* Media query para pantallas pequeñas (menos de 768px) */
+@media (max-width: 767px) {
+    .not-found {
+        height: auto;  /* Permite que la altura se ajuste al contenido en pantallas pequeñas */
+    }
+
+    .not-found__image {
+        width: 80%;  /* Ajusté el tamaño de la imagen para pantallas más pequeñas */
+    }
+
+    .not-found__title {
+        font-size: 4rem;  /* Reduje el tamaño de la fuente para pantallas pequeñas */
+    }
+
+    .not-found__description {
+        font-size: 2rem;  /* Reduje el tamaño de la fuente de la descripción para pantallas pequeñas */
+        width: 90%;  /* Aumenté el ancho para aprovechar el espacio disponible */
+    }
+}
+
+/* .not-found{
     width: 90%;
     min-width: 32rem;
     max-width: 102.4rem;
@@ -81,4 +207,4 @@
     .not-found{
         max-height: 100vh;
     }
-}
+} */

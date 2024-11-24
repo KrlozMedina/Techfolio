@@ -1,22 +1,49 @@
-.pdf-container{
+/* Estilo del contenedor PDF */
+.pdf-container {
+    width: 95%; /* Ocupa el 95% del ancho disponible */
+    max-width: 100rem; /* Limita el ancho máximo a 100rem */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 2rem; /* Añadí padding para evitar que el contenido toque los bordes */
+}
+
+/* Imagen del diploma */
+.diplomaImagen {
+    width: 100%; /* Ajusta la imagen al 100% del contenedor */
+    max-width: 300rem; /* Establece un máximo de tamaño para la imagen */
+    height: auto; /* Mantiene la relación de aspecto */
+}
+
+/* Media query para pantallas pequeñas (menos de 768px) */
+@media (max-width: 768px) {
+    .pdf-container {
+        width: 90%; /* Ajusta el contenedor para que ocupe un 90% del ancho */
+    }
+
+    .diplomaImagen {
+        width: 100%; /* Asegura que la imagen ocupe todo el ancho disponible */
+        max-width: 200rem; /* Limita el tamaño máximo de la imagen */
+    }
+}
+
+/* Media query para pantallas más pequeñas (menos de 425px) */
+@media (max-width: 425px) {
+    .pdf-container {
+        width: 100%; /* Ocupa todo el ancho disponible en pantallas pequeñas */
+    }
+
+    .diplomaImagen {
+        width: 100%; /* Mantiene la imagen con un ancho del 100% */
+        max-width: 150rem; /* Limita el tamaño máximo para evitar que la imagen sea demasiado grande */
+    }
+}
+
+/* .pdf-container{
     width: 95%;
     max-width: 100rem;
-    /* min-width: 30rem; */
     margin: 0 auto;
 }
 
-/* @media (max-width: 425px) {
-    .pdf-container{
-        width: 30rem;
-    }
-}
-
-@media (min-width: 425px) and (max-width: 768px) {
-    .pdf-container{
-        width: 55rem;
-    }
-} */
 
 .diplomaImagen{
     width: 300rem;
-}
+} */

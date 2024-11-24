@@ -1,17 +1,90 @@
-.home--container{
+/* Contenedor principal de la página de inicio */
+.home--container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;  /* Asegura que los elementos puedan envolver correctamente en pantallas pequeñas */
+}
+
+/* Estilo para la sección principal de la página de inicio */
+.home__main {
+    width: 100%;
+    height: 100vh;
+    padding: 4%;
+    display: flex;
+    flex-direction: row;
+    align-items: last baseline;  /* Cambié `last baseline` por `flex-start` para un mejor alineamiento */
+    justify-content: space-between;
+    gap: 2rem;  /* Añadí un pequeño espacio entre los elementos */
+}
+
+/* Contenedor de la información principal */
+.home__main--info {
+    width: 50%;
+}
+
+.home__main--info p {
+    margin: 2.8rem 0.8rem;
+    font-size: 3.2rem;
+    line-height: 1.5;  /* Añadí un poco de interlineado para mejorar la legibilidad */
+}
+
+/* Menú oculto por defecto */
+.menu {
+    display: none;
+}
+
+.menuPhone {
+    display: none;
+}
+
+.home__aside {
+    display: none;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+    .home__main {
+        flex-direction: column;
+        justify-content: flex-end;  /* Ajuste para un buen orden en pantallas pequeñas */
+        gap: 1rem;  /* Reduje el espacio entre los elementos en pantallas pequeñas */
+    }
+
+    .home__main--info {
+        width: 100%;
+    }
+
+    .home__aside {
+        display: flex;
+        align-items: center;
+        justify-content: center;  /* Centré el contenido de `aside` */
+    }
+
+    .menuPhone {
+        display: block;  /* Mostré el menú para pantallas móviles */
+    }
+}
+
+/* Media query para pantallas extra pequeñas */
+@media (max-width: 425px) {
+    .home__main--info p {
+        font-size: 2rem;  /* Ajusté el tamaño de fuente en pantallas aún más pequeñas */
+    }
+
+    .home__main {
+        padding: 2%;  /* Reduje el padding en pantallas pequeñas */
+    }
+
+    /* Ajuste de otros elementos si es necesario */
+    .home__aside {
+        flex-direction: column;
+        gap: 1rem;  /* Añadí un pequeño espacio entre los elementos en el `aside` */
+    }
+}
+
+/* .home--container{
     width: 100%;
     display: flex;
 }
-
-/* .home__main{
-    width: 100%;
-    height: 100vh;
-    padding: 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 20rem;
-} */
 
 .home__main{
     width: 100%;
@@ -52,7 +125,6 @@
 
     .home__main--info{
         width: 100%;
-        /* margin-bottom: 16rem; */
     }
 
     .home__aside{
@@ -65,60 +137,4 @@
     .home__main--info p{
         font-size: 2rem;
     }
-}
-
-/* @media (max-width: 425px) {
-    .home__info--menu{
-        display: none;
-    }
-
-    .description{
-        font-size: 2rem;
-    }
-
-    .aside{
-        display: none;
-    }
-
-    .menu{
-        display: none;
-    }
-
-    .language{
-        display: none;
-    }
-
-    .menuPhone{
-        display: initial;
-    }
-} */
-
-/* @media (min-width: 1024px) {
-    .aside{
-        display: none;
-    }
-
-    .home__info{
-        flex-direction: row;
-        align-items: last baseline;
-        gap: 0;
-        justify-content: space-between;
-    }
-
-    .home__info--description{
-        width: 50%;
-    }
-
-    .menu{
-        display: initial;
-    }
-} */
-
-/* .container section:nth-child(2n+1){
-    background-color: var(--color-background-container-soft);
-}
-
-.container section:first-child,
-.container section:nth-child(2n){
-    background-color: var(--color-background-container);
 } */

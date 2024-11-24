@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, ReactNode } from 'react';
 
-interface LanguageContextType {
+export interface LanguageContextType {
   isSpanish: boolean;
   setIsSpanish: (value: boolean) => void;
 }

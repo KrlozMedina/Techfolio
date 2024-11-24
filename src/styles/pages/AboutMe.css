@@ -1,4 +1,50 @@
-.aboutme__photo{
+/* ABOUT ME PHOTO */
+.aboutme__photo {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+
+/* TITLE */
+.title {
+    font-size: 2.8rem;
+    padding: 0 2.5%;
+}
+
+/* TEXT */
+.text {
+    font-size: 2rem;
+    text-align: justify;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* ICON STYLE */
+.icon {
+    color: aliceblue;
+}
+
+/* SECTION TEXT */
+.section-text {
+    width: 100%;
+    padding: 0 5%;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+}
+
+/* TEXT TITLE */
+.text__title {
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+/* LIST ITEMS IN SECTION TEXT */
+.section-text li {
+    margin-left: 5%;
+}
+
+/* .aboutme__photo{
     width: 100%;
     height: 50%;
     object-fit: cover;
@@ -11,9 +57,7 @@
 }
 
 .text{
-    /* width: calc(100% - 20rem); */
     font-size: 2rem;
-    /* padding: 0 5%; */
     text-align: justify;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
@@ -33,9 +77,8 @@
 .text__title{
     font-size: 2.4rem;
     font-weight: bold;
-    /* display: none; */
 }
 
 .section-text li{
     margin-left: 5%;
-}
+} */

@@ -9,6 +9,10 @@ interface Application {
   id: string;
   name: string;
   description: string;
+  linkDeploy: string;
+  linkCode: string;
+  image: string;
+  title: string;
   // Add any other fields based on the response
 }
 

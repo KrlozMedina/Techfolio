@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useContext } from 'react'
-import LanguageContext from '@/context/LanguageContext'
+import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
 import Page from '@/components/templates/Page'
 import '@/styles/pages/AboutMe.css'
 import { MdCastForEducation, MdOutlineWorkOutline } from 'react-icons/md';
@@ -11,12 +11,6 @@ import Social from '@/components/organisms/Social';
 
 const AboutMe: React.FC = () => {
   // document.title = 'About me'
-
-  // Define the type for LanguageContext
-  type LanguageContextType = {
-    isSpanish: boolean;
-    setIsSpanish: (language: boolean) => void;
-  };
 
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 

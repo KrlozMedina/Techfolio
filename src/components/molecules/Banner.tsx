@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
-import LanguageContext from '../../context/LanguageContext'
-
-import '../../styles/components/molecules.css'
+import LanguageContext from '@/context/LanguageContext'
+import '@/styles/components/molecules.css'
 
 // Define the type for the props that are expected
 interface BannerProps {

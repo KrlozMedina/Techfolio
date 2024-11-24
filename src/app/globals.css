@@ -2,9 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Variables globales */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-logo: 'Rubik Glitch', cursive;
+  --font-text: 'JetBrains Mono', monospace;
+  --color-text: #CCCCCC;
+  --color-background-container: rgba(0, 0, 0, 0.7);
+  --color-button-hover: #395B64;
+  --width-container: 90%;
+  --max-width-container: 110rem;
+  --color-background-title: rgb(53, 51, 51);
+  --border-radius: 1rem;
+  --transition: 0.3s ease-in-out;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,80 +25,152 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* @import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap'); */
-/* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap'); */
-
-:root{
-  --font-logo: 'Rubik Glitch', cursive;
-  --font-text: 'JetBrains Mono', monospace;
-  --color-text: #CCCCCC;
-  --color-background-container: rgba(0, 0, 0, 0.7);
-  --width-container: 90%;
-  --max-width-container: 110rem;
-  --color-background-title: rgb(53, 51, 51);
-}
-
+/* Reset */
 *,
 *::after,
-*::before{
+*::before {
   box-sizing: inherit;
   padding: 0;
   margin: 0;
 }
 
-html{
+html {
   box-sizing: border-box;
   font-size: 62.5%;
   font-family: var(--font-text);
   color: var(--color-text);
 }
 
-body{
+body {
   width: 100%;
   background-color: black;
-  background-image: linear-gradient(135deg, #2C3333,#395B64);
+  background-image: linear-gradient(135deg, #2C3333, #395B64);
   background-size: 400%;
   animation: bgAnimation 15s infinite;
-  /* font-family: var(--font-text); */
+  color: var(--color-text);
 }
 
-button{
+/* Animación para el fondo */
+@keyframes bgAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Tipografía */
+.title {
+  text-transform: uppercase;
+  font-family: var(--font-logo);
+  color: var(--color-text);
+  font-size: 2.8rem;
+  padding: 0 2.5%;
+}
+
+/* Botones */
+button {
   width: max-content;
-  padding: 0 0.8rem;
-  /* height: 3.6rem; */
+  padding: 0.8rem 1.6rem;
   margin: 0 auto;
   font-size: 2.4rem;
   background-color: var(--color-background-container);
   color: var(--color-text);
   border: none;
-  border-radius: 1rem;
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-family: var(--font-text);
+  transition: background-color var(--transition);
 }
 
-a{
+button:hover {
+  background-color: var(--color-button-hover);
+}
+
+/* Enlaces */
+a {
   text-decoration: none;
   color: var(--color-text);
   cursor: pointer;
+  transition: color var(--transition);
 }
 
-.icon{
+a:hover {
+  color: var(--color-button-hover);
+}
+
+/* Iconos */
+.icon {
   font-size: 3.6rem;
   color: var(--color-text);
+  transition: transform var(--transition);
 }
 
-.text-icon{
+.icon:hover {
+  transform: scale(1.1);
+}
+
+.text-icon {
   font-size: 2.8rem;
-  /* color: var(--color-text); */
   background-color: var(--color-background-container);
   padding: 0.8rem;
-  border-radius: 1rem;
+  border-radius: var(--border-radius);
+}
+
+/* Contenedores */
+.container {
+  width: var(--width-container);
+  min-width: 32rem;
+  max-width: var(--max-width-container);
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.background__image {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background-image: url('https://i.imgur.com/mJqosp9.jpg');
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
+  top: 0;
+  opacity: 0.75;
+  transform: rotate(180deg);
+}
+
+/* Responsividad */
+@media (max-width: 425px) {
+  .icon {
+    font-size: 2.4rem;
+  }
+
+  button {
+    font-size: 2rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .text-icon {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-imagen {
+    width: 60%;
+  }
+}
+
+.none{
+  display: none;
 }
 
 .logo-imagen{
@@ -99,52 +182,3 @@ a{
   width: 20rem;
   min-width: 20rem;
 }
-
-.container{
-  width: var(--width-container);
-  min-width: 32rem;
-  max-width: var(--max-width-container);
-  height: 100vh;
-  margin: 0 auto;
-  /* border: 2.5px solid black; */
-  border-bottom: none;
-  /* box-shadow: 0 0 100px black; */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.background__image{
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  background-image: url('https://i.imgur.com/mJqosp9.jpg');
-  background-size: cover;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  z-index: -1;
-  top: 0;
-  border: none;
-  opacity: 75%;
-  transform: rotate(180deg);
-}
-
-.none{
-  display: none;
-}
-
-.title{
-  text-transform: uppercase;
-}
-
-@media (max-width: 425px) {
-  .icon{
-    font-size: 2.4rem;
-  }
-}
-
-/* @media (max-width: 768px) {
-  .logo-imagen{
-    width: 60%;
-  }
-} */
