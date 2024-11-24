@@ -2,8 +2,8 @@
 
 import React, { useContext } from 'react';
 import Page from '@/components/templates/Page';
-import { Viewer, Worker } from '@react-pdf-viewer/core';
-import '@react-pdf-viewer/core/lib/styles/index.css';
+// import { Viewer, Worker } from '@react-pdf-viewer/core';
+// import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@/styles/pages/CV.css';
 import LanguageContext from '@/context/LanguageContext';
 import { FaFileDownload } from 'react-icons/fa';
@@ -50,11 +50,11 @@ const CV = () => {
         </button>
       </h2>
 
-      <div className='pdf-container'>
+      {/* <div className='pdf-container'>
         <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js'>
           <Viewer theme='dark' fileUrl='CV.pdf' />
         </Worker>
-      </div>
+      </div> */}
     </Page>
   );
 };
