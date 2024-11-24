@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Slider from './Slider';
-import dataWeb from '@/app/mock/projectsWeb.json'
-import dataDesktop from '@/app/mock/projectsDesktop.json'
-import dataMobile from '@/app/mock/projectsMobile.json'
+import dataWeb from '@/mock/projectsWeb.json'
+// import dataDesktop from '@/mock/projectsDesktop.json'
+import dataMobile from '@/mock/projectsMobile.json'
 
 // const API = "https://dossier-api.grayground-a5b47aa0.eastus.azurecontainerapps.io/projects";
 
@@ -36,7 +36,10 @@ const ApplicationDesktop: React.FC = () => {
     //   .then(res => res.json())
     //   .then(data => setApplicationsDesktop(data.content))
     //   .catch(() => setApplicationsDesktop(null))
-    setApplicationsDesktop(dataDesktop)
+    // setApplicationsDesktop(dataDesktop)
+    fetch('/api/v1/projects')
+    .then(res => res.json())
+    .then(data => setApplicationsDesktop(data))
   }, [])
 
   return (
