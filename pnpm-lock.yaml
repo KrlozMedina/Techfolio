@@ -3495,6 +3495,7 @@ snapshots:
 
   pdfjs-dist@3.11.174:
     optionalDependencies:
+      canvas: 2.11.2
       path2d-polyfill: 2.0.1
     transitivePeerDependencies:
       - encoding
