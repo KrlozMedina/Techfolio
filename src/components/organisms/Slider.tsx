@@ -5,7 +5,7 @@ import { BsServer } from 'react-icons/bs';
 
 // Define el tipo para los datos que recibirán los proyectos
 interface ProjectData {
-  id: string; // O el tipo adecuado si no es string
+  id: number; // O el tipo adecuado si no es string
   linkDeploy: string;
   linkCode: string;
   image: string;

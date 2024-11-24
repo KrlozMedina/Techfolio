@@ -8,8 +8,8 @@ import Image from 'next/image';
 // Tipos para las propiedades de CardProject
 interface CardProjectProps {
   children: {
-    linkDeploy: string;
-    linkCode: string;
+    linkDeploy: string | undefined;
+    linkCode: string | undefined;
     image: string;
     title: string;
     description: string;
@@ -32,7 +32,7 @@ export const CardProject: React.FC<CardProjectProps> = ({ children }) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Image
+        <img
           src={image}
           className="card__project--image"
           alt={title}
@@ -56,7 +56,6 @@ export const CardProject: React.FC<CardProjectProps> = ({ children }) => {
 // Tipos para las propiedades de CardVideo
 interface CardVideoProps {
   children: {
-    descripcion: string;
     description: string;
     link: string;
     title: string;
@@ -70,7 +69,7 @@ interface CardVideoProps {
 
 export const CardVideo: React.FC<CardVideoProps> = ({ children }) => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-  const { descripcion, description, link, title, thumbnails } = children;
+  const { description, link, title, thumbnails } = children;
 
   return (
     <article className="card__video">
@@ -87,7 +86,7 @@ export const CardVideo: React.FC<CardVideoProps> = ({ children }) => {
             alt={title}
           />
           <p className="card__video--description">
-            {isSpanish ? descripcion : description}
+            description
           </p>
         </div>
 

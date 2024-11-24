@@ -1,0 +1,42 @@
+[
+  {
+    "id": 9,
+    "title": "Control de Gastos",
+    "description": "Aplicación para gestionar gastos personales, con manejo de datos, autenticación y persistencia en bases de datos.",
+    "linkDeploy": "undefined",
+    "linkCode": "undefined",
+    "image": "https://picsum.photos/200/300"
+  },
+  {
+    "id": 1,
+    "title": "Videojuego Score Management",
+    "description": "Proyecto Full Stack que abarca autenticación, manejo de puntuaciones, y gestión de bases de datos con MongoDB y PostgreSQL. Incluye Redis para sesiones.",
+    "linkDeploy": "undefined",
+    "linkCode": "undefined",
+    "image": "https://picsum.photos/200/300"
+  },
+  {
+    "id": 8,
+    "title": "Juego de Triki (Tic-Tac-Toe)",
+    "description": "Juego simple para aprender la lógica de programación y manipulación del DOM.",
+    "linkDeploy": "undefined",
+    "linkCode": "undefined",
+    "image": "https://picsum.photos/200/300"
+  },
+  {
+    "id": 10,
+    "title": "Juego de Piedra, Papel o Tijeras",
+    "description": "Juego simple de lógica con interacción directa y manejo del estado.",
+    "linkDeploy": "undefined",
+    "linkCode": "undefined",
+    "image": "https://picsum.photos/200/300"
+  },
+  {
+    "id": 29,
+    "title": "Blog",
+    "description": "Un blog sencillo que utiliza JavaScript para la funcionalidad dinámica.",
+    "linkDeploy": "undefined",
+    "linkCode": "undefined",
+    "image": "https://picsum.photos/200/300"
+  }
+]

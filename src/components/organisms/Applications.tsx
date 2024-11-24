@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import Slider from './Slider';
+import dataWeb from '@/app/mock/projectsWeb.json'
+import dataDesktop from '@/app/mock/projectsDesktop.json'
+import dataMobile from '@/app/mock/projectsMobile.json'
 
 const API = "https://dossier-api.grayground-a5b47aa0.eastus.azurecontainerapps.io/projects";
 
 // Define types for the data structure that the API returns
 interface Application {
   // Define the structure based on what properties you expect from the API response
-  id: string;
-  name: string;
+  id: number;
+  title: string;
   description: string;
   linkDeploy: string;
   linkCode: string;
   image: string;
-  title: string;
   // Add any other fields based on the response
 }
 
@@ -30,10 +32,11 @@ const ApplicationDesktop: React.FC = () => {
   const [applicationsDesktop, setApplicationsDesktop] = useState<Application[] | null>(null);
 
   useEffect(() => {
-    fetch(API + "/DESKTOP")
-      .then(res => res.json())
-      .then(data => setApplicationsDesktop(data.content))
-      .catch(() => setApplicationsDesktop(null))
+    // fetch(API + "/DESKTOP")
+    //   .then(res => res.json())
+    //   .then(data => setApplicationsDesktop(data.content))
+    //   .catch(() => setApplicationsDesktop(null))
+    setApplicationsDesktop(dataDesktop)
   }, [])
 
   return (
@@ -55,10 +58,11 @@ const ApplicationMobile: React.FC = () => {
   const [applicationsMobile, setApplicationsMobile] = useState<Application[] | null>(null);
 
   useEffect(() => {
-    fetch(API + "/MOBILE")
-      .then(res => res.json())
-      .then(data => setApplicationsMobile(data.content))
-      .catch(() => setApplicationsMobile(null))
+    // fetch(API + "/MOBILE")
+    //   .then(res => res.json())
+    //   .then(data => setApplicationsMobile(data.content))
+    //   .catch(() => setApplicationsMobile(null))
+    setApplicationsMobile(dataMobile)
   }, [])
 
   return (
@@ -80,10 +84,11 @@ const ApplicationWeb: React.FC = () => {
   const [applicationsWeb, setApplicationsWeb] = useState<Application[] | null>(null);
 
   useEffect(() => {
-    fetch(API + "/WEB")
-      .then(res => res.json())
-      .then(data => setApplicationsWeb(data.content))
-      .catch(() => setApplicationsWeb(null))
+    // fetch(API + "/WEB")
+    //   .then(res => res.json())
+    //   .then(data => setApplicationsWeb(data.content))
+    //   .catch(() => setApplicationsWeb(null))
+    setApplicationsWeb(dataWeb);
   }, [])
 
   return (
