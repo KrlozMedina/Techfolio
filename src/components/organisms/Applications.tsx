@@ -4,7 +4,7 @@ import dataWeb from '@/app/mock/projectsWeb.json'
 import dataDesktop from '@/app/mock/projectsDesktop.json'
 import dataMobile from '@/app/mock/projectsMobile.json'
 
-const API = "https://dossier-api.grayground-a5b47aa0.eastus.azurecontainerapps.io/projects";
+// const API = "https://dossier-api.grayground-a5b47aa0.eastus.azurecontainerapps.io/projects";
 
 // Define types for the data structure that the API returns
 interface Application {

@@ -68,8 +68,8 @@ interface CardVideoProps {
 }
 
 export const CardVideo: React.FC<CardVideoProps> = ({ children }) => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-  const { description, link, title, thumbnails } = children;
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  const { link, title, thumbnails } = children;
 
   return (
     <article className="card__video">
