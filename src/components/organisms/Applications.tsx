@@ -9,7 +9,7 @@ import dataMobile from '@/mock/projectsMobile.json'
 // Define types for the data structure that the API returns
 interface Application {
   // Define the structure based on what properties you expect from the API response
-  id: number;
+  _id: number;
   title: string;
   description: string;
   linkDeploy: string;
@@ -51,7 +51,8 @@ const ApplicationDesktop: React.FC = () => {
         "english": {
           "title": "Applications desktop"
         },
-        "data": applicationsDesktop
+        "data": applicationsDesktop,
+        "key": 'desktop'
       }}
     </Slider>
   )
@@ -77,7 +78,8 @@ const ApplicationMobile: React.FC = () => {
         "english": {
           "title": "Applications mobile"
         },
-        "data": applicationsMobile
+        "data": applicationsMobile,
+        "key": 'mobile'
       }}
     </Slider>
   )
@@ -103,7 +105,8 @@ const ApplicationWeb: React.FC = () => {
         "english": {
           "title": "Applications web"
         },
-        "data": applicationsWeb
+        "data": applicationsWeb,
+        "key": 'web'
       }}
     </Slider>
   )

@@ -40,7 +40,7 @@
     color: var(--color-text-bold);
 }
 
-.contact-form input,
+/* .contact-form input,
 .contact-form textarea {
     width: 25rem;
     padding: 0.5rem;
@@ -51,7 +51,7 @@
     color: var(--color-text);
     font-size: 1.5rem;
     resize: none;
-}
+} */
 
 .contact-form textarea {
     width: 90%;

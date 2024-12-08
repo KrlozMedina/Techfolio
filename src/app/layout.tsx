@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <LanguageContextProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <body id="app" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <span className="background__image"></span>
           {children}
         </body>

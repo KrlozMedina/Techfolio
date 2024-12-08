@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "_id": 10,
     "title": "Videojuego Score Management",
     "description": "Proyecto Full Stack que abarca autenticación, manejo de puntuaciones, y gestión de bases de datos con MongoDB y PostgreSQL. Incluye Redis para sesiones.",
     "linkDeploy": "undefined",
@@ -8,7 +8,7 @@
     "image": "https://picsum.photos/200/300"
   },
   {
-    "id": 2,
+    "_id": 20,
     "title": "E-commerce Simulado",
     "description": "E-commerce con integración de pagos, gestión de productos y transacciones. Usa bases de datos relacionales y no relacionales.",
     "linkDeploy": "undefined",
@@ -16,7 +16,7 @@
     "image": "https://picsum.photos/200/300"
   },
   {
-    "id": 3,
+    "_id": 30,
     "title": "Clon de Twitter",
     "description": "Red social con autenticación y manejo de publicaciones, seguidores y mensajes en tiempo real.",
     "linkDeploy": "undefined",
@@ -24,7 +24,7 @@
     "image": "https://picsum.photos/200/300"
   },
   {
-    "id": 4,
+    "_id": 40,
     "title": "Blog (CMS completo)",
     "description": "CMS para gestión de contenido, autenticación y autorización de usuarios, creación de artículos y comentarios.",
     "linkDeploy": "undefined",
@@ -32,7 +32,7 @@
     "image": "https://picsum.photos/200/300"
   },
   {
-    "id": 5,
+    "_id": 50,
     "title": "Portafolio Interactivo",
     "description": "Portafolio interactivo para mostrar proyectos personales, con gestión de rutas, APIs y componentes reutilizables.",
     "linkDeploy": "undefined",
@@ -40,7 +40,7 @@
     "image": "https://picsum.photos/200/300"
   },
   {
-    "id": 6,
+    "_id": 60,
     "title": "REST APIs",
     "description": "Desarrollo de APIs RESTful completas con autenticación, seguridad y documentación con Swagger.",
     "linkDeploy": "undefined",
@@ -48,7 +48,7 @@
     "image": "https://picsum.photos/200/300"
   },
   {
-    "id": 7,
+    "_id": 70,
     "title": "Clon de YouTube",
     "description": "Clon de YouTube que incluye subida y gestión de videos, comentarios, y manejo de usuarios.",
     "linkDeploy": "undefined",
@@ -56,7 +56,7 @@
     "image": "https://picsum.photos/200/300"
   },
   {
-    "id": 8,
+    "_id": 80,
     "title": "Juego de Triki (Tic-Tac-Toe)",
     "description": "Juego simple para aprender la lógica de programación y manipulación del DOM.",
     "linkDeploy": "undefined",
@@ -64,7 +64,7 @@
     "image": "https://picsum.photos/200/300"
   },
   {
-    "id": 9,
+    "_id": 90,
     "title": "Control de Gastos",
     "description": "Aplicación para gestionar gastos personales, con manejo de datos, autenticación y persistencia en bases de datos.",
     "linkDeploy": "undefined",
@@ -72,7 +72,7 @@
     "image": "https://picsum.photos/200/300"
   },
   {
-    "id": 10,
+    "_id": 100,
     "title": "Juego de Piedra, Papel o Tijeras",
     "description": "Juego simple de lógica con interacción directa y manejo del estado.",
     "linkDeploy": "undefined",
