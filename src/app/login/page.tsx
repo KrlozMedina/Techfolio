@@ -60,12 +60,12 @@ const LoginPage: React.FC = () => {
         )}
 
         <div className="form-group">
-          <label htmlFor="text" className="form-label">
+          <label htmlFor="email" className="form-label">
             Username:
           </label>
           <input
-            id="username"
-            name="username"
+            id="email"
+            name="email"
             type="text"
             value={credentials.email}
             onChange={handleChange}
