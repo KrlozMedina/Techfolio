@@ -2,6 +2,7 @@ import mongoose, { Document, Schema } from "mongoose";
 
 // Define la interfaz para el documento del proyecto
 export interface IProject extends Document {
+  _id: string;
   title: string;
   slug: string;
   description: string;

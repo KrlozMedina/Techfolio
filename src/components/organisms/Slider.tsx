@@ -32,6 +32,7 @@ const Slider: React.FC<SliderProps> = (props) => {
 
   // Desestructuraron de las props
   const { spanish, english, data, key } = props.children;
+  console.log(data)
   
   return (
     <section className={data == null || data.length !== 0 ? 'slider' : 'none'} key={key}>

@@ -1,9 +1,10 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 // Definir constantes para categorías
-const CATEGORIES = [
+export const CATEGORIES = [
   'Frontend',
   'Backend',
+  'Full Stack',
   'Database',
   'DevOps',
   'Mobile Development',
@@ -21,6 +22,7 @@ const CATEGORIES = [
 
 // Definir tipos
 export interface ITechnology extends Document {
+  _id: string;
   name: string;
   category: (typeof CATEGORIES)[number]; // Limita los valores al array de categorías
   logoUrl?: string; // Opcional

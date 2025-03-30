@@ -5,42 +5,48 @@ import { useEffect, useState } from 'react';
 import '@/styles/pages/Register.css'
 import { TextInput } from '@/components/atom/Form';
 import Modal from "@/components/organisms/Modal";
-
-interface Technologies {
-  _id: string
-  name: string;
-  category: string;
-  logoUrl: string;
-}
-
-interface Projects {
-  _id: string;
-  title: string;
-  slug: string;
-  description: string;
-  technologies: string[];
-  repositoryUrl: string;
-  liveUrl: string;
-  imageUrl: string;
-  category: string[];
-  role: string;
-  teamSize: number;
-  duration: string;
-  priority: number;
-  projectType: string;
-}
+import { useGetProjectsQuery, useVerifyProfileQuery } from '@/redux/service/projectsApi';
+import { ITechnology } from '@/model/Technology';
+import { IProject } from '@/model/Project';
 
 interface ErrorTry {
   status: number
 }
 
 export default function Home() {
-  const categories = ['Frontend', 'Backend', 'Database', 'DevOps', 'Mobile Development', 'Testing', 'Cloud & Infrastructure', 'Machine Learning & AI', 'Data Analysis & Big Data', 'Cybersecurity', 'Game Development', 'AR/VR', 'IoT (Internet of Things)', 'Blockchain', 'Other'];
+  const {data: verify} = useVerifyProfileQuery(null);
+  // const { msg } = verify;
+  // console.log(verify)
+  if (verify === false) {
+    location.replace('/login')
+  }
+
+
+
+
+  const categories = [
+    'Frontend',
+    'Backend',
+    'Full Stack',
+    'Database',
+    'DevOps',
+    'Mobile Development',
+    'Testing',
+    'Cloud & Infrastructure',
+    'Machine Learning & AI',
+    'Data Analysis & Big Data',
+    'Cybersecurity',
+    'Game Development',
+    'AR/VR',
+    'IoT (Internet of Things)',
+    'Blockchain',
+    'Other'
+  ];
   const projectType = ['Web Applications', 'Desktop Applications', 'Mobile Applications', 'API Development', 'Data Science and Machine Learning Projects', 'DevOps and Automation', 'Game Development', 'IoT Projects', 'Educational Projects', 'Creative or Digital Art Projects', 'Open Source Projects', 'Business Applications', 'Cybersecurity Projects', 'Other Projects'];
   const [collection, setCollection] = useState<string>('projects');
-  const [technologies, setTechnologies] = useState<Technologies[]>([]);
+  const [technologies, setTechnologies] = useState<ITechnology[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [projects, setProjects] = useState<Projects[]>([])
+  const [projects, setProjects] = useState<IProject[]>([])
   const [showModal, setShowModal] = useState(false);
 
   const [projectData, setProjectData] = useState({
@@ -48,7 +54,6 @@ export default function Home() {
     slug: '',
     description: '',
     technologies: [''],
-    // features: [],
     repositoryUrl: '',
     liveUrl: '',
     imageUrl: '',
@@ -67,6 +72,9 @@ export default function Home() {
 
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  const { data } = useGetProjectsQuery(null)
+  console.log('data', data)
 
   useEffect(() => {
     fetch('/api/v1/technologies')
@@ -127,7 +135,7 @@ export default function Home() {
           setError('Error al conectar con el servidor');
           break;
         default:
-          setError('Erro al agregar el proyecto');
+          setError('Error al agregar el proyecto');
           console.log(e)
           break;
       }
@@ -357,7 +365,7 @@ export default function Home() {
                 <img src={project.imageUrl} alt={`${project.title} screenshot`} className="project-card__image" />
                 <h2 className="project-card__title">{project.title}</h2>
                 <p className="project-card__description">{project.description}</p>
-                <p className="project-card__category"><strong>Categoría:</strong> {project.category}</p>
+                <p className="project-card__category"><strong>Categoría:</strong> {project.category.join(', ')}</p>
                 <p className="project-card__role"><strong>Rol:</strong> {project.role}</p>
                 <p className="project-card__duration"><strong>Duración:</strong> {project.duration}</p>
                 <p className="project-card__team-size"><strong>Tamaño del equipo:</strong> {project.teamSize}</p>
