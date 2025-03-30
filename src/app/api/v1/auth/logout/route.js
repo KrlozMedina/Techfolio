@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -26,6 +25,6 @@ export async function POST(req, res) {
 
     return NextResponse.json({ msg: 'Logout exitoso', status: 200 });
   } catch (error) {
-    return res.status(401).json({ msg: 'Token inválido' });
+    return res.status(401).json({ msg: 'Token inválido', error });
   }
 }
