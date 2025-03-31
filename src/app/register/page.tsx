@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import '@/styles/pages/Register.css'
 import { TextInput } from '@/components/atom/Form';
 import Modal from "@/components/organisms/Modal";
-import { useGetProjectsQuery, useVerifyProfileQuery } from '@/redux/service/projectsApi';
+import { useGetProjectsQuery, useLogoutMutation, useVerifyProfileQuery } from '@/redux/service/projectsApi';
 import { ITechnology } from '@/model/Technology';
 import { IProject } from '@/model/Project';
 
@@ -21,7 +21,17 @@ export default function Home() {
     location.replace('/login')
   }
 
+  const [logout] = useLogoutMutation();
 
+  const handlerLogout = async() => {
+    console.log('logout')
+    const { data: logoutSuccess, error } = await logout(null);
+    if (logoutSuccess) {
+      location.replace('/login')
+    } else {
+      console.warn(error)
+    }
+  }
 
 
   const categories = [
@@ -216,6 +226,7 @@ export default function Home() {
           {/* <option value="certificates">Certificados</option> */}
           <option value="technologies">Tecnologías</option>
         </select>
+        <button onClick={() => handlerLogout()}>Logout</button>
       </div>
 
       {collection === 'projects' && (

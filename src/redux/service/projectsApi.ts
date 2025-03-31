@@ -22,8 +22,15 @@ export const projectsApi = createApi({
     }),
     verifyProfile: builder.query({
       query: () => 'auth/login'
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: 'auth/logout',
+        method: 'POST',
+        body: ''
+      })
     })
   })
 })
 
-export const { useGetProjectsQuery, useLoginMutation, useVerifyProfileQuery } = projectsApi
+export const { useGetProjectsQuery, useLoginMutation, useVerifyProfileQuery, useLogoutMutation } = projectsApi
