@@ -68,3 +68,126 @@ Asegúrate de leer detenidamente los términos y condiciones de la licencia CC B
 También es importante tener en cuenta que, si bien mi código fuente puede estar disponible bajo la licencia CC BY-NC, es posible que algunos elementos del diseño, como las imágenes, iconos o fuentes, tengan sus propias licencias. Asegúrate de revisar y respetar las licencias correspondientes de estos elementos si deseas utilizarlos en tu propio proyecto.
 
 Si tienes alguna pregunta o inquietud relacionada con las licencias de mi portafolio web, no dudes en ponerse en contacto conmigo a través de los canales mencionados en la sección de contacto.
+
+## Estructura de las páginas
+
+```
+    src/
+└── app/
+    ├── home/                # Página principal
+    │   ├── page.tsx
+    │   └── page.module.css
+    ├── profile/             # Agrupación de "Perfil"
+    │   ├── about-me/
+    │   │   ├── page.tsx
+    │   │   └── page.module.css
+    │   ├── education/
+    │   │   ├── page.tsx
+    │   │   └── page.module.css
+    │   ├── skills/
+    │   │   ├── page.tsx
+    │   │   └── page.module.css
+    │   ├── certifications/
+    │   │   ├── page.tsx
+    │   │   └── page.module.css
+    │   ├── experience/
+    │   │   ├── page.tsx
+    │   │   └── page.module.css
+    │   └── achievements/
+    │       ├── page.tsx
+    │       └── page.module.css
+    ├── projects/            # Agrupación de "Proyectos"
+    │   ├── page.tsx
+    │   ├── page.module.css
+    │   ├── services/
+    │   │   ├── page.tsx
+    │   │   └── page.module.css
+    │   ├── testimonials/
+    │   │   ├── page.tsx
+    │   │   └── page.module.css
+    │   └── case-studies/
+    │       ├── page.tsx
+    │       └── page.module.css
+    ├── blog/                # Página del blog
+    │   ├── page.tsx
+    │   └── page.module.css
+    ├── contact/             # Página de contacto
+    │   ├── page.tsx
+    │   └── page.module.css
+    ├── clients/             # Página de clientes
+    │   ├── page.tsx
+    │   └── page.module.css
+    ├── resources/           # Página de recursos
+    │   ├── page.tsx
+    │   └── page.module.css
+    └── gallery/             # Página de galería
+        ├── page.tsx
+        └── page.module.css
+```
+
+## Descripción de las páginas
+
+1. Página principal (home)
+- Ruta: /
+- Descripción: Página de inicio que presenta un resumen de tu portafolio, destacando tu perfil, proyectos y habilidades.
+
+2. Sección "Perfil" (profile)
+Agrupa páginas relacionadas con tu información personal y profesional.
+- Ruta principal: /profile
+- Subpáginas:
+    - Sobre mí (about-me):
+        - Ruta: /profile/about-me
+        - Descripción: Información personal, experiencia y habilidades.
+    - Educación (education):
+        - Ruta: /profile/education
+        - Descripción: Formación académica y certificaciones.
+    - Habilidades (skills):
+        - Ruta: /profile/skills
+        - Descripción: Lenguajes de programación, tecnologías y habilidades blandas.
+    - Certificaciones (certifications):
+        - Ruta: /profile/certifications
+        - Descripción: Certificaciones profesionales y técnicas.
+    - Experiencia laboral (experience):
+        - Ruta: /profile/experience
+        - Descripción: Detalle de tu experiencia profesional.
+    - Logros (achievements):
+        - Ruta: /profile/achievements
+        - Descripción: Premios, reconocimientos y contribuciones destacadas.
+
+3. Sección "Proyectos" (projects)
+Agrupa páginas relacionadas con tus proyectos y servicios.
+- Ruta principal: /projects
+- Subpáginas:
+    - Servicios (services):
+        - Ruta: /projects/services
+        - Descripción: Servicios ofrecidos relacionados con los proyectos.
+    - Testimonios (testimonials):
+        - Ruta: /projects/testimonials
+        - Descripción: Opiniones de clientes o colaboradores sobre los proyectos.
+    - Casos de éxito (case-studies):
+        - Ruta: /projects/case-studies
+        - Descripción: Proyectos destacados con detalles sobre el problema, la solución y los resultados.
+
+4. Blog (blog)
+- Ruta: /blog
+- Descripción: Artículos y publicaciones relacionadas con tecnología, desarrollo y automatización.
+
+5. Contacto (contact)
+- Ruta: /contact
+- Descripción: Página para que los visitantes puedan contactarte.
+- Contenido sugerido:
+    - Formulario de contacto.
+    - Información de contacto (correo electrónico, teléfono, redes sociales).
+    - Enlace para descargar tu CV.
+
+6. Página "Clientes" (clients)
+- Ruta: /clients
+- Descripción: Lista de clientes con los que has trabajado, incluyendo logos y breves descripciones de los proyectos realizados.
+
+7. Página "Recursos" (resources)
+- Ruta: /resources
+- Descripción: Comparte recursos útiles relacionados con tu área de especialización, como herramientas, artículos o tutoriales.
+
+8. Página "Galería" (gallery)
+- Ruta: /gallery
+- Descripción: Muestra imágenes relacionadas con tus proyectos, eventos o logros.

@@ -1,73 +1,54 @@
-import React, { useContext, useState } from 'react'
-import LenguajeContext from '@/context/LanguageContext'
+import React, { useContext, useState } from 'react';
+import Link from 'next/link';
+import LanguageContext from '@/context/LanguageContext';
+import { AiFillHome, AiOutlineClose } from 'react-icons/ai';
 import { TiInfoLarge } from 'react-icons/ti';
 import { IoIosSchool } from 'react-icons/io';
 import { SiPolymerproject } from 'react-icons/si';
 import { BiMessageDots } from 'react-icons/bi';
+import { MdDocumentScanner, MdDesignServices, MdFeedback } from 'react-icons/md';
 import { TfiMenuAlt } from 'react-icons/tfi';
-import { AiOutlineClose, AiFillHome } from 'react-icons/ai'
-import { MdDocumentScanner } from 'react-icons/md'
+import { ImBlog, ImProfile } from 'react-icons/im';
 import { LanguagePhone } from '@/components/molecules/Language';
-import '@/styles/components/organisms.css';
-import Link from 'next/link'
+import styles from '@/styles/components/organisms/Menu.module.css';
 
-// Tipo para el contexto
 interface LanguageContextType {
   isSpanish: boolean;
 }
 
-let menu: boolean, setMenu: React.Dispatch<React.SetStateAction<boolean>>
+const navItems = [
+  { href: '/', labelEs: 'Inicio', labelEn: 'Home', icon: AiFillHome, key: 'home' },
+  { href: '/projects', labelEs: 'Proyectos', labelEn: 'Projects', icon: SiPolymerproject, key: 'projects' },
+  { href: '/contact', labelEs: 'Contactarme', labelEn: 'Contact me', icon: BiMessageDots, key: 'contact' },
+  { href: '/profile', labelEs: 'Perfil', labelEn: 'Profile', icon: ImProfile, key: 'about' },
+  { href: '/blog', labelEs: 'Blog', labelEn: 'Blog', icon: ImBlog, key: 'blog' },
+];
 
 // Función para descargar el CV
-const downloadCV = (): void => {
-  fetch('CV.pdf').then((response) => {
-    response.blob().then((blob) => {
-      const fileURL = window.URL.createObjectURL(blob);
-      const alink = document.createElement('a');
-      alink.href = fileURL;
-      alink.download = 'Carlos Alidio Medina Lopez.pdf';
-      alink.click();
+const downloadCV = () => {
+  fetch('CV.pdf')
+    .then(res => res.blob())
+    .then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Carlos Alidio Medina Lopez.pdf';
+      a.click();
     });
-  });
 };
 
-// Componente Menu
-const Menu: React.FC = () => {
-  const context = useContext(LenguajeContext);
-
-  if (!context) {
-    throw new Error('LanguageContext debe ser usado dentro de un LanguageContextProvider');
-  }
-
-  const { isSpanish } = context as LanguageContextType;
+// Subcomponente para los enlaces del menú
+const MenuLinks: React.FC<{ isSpanish: boolean; isPhone?: boolean }> = ({ isSpanish, isPhone = false }) => {
+  const containerClass = isPhone ? styles['menu__container--phone'] : styles['menu__container'];
 
   return (
-    <div className={menu ? 'menu__container--phone' : 'menu__container'}>
-      <Link href="/">
-        <AiFillHome className="icon" />
-        {isSpanish ? 'Inicio' : 'Home'}
-      </Link>
-
-      <Link href="/projects">
-        <SiPolymerproject className="icon" />
-        {isSpanish ? 'Proyectos' : 'Projects'}
-      </Link>
-
-      <Link href="/aboutme">
-        <TiInfoLarge className="icon" />
-        {isSpanish ? 'Sobre mi' : 'About me'}
-      </Link>
-
-      <Link href="/education">
-        <IoIosSchool className="icon" />
-        {isSpanish ? 'Educación' : 'Education'}
-      </Link>
-
-      <Link href="/contactme">
-        <BiMessageDots className="icon" />
-        {isSpanish ? 'Contactarme' : 'Contact me'}
-      </Link>
-
+    <div className={containerClass}>
+      {navItems.map(({ href, labelEs, labelEn, icon: Icon, key }) => (
+        <Link href={href} key={key}>
+          <Icon className="icon" />
+          {isSpanish ? labelEs : labelEn}
+        </Link>
+      ))}
       <a onClick={downloadCV}>
         <MdDocumentScanner className="icon" />
         CV
@@ -76,107 +57,64 @@ const Menu: React.FC = () => {
   );
 };
 
-// Componente MenuPhone
+const Menu: React.FC = () => {
+  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  return <MenuLinks isSpanish={isSpanish} />;
+};
+
 const MenuPhone: React.FC = () => {
-  [menu, setMenu] = useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
   return (
     <>
-      <TfiMenuAlt
-        className={menu ? 'none' : 'icon-menu'}
-        onClick={() => setMenu(true)}
-      />
-      <section className={menu ? 'menu-phone__container' : 'none'}>
-        <AiOutlineClose
-          className="icon-menu"
-          onClick={() => setMenu(false)}
-        />
-        <Menu />
-        <LanguagePhone />
-      </section>
+      {!menuOpen && (
+        <TfiMenuAlt className={styles['icon-menu']} onClick={() => setMenuOpen(true)} />
+      )}
+      {menuOpen && (
+        <section className={styles['menu-phone__container']}>
+          <AiOutlineClose className={styles['icon-menu']} onClick={() => setMenuOpen(false)} />
+          <MenuLinks isSpanish={isSpanish} isPhone />
+          <LanguagePhone />
+        </section>
+      )}
     </>
   );
 };
 
-// Componente MenuAside
 const MenuAside: React.FC = () => {
-  const [hoverState, setHoverState] = useState<Record<string, boolean>>({
-    home: false,
-    projects: false,
-    about: false,
-    education: false,
-    contact: false,
-    cv: false,
-  });
-
-  const handleMouseOver = (key: string) => {
-    setHoverState((prev) => ({ ...prev, [key]: true }));
-  };
-
-  const handleMouseLeave = (key: string) => {
-    setHoverState((prev) => ({ ...prev, [key]: false }));
-  };
-
-  const context = useContext(LenguajeContext);
-
-  if (!context) {
-    throw new Error('LanguageContext debe ser usado dentro de un LanguageContextProvider');
-  }
-
-  const { isSpanish } = context as LanguageContextType;
+  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  const [hover, setHover] = useState<string | null>(null);
 
   return (
-    <div className="menu-aside__container">
-      <Link
-        href="/"
-        onMouseOver={() => handleMouseOver('home')}
-        onMouseLeave={() => handleMouseLeave('home')}
-      >
-        {hoverState.home ? <p className="text-icon">{isSpanish ? "Inicio" : "Home"}</p> : <AiFillHome className="icon" />}
-      </Link>
-
-      <Link
-        href="/projects"
-        onMouseOver={() => handleMouseOver('projects')}
-        onMouseLeave={() => handleMouseLeave('projects')}
-      >
-        {hoverState.projects ? <p className="text-icon">{isSpanish ? "Proyectos" : "Projects"}</p> : <SiPolymerproject className="icon" />}
-      </Link>
-
-      <Link
-        href="/aboutme"
-        onMouseOver={() => handleMouseOver('about')}
-        onMouseLeave={() => handleMouseLeave('about')}
-      >
-        {hoverState.about ? <p className="text-icon">{isSpanish ? "Sobre mi" : "About me"}</p> : <TiInfoLarge className="icon" />}
-      </Link>
-
-      <Link
-        href="/education"
-        onMouseOver={() => handleMouseOver('education')}
-        onMouseLeave={() => handleMouseLeave('education')}
-      >
-        {hoverState.education ? <p className="text-icon">{isSpanish ? "Educación" : "Education"}</p> : <IoIosSchool className="icon" />}
-      </Link>
-
-      <Link
-        href="/contactme"
-        onMouseOver={() => handleMouseOver('contact')}
-        onMouseLeave={() => handleMouseLeave('contact')}
-      >
-        {hoverState.contact ? <p className="text-icon">{isSpanish ? "Contacto" : "Contact"}</p> : <BiMessageDots className="icon" />}
-      </Link>
-
+    <div className={styles['menu-aside__container']}>
+      {navItems.map(({ href, labelEs, labelEn, icon: Icon, key }) => (
+        <Link
+          href={href}
+          key={key}
+          onMouseOver={() => setHover(key)}
+          onMouseLeave={() => setHover(null)}
+        >
+          {hover === key ? (
+            <p className='text-icon'>{isSpanish ? labelEs : labelEn}</p>
+          ) : (
+            <Icon className="icon" />
+          )}
+        </Link>
+      ))}
       <a
-        // href="cv"
         onClick={downloadCV}
-        onMouseOver={() => handleMouseOver('cv')}
-        onMouseLeave={() => handleMouseLeave('cv')}
+        onMouseOver={() => setHover('cv')}
+        onMouseLeave={() => setHover(null)}
       >
-        {hoverState.cv ? <p className="text-icon">CV</p> : <MdDocumentScanner className="icon" />}
+        {hover === 'cv' ? (
+          <p className='text-icon'>CV</p>
+        ) : (
+          <MdDocumentScanner className="icon" />
+        )}
       </a>
     </div>
   );
 };
 
-export { Menu, MenuPhone, MenuAside }
+export { Menu, MenuPhone, MenuAside };

@@ -14,7 +14,15 @@ const Projects: React.FC = () => {
 
   return (
     <div>
+      <nav>
+          <ol>
+            <li><a href="/projects/services">Servicios</a></li>
+            <li><a href="/projects/testimonials">Testimonios</a></li>
+            <li><a href="/projects/case-studies">Casos de éxito</a></li>
+          </ol>
+        </nav>
       <Page>
+        
         <p className='phrase'>
           {
             isSpanish
