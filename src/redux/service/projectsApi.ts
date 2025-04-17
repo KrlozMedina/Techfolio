@@ -1,36 +1,33 @@
-import { IProject } from "@/model/Project";
+import { IProject } from "@/models/Project.model";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const projectsApi = createApi({
   reducerPath: 'projectsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api/v1/'
+    baseUrl: '/api/v1/projects'
   }),
   endpoints: (builder) => ({
     getProjects: builder.query<IProject[], null>({
-      query: () => 'projects'
+      query: () => '/'
     }),
-    getProjectById: builder.query<IProject, null>({
-      query: () => 'projects'
-    }),
-    login: builder.mutation<{ token: string }, { username: string; password: string }>({
-      query: (credentials) => ({
-      url: 'auth/login',
-      method: 'POST',
-      body: credentials
+    createProject: builder.mutation({
+      query: (project) => ({
+        url: '/',
+        method: 'POST',
+        body: project
       })
     }),
-    verifyProfile: builder.query({
-      query: () => 'auth/login'
-    }),
-    logout: builder.mutation({
-      query: () => ({
-        url: 'auth/logout',
-        method: 'POST',
-        body: ''
+    deleteProject: builder.mutation({
+      query: (id) => ({
+        url: `?projectId=${id}`,
+        method: 'DELETE'
       })
     })
   })
 })
 
-export const { useGetProjectsQuery, useLoginMutation, useVerifyProfileQuery, useLogoutMutation } = projectsApi
+export const {
+  useGetProjectsQuery,
+  useCreateProjectMutation,
+  useDeleteProjectMutation,
+} = projectsApi

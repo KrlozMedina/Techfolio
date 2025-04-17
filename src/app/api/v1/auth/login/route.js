@@ -7,8 +7,8 @@ const AUTH_CONFIG = {
   TOKEN_EXPIRATION: 60 * 60, // 1 hora en segundos
   SECRET: process.env.JWT_SECRET || 'secret-dev-only',
   CREDENTIALS: {
-    username: "admin",
-    password: "admin"
+    username: process.env.JWT_USERNAME || 'admin',
+    password: process.env.JWT_PASSWORD || 'admin'
   }
 };
 

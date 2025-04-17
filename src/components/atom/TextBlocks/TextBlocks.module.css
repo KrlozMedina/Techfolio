@@ -1,0 +1,43 @@
+/* Phrase */
+.container{
+  width: 100%;
+  padding: 0 1.6rem;
+}
+
+.phrase {
+  width: 50%;
+  font-size: 2rem;
+  margin: 0 1.6rem 0 auto;
+}
+
+.author {
+  text-align: end;
+  font-size: 2.4rem;
+  margin: 0 1.6rem 0 auto;
+}
+
+@media (max-width: 768px) {
+  .phrase {
+      width: 100%;
+      margin: 0 auto;
+  }
+}
+
+/* Intro */
+.title {
+  text-transform: uppercase;
+  font-family: "DM Serif Display", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--color-text);
+  font-size: 2.8rem;
+  padding: 0 1.5%;
+  margin: 1.2rem 0;
+}
+
+.intro{
+  font-size: 1.6rem;
+  padding: 0 2.5%;
+  margin: 2rem 0;
+  text-align: justify;
+}

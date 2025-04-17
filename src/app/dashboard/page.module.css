@@ -1,0 +1,129 @@
+/* DASHBOARD */
+.dashboard {
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard__form {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+.dashboard__form-label {
+  font-size: 1.6rem;
+}
+
+/* MODAL (Formulario) */
+.modal__form {
+  max-width: 40rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 0.8rem;
+}
+
+.modal__fieldset {
+  border: none;
+  padding: 0;
+}
+
+.modal__legend {
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* PROJECT */
+.project__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.project__card {
+  background-color: var(--color-background-container-soft);
+  border: 1px solid var(--color-text);
+  border-radius: 8px;
+  width: 300px;
+  padding: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.project__card:hover {
+  transform: translateY(-10px);
+}
+
+.project__card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.project__card-title {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.project__card p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #b0adad;
+}
+
+.project__card a {
+  display: inline-block;
+  margin-right: 2.4rem;
+  text-decoration: none;
+  color: #0070f3;
+}
+
+.project__card a:hover {
+  text-decoration: underline;
+}
+
+/* TECHNOLOGIES */
+.technology__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.technology__card {
+  background-color: var(--color-background-container);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+  padding: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.technology__card:hover {
+  transform: translateY(-4px);
+}
+
+.technology__card-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+}
+
+.technology__card-name {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.technology__card-category {
+  font-size: 1rem;
+  color: #555;
+}

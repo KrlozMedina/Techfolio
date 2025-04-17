@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 interface Client {
@@ -31,7 +32,7 @@ const ClientsPage: React.FC = () => {
             <div className="clients-list">
                 {clients.map((client, index) => (
                     <div key={index} className="client-card">
-                        <img src={client.logo} alt={`${client.name} logo`} className="client-logo" />
+                        <Image src={client.logo} alt={`${client.name} logo`} className="client-logo" />
                         <h2 className="client-name">{client.name}</h2>
                         <p className="client-description">{client.description}</p>
                     </div>

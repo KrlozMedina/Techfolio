@@ -89,27 +89,3 @@
     }
 } */
 
-/* SLIDER */
-.slider {
-    width: 100%;
-    margin: 0 auto;
-}
-
-.slider__cards {
-    width: 100%;
-    display: flex;
-    overflow-x: scroll;
-    scroll-snap-type: x proximity;
-    overscroll-behavior-x: contain;
-    gap: 1.2rem;
-    padding: 0 2rem;
-    box-sizing: border-box;
-}
-
-.slider__error {
-    width: 100%;
-    height: 10rem;
-    font-size: 2rem;
-    text-align: center;
-    padding-top: 2rem;
-}

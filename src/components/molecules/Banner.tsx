@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
-import LanguageContext from '@/context/LanguageContext'
+import LanguageContext from '@/redux/context/LanguageContext'
 import '@/styles/components/molecules.css'
+import Image from 'next/image';
 
 // Define the type for the props that are expected
 interface BannerProps {
@@ -24,7 +25,13 @@ const Banner: React.FC<BannerProps> = (props) => {
     <a href={url} onClick={() => localStorage.setItem('diploma', logo)} target="_blank" rel="noopener noreferrer">
       <article className="card-education">
         <div>
-          <img className="education-logo" src={logo} alt={alt} />
+          <Image
+            className="education-logo"
+            src={logo}
+            width={50}
+            height={50}
+            alt={alt}
+          />
           <h3>{isSpanish ? titulo : title}</h3>
         </div>
       </article>

@@ -1,6 +1,6 @@
 import connectDB from "@/lib/connectDB";
-import Project from "@/model/Project";
-import Technology from "@/model/Technology";
+import Project from "@/models/Project.model";
+import Technology from "@/models/Technology.model";
 import { NextResponse } from "next/server";
 
 // Interfaces
@@ -90,7 +90,6 @@ export async function POST(req: Request) {
     if (body.technologies) {
       body.category = await mapTechnologiesToCategories(body.technologies);
     }
-
     const newProject = await new Project(body).save();
     return NextResponse.json({ message: "Project created successfully.", newProject }, { status: 201 });
   } catch (e) {
@@ -98,7 +97,7 @@ export async function POST(req: Request) {
     if (err.code === 11000) {
       return NextResponse.json({ error: "Duplicate project title.", duplicateKey: err.keyValue }, { status: 409 });
     }
-    console.error("Error creating project:", err);
+    // console.error("Error creating project:", err);
     return errorResponse("Failed to create project.", 500);
   }
 }

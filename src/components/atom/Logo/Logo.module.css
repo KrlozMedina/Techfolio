@@ -1,0 +1,21 @@
+/* Contenedor del logo como enlace */
+/* .logo__link {
+  width: 100%;
+  display: inline-block;
+  text-decoration: none;
+} */
+
+/* Imagen del logo */
+.logo__image {
+  width: fit-content;
+  height: 90%;
+}
+
+/* Texto del logo */
+.logo__text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  text-align: center;
+  margin: 0;
+}

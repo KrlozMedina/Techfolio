@@ -1,10 +1,14 @@
 'use client'
 
-import { useLoginMutation } from '@/redux/service/projectsApi';
-import React, { useState, useCallback } from 'react';
+import { useLoginMutation } from '@/redux/service/authApi';
+import React, { useState, useCallback, useContext } from 'react';
 import { useRouter } from 'next/navigation';
+import MainLayout from '@/components/templates/MainLayout/MainLayout';
+import style from './page.module.css';
+import LanguageContext, { LanguageContextType } from '@/redux/context/LanguageContext';
 
 const LoginPage: React.FC = () => {
+  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
@@ -38,68 +42,72 @@ const LoginPage: React.FC = () => {
       }
 
       if (data) {
-        router.push('/register');
+        router.push('/dashboard');
       }
     } catch (err) {
-      setError('Invalid credentials. Please try again.');
-      console.error('Login error:', err);
+      console.warn(err);
+      setError(isSpanish ? 'Credenciales inválidas. Por favor, intenta de nuevo.' : 'Invalid credentials. Please try again.');
     } finally {
       setIsLoading(false);
     }
-  }, [credentials, login, router]);
+  }, [credentials, login]);
 
   return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit} className="login-form">
-        <h2 className="login-title">Login</h2>
-        
-        {error && (
-          <div className="error-message">
-            {error}
+    <MainLayout isAdmin={false}>
+      <section className={style['login-container']}>
+        <form onSubmit={handleSubmit} className={style["login-form"]}>
+          <h2 className={style["login-title"]}>{isSpanish ? 'Iniciar sesión' : 'Login'}</h2>
+          
+          {error && (
+            <div className={style["error-message"]}>
+              {error}
+            </div>
+          )}
+
+          <div className={style["form-group"]}>
+            <label htmlFor="email" className={style["form-label"]}>
+              {isSpanish ? 'Usuario'  : 'Username'}:
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="text"
+              value={credentials.email}
+              onChange={handleChange}
+              required
+              disabled={isLoading}
+            />
           </div>
-        )}
 
-        <div className="form-group">
-          <label htmlFor="email" className="form-label">
-            Username:
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="text"
-            value={credentials.email}
-            onChange={handleChange}
-            required
+          <div className={style["form-group"]}>
+            <label htmlFor="password" className={style["form-label"]}>
+              {isSpanish ? 'Contraseña' : 'Password'}:
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              value={credentials.password}
+              onChange={handleChange}
+              required
+              disabled={isLoading}
+              className={style["form-input"]}
+            />
+          </div>
+
+          <button 
+            type="submit" 
             disabled={isLoading}
-            className="form-input"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password" className="form-label">
-            Password:
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            value={credentials.password}
-            onChange={handleChange}
-            required
-            disabled={isLoading}
-            className="form-input"
-          />
-        </div>
-
-        <button 
-          type="submit" 
-          disabled={isLoading}
-          className="submit-button"
-        >
-          {isLoading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
-    </div>
+            className={style["submit-button"]}
+          >
+            {isSpanish
+              ? isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'
+              : isLoading ? 'Logging in...' : 'Login'
+            }
+          </button>
+        </form>
+      </section>
+    </MainLayout>
   );
 };
 

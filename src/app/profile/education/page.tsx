@@ -1,10 +1,11 @@
 'use client'
 
 import React, { useContext } from 'react'
-import LanguageContext from '@/context/LanguageContext'
-import Pages from '@/components/templates/Page'
+import LanguageContext from '@/redux/context/LanguageContext'
+import Pages from '@/components/templates/MainLayout/MainLayout'
 import Banner from '@/components/molecules/Banner'
 import '@/styles/pages/Education.css'
+import Image from 'next/image'
 
 // Define the context type if not already defined
 interface LanguageContextType {
@@ -123,7 +124,7 @@ const Education: React.FC = () => {
   ]
 
   return (
-    <Pages>
+    <Pages isAdmin={false}>
       <p className='phrase'>
         {
           isSpanish
@@ -146,7 +147,13 @@ const Education: React.FC = () => {
             }
           </div>
           
-          <img src={diplomas[0]} className='diploma' alt="Diploma" />
+          <Image 
+            src={diplomas[0]} 
+            width={200}
+            height={300}
+            className='diploma' 
+            alt="Diploma" 
+          />
         </div>
 
         <h2 className='title'>{isSpanish ? "Conocimientos" : "Knowledge"}</h2>
@@ -155,7 +162,13 @@ const Education: React.FC = () => {
           {
             codeData.map(code => (
               <article key={code.id}>
-                <img className='education-code-logo' src={code.logo} alt={code.name} />
+                <Image
+                  className='education-code-logo'
+                  src={code.logo}
+                  width={300}
+                  height={200}
+                  alt={code.name}
+                />
                 <h3 className='education-code-name'>{code.name}</h3>
               </article>
             ))

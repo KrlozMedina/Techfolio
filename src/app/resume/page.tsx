@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useContext } from 'react';
-import Page from '@/components/templates/Page';
+import Page from '@/components/templates/MainLayout/MainLayout';
 // import { Viewer, Worker } from '@react-pdf-viewer/core';
 // import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@/styles/pages/CV.css';
-import LanguageContext from '@/context/LanguageContext';
+import LanguageContext from '@/redux/context/LanguageContext';
 import { FaFileDownload } from 'react-icons/fa';
 
 // Define the context type if not already defined
@@ -34,7 +34,7 @@ const CV = () => {
   };
 
   return (
-    <Page>
+    <Page isAdmin={false}>
       <p className='phrase'>
         {isSpanish
           ? 'El éxito no es la clave de la felicidad. La felicidad es la clave del éxito.'

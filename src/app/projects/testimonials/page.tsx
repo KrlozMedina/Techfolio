@@ -29,7 +29,7 @@ const TestimonialsPage = () => {
                     <div key={index} className="testimonial-card">
                         <h2>{testimonial.name}</h2>
                         <h4>{testimonial.role}</h4>
-                        <p>"{testimonial.feedback}"</p>
+                        <p>{testimonial.feedback}</p>
                     </div>
                 ))}
             </div>

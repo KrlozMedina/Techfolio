@@ -1,13 +1,13 @@
 'use client'
 
 import React, { useContext } from 'react'
-import LanguageContext from '@/context/LanguageContext'
-import Page from '@/components/templates/Page'
+import LanguageContext from '@/redux/context/LanguageContext'
+import Page from '@/components/templates/MainLayout/MainLayout'
 import '@/styles/pages/ContactMe.css'
 import emailjs from '@emailjs/browser';
 import { ImWhatsapp } from 'react-icons/im'
 import { MdEmail, MdLocationOn } from 'react-icons/md'
-import Social from '@/components/organisms/Social'
+import Social from '@/components/organisms/Social/Social'
 
 // Define the context type if not already defined
 interface LanguageContextType {
@@ -37,7 +37,7 @@ const ContactMe: React.FC = () => {
   }
 
   return (
-    <Page>
+    <Page isAdmin={false}>
       <p className='phrase'>
         {
           isSpanish

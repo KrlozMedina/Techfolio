@@ -1,13 +1,14 @@
 'use client'
 
 import React, { useContext } from 'react'
-import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
-import Page from '@/components/templates/Page'
+import LanguageContext, { LanguageContextType } from '@/redux/context/LanguageContext'
+import Page from '@/components/templates/MainLayout/MainLayout'
 import '@/styles/pages/AboutMe.css'
 import { MdCastForEducation, MdOutlineWorkOutline } from 'react-icons/md';
 import { GiSkills, GiThink, GiStairsGoal } from 'react-icons/gi'
 import { MdTravelExplore, MdOutlineSocialDistance } from "react-icons/md"
-import Social from '@/components/organisms/Social';
+import Social from '@/components/organisms/Social/Social';
+import Image from 'next/image'
 
 const AboutMe: React.FC = () => {
   // document.title = 'About me'
@@ -15,7 +16,7 @@ const AboutMe: React.FC = () => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
   return (
-    <Page>
+    <Page isAdmin={false}>
       <p className='phrase'>
         {
           isSpanish
@@ -26,7 +27,13 @@ const AboutMe: React.FC = () => {
 
       <p className='author'>Tao Te Ching</p>
 
-      <img src="https://i.imgur.com/cy2PG85.jpg" alt="" className='aboutme__photo' />
+      <Image 
+        src="https://i.imgur.com/cy2PG85.jpg" 
+        width={200}
+        height={300}
+        alt="" 
+        className='aboutme__photo'
+      />
       
       <h1 className='title' >{isSpanish ? "Sobre mi" : "About me"}</h1>
 

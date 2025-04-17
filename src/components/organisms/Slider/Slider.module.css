@@ -1,0 +1,47 @@
+/* .slider {
+    width: 50rem;
+    margin: 0 auto;
+} */
+
+.slider__cards {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  gap: 1.2rem;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+.slider__cards::-webkit-scrollbar {
+  height: 0.8rem;
+}
+
+.slider__cards::-webkit-scrollbar-track {
+  background: var(--color-background-container);
+}
+
+.slider__cards::-webkit-scrollbar-thumb {
+  background-color: gray; /* Rosado vibrante */
+  border-radius: 1rem;
+  border: 0.2rem solid var(--color-background-container); /* Para que tenga algo de padding */
+}
+
+.slider__cards::-webkit-scrollbar-thumb:hover {
+  background-color: white; /* Rosado más oscuro al pasar el mouse */
+}
+
+@media (max-width: 768px) {
+  .slider__cards::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* .slider__error {
+    width: 100%;
+    height: 10rem;
+    font-size: 2rem;
+    text-align: center;
+    padding-top: 2rem;
+} */

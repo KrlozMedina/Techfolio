@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React from 'react';
 
 const GalleryPage = () => {
@@ -16,7 +17,7 @@ const GalleryPage = () => {
             <div className="gallery-grid">
                 {images.map((image, index) => (
                     <div key={index} className="gallery-item">
-                        <img src={image.src} alt={image.alt} />
+                        <Image src={image.src} alt={image.alt} />
                     </div>
                 ))}
             </div>
