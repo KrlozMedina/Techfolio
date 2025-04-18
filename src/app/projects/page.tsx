@@ -13,14 +13,16 @@ import caseStudies from "@/mock/caseStudies.json";
 import style from './page.module.css'
 import Link from "next/link";
 import { Intro, Phrase } from "@/components/atom/TextBlocks/TextsBlocks";
-import { Loading, NoData } from "@/components/molecules/Loading/FeedbackStates";
+import { DatabaseError, Loading, NoData } from "@/components/molecules/Loading/FeedbackStates";
 import Image from "next/image";
 
 const Projects: React.FC = () => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-  const { data: dataProjects, isLoading, isSuccess } = useGetProjectsQuery(null);
   const { data: dataTechnologies } = useGetTechnologiesQuery(null);
+  const { data: dataProjects, isLoading, isSuccess, isError, error: errorProjects } = useGetProjectsQuery(null);
   const [newDataProjects, setNewDataProjects] = useState<IProject[] | undefined>(undefined);
+
+  // console.log(errorProjects)
 
   const [filter, setFilters] = useState({
     category: "",
@@ -98,10 +100,21 @@ const Projects: React.FC = () => {
       return matchType && matchCategory && matchTechnology;
     });
     setNewDataProjects(filtered);
-  }, [filter]);
+  }, [filter]);  
 
   return (
     <div>
+      <title>{isSpanish ? 'Proyectos | KrlozMedina Portfolio Lab' : 'Projects | KrlozMedina Portfolio Lab'}</title>
+      <meta name="keyword" content="Proyectos, Full Stack, Electronica" />
+      <meta name="description" content="Una demostración de ModalJS en Next.js" />
+      <meta property="og:title" content="Demo - ModalJS" />
+      <meta property="og:description" content="Una demostración de ModalJS en Next.js" />
+      <meta property="og:image" content="https://tusitio.com/og-image.jpg" />
+      <meta property="og:url" content="https://tusitio.com/demo" />
+      <meta property="og:type" content="article" />
+      <meta property="og:site_name" content="KrlozMedina Portfolio Lab" />
+      <meta property="og:locale" content="es_CO" />
+
       <MainLayout isAdmin={false} links={links}>
         <Phrase
           phraseEnglish="Rewards and motivation are an oil change for the engines of a project. Do it regularly and frequently."
@@ -170,11 +183,13 @@ const Projects: React.FC = () => {
             {
               isLoading
               ? <Loading />
-              : newDataProjects?.length === 0
-                ? <NoData reason="no-match" />
-                : newDataProjects?.map((element) => (
-                  <CardProject key={element._id} data={element} />
-                ))
+              : isError
+                ? <DatabaseError reason={errorProjects}/>
+                : newDataProjects?.length === 0
+                  ? <NoData reason="no-match" />
+                  : newDataProjects?.map((element) => (
+                    <CardProject key={element._id} data={element} />
+                  ))
             }
           </Slider>
         </section>

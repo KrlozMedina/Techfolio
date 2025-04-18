@@ -31,9 +31,9 @@ export async function GET() {
     const technologies = await Technology.find();
     return NextResponse.json(technologies, { status: 200 });
   } catch (err) {
-    console.error("Error fetching technologies:", err);
+    // console.error("Error fetching technologies:", err);
     return NextResponse.json(
-      { error: "Failed to fetch technologies." },
+      { error: "Failed to fetch technologies.", msg: err },
       { status: 500 }
     );
   }

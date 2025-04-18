@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { FaDatabase, FaFilter } from 'react-icons/fa';
 import styles from './FeedbackStates.module.css';
 import LanguageContext, { LanguageContextType } from '@/redux/context/LanguageContext';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
 interface NoDataProps {
   reason: 'empty-db' | 'no-match';
@@ -49,6 +51,30 @@ export const NoData: React.FC<NoDataProps> = ({ reason }) => {
           : isSpanish
             ? 'Aún no hay información registrada en la base de datos.'
             : "There is no information recorded in the database yet."
+        }
+      </p>
+    </div>
+  );
+};
+
+interface DatabaseErrorProps {
+  reason: FetchBaseQueryError | SerializedError;
+}
+
+export const DatabaseError: React.FC<DatabaseErrorProps> = ({ reason }) => {
+  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+
+  console.warn(reason)
+  
+  return (
+    <div className={styles["db-error-container"]}>
+      <div className={styles["db-error-icon"]}>⚠️</div>
+      <h2 className={styles["db-error-title"]}>{isSpanish ? 'Error de Conexión' : 'Connection Error'}</h2>
+      <p className={styles["db-error-message"]}>
+        {
+          isSpanish
+            ? 'No pudimos conectarnos con la base de datos en este momento. Por favor, verifica tu conexión o intenta de nuevo más tarde.'
+            : 'We couldn’t connect to the database at this moment. Please check your connection or try again later.'
         }
       </p>
     </div>

@@ -59,8 +59,11 @@ export async function GET() {
     const projects = await Project.find();
     return NextResponse.json(projects, { status: 200 });
   } catch (err) {
-    console.error("Error fetching projects:", err);
-    return errorResponse("Failed to fetch projects.", 500);
+    // console.error("Error fetching projects:", err);
+    return NextResponse.json(
+        { error: "Failed to fetch projects.", msg: err },
+        { status: 500 }
+    )
   }
 }
 

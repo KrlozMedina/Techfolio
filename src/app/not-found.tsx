@@ -12,7 +12,13 @@ const NotFound: React.FC = () => {
 
   return (
     <section className='not-found'>
-      <Image className='not-found__image' src="https://i.imgur.com/GMDwQGM.png" alt="Bot not found" />
+      <Image
+        className='not-found__image'
+        src="https://i.imgur.com/GMDwQGM.png"
+        width={300}
+        height={200}
+        alt="Bot not found"
+      />
 
       <div className='not-found__description'>
         <h1 className='not-found__title'>{"<404/>"}</h1>

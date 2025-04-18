@@ -7,6 +7,7 @@ import { Language } from '@/components/molecules/Language';
 import { Menu, MenuPhone, MenuAside } from '@/components/organisms/Menu/Menu';
 import LanguageContext, { LanguageContextType } from '@/redux/context/LanguageContext';
 import styles from './page.module.css';
+import Head from 'next/head';
 
 const HomePage: React.FC = () => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
@@ -22,36 +23,41 @@ const HomePage: React.FC = () => {
   }
   
     return (
-    <section className={styles['home__container']}>
-      <header>
-        <MenuPhone isAdmin={false} />
-        <Language />
-      </header>
+    <>
+      <Head>
+        <link rel="canonical" href={'https://krlozmedina.dev'} />
+      </Head>
+      <section className={styles['home__container']}>
+        <header>
+          <MenuPhone isAdmin={false} />
+          <Language />
+        </header>
 
-      <main className={styles['home__main']}>
-        <section className={styles['home__main-info']}>
-          <Image
-            src='https://imgur.com/LGfotuO.png' 
-            alt="Logo de Krloz Medina"
-            width={300}
-            height={200}
-            className={styles['home__main-img']}
-          />
-          <section>
-            <p>{text.greeting}</p>
-            <p>{text.intro1}</p>
-            <p>{text.intro2}</p>
+        <main className={styles['home__main']}>
+          <section className={styles['home__main-info']}>
+            <Image
+              src='https://imgur.com/LGfotuO.png' 
+              alt="Logo de Krloz Medina"
+              width={300}
+              height={200}
+              className={styles['home__main-img']}
+            />
+            <section>
+              <p>{text.greeting}</p>
+              <p>{text.intro1}</p>
+              <p>{text.intro2}</p>
+            </section>
+            <Social />
           </section>
-          <Social />
-        </section>
 
-        <Menu />
-      </main>
+          <Menu />
+        </main>
 
-      <aside className={styles['home__aside']}>
-        <MenuAside />
-      </aside>
-    </section>
+        <aside className={styles['home__aside']}>
+          <MenuAside />
+        </aside>
+      </section>
+    </>
   );
 };
 
