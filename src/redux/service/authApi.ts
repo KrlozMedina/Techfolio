@@ -8,18 +8,18 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     login: builder.mutation<{ token: string },{ username: string; password: string }>({
       query: (credentials) => ({
-        url: "/login",
+        url: "/",
         method: "POST",
         body: credentials,
       }),
     }),
     verifyProfile: builder.query({
-      query: () => "/login",
+      query: () => "/",
     }),
     logout: builder.mutation({
       query: () => ({
-        url: "/logout",
-        method: "POST",
+        url: "/",
+        method: "DELETE",
         body: "",
       }),
     }),

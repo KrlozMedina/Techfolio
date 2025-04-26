@@ -4,11 +4,14 @@ import style from './Logo.module.css';
 import Link from 'next/link';
 
 interface LogoProps {
-  label?: string; // Texto opcional para el logo
-  isHeader?: boolean; // Indica si es el logo del encabezado
+  label?: string;
+  isHeader?: boolean;
 }
 
-const Logo: React.FC<LogoProps> = ({ label = "Krloz Medina </>", isHeader = false }) => {
+const Logo: React.FC<LogoProps> = ({
+  label = "Krloz Medina </>",
+  isHeader = false,
+}) => {
   return isHeader ? (
     <Link href="/" className={style["logo__link"]}>
       <Image

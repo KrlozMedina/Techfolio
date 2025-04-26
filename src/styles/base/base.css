@@ -1,0 +1,200 @@
+/* ========================
+  🔧 Estilos Base y Reset
+   ======================== */
+
+/* Reset básico y box model */
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
+body {
+  width: 100%;
+  font-family: var(--font-family-text);
+  color: var(--color-text);
+  /* background: linear-gradient(135deg, #2c3333, #395b64); */
+  /* background-size: 400%; */
+  /* animation: bgAnimation 15s infinite; */
+}
+
+/* Animación de fondo */
+/* @keyframes bgAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+} */
+
+/* ========================
+  🎛 Elementos Generales
+   ======================== */
+
+/* Botones */
+button {
+  width: max-content;
+  height: fit-content;
+  padding: var(--space-sm) var(--space-lg);
+  margin: var(--space-md) auto;
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  background-color: var(--color-button-bg);
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--color-button-hover);
+}
+
+button:disabled {
+  background-color: var(--color-bg-disable);
+  cursor: not-allowed;
+}
+
+/* Enlaces */
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+a:hover {
+  color: var(--color-button-hover);
+}
+
+/* Iconos */
+.icon {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text);
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+.text-icon {
+  font-size: var(--font-size-xl);
+  color: var(--color-text);
+  padding: var(--space-sm);
+  border-radius: var(--border-radius);
+  font-weight: var(--font-weight-bold);
+  width: max-content;
+}
+
+/* Inputs y selects */
+select,
+input,
+textarea {
+  width: 25rem;
+  padding: var(--space-xs);
+  margin: var(--space-xs);
+  font-size: var(--font-size-sm);
+  background-color: var(--color-background-container);
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  resize: none;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 2px var(--color-border-shadow);
+}
+
+select:disabled,
+input:disabled,
+textarea:disabled {
+  background-color: var(--color-bg-disable);
+  cursor: not-allowed;
+}
+
+/* ========================
+  🧱 Layout y Contenedores
+   ======================== */
+
+.container {
+  width: var(--width-container);
+  min-width: 32rem;
+  max-width: var(--max-width-container);
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.background__image {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100vh;
+  opacity: 0.75;
+  background: url("https://i.imgur.com/mJqosp9.jpg") bottom / cover no-repeat;
+  transform: rotate(180deg);
+}
+
+fieldset{
+  width: 100%;
+  padding: var(--space-sm) var(--space-xl);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* min-width: 30rem; */
+}
+
+/* ========================
+  📱 Responsividad
+   ======================== */
+
+@media (max-width: 768px) {
+  .logo-imagen {
+    width: 60%;
+  }
+}
+
+@media (max-width: 425px) {
+  .icon {
+    font-size: var(--font-size-xl);
+  }
+
+  button {
+    font-size: var(--font-size-lg);
+    padding: var(--space-xs) var(--space-md);
+  }
+
+  .text-icon {
+    font-size: var(--font-size-xl);
+  }
+
+  fieldset{
+    padding: var(--space-xxs) var(--space-md);
+  }
+}
+
+/* ========================
+  🧩 Utilidades
+   ======================== */
+
+.none {
+  display: none;
+}

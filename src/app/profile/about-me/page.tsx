@@ -1,22 +1,32 @@
 'use client'
 
 import React, { useContext } from 'react'
-import LanguageContext, { LanguageContextType } from '@/redux/context/LanguageContext'
+import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
 import Page from '@/components/templates/MainLayout/MainLayout'
 import '@/styles/pages/AboutMe.css'
 import { MdCastForEducation, MdOutlineWorkOutline } from 'react-icons/md';
 import { GiSkills, GiThink, GiStairsGoal } from 'react-icons/gi'
 import { MdTravelExplore, MdOutlineSocialDistance } from "react-icons/md"
-import Social from '@/components/organisms/Social/Social';
+import Social from '@/components/molecules/SocialLinks/SocialLinks';
 import Image from 'next/image'
+import StatusNotice from '@/components/organisms/Notice/Notice'
 
 const AboutMe: React.FC = () => {
   // document.title = 'About me'
 
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
+  const links = [
+    { href: '/profile/about-me', title: isSpanish ? 'Sobre mí' : 'About me', isActive:true },
+    { href: '/profile/education', title: isSpanish ? 'Educación' : 'Education', isActive:false },
+    { href: '/profile/skills', title: isSpanish ? 'Habilidades' : 'Skills', isActive:false },
+    { href: '/profile/certifications', title: isSpanish ? 'Certificaciones' : 'Certifications', isActive:false },
+    { href: '/profile/experience', title: isSpanish ? 'Experiencia laboral' : 'Work experience', isActive:false },
+    { href: '/profile/achievements', title: isSpanish ? 'Logros' : 'Achievements', isActive:false },
+  ]
+
   return (
-    <Page isAdmin={false}>
+    <Page isAdmin={false} links={links}>
       <p className='phrase'>
         {
           isSpanish
@@ -26,6 +36,8 @@ const AboutMe: React.FC = () => {
       </p>
 
       <p className='author'>Tao Te Ching</p>
+
+      <StatusNotice type='incomplete' language={isSpanish ? 'es' : 'en'} />
 
       <Image 
         src="https://i.imgur.com/cy2PG85.jpg" 

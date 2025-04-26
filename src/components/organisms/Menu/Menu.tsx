@@ -1,113 +1,178 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import LanguageContext from '@/redux/context/LanguageContext';
 import { AiOutlineClose } from 'react-icons/ai';
 import { SiPolymerproject } from 'react-icons/si';
 import { BiMessageDots } from 'react-icons/bi';
 import { TfiMenuAlt } from 'react-icons/tfi';
 import { ImBlog, ImProfile } from 'react-icons/im';
-import { LanguagePhone } from '@/components/molecules/Language';
-import styles from './Menu.module.css'
+import { LanguageToggleButtonMobile } from '@/components/molecules/LanguageSelector/LanguageSelector';
+import styles from './Menu.module.css';
 import Logout from '@/components/atom/Logout/Logout';
-
-interface LanguageContextType {
-  isSpanish: boolean;
-}
+import ThemeToggle from '@/components/molecules/ThemeToggle/ThemeToggle';
 
 interface Link {
   href: string;
   title: string;
 }
 
-interface MenuPhoneProps {
-  links?: Link[];
-  isAdmin: boolean;
+interface MenuProps {
+  language: 'es' | 'en';
 }
 
+interface MenuPhoneProps {
+  links?: Link[]; // Custom links (e.g., admin panel)
+  isAdmin: boolean; // Shows logout button if user is an admin
+  language: 'es' | 'en';
+}
+
+interface MenuLinksProps {
+  isPhone?: boolean; // Defines if the menu is in mobile version
+  links?: Link[]; // Additional links to render alongside main ones
+  language: 'es' | 'en';
+}
+
+interface MenuAsideProps {
+  language: 'es' | 'en';
+}
+
+// Base navigation items with icons and multilingual labels
 const navItems = [
-  { href: '/projects', labelEs: 'Proyectos', labelEn: 'Projects', icon: SiPolymerproject, key: 'projects' },
-  { href: '/profile', labelEs: 'Perfil', labelEn: 'Profile', icon: ImProfile, key: 'about' },
-  { href: '/blog', labelEs: 'Blog', labelEn: 'Blog', icon: ImBlog, key: 'blog' },
-  { href: '/contact', labelEs: 'Contactarme', labelEn: 'Contact me', icon: BiMessageDots, key: 'contact' },
+  {
+    href: '/projects',
+    label: {
+      es: 'Proyectos',
+      en: 'Projects'
+    },
+    icon: SiPolymerproject,
+    key: 'projects'
+  },
+  {
+    href: '/profile',
+    label: {
+      es: 'Perfil',
+      en: 'Profile'
+    },
+    icon: ImProfile,
+    key: 'about'
+  },
+  {
+    href: '/blog',
+    label: {
+      es: 'Blog',
+      en: 'Blog'
+    },
+    icon: ImBlog,
+    key: 'blog'
+  },
+  {
+    href: '/contact',
+    label: {
+      es: 'Contactarme',
+      en: 'Contact me'
+    },
+    icon: BiMessageDots,
+    key: 'contact'
+  },
 ];
 
-// Función para descargar el CV
-// const downloadCV = () => {
-//   fetch('CV.pdf')
-//     .then(res => res.blob())
-//     .then(blob => {
-//       const url = window.URL.createObjectURL(blob);
-//       const a = document.createElement('a');
-//       a.href = url;
-//       a.download = 'Carlos Alidio Medina Lopez.pdf';
-//       a.click();
-//     });
-// };
-
-// Subcomponente para los enlaces del menú
-const MenuLinks: React.FC<{ isSpanish: boolean; isPhone?: boolean; links?: Link[] }> = ({ isSpanish, isPhone = false, links }) => {
+//
+// COMPONENT: MenuLinks
+// Renders navigation links with icons and multilingual labels.
+// Supports both standard and mobile views.
+//
+const MenuLinks: React.FC<MenuLinksProps> = ({
+  isPhone = false,
+  links,
+  language = 'es'
+}) => {
   const containerClass = isPhone ? styles['menu__container--phone'] : styles['menu__container'];
 
   return (
     <div className={containerClass}>
-      {navItems.map(({ href, labelEs, labelEn, icon: Icon, key }) => (
+      {/* Main navigation links */}
+      {navItems.map(({ href, label, icon: Icon, key }) => (
         <Link href={href} key={key}>
           <Icon className="icon" />
-          {isSpanish ? labelEs : labelEn}
+          {label[language]}
         </Link>
       ))}
+
+      {/* Custom/Extra links (e.g., admin) */}
       <div className={styles['menu__container--links']}>
-        {
-          links?.map((link, index) => (
-            <a key={index} href={link.href}>{link.title}</a>
-          ))
-        }
+        {links?.map((link, index) => (
+          <a key={index} href={link.href}>{link.title}</a>
+        ))}
       </div>
     </div>
   );
 };
 
-const Menu: React.FC = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-  return <MenuLinks isSpanish={isSpanish} />;
+//
+// COMPONENT: Menu
+// Basic version of the menu used in standard layouts.
+//
+const Menu: React.FC<MenuProps> = ({ language }) => {
+  return <MenuLinks language={language} />;
 };
 
-const MenuPhone: React.FC<MenuPhoneProps> = ({ links, isAdmin }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+//
+// COMPONENT: MenuPhone
+// Mobile-friendly collapsible menu.
+// Includes toggle button, multilingual support, and logout (if admin).
+//
+const MenuPhone: React.FC<MenuPhoneProps> = ({ links, isAdmin, language='es' }) => {
+  const [menuOpen, setMenuOpen] = useState(false); // Menu open/close state
 
   return (
     <>
+      {/* Open menu button */}
       {!menuOpen && (
         <TfiMenuAlt className={styles['icon-menu']} onClick={() => setMenuOpen(true)} />
       )}
+
+      {/* Mobile menu container */}
       {menuOpen && (
         <section className={styles['menu-phone__container']}>
+          {/* Close menu button */}
           <AiOutlineClose className={styles['icon-menu']} onClick={() => setMenuOpen(false)} />
-          <MenuLinks isSpanish={isSpanish} isPhone links={links} />
-          <LanguagePhone />
-          {isAdmin && <Logout />}
+
+          {/* Navigation links */}
+          <MenuLinks isPhone links={links} language={language} />
+
+          {/* Language selector (mobile version) */}
+          <LanguageToggleButtonMobile />
+
+          {/* Admin logout button */}
+          {isAdmin && <Logout language={language}/>}
+
+          {/* Theme toggle switch */}
+          <ThemeToggle language={language} />
         </section>
       )}
     </>
   );
 };
 
-const MenuAside: React.FC = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-  const [hover, setHover] = useState<string | null>(null);
+//
+// COMPONENT: MenuAside
+// Sidebar navigation menu for desktop views.
+// Shows text label on hover instead of icon.
+//
+const MenuAside: React.FC<MenuAsideProps> = ({ language }) => {
+  const [hover, setHover] = useState<string | null>(null); // Hover tracking
 
   return (
     <div className={styles['menu-aside__container']}>
-      {navItems.map(({ href, labelEs, labelEn, icon: Icon, key }) => (
+      {navItems.map(({ href, label, icon: Icon, key }) => (
         <Link
           href={href}
           key={key}
           onMouseOver={() => setHover(key)}
           onMouseLeave={() => setHover(null)}
         >
+          {/* Display label on hover, icon otherwise */}
           {hover === key ? (
-            <p className='text-icon'>{isSpanish ? labelEs : labelEn}</p>
+            <p className='text-icon'>{label[language]}</p>
           ) : (
             <Icon className="icon" />
           )}
@@ -117,4 +182,5 @@ const MenuAside: React.FC = () => {
   );
 };
 
+// Export all three menu variants
 export { Menu, MenuPhone, MenuAside };

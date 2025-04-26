@@ -1,0 +1,5 @@
+[STYLE] create new variables and standardize styles
+
+Created new color variables for muted text and icons.
+Updated existing CSS to follow BEM conventions and use the new variables.
+No functional changes were made, only improvements in styling consistency.

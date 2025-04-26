@@ -1,17 +1,26 @@
-import React, { useContext } from "react";
-import LanguageContext, { LanguageContextType } from "@/redux/context/LanguageContext";
+import React from "react";
 import { useLogoutMutation } from "@/redux/service/authApi";
 import { useRouter } from "next/navigation";
 
-const Logout = () => {
-  const { isSpanish} = useContext(LanguageContext) as LanguageContextType;
+interface LogoutProps {
+  language: 'es' | 'en'
+}
+
+const text = {
+  es: 'Cerrar sesión',
+  en: 'Logout'
+}
+
+const Logout: React.FC<LogoutProps> = ({
+  language
+}) => {
   const [logout] = useLogoutMutation();
   const router = useRouter();
 
   const handlerLogout = async () => {
       const { data: logoutSuccess, error } = await logout(null);
       if (logoutSuccess) {
-        router.push('/auth/login')
+        router.push('/auth')
       } else {
         console.warn(error);
       }
@@ -19,7 +28,7 @@ const Logout = () => {
 
   return (
     <button onClick={handlerLogout}>
-      {isSpanish ? "Cerrar sesión" : "Logout"}
+      {text[language]}
     </button>
   );
 };

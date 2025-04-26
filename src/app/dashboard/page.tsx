@@ -6,20 +6,24 @@ import { useVerifyProfileQuery } from "@/redux/service/authApi";
 import ProjectsSection from "./sections/ProjectsSection";
 import TechnologiesSection from "./sections/TechnologiesSection";
 import { useRouter } from "next/navigation";
-import LanguageContext, { LanguageContextType } from "@/redux/context/LanguageContext";
+import LanguageContext, { LanguageContextType } from "@/context/LanguageContext";
 import style from "./page.module.css";
 
 const DashboardPage: React.FC = () => {
-  const { data: verify } = useVerifyProfileQuery(null);
+  const { data: verify, isLoading, error } = useVerifyProfileQuery(null);
   // const searchParams = useSearchParams();
   const router = useRouter();
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
+  console.log(verify);
+  console.warn(error);
+
   useEffect(() => {
-    if (verify === false) {
-      router.push("/auth/login");
+    // console.log(verify, error)
+    if (verify?.authenticated === false || error) {
+      router.push("/auth");
     }
-  }, [verify]);
+  }, [isLoading===false]);
 
   const [collection, setCollection] = useState<string>("projects");
 

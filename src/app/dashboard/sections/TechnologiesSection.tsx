@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import Modal from "@/components/organisms/Modal/Modal";
-import { TextInput } from "@/components/atom/Form/Form";
+import { TextInput } from "@/components/atom/Form/FormElements";
 import { CATEGORIES } from "@/types/constants";
 import { useCreateTechnologyMutation, useDeleteTechnologyMutation, useGetTechnologiesQuery } from "@/redux/service/technologiesApi";
 import { ErrorResponse, ITechnology } from "@/types/common";
-import LanguageContext, { LanguageContextType } from "@/redux/context/LanguageContext";
+import LanguageContext, { LanguageContextType } from "@/context/LanguageContext";
 import style from '../page.module.css';
 import Image from "next/image";
 

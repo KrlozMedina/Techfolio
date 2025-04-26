@@ -1,26 +1,54 @@
-import React from 'react';
+'use client'
+
+import React, { useContext } from 'react';
+import MainLayout from '@/components/templates/MainLayout/MainLayout';
+import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
+import StatusNotice from '@/components/organisms/Notice/Notice';
 
 const ServicesPage = () => {
-    const services = [
-        { id: 1, name: 'Desarrollo Web', description: 'Creación de sitios web modernos y responsivos.' },
-        { id: 2, name: 'Aplicaciones Móviles', description: 'Desarrollo de aplicaciones móviles para iOS y Android.' },
-        { id: 3, name: 'Consultoría Técnica', description: 'Asesoramiento en tecnología y mejores prácticas.' },
-        { id: 4, name: 'Diseño UI/UX', description: 'Diseño de interfaces atractivas y fáciles de usar.' },
-    ];
+  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
-    return (
-        <div style={{ padding: '20px' }}>
-            <h1>Servicios Ofrecidos</h1>
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-                {services.map((service) => (
-                    <li key={service.id} style={{ marginBottom: '20px', border: '1px solid #ccc', padding: '15px', borderRadius: '8px' }}>
-                        <h2>{service.name}</h2>
-                        <p>{service.description}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+  const links = [
+    {
+      title: isSpanish ? "Servicios" : "Services",
+      href: "/projects/services",
+      isActive: true
+    },
+    {
+      title: isSpanish ? "Testimonios" : "Testimonials",
+      href: "/projects/testimonials",
+      isActive: false
+    },
+    {
+      title: isSpanish ? "Casos de éxito" : "Success Stories",
+      href: "/projects/case-studies",
+      isActive: false
+    },
+  ];
+
+  const services = [
+    { id: 1, name: 'Desarrollo Web', description: 'Creación de sitios web modernos y responsivos.' },
+    { id: 2, name: 'Aplicaciones Móviles', description: 'Desarrollo de aplicaciones móviles para iOS y Android.' },
+    { id: 3, name: 'Consultoría Técnica', description: 'Asesoramiento en tecnología y mejores prácticas.' },
+    { id: 4, name: 'Diseño UI/UX', description: 'Diseño de interfaces atractivas y fáciles de usar.' },
+  ];
+
+  return (
+    <MainLayout isAdmin={false} links={links}>
+      <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} />
+      <div style={{ padding: '20px' }}>
+        <h1>Servicios Ofrecidos</h1>
+        <ul style={{ listStyle: 'none', padding: 0 }}>
+          {services.map((service) => (
+            <li key={service.id} style={{ marginBottom: '20px', border: '1px solid #ccc', padding: '15px', borderRadius: '8px' }}>
+              <h2>{service.name}</h2>
+              <p>{service.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </MainLayout>
+  );
 };
 
 export default ServicesPage;

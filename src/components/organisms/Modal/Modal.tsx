@@ -33,7 +33,7 @@ const Modal: FC<ModalProps> = ({ onClose, children, title }) => {
   // Validación para evitar errores si el elemento raíz no existe
   const rootElement = document.getElementById("app");
   if (!rootElement) {
-    console.error("El elemento con id 'app' no se encuentra en el DOM.");
+    console.error("The element with the ID 'app' was not found in the DOM.");
     return null;
   }
 

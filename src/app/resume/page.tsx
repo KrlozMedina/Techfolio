@@ -5,7 +5,7 @@ import Page from '@/components/templates/MainLayout/MainLayout';
 // import { Viewer, Worker } from '@react-pdf-viewer/core';
 // import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@/styles/pages/CV.css';
-import LanguageContext from '@/redux/context/LanguageContext';
+import LanguageContext from '@/context/LanguageContext';
 import { FaFileDownload } from 'react-icons/fa';
 
 // Define the context type if not already defined
@@ -32,6 +32,19 @@ const CV = () => {
       })
       .catch((error) => console.error('Error downloading the file', error));
   };
+
+  // Función para descargar el CV
+// const downloadCV = () => {
+//   fetch('CV.pdf')
+//     .then(res => res.blob())
+//     .then(blob => {
+//       const url = window.URL.createObjectURL(blob);
+//       const a = document.createElement('a');
+//       a.href = url;
+//       a.download = 'Carlos Alidio Medina Lopez.pdf';
+//       a.click();
+//     });
+// };
 
   return (
     <Page isAdmin={false}>

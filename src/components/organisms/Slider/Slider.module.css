@@ -10,8 +10,8 @@
   overflow-x: scroll;
   scroll-snap-type: x proximity;
   overscroll-behavior-x: contain;
-  gap: 1.2rem;
-  padding: 0 2rem;
+  gap: var(--space-md);
+  padding: 0 var(--space-xl);
   box-sizing: border-box;
 }
 .slider__cards::-webkit-scrollbar {
@@ -23,13 +23,13 @@
 }
 
 .slider__cards::-webkit-scrollbar-thumb {
-  background-color: gray; /* Rosado vibrante */
-  border-radius: 1rem;
-  border: 0.2rem solid var(--color-background-container); /* Para que tenga algo de padding */
+  background-color: gray;
+  border-radius: var(--border-radius-lg);
+  border: 0.2rem solid var(--color-background-container);
 }
 
 .slider__cards::-webkit-scrollbar-thumb:hover {
-  background-color: white; /* Rosado más oscuro al pasar el mouse */
+  background-color: var(--color-scrollbar-hover);
 }
 
 @media (max-width: 768px) {

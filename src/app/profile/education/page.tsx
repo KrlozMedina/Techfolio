@@ -1,11 +1,12 @@
 'use client'
 
 import React, { useContext } from 'react'
-import LanguageContext from '@/redux/context/LanguageContext'
+import LanguageContext from '@/context/LanguageContext'
 import Pages from '@/components/templates/MainLayout/MainLayout'
-import Banner from '@/components/molecules/Banner'
+import { Banner } from '@/components/molecules/CardViews/CardViews'
 import '@/styles/pages/Education.css'
 import Image from 'next/image'
+import StatusNotice from '@/components/organisms/Notice/Notice'
 
 // Define the context type if not already defined
 interface LanguageContextType {
@@ -117,6 +118,15 @@ const codeData: CodeItem[] = [
 const Education: React.FC = () => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
+  const links = [
+    { href: '/profile/about-me', title: isSpanish ? 'Sobre mí' : 'About me', isActive:false },
+    { href: '/profile/education', title: isSpanish ? 'Educación' : 'Education', isActive:true },
+    { href: '/profile/skills', title: isSpanish ? 'Habilidades' : 'Skills', isActive:false },
+    { href: '/profile/certifications', title: isSpanish ? 'Certificaciones' : 'Certifications', isActive:false },
+    { href: '/profile/experience', title: isSpanish ? 'Experiencia laboral' : 'Work experience', isActive:false },
+    { href: '/profile/achievements', title: isSpanish ? 'Logros' : 'Achievements', isActive:false },
+  ]
+
   const diplomas = [
     'https://i.imgur.com/hPTmVAj.jpg',
     'https://i.imgur.com/nZXn3yW.jpg',
@@ -124,7 +134,7 @@ const Education: React.FC = () => {
   ]
 
   return (
-    <Pages isAdmin={false}>
+    <Pages isAdmin={false} links={links}>
       <p className='phrase'>
         {
           isSpanish
@@ -132,6 +142,9 @@ const Education: React.FC = () => {
             : "Education is our passport to the future, because tomorrow belongs to the people who prepare for today."
         }
       </p>
+
+      <StatusNotice type='dummy' language={isSpanish ? 'es' : 'en'} />
+      <StatusNotice type='incomplete' language={isSpanish ? 'es' : 'en'} />
 
       <p className='author'>Malcolm X</p>
 
@@ -142,7 +155,8 @@ const Education: React.FC = () => {
           <div className="education-cards-container">
             {
               educationData.map(education => (
-                <Banner key={education.id} {...education} />
+                // <Banner key={education.id} {...education} />
+                <Banner key={education.id} data={education} />
               ))
             }
           </div>

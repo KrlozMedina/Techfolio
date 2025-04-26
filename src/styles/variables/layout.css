@@ -1,0 +1,16 @@
+/* ========================
+  🏗️ Variables de Diseño (Ancho de Contenedores, Bordes, etc.)
+   ======================== */
+
+  :root {
+    /* Ancho de contenedores */
+    --width-container: 90%;
+    --max-width-container: 110rem;
+  
+    /* Bordes */
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 1rem;
+    --border-radius-full: 3.2rem;
+  }
+  

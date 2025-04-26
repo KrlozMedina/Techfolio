@@ -1,7 +1,8 @@
 'use client'
 
+import StatusNotice from '@/components/organisms/Notice/Notice';
 import MainLayout from '@/components/templates/MainLayout/MainLayout';
-import LanguageContext, { LanguageContextType } from '@/redux/context/LanguageContext';
+import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
 import React, { useContext } from 'react'
 
 const ProfilePage = () => {
@@ -17,6 +18,8 @@ const ProfilePage = () => {
 
   return (
     <MainLayout links={links} isAdmin={false}>
+      <StatusNotice type="construction" language={isSpanish ? 'es' : 'en'} />
+      
       <header>
           <h1>Mi Perfil Profesional y Personal</h1>
       </header>

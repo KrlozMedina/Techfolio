@@ -1,4 +1,4 @@
-import { TextInput } from "@/components/atom/Form/Form";
+import { TextInput } from "@/components/atom/Form/FormElements";
 import Modal from "@/components/organisms/Modal/Modal";
 import { IProject } from "@/models/Project.model";
 import {
@@ -11,7 +11,7 @@ import { ErrorResponse, ITechnology } from "@/types/common";
 import React, { useContext, useEffect, useState } from "react";
 import LanguageContext, {
   LanguageContextType,
-} from "@/redux/context/LanguageContext";
+} from "@/context/LanguageContext";
 import { PROJECT_TYPE } from "@/types/constants";
 import style from "../page.module.css";
 import Image from "next/image";

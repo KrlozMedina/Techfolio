@@ -8,8 +8,9 @@ import styles from "./page.module.css";
 import MainLayout from "@/components/templates/MainLayout/MainLayout";
 import LanguageContext, {
   LanguageContextType,
-} from "@/redux/context/LanguageContext";
+} from "@/context/LanguageContext";
 import { Intro, Phrase } from "@/components/atom/TextBlocks/TextsBlocks";
+import StatusNotice from "@/components/organisms/Notice/Notice";
 
 const CaseStudiesPage: React.FC = () => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
@@ -55,8 +56,10 @@ const CaseStudiesPage: React.FC = () => {
         author="Robert Collier"
       />
 
+
       <section>
         <Intro es={texts.intro.es} en={texts.intro.en} />
+        <StatusNotice type="dummy" language={isSpanish ? 'es' : 'en'} />
 
         <section className={styles["page"]}>
           <div className={styles["caseList"]}>

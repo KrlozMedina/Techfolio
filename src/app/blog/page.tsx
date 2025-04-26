@@ -2,93 +2,77 @@
 
 import MainLayout from '@/components/templates/MainLayout/MainLayout';
 import React, { useContext } from 'react';
-import LanguageContext, { LanguageContextType } from '@/redux/context/LanguageContext';
+import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
 import style from './page.module.css'
 import Image from 'next/image';
+import articles from '@/mock/articles.json';
+import tagsMock from '@/mock/tags.json';
+import { Intro, Phrase } from '@/components/atom/TextBlocks/TextsBlocks';
+import StatusNotice from '@/components/organisms/Notice/Notice';
 
 const BlogPage = () => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-  const articles = [
-    {
-      id: 1,
-      title: 'Introducción a la Automatización',
-      description: 'Descubre cómo la automatización puede mejorar tus procesos y ahorrar tiempo.',
-      link: '/blog/introduccion-automatizacion',
-      image: 'https://www.firgelliauto.com/cdn/shop/articles/Untitled.jpg?v=1675204202',
-      date: '2023-10-01',
-      tags: [
-        {
-          name: 'automatización',
-          color: 'blue',
-          icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL4AXfr6TWe8kJ-9ymaXq72ent3ulz3vQO5g&s',
-        },
-        {
-          name: 'desarrollo',
-          color: 'green',
-          icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL4AXfr6TWe8kJ-9ymaXq72ent3ulz3vQO5g&s',
-        }
-      ],
+  
+  const texts = {
+    intro: {
+      es: {
+        title: 'Blog de Tecnología, Desarrollo y Automatización',
+        intro: 'Publicaciones sobre programación, desarrollo web y experiencias en proyectos reales.'
+      },
+      en: {
+        title: 'Technology, Development, and Automation Blog',
+        intro: 'Posts about programming, web development, and real-world project experiences.'
+      }
     },
-    {
-      id: 2,
-      title: 'Mejores Prácticas en Desarrollo Web',
-      description: 'Aprende las mejores prácticas para construir aplicaciones web modernas.',
-      link: '/blog/mejores-practicas-desarrollo-web',
-      image: 'https://www.firgelliauto.com/cdn/shop/articles/Untitled.jpg?v=1675204202',
-      date: '2023-10-01',
-      tags: [
-        {
-          name: 'automatización',
-          color: 'blue',
-          icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL4AXfr6TWe8kJ-9ymaXq72ent3ulz3vQO5g&s',
-        },
-        {
-          name: 'desarrollo',
-          color: 'green',
-          icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL4AXfr6TWe8kJ-9ymaXq72ent3ulz3vQO5g&s',
-        }
-      ],
+    phrase: {
+      es: 'Escribimos para saborear la vida dos veces, en el momento y en la retrospección.',
+      en: 'We write to taste life twice, in the moment and in retrospect.'
     },
-    {
-      id: 3,
-      title: 'Tendencias Tecnológicas 2023',
-      description: 'Explora las tendencias tecnológicas más importantes de este año.',
-      link: '/blog/tendencias-tecnologicas-2023',
-      image: 'https://www.firgelliauto.com/cdn/shop/articles/Untitled.jpg?v=1675204202',
-      date: '2023-10-01',
-      tags: [
-        {
-          name: 'automatización',
-          color: 'blue',
-          icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL4AXfr6TWe8kJ-9ymaXq72ent3ulz3vQO5g&s',
-        },
-        {
-          name: 'desarrollo',
-          color: 'green',
-          icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL4AXfr6TWe8kJ-9ymaXq72ent3ulz3vQO5g&s',
-        }
-      ],
-    },
-  ];
+    author: 'Anaïs Nin'
+  }
+  
 
   return (
     <MainLayout isAdmin={false}>
-      <section>
-        <p className='phrase'>
-          {
-            isSpanish
-              ? "Escribimos para saborear la vida dos veces, en el momento y en la retrospección."
-              : "We write to taste life twice, in the moment and in retrospect."
-          }
-        </p>
+      <Phrase
+        // phraseEnglish="We write to taste life twice, in the moment and in retrospect."
+        // phraseSpanish="Escribimos para saborear la vida dos veces, en el momento y en la retrospección."
+        phrase={isSpanish ? texts.phrase.es : texts.phrase.en}
+        author={texts.author}
+      />
 
-        <p className='author'>Anaïs Nin</p>
-      </section>
-      
-      <section>
-        <h1 className="title">Blog de Tecnología, Desarrollo y Automatización</h1>
-        <h2 className='subtitle'>Publicaciones sobre programación, desarrollo web y experiencias en proyectos reales.</h2>
-      </section>
+      <Intro
+        title={isSpanish ? texts.intro.es.title : texts.intro.en.title}
+        intro={isSpanish ? texts.intro.es.intro : texts.intro.en.intro}
+      />
+      <StatusNotice
+        type='dummy'
+        language={isSpanish ? 'en' : 'en'}
+      />
+      <StatusNotice
+        type='construction'
+        language={isSpanish ? 'en' : 'en'}
+      />
+      <StatusNotice
+        type='incomplete'
+        language={isSpanish ? 'en' : 'en'}
+
+      />
+      <StatusNotice
+        type='maintenance'
+        language={isSpanish ? 'en' : 'en'}
+
+      />
+      <StatusNotice
+        type='comingSoon'
+        language={isSpanish ? 'en' : 'en'}
+
+      />
+      <StatusNotice
+        type='beta'
+        language={isSpanish ? 'en' : 'en'}
+
+      />
 
       <section className={style["article__container"]}>
         {articles.map((article) => (
@@ -97,20 +81,20 @@ const BlogPage = () => {
               src={article.image}
               width={200}
               height={300}
-              alt={article.title}
+              alt={article.title.es}
               className={style["article-card__image"]} 
             />
-            <h2 className={style["article-card__title"]}>{article.title}</h2>
-            <p className={style["article-card__description"]}>{article.description}</p>
+            <h2 className={style["article-card__title"]}>{article.title.es}</h2>
+            <p className={style["article-card__description"]}>{article.description.es}</p>
             <div className={style["article-card__tags"]}>
               {
                 article.tags.map((tag, index) => (
-                  <Image
+                  <img
                     key={index}
-                    src={tag.icon}
+                    src={tagsMock.filter(item => item.id===tag)[0].icon}
                     width={200}
                     height={24}
-                    alt={tag.name}
+                    alt={tagsMock.filter(item => item.id===tag)[0].name.es}
                     className={style['article-card__tag']}
                   />
                 ))

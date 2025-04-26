@@ -1,19 +1,19 @@
 /* Phrase */
 .container{
   width: 100%;
-  padding: 0 1.6rem;
+  padding: 0 var(--space-lg);
 }
 
 .phrase {
   width: 50%;
-  font-size: 2rem;
-  margin: 0 1.6rem 0 auto;
+  font-size: var(--font-size-lg);
+  margin: 0 var(--space-lg) 0 auto;
 }
 
 .author {
   text-align: end;
-  font-size: 2.4rem;
-  margin: 0 1.6rem 0 auto;
+  font-size: var(--font-size-xl);
+  margin: 0 var(--space-lg) 0 auto;
 }
 
 @media (max-width: 768px) {
@@ -27,17 +27,17 @@
 .title {
   text-transform: uppercase;
   font-family: "DM Serif Display", serif;
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   font-style: normal;
   color: var(--color-text);
-  font-size: 2.8rem;
+  font-size: var(--font-size-2xl);
   padding: 0 1.5%;
-  margin: 1.2rem 0;
+  margin: var(--space-md) 0;
 }
 
 .intro{
-  font-size: 1.6rem;
+  font-size: var(--font-size-base);
   padding: 0 2.5%;
-  margin: 2rem 0;
+  margin: var(--space-xl) 0;
   text-align: justify;
 }

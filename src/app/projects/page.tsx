@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import LanguageContext, { LanguageContextType } from "@/redux/context/LanguageContext";
+import LanguageContext, { LanguageContextType } from "@/context/LanguageContext";
 import MainLayout from "@/components/templates/MainLayout/MainLayout";
 import Slider from "@/components/organisms/Slider/Slider";
 import { useGetProjectsQuery } from "@/redux/service/projectsApi";
-import { CardProject } from "@/components/molecules/Cards/Cards";
+import { ProjectCard } from "@/components/molecules/CardViews/CardViews";
 import { CATEGORIES, PROJECT_TYPE } from "@/types/constants";
 import { useGetTechnologiesQuery } from "@/redux/service/technologiesApi";
 import { IProject } from "@/models/Project.model";
@@ -13,13 +13,43 @@ import caseStudies from "@/mock/caseStudies.json";
 import style from './page.module.css'
 import Link from "next/link";
 import { Intro, Phrase } from "@/components/atom/TextBlocks/TextsBlocks";
-import { DatabaseError, Loading, NoData } from "@/components/molecules/Loading/FeedbackStates";
+import { DatabaseError, Loading, NoData } from "@/components/molecules/FeedbackStates/FeedbackStates";
 import Image from "next/image";
+import StatusNotice from "@/components/organisms/Notice/Notice";
+// import { text } from "stream/consumers";
+
+const texts = {
+  intro: {
+    es: {
+      title: 'Proyectos',
+      intro: 'Una muestra de proyectos que reflejan mi experiencia construyendo soluciones tecnológicas. Desde aplicaciones web hasta proyectos en electrónica, cada uno representa parte de mi aprendizaje, evolución y pasión por la tecnología.'
+    },
+    en: {
+      title: 'Projects',
+      intro: 'A selection of projects that reflect my experience building technological solutions. From web applications to electronics projects, each one represents my learning journey, growth, and passion for technology.'
+    }
+  },
+  successStories: {
+    es: {
+      title: 'Casos de Éxito',
+      intro: 'Descubre cómo mis soluciones han marcado la diferencia en diversos proyectos. Cada caso de éxito refleja el compromiso, la innovación y el enfoque personalizado para resolver desafíos reales y generar impacto.'
+    },
+    en: {
+      title: 'Success Stories',
+      intro: 'Discover how my solutions have made a difference in various projects. Each success story reflects commitment, innovation, and a tailored approach to solving real-world challenges and creating impact.'
+    }
+  },
+  phrase: {
+    es: 'Las recompensas y la motivación son un cambio de aceite para los motores del proyecto. Hazlo regularmente y con frecuencia.',
+    en: 'Rewards and motivation are an oil change for the engines of a project. Do it regularly and frequently.'
+  },
+  author: 'Woody Williams',
+}
 
 const Projects: React.FC = () => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
   const { data: dataTechnologies } = useGetTechnologiesQuery(null);
-  const { data: dataProjects, isLoading, isSuccess, isError, error: errorProjects } = useGetProjectsQuery(null);
+  const { data: dataProjects, isLoading, isSuccess, isError, error: errorProjects, refetch } = useGetProjectsQuery(null);
   const [newDataProjects, setNewDataProjects] = useState<IProject[] | undefined>(undefined);
 
   // console.log(errorProjects)
@@ -47,29 +77,6 @@ const Projects: React.FC = () => {
       isActive: false
     },
   ];
-
-  const texts = {
-    intro: {
-      es: {
-        title: 'Proyectos',
-        intro: 'Una muestra de proyectos que reflejan mi experiencia construyendo soluciones tecnológicas. Desde aplicaciones web hasta proyectos en electrónica, cada uno representa parte de mi aprendizaje, evolución y pasión por la tecnología.'
-      },
-      en: {
-        title: 'Projects',
-        intro: 'A selection of projects that reflect my experience building technological solutions. From web applications to electronics projects, each one represents my learning journey, growth, and passion for technology.'
-      }
-    },
-    successStories: {
-      es: {
-        title: 'Casos de Éxito',
-        intro: 'Descubre cómo mis soluciones han marcado la diferencia en diversos proyectos. Cada caso de éxito refleja el compromiso, la innovación y el enfoque personalizado para resolver desafíos reales y generar impacto.'
-      },
-      en: {
-        title: 'Success Stories',
-        intro: 'Discover how my solutions have made a difference in various projects. Each success story reflects commitment, innovation, and a tailored approach to solving real-world challenges and creating impact.'
-      }
-    }
-  }
 
   const handlerFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilters((prev) => ({
@@ -117,13 +124,15 @@ const Projects: React.FC = () => {
 
       <MainLayout isAdmin={false} links={links}>
         <Phrase
-          phraseEnglish="Rewards and motivation are an oil change for the engines of a project. Do it regularly and frequently."
-          phraseSpanish="Las recompensas y la motivación son un cambio de aceite para los motores del proyecto. Hazlo regularmente y con frecuencia."
-          author="Woody Williams"
+          // phraseEnglish="Rewards and motivation are an oil change for the engines of a project. Do it regularly and frequently."
+          // phraseSpanish="Las recompensas y la motivación son un cambio de aceite para los motores del proyecto. Hazlo regularmente y con frecuencia."
+          phrase={isSpanish ? texts.phrase.es : texts.phrase.en}
+          author={texts.author}
         />
 
         <section>
-          <Intro es={texts.intro.es} en={texts.intro.en} />
+          <Intro title={isSpanish ? texts.intro.es.title : texts.intro.en.title} intro={isSpanish ? texts.intro.es.intro : texts.intro.en.intro} />
+          <StatusNotice type="incomplete" language={isSpanish ? 'es' : 'en'} />
 
           <form className={style['projects__filter']}>
             <fieldset className={style['projects__filter-fieldset']}>
@@ -179,23 +188,32 @@ const Projects: React.FC = () => {
             </fieldset>
           </form>
 
+          {/* <button onClick={() => refetch()}>Reload</button> */}
+
           <Slider>
             {
               isLoading
-              ? <Loading />
+              ? <Loading language={isSpanish ? 'es' : 'en'} />
               : isError
-                ? <DatabaseError reason={errorProjects}/>
+                ? <DatabaseError reason={errorProjects} language={isSpanish ? 'es' : 'en'} />
                 : newDataProjects?.length === 0
-                  ? <NoData reason="no-match" />
+                  ? <NoData reason="no-match" language={isSpanish ? 'es' : 'en'} />
                   : newDataProjects?.map((element) => (
-                    <CardProject key={element._id} data={element} />
+                    <ProjectCard
+                      key={element._id}
+                      data={element}
+                      language={isSpanish ? 'es' : 'en'}
+                    />
                   ))
             }
           </Slider>
         </section>
 
         <section>
-          <Intro es={texts.successStories.es} en={texts.successStories.en} />
+          <Intro
+            title={isSpanish ? texts.successStories.es.title : texts.successStories.en.title}
+            intro={isSpanish ? texts.successStories.en.intro : texts.successStories.en.intro}
+          />
           
           <section className={style["projects__case-study"]}>
             {
