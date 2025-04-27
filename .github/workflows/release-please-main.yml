@@ -3,15 +3,22 @@ name: Release Please - Main
 on:
   push:
     branches:
-      - main
+      - main  # Este workflow se ejecutará cuando haya un push a la rama main
 
 jobs:
-  release-please:
+  release:
     runs-on: ubuntu-latest
     steps:
-      - name: Release Please
-        uses: googleapis/release-please-action@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          release-type: node
-          default-branch: main
+          node-version: '16'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run release-please for main
+        run: pnpm exec release-please release --repo-url https://github.com/tuusuario/tu-repositorio --token ${{ secrets.GITHUB_TOKEN }}
