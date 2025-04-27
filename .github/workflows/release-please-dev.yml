@@ -21,4 +21,4 @@ jobs:
         run: pnpm install
 
       - name: Run release-please for dev
-        run: pnpm exec release-please release --repo-url https://github.com/tuusuario/tu-repositorio --token ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm exec release-please release --repo-url https://github.com/KrlozMedina/Portafolio --token ${{ secrets.GITHUB_TOKEN }}
