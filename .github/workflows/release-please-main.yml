@@ -1,9 +1,11 @@
-name: Release Please Main
+name: Release Please
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types:
+      - closed  # Este evento se dispara cuando el PR se cierra (ya sea fusionado o cerrado sin fusionar)
 
 jobs:
   release:
@@ -11,16 +13,16 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22' # O la versión de node que uses en tu proyecto
+        uses: actions/checkout@v3
 
       - name: Run Release Please for Main
         uses: google-github-actions/release-please-action@v4
         with:
           release-type: node
           token: ${{ secrets.GITHUB_TOKEN }}
-          default-branch: main
+          prerelease: false
+          
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./dist/*
