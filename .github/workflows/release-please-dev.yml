@@ -11,11 +11,17 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22' # o la que uses
 
       - name: Run Release Please for Dev
         uses: google-github-actions/release-please-action@v4
         with:
           release-type: node
-          token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: true
+          default-branch: dev
+          token: ${{ secrets.GITHUB_TOKEN }}
