@@ -2,7 +2,7 @@
 
 import React, { useContext } from 'react'
 import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
-import Page from '@/components/templates/MainLayout/MainLayout'
+import MainLayout from '@/components/templates/MainLayout/MainLayout'
 import '@/styles/pages/AboutMe.css'
 import { MdCastForEducation, MdOutlineWorkOutline } from 'react-icons/md';
 import { GiSkills, GiThink, GiStairsGoal } from 'react-icons/gi'
@@ -26,7 +26,7 @@ const AboutMe: React.FC = () => {
   ]
 
   return (
-    <Page isAdmin={false} links={links}>
+    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'}>
       <p className='phrase'>
         {
           isSpanish
@@ -318,7 +318,7 @@ const AboutMe: React.FC = () => {
 
         <Social />
       </section>
-    </Page>
+    </MainLayout>
   )
 }
 

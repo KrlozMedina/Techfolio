@@ -36,7 +36,7 @@ const CertificationsPage: React.FC = () => {
   ]
 
   return (
-    <MainLayout isAdmin={false} links={links}>
+    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'}>
       <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} />
       <div style={{ padding: '20px' }}>
         <h1>Certificaciones Profesionales y Técnicas</h1>

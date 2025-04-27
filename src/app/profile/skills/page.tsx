@@ -18,7 +18,7 @@ const SkillsPage = () => {
   ]
 
   return (
-    <MainLayout isAdmin={false} links={links}>
+    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'} >
       <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} />
       <div className="skills-page">
         <h1>Mis Habilidades</h1>

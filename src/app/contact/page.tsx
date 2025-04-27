@@ -2,13 +2,14 @@
 
 import React, { useContext } from 'react'
 import LanguageContext from '@/context/LanguageContext'
-import Page from '@/components/templates/MainLayout/MainLayout'
+import MainLayout from '@/components/templates/MainLayout/MainLayout'
 import '@/styles/pages/ContactMe.css'
 import emailjs from '@emailjs/browser';
 import { ImWhatsapp } from 'react-icons/im'
 import { MdEmail, MdLocationOn } from 'react-icons/md'
 import Social from '@/components/molecules/SocialLinks/SocialLinks'
-import { MaintenanceNotice } from '@/components/organisms/Notice/Notice'
+import StatusNotice from '@/components/organisms/Notice/Notice'
+// import { MaintenanceNotice } from '@/components/organisms/Notice/Notice'
 
 // Define the context type if not already defined
 interface LanguageContextType {
@@ -38,7 +39,7 @@ const ContactMe: React.FC = () => {
   }
 
   return (
-    <Page isAdmin={false}>
+    <MainLayout isAdmin={false} language={isSpanish ? 'es' : 'en'} >
       <p className='phrase'>
         {
           isSpanish
@@ -49,7 +50,7 @@ const ContactMe: React.FC = () => {
 
       <p className='author'>Maya Angelou</p>
 
-      <MaintenanceNotice />
+      <StatusNotice type='maintenance' language={isSpanish ? 'es' : 'en'} />
 
       <form id='contact' className='contact-form' onSubmit={sendEmail}>
         <fieldset className="main-contact-container">
@@ -85,7 +86,7 @@ const ContactMe: React.FC = () => {
           </div>
         </fieldset>
       </form>
-    </Page>
+    </MainLayout>
   )
 }
 

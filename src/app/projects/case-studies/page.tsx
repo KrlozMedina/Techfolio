@@ -46,19 +46,26 @@ const CaseStudiesPage: React.FC = () => {
           "In this section, I present some of the success stories I've had the pleasure of developing. Each one reflects my approach to problem-solving, my ability to adapt to different needs, and my commitment to delivering solutions that exceed expectations. Take a look at how my projects have made a real impact!",
       },
     },
+    phrase: {
+      es: 'El éxito es la suma de pequeños esfuerzos repetidos día tras día.',
+      en: 'Success is the sum of small efforts, repeated day in and day out.',
+      author: 'Robert Collier'
+    }
   };
 
   return (
-    <MainLayout isAdmin={false} links={links}>
+    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'}>
       <Phrase
-        phraseSpanish="El éxito es la suma de pequeños esfuerzos repetidos día tras día."
-        phraseEnglish="Success is the sum of small efforts, repeated day in and day out."
-        author="Robert Collier"
+        phrase={isSpanish ? texts.phrase.es : texts.phrase.en}
+        author={texts.phrase.author}
       />
 
 
       <section>
-        <Intro es={texts.intro.es} en={texts.intro.en} />
+        <Intro
+          title={isSpanish ? texts.intro.es.title : texts.intro.en.title}
+          intro={isSpanish ? texts.intro.es.intro : texts.intro.en.intro}
+        />
         <StatusNotice type="dummy" language={isSpanish ? 'es' : 'en'} />
 
         <section className={styles["page"]}>

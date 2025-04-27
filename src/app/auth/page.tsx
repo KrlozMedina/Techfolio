@@ -111,7 +111,7 @@ const LoginPage: React.FC = () => {
   );
 
   return (
-    <MainLayout isAdmin={false}>
+    <MainLayout isAdmin={false} language={isSpanish ? 'es' : 'en'}>
       <section className={style['login__container']}>
         <form onSubmit={handleSubmit(onSubmit)} className={style['login__form']}>
           <fieldset>

@@ -33,7 +33,7 @@ const BlogPage = () => {
   
 
   return (
-    <MainLayout isAdmin={false}>
+    <MainLayout isAdmin={false} language={isSpanish ? 'es' : 'en'} >
       <Phrase
         // phraseEnglish="We write to taste life twice, in the moment and in retrospect."
         // phraseSpanish="Escribimos para saborear la vida dos veces, en el momento y en la retrospección."
@@ -89,7 +89,7 @@ const BlogPage = () => {
             <div className={style["article-card__tags"]}>
               {
                 article.tags.map((tag, index) => (
-                  <img
+                  <Image
                     key={index}
                     src={tagsMock.filter(item => item.id===tag)[0].icon}
                     width={200}

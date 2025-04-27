@@ -17,7 +17,7 @@ const ProfilePage = () => {
   ]
 
   return (
-    <MainLayout links={links} isAdmin={false}>
+    <MainLayout links={links} isAdmin={false} language={isSpanish ? 'es' : 'en'} >
       <StatusNotice type="construction" language={isSpanish ? 'es' : 'en'} />
       
       <header>

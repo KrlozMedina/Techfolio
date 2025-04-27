@@ -45,7 +45,7 @@ const TestimonialsPage = () => {
   ];
 
   return (
-    <MainLayout isAdmin={false} links={links}>
+    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'} >
       <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} />
       <div className="testimonials-page">
         <h1>Testimonials</h1>

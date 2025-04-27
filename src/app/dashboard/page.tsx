@@ -1,6 +1,6 @@
 "use client";
 
-import Page from "@/components/templates/MainLayout/MainLayout";
+import MainLayout from "@/components/templates/MainLayout/MainLayout";
 import { useContext, useEffect, useState } from "react";
 import { useVerifyProfileQuery } from "@/redux/service/authApi";
 import ProjectsSection from "./sections/ProjectsSection";
@@ -59,7 +59,7 @@ const DashboardPage: React.FC = () => {
   }
 
   return (
-    <Page controlPanel={controlPanel()} isAdmin={true}>
+    <MainLayout controlPanel={controlPanel()} isAdmin={true} language={isSpanish ? 'es' : 'en'} >
       {/* <div className={style['dashboard-container']}>
         <form className={style['dashboard-form']}>
           <label htmlFor="collection">{isSpanish ? 'Seleccionar colección' : 'Select collection'}:</label>
@@ -78,7 +78,7 @@ const DashboardPage: React.FC = () => {
 
       {collection === "projects" && (<ProjectsSection />)}
       {collection === "technologies" && (<TechnologiesSection />)}
-    </Page>
+    </MainLayout>
   );
 };
 

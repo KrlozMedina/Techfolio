@@ -2,7 +2,7 @@
 
 import React, { useContext } from 'react'
 import LanguageContext from '@/context/LanguageContext'
-import Pages from '@/components/templates/MainLayout/MainLayout'
+import MainLayout from '@/components/templates/MainLayout/MainLayout'
 import { Banner } from '@/components/molecules/CardViews/CardViews'
 import '@/styles/pages/Education.css'
 import Image from 'next/image'
@@ -134,7 +134,7 @@ const Education: React.FC = () => {
   ]
 
   return (
-    <Pages isAdmin={false} links={links}>
+    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'}>
       <p className='phrase'>
         {
           isSpanish
@@ -189,7 +189,7 @@ const Education: React.FC = () => {
           }
         </div>
       </section>
-    </Pages>
+    </MainLayout>
   )
 }
 

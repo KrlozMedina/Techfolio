@@ -49,7 +49,7 @@ const texts = {
 const Projects: React.FC = () => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
   const { data: dataTechnologies } = useGetTechnologiesQuery(null);
-  const { data: dataProjects, isLoading, isSuccess, isError, error: errorProjects, refetch } = useGetProjectsQuery(null);
+  const { data: dataProjects, isLoading, isSuccess, isError, error: errorProjects } = useGetProjectsQuery(null);
   const [newDataProjects, setNewDataProjects] = useState<IProject[] | undefined>(undefined);
 
   // console.log(errorProjects)
@@ -122,7 +122,7 @@ const Projects: React.FC = () => {
       <meta property="og:site_name" content="KrlozMedina Portfolio Lab" />
       <meta property="og:locale" content="es_CO" />
 
-      <MainLayout isAdmin={false} links={links}>
+      <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'}>
         <Phrase
           // phraseEnglish="Rewards and motivation are an oil change for the engines of a project. Do it regularly and frequently."
           // phraseSpanish="Las recompensas y la motivación son un cambio de aceite para los motores del proyecto. Hazlo regularmente y con frecuencia."
