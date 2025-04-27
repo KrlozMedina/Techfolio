@@ -1,23 +1,21 @@
+name: Release Please Dev (Pre-release)
+
+on:
+  push:
+    branches:
+      - dev
+
 jobs:
   release:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Run release-please
-        run: pnpm exec release-please release --repo-url https://github.com/KrlozMedina/Portafolio --token ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Verify version has changed
-        run: |
-          current_version=$(jq -r .version package.json)
-          echo "Current version is: $current_version"
-          if [[ "$current_version" == "1.0.0" ]]; then
-            echo "Version has not been incremented!"
-            exit 1
-          else
-            echo "Version has been incremented to $current_version"
-          fi
+      - name: Run Release Please for Dev
+        uses: google-github-actions/release-please-action@v4
+        with:
+          release-type: node
+          token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: true
