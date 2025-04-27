@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "release": "standard-version"
+    "release": "standard-version",
+    "commit": "cz"
   },
   "dependencies": {
     "@emailjs/browser": "^3.12.1",
@@ -34,6 +35,9 @@
     "@types/node": "22.14.1",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "release-please": "^17.0.0",
     "standard-version": "^9.5.0",
     "typescript": "^5.8.3"
   },
@@ -41,6 +45,11 @@
     "overrides": {
       "next@>=15.0.0 <15.1.2": ">=15.1.2",
       "next@>=15.0.0 <15.2.3": ">=15.2.3"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
     }
   }
 }

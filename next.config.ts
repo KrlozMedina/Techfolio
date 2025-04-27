@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'cdn-icons-png.flaticon.com' },
       { protocol: 'https', hostname: 'www.luisllamas.es' },
       { protocol: 'https', hostname: 'wcdn-icons-png.flaticon.com' },
+      { protocol: 'https', hostname: 'cdn-icons-png.flaticon.com' },
     ],
   },
 };

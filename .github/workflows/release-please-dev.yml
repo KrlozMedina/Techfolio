@@ -1,0 +1,19 @@
+name: Release Please - Dev
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release Please
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: node  # o el tipo que uses (node, php, python, etc.)
+          prerelease: true  # << activa pre-release
+          default-branch: dev
+          bump-minor-pre-major: true  # incrementa versión menor si estás en 0.x.x
