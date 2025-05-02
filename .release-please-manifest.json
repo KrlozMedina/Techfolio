@@ -1,8 +1,14 @@
 {
-  "packages": {
-    ".": {
-      "release-type": "node",
+  "releases": [
+    {
+      "version": "1.0.0",
+      "branch": "main",
       "prerelease": false
+    },
+    {
+      "version": "1.0.1-alpha",
+      "branch": "dev",
+      "prerelease": true
     }
-  }
+  ]
 }
