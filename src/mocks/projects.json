@@ -1,0 +1,270 @@
+[
+  {
+    "id": "67ffaacaacb86d5728db4f11",
+    "title": "Hotel Alura (Plataforma de reservas y huespedes)",
+    "slug": "hotel-alura-(plataforma-de-reservas-y-huespedes)",
+    "description": "Sistema web para el Hotel Alura que gestiona reservas y huéspedes con autenticación, CRUD completo, cálculo automático del costo por días y almacenamiento en base de datos. Optimiza el control y la eficiencia del proceso de reservas.",
+    "technologies": [
+      "Spring Boote",
+      "Java",
+      "MySQL"
+    ],
+    "repositoryUrl": "https://github.com/KrlozMedina/HotelAlura.git",
+    "liveUrl": "https://github.com/KrlozMedina/HotelAlura.git",
+    "imageUrl": "https://imgur.com/IXGwuDC.png",
+    "category": [
+      "Backend",
+      "Frontend",
+      "Database"
+    ],
+    "role": "Student",
+    "teamSize": 1,
+    "duration": "2 months",
+    "priority": 7,
+    "projectType": "Desktop Applications",
+    "createdAt": "2025-04-16T13:04:10.871Z",
+    "updatedAt": "2025-04-16T13:04:10.871Z",
+    "__v": 0
+  },
+  {
+    "id": "67ffab63acb86d5728db4f16",
+    "title": "Juego de carreras en consola con conexión a base de datos MySQL",
+    "slug": "juego-de-carreras-en-consola-con-conexión-a-base-de-datos-mysql",
+    "description": "Juego de carros por consola donde los jugadores lanzan un dado para avanzar por una pista. Usa MySQL para guardar datos de jugadores, carros, pistas y resultados. Gana quien llegue primero a la meta y se registran los tres primeros lugares.",
+    "technologies": [
+      "Java",
+      "MySQL"
+    ],
+    "repositoryUrl": "https://github.com/KrlozMedina/GameCar.git",
+    "liveUrl": "https://github.com/KrlozMedina/GameCar.git",
+    "imageUrl": "https://imgur.com/04hQnG7.png",
+    "category": [
+      "Frontend",
+      "Database"
+    ],
+    "role": "Owner",
+    "teamSize": 1,
+    "duration": "2 weeks",
+    "priority": 6,
+    "projectType": "Desktop Applications",
+    "createdAt": "2025-04-16T13:06:43.955Z",
+    "updatedAt": "2025-04-16T13:06:43.955Z",
+    "__v": 0
+  },
+  {
+    "id": "67ffaca7acb86d5728db4f1d",
+    "title": " Laboratorio-Electronica",
+    "slug": "-laboratorio-electronica",
+    "description": "Sistema de monitoreo de temperatura y humedad para un laboratorio de electrónica. Registra históricos y alerta si se exceden los márgenes permitidos, ayudando a proteger equipos y refacciones.",
+    "technologies": [
+      "React",
+      "CSS",
+      "Spring Boote",
+      "MySQL"
+    ],
+    "repositoryUrl": "https://github.com/Laboratorio-Electronica",
+    "liveUrl": "https://tubular-profiterole-64b7dd.netlify.app/login",
+    "imageUrl": "https://imgur.com/86z5FBN.png",
+    "category": [
+      "Frontend",
+      "Frontend",
+      "Backend",
+      "Database"
+    ],
+    "role": "Ownes",
+    "teamSize": 1,
+    "duration": "2 years",
+    "priority": 9,
+    "projectType": "Web Applications",
+    "createdAt": "2025-04-16T13:12:07.138Z",
+    "updatedAt": "2025-04-16T13:12:07.138Z",
+    "__v": 0
+  },
+  {
+    "id": "67ffae56acb86d5728db4f2f",
+    "title": "Digital transformation",
+    "slug": "digital-transformation",
+    "description": "Aplicativo que recolecta datos desde un PLC en una planta de producción. Permite analizar tiempos, procesos y recursos utilizados para detectar fallas y optimizar la eficiencia administrativa y operativa.",
+    "technologies": [
+      "React",
+      "SASS",
+      "AWS"
+    ],
+    "repositoryUrl": "https://github.com/Tranformacion-Digital",
+    "liveUrl": "https://grado.onrender.com/",
+    "imageUrl": "https://imgur.com/f5yemqI.png",
+    "category": [
+      "Frontend",
+      "Frontend",
+      "Cloud & Infrastructure"
+    ],
+    "role": "Student",
+    "teamSize": 2,
+    "duration": "1 year",
+    "priority": 9,
+    "projectType": "Web Applications",
+    "createdAt": "2025-04-16T13:19:18.572Z",
+    "updatedAt": "2025-04-16T13:19:18.572Z",
+    "__v": 0
+  },
+  {
+    "id": "67ffaf69acb86d5728db4f3c",
+    "title": "Rick-Morty",
+    "slug": "rick-morty",
+    "description": "Aplicación web que consume la API de Rick & Morty para mostrar personajes. Permite filtrarlos por nombre, ofreciendo una interfaz interactiva y fácil de usar para explorar el universo de la serie.",
+    "technologies": [
+      "CSS",
+      "HTML",
+      "JavaScript"
+    ],
+    "repositoryUrl": "https://github.com/KrlozMedina/Rick-Morty.git",
+    "liveUrl": "https://rickandmorty-krlozmedina.netlify.app/",
+    "imageUrl": "https://imgur.com/8dloLlb.png",
+    "category": [
+      "Frontend",
+      "Frontend",
+      "Backend"
+    ],
+    "role": "Owner",
+    "teamSize": 1,
+    "duration": "1 month",
+    "priority": 4,
+    "projectType": "Web Applications",
+    "createdAt": "2025-04-16T13:23:53.481Z",
+    "updatedAt": "2025-04-16T13:23:53.481Z",
+    "__v": 0
+  },
+  {
+    "id": "67ffb02eacb86d5728db4f42",
+    "title": "RandomDogs",
+    "slug": "randomdogs",
+    "description": "Aplicación web que consume la API de RandomDogs para mostrar fotos aleatorias de perros. Permite al usuario marcar y guardar sus imágenes favoritas para visualizarlas luego.",
+    "technologies": [
+      "CSS",
+      "HTML",
+      "JavaScript"
+    ],
+    "repositoryUrl": "https://github.com/KrlozMedina/RandomDogs.git",
+    "liveUrl": "https://krlozmedina.github.io/RandomDogs/",
+    "imageUrl": "https://imgur.com/hmeeYqQ.png",
+    "category": [
+      "Frontend",
+      "Frontend",
+      "Backend"
+    ],
+    "role": "Owner",
+    "teamSize": 1,
+    "duration": "1 week",
+    "priority": 4,
+    "projectType": "Web Applications",
+    "createdAt": "2025-04-16T13:27:10.953Z",
+    "updatedAt": "2025-04-16T13:27:10.953Z",
+    "__v": 0
+  },
+  {
+    "id": "67ffb103acb86d5728db4f48",
+    "title": "MyPokedesk",
+    "slug": "mypokedesk",
+    "description": "Aplicación web conectada a la API de Pokémon. Muestra una Pokédex con filtros para explorar diferentes Pokémon y permite seleccionar uno para iniciar un juego interactivo.",
+    "technologies": [
+      "CSS",
+      "HTML",
+      "JavaScript"
+    ],
+    "repositoryUrl": "https://github.com/KrlozMedina/MyPokedesk.git",
+    "liveUrl": "https://pokemon-32ua.onrender.com/",
+    "imageUrl": "https://imgur.com/DKlA2ut.png",
+    "category": [
+      "Frontend",
+      "Frontend",
+      "Backend"
+    ],
+    "role": "Owner",
+    "teamSize": 1,
+    "duration": "1 week",
+    "priority": 4,
+    "projectType": "Web Applications",
+    "createdAt": "2025-04-16T13:30:43.740Z",
+    "updatedAt": "2025-04-16T13:30:43.740Z",
+    "__v": 0
+  },
+  {
+    "id": "67ffb1a4acb86d5728db4f4e",
+    "title": "Cronometro",
+    "slug": "cronometro",
+    "description": "Aplicación web con cronómetro, temporizador y contador regresivo para fechas importantes. Ideal para medir tiempos, establecer alarmas y hacer seguimiento de eventos futuros.",
+    "technologies": [
+      "CSS",
+      "HTML",
+      "JavaScript"
+    ],
+    "repositoryUrl": "https://github.com/KrlozMedina/Cronometro.git",
+    "liveUrl": "https://krlozmedina.github.io/Cronometro/",
+    "imageUrl": "https://imgur.com/f7pXh08.png",
+    "category": [
+      "Frontend",
+      "Frontend",
+      "Backend"
+    ],
+    "role": "Owner",
+    "teamSize": 1,
+    "duration": "1 week",
+    "priority": 4,
+    "projectType": "Web Applications",
+    "createdAt": "2025-04-16T13:33:24.993Z",
+    "updatedAt": "2025-04-16T13:33:24.993Z",
+    "__v": 0
+  },
+  {
+    "id": "67ffb238acb86d5728db4f54",
+    "title": "Exchange",
+    "slug": "exchange",
+    "description": "Aplicación web conectada a una API de exchange para mostrar indicadores y valores actualizados de distintas criptomonedas en tiempo real, facilitando el seguimiento del mercado cripto.",
+    "technologies": [
+      "CSS",
+      "HTML",
+      "JavaScript"
+    ],
+    "repositoryUrl": "https://github.com/KrlozMedina/Exchange.git",
+    "liveUrl": "https://krlozmedina.github.io/Exchange/",
+    "imageUrl": "https://imgur.com/mB00YrE.png",
+    "category": [
+      "Frontend",
+      "Frontend",
+      "Backend"
+    ],
+    "role": "Owner",
+    "teamSize": 1,
+    "duration": "1 week",
+    "priority": 2,
+    "projectType": "Web Applications",
+    "createdAt": "2025-04-16T13:35:52.028Z",
+    "updatedAt": "2025-04-16T13:35:52.028Z",
+    "__v": 0
+  },
+  {
+    "id": "67ffb2eeacb86d5728db4f59",
+    "title": "BatataBit",
+    "slug": "batatabit",
+    "description": "Clon responsivo de la página de Batatabit, replicando su diseño y estructura con HTML, CSS y JavaScript. Ideal para practicar maquetación, diseño web moderno y adaptación a dispositivos móviles.",
+    "technologies": [
+      "CSS",
+      "HTML"
+    ],
+    "repositoryUrl": "https://github.com/KrlozMedina/BatataBit.git",
+    "liveUrl": "https://bata-bit.netlify.app/",
+    "imageUrl": "https://imgur.com/srOyMs3.png",
+    "category": [
+      "Frontend",
+      "Frontend"
+    ],
+    "role": "Student",
+    "teamSize": 1,
+    "duration": "1 day",
+    "priority": 2,
+    "projectType": "Web Applications",
+    "createdAt": "2025-04-16T13:38:54.674Z",
+    "updatedAt": "2025-04-16T13:38:54.674Z",
+    "__v": 0
+  }
+]

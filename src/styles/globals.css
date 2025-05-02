@@ -1,0 +1,23 @@
+/* ========================
+   🌐 Estilos Globales
+   ======================== */
+
+/* ⚠️ Tailwind (Descomenta si usas Tailwind CSS) */
+/* 
+@tailwind base;
+@tailwind components;
+@tailwind utilities; 
+*/
+
+/* 🎨 Variables globales */
+@import './variables/colors.css';
+@import './variables/typography.css';
+@import './variables/spacing.css';
+@import './variables/layout.css';
+@import './variables/themes.css';
+
+/* 🔄 Reset de estilos */
+@import './base/reset.css';
+
+/* 📦 Estilos base del proyecto */
+@import './base/base.css';

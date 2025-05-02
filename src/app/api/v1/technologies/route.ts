@@ -1,5 +1,5 @@
-import connectDB from "@/lib/connectDB";
-import Technology from "@/model/Technology";
+import connectDB from "@/lib/db/connectDB";
+import Technology from "@/models/Technology.model";
 import { NextResponse } from "next/server";
 
 // Interfaces
@@ -31,9 +31,9 @@ export async function GET() {
     const technologies = await Technology.find();
     return NextResponse.json(technologies, { status: 200 });
   } catch (err) {
-    console.error("Error fetching technologies:", err);
+    // console.error("Error fetching technologies:", err);
     return NextResponse.json(
-      { error: "Failed to fetch technologies." },
+      { error: "Failed to fetch technologies.", msg: err },
       { status: 500 }
     );
   }

@@ -1,0 +1,31 @@
+/* ========================
+  ✍️ Variables de Tipografía
+   ======================== */
+
+  :root {
+    /* Fuentes */
+    --font-family-logo: 'Rubik Glitch', cursive;
+    --font-family-text: 'JetBrains Mono', monospace;
+    --font-family-heading: 'JetBrains Mono', monospace;
+  
+    /* Tamaños de texto */
+    --font-size-xs: 1.2rem;     
+    --font-size-sm: 1.4rem;    
+    --font-size-base: 1.6rem;      
+    --font-size-md: 1.8rem;    
+    --font-size-lg: 2.0rem;     
+    --font-size-xl: 2.4rem;      
+    --font-size-2xl: 3.2rem;       
+    --font-size-3xl: 4.8rem;       
+  
+    /* Pesos tipográficos */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+  
+    /* Interlineado */
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+  }
+  

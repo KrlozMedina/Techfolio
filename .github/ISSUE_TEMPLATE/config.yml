@@ -1,0 +1,8 @@
+# Configuración general de Issues
+contact_links:
+  - name: ❓ Soporte General
+    url: https://github.com/KrlozMedina/tu-repo/issues/new/choose
+    about: Si tienes dudas o preguntas generales, usa esta opción.
+  - name: 🛡 Reportar problema de seguridad
+    url: mailto:kamedinal16@outlook.com
+    about: Si detectas una vulnerabilidad de seguridad, contáctanos por email.

@@ -1,0 +1,43 @@
+/* Phrase */
+.container{
+  width: 100%;
+  padding: 0 var(--space-lg);
+}
+
+.phrase {
+  width: 50%;
+  font-size: var(--font-size-lg);
+  margin: 0 var(--space-lg) 0 auto;
+}
+
+.author {
+  text-align: end;
+  font-size: var(--font-size-xl);
+  margin: 0 var(--space-lg) 0 auto;
+}
+
+@media (max-width: 768px) {
+  .phrase {
+      width: 100%;
+      margin: 0 auto;
+  }
+}
+
+/* Intro */
+.title {
+  text-transform: uppercase;
+  font-family: "DM Serif Display", serif;
+  font-weight: var(--font-weight-regular);
+  font-style: normal;
+  color: var(--color-text);
+  font-size: var(--font-size-2xl);
+  padding: 0 1.5%;
+  margin: var(--space-md) 0;
+}
+
+.intro{
+  font-size: var(--font-size-base);
+  padding: 0 2.5%;
+  margin: var(--space-xl) 0;
+  text-align: justify;
+}

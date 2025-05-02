@@ -1,0 +1,96 @@
+/* ============ CONTAINERS GENERALES ============ */
+.menu__container,
+.menu__container--phone {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2xl);
+  padding: var(--space-lg);
+  width: max-content;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-background-container);
+}
+
+/* ============ ENLACES E ÍCONOS ============ */
+.menu__container a,
+.menu__container--phone a {
+  display: flex;
+  align-items: center;
+}
+
+.menu__container .icon,
+.menu__container--phone .icon {
+  font-size: var(--font-size-base);
+  margin-right: var(--space-sm);
+}
+
+/* ============ MENÚ ASIDE ============ */
+.menu-aside__container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-sm);
+  padding: var(--space-xl);
+  width: 7.6rem;
+  height: min-content;
+  border-radius: var(--border-radius-full) 0 0 var(--border-radius-full);
+  background-color: var(--color-background-container);
+}
+
+/* ============ MENÚ MÓVIL (FULLSCREEN) ============ */
+.menu-phone__container {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  padding: var(--space-sm);
+  background-color: var(--color-background-container);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Estilo específico para enlaces del menú phone */
+.menu__container--links {
+  font-size: var(--font-size-md);
+}
+
+/* Ícono hamburguesa */
+.icon-menu {
+  display: none;
+  cursor: pointer;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .menu__container {
+    display: none;
+  }
+
+  .menu-phone__container.active {
+    display: flex;
+  }
+}
+
+@media (max-width: 425px) {
+  .menu-aside__container {
+    display: none;
+  }
+
+  .icon-menu {
+    display: initial;
+    font-size: var(--font-size-xl);
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+  }
+
+  .menu__container--phone {
+    margin: 0 auto;
+  }
+}

@@ -2,22 +2,26 @@
 
 import React, { useState, useEffect, ReactNode } from 'react';
 
+// Defines the type for the language context, including the current language state and its setter.
 export interface LanguageContextType {
   isSpanish: boolean;
   setIsSpanish: (value: boolean) => void;
 }
 
-export const LanguageContext = React.createContext<LanguageContextType | null>(null);
+// Creates a context for managing language preference (Spanish or English).
+export const LanguageContext = React.createContext<LanguageContextType | undefined>(undefined);
 
 interface LanguageContextProviderProps {
   children: ReactNode;
 }
 
+// Context provider that manages language switching between Spanish and English.
+// It saves and retrieves the user's language preference from localStorage.
 export function LanguageContextProvider({ children }: LanguageContextProviderProps) {
   const [isSpanish, setIsSpanish] = useState<boolean>(false);
 
   useEffect(() => {
-    // Ejecutar solo en el cliente
+    // On component mount, retrieve the stored language preference from localStorage.
     if (typeof window !== 'undefined') {
       const valueIsSpanish = localStorage.getItem('isSpanish');
       if (valueIsSpanish) {
@@ -27,7 +31,7 @@ export function LanguageContextProvider({ children }: LanguageContextProviderPro
   }, []);
 
   useEffect(() => {
-    // Guardar en localStorage cada vez que el idioma cambie
+    // Whenever the language changes, save the new preference to localStorage.
     if (typeof window !== 'undefined') {
       localStorage.setItem('isSpanish', isSpanish.toString());
     }

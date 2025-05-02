@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "es": {
+      "name": "Desarrollador Frontend",
+      "description": "Responsable de la creación y mantenimiento de la parte visual y de interacción del sitio web."
+    },
+    "en": {
+      "name": "Frontend Developer",
+      "description": "Responsible for creating and maintaining the visual and interactive aspects of the website."
+    }
+  },
+  {
+    "id": 2,
+    "es": {
+      "name": "Desarrollador Backend",
+      "description": "Encargado de la lógica del servidor, bases de datos y la arquitectura del sistema."
+    },
+    "en": {
+      "name": "Backend Developer",
+      "description": "Responsible for server-side logic, databases, and system architecture."
+    }
+  },
+  {
+    "id": 3,
+    "es": {
+      "name": "Full Stack Developer",
+      "description": "Desarrollador que trabaja tanto en el frontend como en el backend de la aplicación."
+    },
+    "en": {
+      "name": "Full Stack Developer",
+      "description": "Developer who works on both the frontend and backend of the application."
+    }
+  },
+  {
+    "id": 4,
+    "es": {
+      "name": "Diseñador UI/UX",
+      "description": "Diseña la interfaz de usuario y mejora la experiencia del usuario en la aplicación."
+    },
+    "en": {
+      "name": "UI/UX Designer",
+      "description": "Designs the user interface and improves the user experience of the application."
+    }
+  },
+  {
+    "id": 5,
+    "es": {
+      "name": "Project Manager",
+      "description": "Gestiona el equipo de desarrollo, coordina el proyecto y asegura que se cumplan los plazos."
+    },
+    "en": {
+      "name": "Project Manager",
+      "description": "Manages the development team, coordinates the project, and ensures deadlines are met."
+    }
+  },
+  {
+    "id": 6,
+    "es": {
+      "name": "Desarrollador Mobile",
+      "description": "Encargado del desarrollo de aplicaciones móviles para iOS y Android."
+    },
+    "en": {
+      "name": "Mobile Developer",
+      "description": "Responsible for developing mobile applications for iOS and Android."
+    }
+  },
+  {
+    "id": 7,
+    "es": {
+      "name": "Administrador de Bases de Datos",
+      "description": "Encargado de gestionar y optimizar las bases de datos para asegurar un rendimiento eficiente."
+    },
+    "en": {
+      "name": "Database Administrator",
+      "description": "Responsible for managing and optimizing databases to ensure efficient performance."
+    }
+  },
+  {
+    "id": 8,
+    "es": {
+      "name": "DevOps",
+      "description": "Encargado de integrar y automatizar los procesos de desarrollo y operaciones."
+    },
+    "en": {
+      "name": "DevOps",
+      "description": "Responsible for integrating and automating the development and operations processes."
+    }
+  },
+  {
+    "id": 9,
+    "es": {
+      "name": "Analista de Seguridad",
+      "description": "Monitorea y protege los sistemas, redes y aplicaciones contra amenazas de seguridad."
+    },
+    "en": {
+      "name": "Security Analyst",
+      "description": "Monitors and protects systems, networks, and applications from security threats."
+    }
+  },
+  {
+    "id": 10,
+    "es": {
+      "name": "Ingeniero de Calidad",
+      "description": "Garantiza que el software cumpla con los estándares de calidad mediante pruebas y validaciones."
+    },
+    "en": {
+      "name": "Quality Engineer",
+      "description": "Ensures the software meets quality standards through testing and validation."
+    }
+  }
+]

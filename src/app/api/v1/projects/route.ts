@@ -1,6 +1,7 @@
-import connectDB from "@/lib/connectDB";
-import Project from "@/model/Project";
-import Technology from "@/model/Technology";
+import connectDB from "@/lib/db/connectDB";
+import { CreateProjectDto, DeleteProjectDto, UpdateProjectDto } from "@/lib/dtos";
+import Project from "@/models/Project.model";
+import Technology from "@/models/Technology.model";
 import { NextResponse } from "next/server";
 
 // Interfaces
@@ -27,9 +28,9 @@ interface ErrorMongoDb {
 }
 
 // Helper: Validate required fields
-function validateRequiredFields(body: ProjectBody, fields: (keyof ProjectBody)[]): string[] {
-  return fields.filter((field) => !body[field]);
-}
+// function validateRequiredFields(body: ProjectBody, fields: (keyof ProjectBody)[]): string[] {
+//   return fields.filter((field) => !body[field]);
+// }
 
 // Helper: Generate slug
 const generateSlug = (title: string) => title.replace(/\s+/g, "-").toLowerCase();
@@ -59,8 +60,10 @@ export async function GET() {
     const projects = await Project.find();
     return NextResponse.json(projects, { status: 200 });
   } catch (err) {
-    console.error("Error fetching projects:", err);
-    return errorResponse("Failed to fetch projects.", 500);
+    return NextResponse.json(
+        { error: "Failed to fetch projects.", msg: err },
+        { status: 500 }
+    );
   }
 }
 
@@ -68,29 +71,19 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     await connectDB();
-    const body: ProjectBody = await req.json();
+    const json = await req.json();
+    const result = CreateProjectDto.safeParse(json);
 
-    const requiredFields: (keyof ProjectBody)[] = [
-      "title",
-      "description",
-      "technologies",
-      "repositoryUrl",
-      "liveUrl",
-      "imageUrl",
-      "priority",
-      "projectType",
-    ];
-
-    const missingFields = validateRequiredFields(body, requiredFields);
-    if (missingFields.length) {
-      return errorResponse(`Missing fields: ${missingFields.join(", ")}.`, 400);
+    if (!result.success) {
+      return errorResponse("Invalid data", 400);
     }
+
+    const body = result.data;
 
     body.slug = generateSlug(body.title);
     if (body.technologies) {
       body.category = await mapTechnologiesToCategories(body.technologies);
     }
-
     const newProject = await new Project(body).save();
     return NextResponse.json({ message: "Project created successfully.", newProject }, { status: 201 });
   } catch (e) {
@@ -98,7 +91,6 @@ export async function POST(req: Request) {
     if (err.code === 11000) {
       return NextResponse.json({ error: "Duplicate project title.", duplicateKey: err.keyValue }, { status: 409 });
     }
-    console.error("Error creating project:", err);
     return errorResponse("Failed to create project.", 500);
   }
 }
@@ -115,9 +107,21 @@ export async function PUT(req: Request) {
     }
 
     const dataUpdate: Partial<ProjectBody> = await req.json();
+
+    const parsedData = UpdateProjectDto.safeParse(dataUpdate);
+
+    if (!parsedData.success) {
+      const errors = parsedData.error.format();
+      return NextResponse.json(
+        { error: "Invalid data", details: errors },
+        { status: 400 }
+      );
+    }
+
     if (dataUpdate.title) {
       dataUpdate.slug = generateSlug(dataUpdate.title);
     }
+
     if (dataUpdate.technologies) {
       dataUpdate.category = await mapTechnologiesToCategories(dataUpdate.technologies);
     }
@@ -140,6 +144,13 @@ export async function DELETE(req: Request) {
     await connectDB();
     const { searchParams } = new URL(req.url);
     const projectId = searchParams.get("projectId");
+
+    const parsedData = DeleteProjectDto.safeParse({ projectId });
+
+    if (!parsedData.success) {
+      const errors = parsedData.error.format();
+      return NextResponse.json({ error: "Invalid data", details: errors }, { status: 400 });
+    }
 
     if (!projectId) {
       return errorResponse("Missing 'projectId' parameter.", 400);

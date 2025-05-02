@@ -1,0 +1,95 @@
+/* === HOME CONTAINER === */
+/* Base container for the home view */
+.home__container {
+  width: 100%;
+  display: flex;
+}
+
+/* === MAIN SECTION === */
+/* Main section that includes text and image */
+.home__main {
+  width: 100%;
+  height: 100vh;
+  padding: 4%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-xl);
+}
+
+/* === MAIN INFO SECTION === */
+/* Textual content section within main */
+.home__main-info {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-xl);
+}
+
+/* Paragraph styles within main info */
+.home__main-info p {
+  margin: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-normal);
+}
+
+/* === MAIN IMAGE === */
+/* Image section within main */
+.home__main-img {
+  width: 90%;
+  height: fit-content;
+  max-width: 35rem;
+}
+
+/* === ASIDE SECTION === */
+/* Sidebar hidden by default */
+.home__aside {
+  display: none;
+}
+
+/* === RESPONSIVE: TABLET (≤768px) === */
+@media (max-width: 768px) {
+  .home__main {
+    width: 95%;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: flex-end;
+    gap: var(--space-md);
+  }
+
+  .home__main-info {
+    width: 100%;
+  }
+
+  .home__aside {
+    display: flex; /* Show sidebar */
+    align-items: center;
+    justify-content: center;
+  }
+
+  .home__main-img {
+    width: 60%; /* Adjust image width for smaller screens */
+  }
+}
+
+/* === RESPONSIVE: MOBILE (≤425px) === */
+@media (max-width: 425px) {
+  .home__main {
+    padding: 2%; /* Reduce padding for small devices */
+  }
+
+  .home__main-info p {
+    font-size: var(--font-size-lg); /* Smaller font for mobile */
+  }
+
+  .home__aside {
+    flex-direction: column;
+    gap: var(--space-md); /* Add spacing between sidebar items */
+  }
+
+  .home__main-img {
+    width: 90%; /* Reset image width for very small screens */
+  }
+}

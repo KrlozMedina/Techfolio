@@ -1,0 +1,133 @@
+/* FILTER */
+.projects__filter {
+  width: 100%;
+  min-width: 28rem;
+}
+.projects__filter-fieldset{
+  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.8rem 2rem;
+  margin: 1.2rem auto;
+  align-items: center;
+  border: 1px solid gray;
+}
+.projects__filter-legend{
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.projects__filter div{
+  display: flex;
+  flex-wrap: wrap;
+}
+.projects__filter label{
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+}
+.projects__filter select{
+  width: 20rem;
+  font-size: 1.6rem;
+}
+
+/* CASE STUDY */
+.projects__case-study {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  padding: 2rem;
+}
+.projects__case-study__content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.2rem;
+  border: 1px solid gray;
+  border-radius: 2rem;
+  flex-wrap: wrap;
+}
+.projects__case-study__content:nth-child(even) {
+  flex-direction: row-reverse;
+}
+.projects__case-study__image {
+  width: 100%;
+  max-width: 30rem;
+  height: fit-content;
+  border-radius: 0.8rem;
+  object-fit: cover;
+  margin: auto;
+}
+.projects__case-study__content-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: auto;
+}
+.projects__case-study__title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.projects__case-study__content p {
+  font-size: 1.6rem;
+  color: var(--color-text);
+}
+.projects__case-study__content blockquote{
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .projects__case-study__content {
+    flex-direction: column;
+  }
+  .projects__case-study__content:nth-child(even) {
+    flex-direction: column;
+  }
+}
+
+/* CTA */
+.projects__cta {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.projects__cta__title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+.projects__cta__actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.projects__cta__button--primary {
+  padding: 0.8rem 1.6rem;
+  font-size: 1.2rem;
+  border-radius: 0.6rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+
+  background-color: #0070f3;
+  color: #fff;
+}
+.projects__cta__button--primary:hover {
+  background-color: #005ec2;
+}
+.projects__cta__button--secondary {
+  padding: 0.8rem 1.6rem;
+  font-size: 1.2rem;
+  border-radius: 0.6rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+
+  background-color: transparent;
+  border: 1px solid #0070f3;
+  color: #0070f3;
+}
+.projects__cta__button--secondary:hover {
+  background-color: #f0f8ff;
+}

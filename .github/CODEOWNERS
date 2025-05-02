@@ -1,0 +1,10 @@
+# Asignar responsables de código automáticamente
+
+# Todo el código
+* @KrlozMedina
+
+# Solo los componentes
+src/components/* @KrlozMedina
+
+# Solo la configuración de GitHub Actions
+.github/workflows/* @KrlozMedina

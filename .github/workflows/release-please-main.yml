@@ -1,0 +1,66 @@
+name: Release Please Main
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run Release Please for Main
+        uses: googleapis/release-please-action@v4
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./dist/*
+
+
+# name: Release Please
+
+# on:
+#   pull_request:
+#     branches:
+#       - main
+#     types:
+#       - closed  # Este evento se dispara cuando el PR se cierra (ya sea fusionado o cerrado sin fusionar)
+
+# jobs:
+#   release:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
+
+#       - name: Run Release Please for Main
+#         uses: google-github-actions/release-please-action@v4
+#         with:
+#           release-type: node
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           prerelease: false
+          
+#       - name: Create GitHub Release
+#         uses: softprops/action-gh-release@v1
+#         with:
+#           files: ./dist/*
