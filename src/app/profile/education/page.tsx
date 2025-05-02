@@ -166,7 +166,8 @@ const Education: React.FC = () => {
             width={200}
             height={300}
             className='diploma' 
-            alt="Diploma" 
+            alt="Diploma"
+            loading='lazy'
           />
         </div>
 
@@ -182,6 +183,7 @@ const Education: React.FC = () => {
                   width={300}
                   height={200}
                   alt={code.name}
+                  loading='lazy'
                 />
                 <h3 className='education-code-name'>{code.name}</h3>
               </article>

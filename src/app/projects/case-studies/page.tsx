@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext } from "react";
-import successCases from "@/mock/caseStudies.json";
+import successCases from "@/mocks/caseStudies.json";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
@@ -84,6 +84,7 @@ const CaseStudiesPage: React.FC = () => {
                     width={200}
                     height={300}
                     className={styles["image"]}
+                    loading="lazy"
                   />
                 </div>
 

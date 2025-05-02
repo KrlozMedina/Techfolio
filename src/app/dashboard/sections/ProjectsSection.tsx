@@ -5,16 +5,17 @@ import {
   useCreateProjectMutation,
   useDeleteProjectMutation,
   useGetProjectsQuery,
-} from "@/redux/service/projectsApi";
-import { useGetTechnologiesQuery } from "@/redux/service/technologiesApi";
-import { ErrorResponse, ITechnology } from "@/types/common";
+} from "@/store/service/projectsApi";
+import { useGetTechnologiesQuery } from "@/store/service/technologiesApi";
+import { ErrorResponse, ITechnology } from "@/shared/types/common";
 import React, { useContext, useEffect, useState } from "react";
 import LanguageContext, {
   LanguageContextType,
 } from "@/context/LanguageContext";
-import { PROJECT_TYPE } from "@/types/constants";
+// import { PROJECT_TYPE } from "@/types/constants";
 import style from "../page.module.css";
 import Image from "next/image";
+import { PLATFORMS } from "@/shared/constants/constants";
 
 const ProjectsSection: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -41,7 +42,7 @@ const ProjectsSection: React.FC = () => {
     teamSize: 0,
     duration: "",
     priority: 0,
-    projectType: PROJECT_TYPE[0],
+    projectType: PLATFORMS[0],
   });
 
   const setTitleAndSlug = (title: string) => {
@@ -93,7 +94,7 @@ const ProjectsSection: React.FC = () => {
         teamSize: 0,
         duration: "",
         priority: 0,
-        projectType: PROJECT_TYPE[0],
+        projectType: PLATFORMS[0],
       });
       refetch();
     } catch (err) {
@@ -310,7 +311,7 @@ const ProjectsSection: React.FC = () => {
                     }
                     required
                   >
-                    {PROJECT_TYPE.map((type, index) => (
+                    {PLATFORMS.map((type, index) => (
                       <option key={index} value={type}>
                         {type}
                       </option>

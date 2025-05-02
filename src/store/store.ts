@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./features/counterSlice";
+import counterReducer from "./slices/counterSlice";
 import { projectsApi } from "./service/projectsApi";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { technologiesApi } from "./service/technologiesApi";

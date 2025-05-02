@@ -37,10 +37,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ data, language }) => {
       >
         <Image
           src={imageUrl}
-          width={300}
-          height={200}
+          width={240}
+          height={132}
           className={style["card__project--image"]}
           alt={title}
+          loading='lazy'
+          placeholder='blur'
+          blurDataURL='https://imgur.com/86z5FBN.png'
         />
         <h3>{title}</h3>
         <p className={style["card__project--description"]}>{description}</p>
@@ -90,6 +93,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ children }) => {
             src={thumbnails.medium.url}
             className="card__video--image"
             alt={title}
+            loading='lazy'
           />
           <p className="card__video--description">
             description
@@ -115,6 +119,7 @@ export const Banner: React.FC<BannerProps> = ({ data }) => {
             width={50}
             height={50}
             alt={alt}
+            loading='lazy'
           />
           <h3>{title}</h3>
         </div>

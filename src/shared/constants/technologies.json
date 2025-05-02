@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "category": "Frontend",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/1200px-React.svg.png",
+    "name": "React.js",
+    "es": {
+      "description": "Biblioteca de JavaScript para construir interfaces de usuario."
+    },
+    "en": {
+      "description": "JavaScript library for building user interfaces."
+    }
+  },
+  {
+    "id": 2,
+    "category": "Frontend",
+    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Next.js_logo.svg",
+    "name": "Next.js",
+    "es": {
+      "description": "Framework de React para aplicaciones web y estáticas."
+    },
+    "en": {
+      "description": "React framework for web and static applications."
+    }
+  },
+  {
+    "id": 3,
+    "category": "Backend",
+    "logoUrl": "https://nestjs.com/img/logo_small.svg",
+    "name": "NestJS",
+    "es": {
+      "description": "Framework de Node.js para crear aplicaciones backend escalables."
+    },
+    "en": {
+      "description": "Node.js framework for building scalable backend applications."
+    }
+  },
+  {
+    "id": 4,
+    "category": "Database",
+    "logoUrl": "https://cdn.worldvectorlogo.com/logos/mongodb-icon-2.svg",
+    "name": "MongoDB",
+    "es": {
+      "description": "Base de datos NoSQL orientada a documentos."
+    },
+    "en": {
+      "description": "NoSQL document-oriented database."
+    }
+  },
+  {
+    "id": 5,
+    "category": "Database",
+    "logoUrl": "https://www.svgrepo.com/show/303251/mysql-logo.svg",
+    "name": "PostgreSQL",
+    "es": {
+      "description": "Sistema de gestión de bases de datos relacional."
+    },
+    "en": {
+      "description": "Relational database management system."
+    }
+  },
+  {
+    "id": 6,
+    "category": "Cloud & Infrastructure",
+    "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSObhWW7gEGNs1r3kbEXIeWuIDC74C6p5RVQ&s",
+    "name": "Docker",
+    "es": {
+      "description": "Plataforma para crear, desplegar y ejecutar aplicaciones en contenedores."
+    },
+    "en": {
+      "description": "Platform for creating, deploying, and running applications in containers."
+    }
+  },
+  {
+    "id": 7,
+    "category": "Frontend",
+    "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbLCBvPGD_ZFg4yZg27hRhJYpT0T1kWmxYHg&s",
+    "name": "React",
+    "es": {
+      "description": "Biblioteca de JavaScript para construir interfaces de usuario."
+    },
+    "en": {
+      "description": "JavaScript library for building user interfaces."
+    }
+  },
+  {
+    "id": 8,
+    "category": "Frontend",
+    "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBOy1dXFCRv_iVBu4hz4QRSQAUtxAiwKfx8Q&s",
+    "name": "Redux",
+    "es": {
+      "description": "Biblioteca de gestión de estado predecible para aplicaciones JavaScript."
+    },
+    "en": {
+      "description": "Predictable state management library for JavaScript applications."
+    }
+  },
+  {
+    "id": 9,
+    "category": "Frontend",
+    "logoUrl": "https://images.icon-icons.com/1488/PNG/512/5351-css3_102605.png",
+    "name": "CSS",
+    "es": {
+      "description": "Lenguaje de hojas de estilo utilizado para diseñar la apariencia de las páginas web."
+    },
+    "en": {
+      "description": "Style sheet language used for designing the layout of web pages."
+    }
+  },
+  {
+    "id": 10,
+    "category": "Backend",
+    "logoUrl": "https://img.icons8.com/color/600/spring-logo.png",
+    "name": "Spring Boot",
+    "es": {
+      "description": "Framework para aplicaciones backend en Java."
+    },
+    "en": {
+      "description": "Framework for backend applications in Java."
+    }
+  },
+  {
+    "id": 11,
+    "category": "Frontend",
+    "logoUrl": "https://static-00.iconduck.com/assets.00/java-icon-1511x2048-6ikx8301.png",
+    "name": "Java",
+    "es": {
+      "description": "Lenguaje de programación orientado a objetos utilizado en diversas plataformas."
+    },
+    "en": {
+      "description": "Object-oriented programming language used in various platforms."
+    }
+  },
+  {
+    "id": 12,
+    "category": "Database",
+    "logoUrl": "https://www.svgrepo.com/show/303251/mysql-logo.svg",
+    "name": "MySQL",
+    "es": {
+      "description": "Sistema de gestión de bases de datos relacional."
+    },
+    "en": {
+      "description": "Relational database management system."
+    }
+  },
+  {
+    "id": 13,
+    "category": "Frontend",
+    "logoUrl": "https://img.icons8.com/color/512/sass.png",
+    "name": "SASS",
+    "es": {
+      "description": "Preprocesador de CSS que facilita la escritura de estilos."
+    },
+    "en": {
+      "description": "CSS preprocessor that makes writing styles easier."
+    }
+  },
+  {
+    "id": 14,
+    "category": "Cloud & Infrastructure",
+    "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSObhWW7gEGNs1r3kbEXIeWuIDC74C6p5RVQ&s",
+    "name": "AWS",
+    "es": {
+      "description": "Plataforma de servicios en la nube proporcionada por Amazon."
+    },
+    "en": {
+      "description": "Cloud services platform provided by Amazon."
+    }
+  },
+  {
+    "id": 15,
+    "category": "Frontend",
+    "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbLCBvPGD_ZFg4yZg27hRhJYpT0T1kWmxYHg&s",
+    "name": "HTML",
+    "es": {
+      "description": "Lenguaje de marcado utilizado para estructurar contenido web."
+    },
+    "en": {
+      "description": "Markup language used for structuring web content."
+    }
+  }
+]

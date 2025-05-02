@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import { useLoginMutation } from '@/redux/service/authApi';
+import { useLoginMutation } from '@/store/service/authApi';
 import { LanguageContext, LanguageContextType } from '@/context/LanguageContext';
 
 import MainLayout from '@/components/templates/MainLayout/MainLayout';

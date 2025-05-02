@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    formats: ['image/avif', 'image/webp'], // ¡activa AVIF y WebP!
     remotePatterns: [
       { protocol: 'https', hostname: 'imgur.com' },
       { protocol: 'https', hostname: 'i.imgur.com' },
@@ -12,6 +13,10 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'www.luisllamas.es' },
       { protocol: 'https', hostname: 'wcdn-icons-png.flaticon.com' },
       { protocol: 'https', hostname: 'cdn-icons-png.flaticon.com' },
+      { protocol: 'https', hostname: 'cdn-icons-png.flaticon.com' },
+      { protocol: 'https', hostname: 'www.flickr.com' },
+      { protocol: 'https', hostname: 'live.staticflickr.com' },
+      { protocol: 'https', hostname: 'localhost' },
     ],
   },
 };

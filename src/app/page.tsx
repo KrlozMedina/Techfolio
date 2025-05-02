@@ -44,6 +44,7 @@ const HomePage: React.FC = () => {
               height={200}
               className={styles['home__main-img']}
               priority
+              loading='lazy'
             />
             <section>
               <p>{text.greeting}</p>

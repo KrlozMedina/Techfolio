@@ -4,12 +4,12 @@ import React, { useContext, useEffect, useState } from "react";
 import LanguageContext, { LanguageContextType } from "@/context/LanguageContext";
 import MainLayout from "@/components/templates/MainLayout/MainLayout";
 import Slider from "@/components/organisms/Slider/Slider";
-import { useGetProjectsQuery } from "@/redux/service/projectsApi";
+import { useGetProjectsQuery } from "@/store/service/projectsApi";
 import { ProjectCard } from "@/components/molecules/CardViews/CardViews";
-import { CATEGORIES, PROJECT_TYPE } from "@/types/constants";
-import { useGetTechnologiesQuery } from "@/redux/service/technologiesApi";
+import { CATEGORIES, PLATFORMS } from "@/shared/constants/constants";
+import { useGetTechnologiesQuery } from "@/store/service/technologiesApi";
 import { IProject } from "@/models/Project.model";
-import caseStudies from "@/mock/caseStudies.json";
+import caseStudies from "@/mocks/caseStudies.json";
 import style from './page.module.css'
 import Link from "next/link";
 import { Intro, Phrase } from "@/components/atom/TextBlocks/TextsBlocks";
@@ -146,7 +146,7 @@ const Projects: React.FC = () => {
                     onChange={handlerFilter}
                   >
                     <option value="">{isSpanish ? 'Todos' : 'All'}</option>
-                    {PROJECT_TYPE.map((type, index) => (
+                    {PLATFORMS.map((type, index) => (
                       <option value={type} key={index}>
                         {type}
                       </option>

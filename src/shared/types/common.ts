@@ -1,4 +1,7 @@
-import { CATEGORIES } from "./constants";
+// Tipos e interfaces reutilizables en todo el proyecto.
+// user.ts, project.ts, apiResponse.ts
+
+import { CATEGORIES } from "../constants/constants";
 
 // export interface IProject extends Document {
 //   _id: string;
@@ -25,6 +28,17 @@ export interface ITechnology extends Document {
   name: string;
   category: (typeof CATEGORIES)[number];
   logoUrl?: string;
+  // id: number;
+  // category: (typeof CATEGORIES)[number];
+  // logoUrl: string;
+  // name: string;
+  // es: {
+  //   description: string
+  // };
+  // en: {
+  //   description: string
+  // }
+
 }
 
 interface MessageProps {

@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "es": {
+      "name": "Autenticación de Usuarios",
+      "description": "Permite a los usuarios registrarse, iniciar sesión de manera segura y gestionar su identidad."
+    },
+    "en": {
+      "name": "User Authentication",
+      "description": "Allows users to securely register, log in, and manage their identity."
+    }
+  },
+  {
+    "id": 2,
+    "es": {
+      "name": "Sistema de Notificaciones",
+      "description": "Envía alertas y mensajes en tiempo real para mantener informados a los usuarios."
+    },
+    "en": {
+      "name": "Notification System",
+      "description": "Sends real-time alerts and messages to keep users informed."
+    }
+  },
+  {
+    "id": 3,
+    "es": {
+      "name": "Chat en Tiempo Real",
+      "description": "Permite la comunicación instantánea entre los usuarios dentro de la plataforma."
+    },
+    "en": {
+      "name": "Real-Time Chat",
+      "description": "Enables instant communication between users within the platform."
+    }
+  },
+  {
+    "id": 4,
+    "es": {
+      "name": "Integración de Pagos",
+      "description": "Permite procesar pagos en línea de forma segura a través de múltiples métodos de pago."
+    },
+    "en": {
+      "name": "Payment Integration",
+      "description": "Enables secure online payment processing through multiple payment methods."
+    }
+  },
+  {
+    "id": 5,
+    "es": {
+      "name": "Dashboard de Administración",
+      "description": "Panel de control para gestionar usuarios, contenido y configuraciones de la aplicación."
+    },
+    "en": {
+      "name": "Admin Dashboard",
+      "description": "Control panel to manage users, content, and application settings."
+    }
+  },
+  {
+    "id": 6,
+    "es": {
+      "name": "Gestión de Roles y Permisos",
+      "description": "Control de acceso basado en roles de usuario para distintas funcionalidades."
+    },
+    "en": {
+      "name": "Role and Permission Management",
+      "description": "User access control based on roles for different functionalities."
+    }
+  },
+  {
+    "id": 7,
+    "es": {
+      "name": "Soporte Multilenguaje",
+      "description": "Permite que la aplicación funcione en varios idiomas para llegar a un público más amplio."
+    },
+    "en": {
+      "name": "Multilanguage Support",
+      "description": "Enables the application to work in multiple languages to reach a wider audience."
+    }
+  },
+  {
+    "id": 8,
+    "es": {
+      "name": "Sistema de Reportes",
+      "description": "Generación de reportes detallados de actividad, usuarios, ventas, etc."
+    },
+    "en": {
+      "name": "Reporting System",
+      "description": "Generates detailed reports on activity, users, sales, etc."
+    }
+  }
+]

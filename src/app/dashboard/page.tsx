@@ -2,7 +2,7 @@
 
 import MainLayout from "@/components/templates/MainLayout/MainLayout";
 import { useContext, useEffect, useState } from "react";
-import { useVerifyProfileQuery } from "@/redux/service/authApi";
+import { useVerifyProfileQuery } from "@/store/service/authApi";
 import ProjectsSection from "./sections/ProjectsSection";
 import TechnologiesSection from "./sections/TechnologiesSection";
 import { useRouter } from "next/navigation";

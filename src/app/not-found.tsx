@@ -18,6 +18,7 @@ const NotFound: React.FC = () => {
         width={300}
         height={200}
         alt="Bot not found"
+        loading='lazy'
       />
 
       <div className='not-found__description'>

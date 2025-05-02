@@ -5,8 +5,8 @@ import React, { useContext } from 'react';
 import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
 import style from './page.module.css'
 import Image from 'next/image';
-import articles from '@/mock/articles.json';
-import tagsMock from '@/mock/tags.json';
+import articles from '@/mocks/articles.json';
+import tagsMock from '@/mocks/tags.json';
 import { Intro, Phrase } from '@/components/atom/TextBlocks/TextsBlocks';
 import StatusNotice from '@/components/organisms/Notice/Notice';
 
@@ -83,6 +83,7 @@ const BlogPage = () => {
               height={300}
               alt={article.title.es}
               className={style["article-card__image"]} 
+              loading='lazy'
             />
             <h2 className={style["article-card__title"]}>{article.title.es}</h2>
             <p className={style["article-card__description"]}>{article.description.es}</p>
@@ -96,6 +97,7 @@ const BlogPage = () => {
                     height={24}
                     alt={tagsMock.filter(item => item.id===tag)[0].name.es}
                     className={style['article-card__tag']}
+                    loading='lazy'
                   />
                 ))
               }

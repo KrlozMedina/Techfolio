@@ -45,6 +45,7 @@ const AboutMe: React.FC = () => {
         height={300}
         alt="" 
         className='aboutme__photo'
+        loading='lazy'
       />
       
       <h1 className='title' >{isSpanish ? "Sobre mi" : "About me"}</h1>

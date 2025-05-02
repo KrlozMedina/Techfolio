@@ -1,4 +1,6 @@
 // // https://medium.com/@nithishreddy0627/connecting-your-next-js-project-to-mongodb-atlas-using-mongoose-a-step-by-step-guide-2d2552b5d7ca
+// Lógica de conexión a bases de datos y queries directas.
+// connectDB.ts, userQueries.ts, seed.ts
 
 import mongoose from "mongoose";
 

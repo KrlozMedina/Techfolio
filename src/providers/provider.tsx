@@ -1,7 +1,7 @@
 'use client'
 
 import { Provider } from 'react-redux' 
-import { store } from '../redux/store' 
+import { store } from '../store/store' 
 import { ThemeClientProvider } from '@/providers/ThemeClientProvider'
 
 interface Props {

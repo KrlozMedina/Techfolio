@@ -1,5 +1,7 @@
-import { ITechnology } from "@/types/common";
-import { CATEGORIES } from "@/types/constants";
+// import { ITechnology } from "@/types/common";
+// import { CATEGORIES } from "@/types/constants";
+import { CATEGORIES } from "@/shared/constants/constants";
+import { ITechnology } from "@/shared/types/common";
 import mongoose, { Schema } from "mongoose";
 
 const technologySchema = new Schema<ITechnology>(

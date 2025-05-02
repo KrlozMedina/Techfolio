@@ -17,7 +17,7 @@ export const CATEGORIES = [
   "Other",
 ];
 
-export const PROJECT_TYPE = [
+export const PLATFORMS = [
   "Web Applications",
   "Desktop Applications",
   "Mobile Applications",

@@ -1,5 +1,5 @@
 import React from "react";
-import { useLogoutMutation } from "@/redux/service/authApi";
+import { useLogoutMutation } from "@/store/service/authApi";
 import { useRouter } from "next/navigation";
 
 interface LogoutProps {

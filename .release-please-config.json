@@ -1,0 +1,15 @@
+{
+  "branches": [
+    {
+      "branch": "main",
+      "release-type": "node"
+    },
+    {
+      "branch": "dev",
+      "release-type": "node",
+      "prerelease": true,
+      "label": "prerelease",
+      "versioning-strategy": "same-as-main"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import Modal from "@/components/organisms/Modal/Modal";
 import { TextInput } from "@/components/atom/Form/FormElements";
-import { CATEGORIES } from "@/types/constants";
-import { useCreateTechnologyMutation, useDeleteTechnologyMutation, useGetTechnologiesQuery } from "@/redux/service/technologiesApi";
-import { ErrorResponse, ITechnology } from "@/types/common";
+import { CATEGORIES } from "@/shared/constants/constants";
+import { useCreateTechnologyMutation, useDeleteTechnologyMutation, useGetTechnologiesQuery } from "@/store/service/technologiesApi";
+import { ErrorResponse, ITechnology } from "@/shared/types/common";
 import LanguageContext, { LanguageContextType } from "@/context/LanguageContext";
 import style from '../page.module.css';
 import Image from "next/image";
@@ -147,6 +147,7 @@ const TechnologiesSection: React.FC = () => {
               height={300}
               alt={`${technology.name} logo`}
               className={style["technology__card-logo"]}
+              loading="lazy"
             />
             <h3 className={style["technology__card-name"]}>{technology.name}</h3>
             <p className={style["technology__card-category"]}>{technology.category}</p>
