@@ -1,4 +1,15 @@
 {
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "node",
+  "include-component-in-tag": false,
+  "packages": {
+    ".": {
+      "package-name": "techfolio",
+      "versioning-strategy": "same-as-main",
+      "extra-files": [],
+      "pull-request-title-pattern": "chore: release ${component} ${version}"
+    }
+  },
   "branches": [
     {
       "branch": "main",
