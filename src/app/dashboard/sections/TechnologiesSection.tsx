@@ -3,7 +3,7 @@ import Modal from "@/components/organisms/Modal/Modal";
 import { TextInput } from "@/components/atom/Form/FormElements";
 import { CATEGORIES } from "@/shared/constants/constants";
 import { useCreateTechnologyMutation, useDeleteTechnologyMutation, useGetTechnologiesQuery } from "@/store/service/technologiesApi";
-import { ErrorResponse, ITechnology } from "@/shared/types/common";
+import { ErrorResponse, ITechnology } from "@/shared/types";
 import LanguageContext, { LanguageContextType } from "@/context/LanguageContext";
 import style from '../page.module.css';
 import Image from "next/image";

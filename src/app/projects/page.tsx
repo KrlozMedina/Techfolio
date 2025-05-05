@@ -1,119 +1,76 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import LanguageContext, { LanguageContextType } from "@/context/LanguageContext";
 import MainLayout from "@/components/templates/MainLayout/MainLayout";
 import Slider from "@/components/organisms/Slider/Slider";
-import { useGetProjectsQuery } from "@/store/service/projectsApi";
+import { useGetProjectsSimpleDataQuery } from "@/store/service/projectsApi";
 import { ProjectCard } from "@/components/molecules/CardViews/CardViews";
-import { CATEGORIES, PLATFORMS } from "@/shared/constants/constants";
-import { useGetTechnologiesQuery } from "@/store/service/technologiesApi";
-import { IProject } from "@/models/Project.model";
-import caseStudies from "@/mocks/caseStudies.json";
-import style from './page.module.css'
-import Link from "next/link";
 import { Intro, Phrase } from "@/components/atom/TextBlocks/TextsBlocks";
 import { DatabaseError, Loading, NoData } from "@/components/molecules/FeedbackStates/FeedbackStates";
-import Image from "next/image";
 import StatusNotice from "@/components/organisms/Notice/Notice";
-// import { text } from "stream/consumers";
+import style from './page.module.css'
+import caseStudies from "@/mocks/caseStudies.json";
+import Image from "next/image";
+import Link from "next/link";
+import { IProjectV2 } from "@/models/interfaces";
+import { CATEGORIES, NAV_LINKS_PROJECT, PLATFORMS, TECHNOLOGIES } from "@/shared/constants";
 
-const texts = {
-  intro: {
-    es: {
-      title: 'Proyectos',
-      intro: 'Una muestra de proyectos que reflejan mi experiencia construyendo soluciones tecnológicas. Desde aplicaciones web hasta proyectos en electrónica, cada uno representa parte de mi aprendizaje, evolución y pasión por la tecnología.'
+const TEXTS = {
+  hero: {
+    title: {
+      es: 'Proyectos',
+      en: 'Projects',
     },
-    en: {
-      title: 'Projects',
-      intro: 'A selection of projects that reflect my experience building technological solutions. From web applications to electronics projects, each one represents my learning journey, growth, and passion for technology.'
+    intro: {
+      es: 'Una muestra de proyectos que reflejan mi experiencia construyendo soluciones tecnológicas...',
+      en: 'A selection of projects that reflect my experience building technological solutions...',
     }
   },
   successStories: {
-    es: {
-      title: 'Casos de Éxito',
-      intro: 'Descubre cómo mis soluciones han marcado la diferencia en diversos proyectos. Cada caso de éxito refleja el compromiso, la innovación y el enfoque personalizado para resolver desafíos reales y generar impacto.'
+    title: {
+      es: 'Casos de Éxito',
+      en: 'Success Stories',
     },
-    en: {
-      title: 'Success Stories',
-      intro: 'Discover how my solutions have made a difference in various projects. Each success story reflects commitment, innovation, and a tailored approach to solving real-world challenges and creating impact.'
+    intro: {
+      es: 'Descubre cómo mis soluciones han marcado la diferencia en diversos proyectos. Cada caso de éxito refleja el compromiso, la innovación y el enfoque personalizado para resolver desafíos reales y generar impacto.',
+      en: 'Discover how my solutions have made a difference in various projects. Each success story reflects commitment, innovation, and a tailored approach to solving real-world challenges and creating impact.'
     }
   },
   phrase: {
-    es: 'Las recompensas y la motivación son un cambio de aceite para los motores del proyecto. Hazlo regularmente y con frecuencia.',
-    en: 'Rewards and motivation are an oil change for the engines of a project. Do it regularly and frequently.'
+    es: 'Las recompensas y la motivación son un cambio de aceite...',
+    en: 'Rewards and motivation are an oil change for the engines of a project...',
   },
-  author: 'Woody Williams',
-}
+  author: 'Woody Williams'
+};
 
 const Projects: React.FC = () => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-  const { data: dataTechnologies } = useGetTechnologiesQuery(null);
-  const { data: dataProjects, isLoading, isSuccess, isError, error: errorProjects } = useGetProjectsQuery(null);
-  const [newDataProjects, setNewDataProjects] = useState<IProject[] | undefined>(undefined);
+  const language = isSpanish ? 'es' : 'en';
+  const { data: projects, isLoading, isError, error } = useGetProjectsSimpleDataQuery(language);
+  const [filter, setFilter] = useState({ category: "", platform: "", technology: "" });
+  const clearFilters = () => setFilter({ category: "", platform: "", technology: "" });
 
-  // console.log(errorProjects)
-
-  const [filter, setFilters] = useState({
-    category: "",
-    projectType: "",
-    technology: "",
-  });
-
-  const links = [
-    {
-      title: isSpanish ? "Servicios" : "Services",
-      href: "/projects/services",
-      isActive: false
-    },
-    {
-      title: isSpanish ? "Testimonios" : "Testimonials",
-      href: "/projects/testimonials",
-      isActive: false
-    },
-    {
-      title: isSpanish ? "Casos de éxito" : "Success Stories",
-      href: "/projects/case-studies",
-      isActive: false
-    },
-  ];
-
-  const handlerFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilters((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handlerClear = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setFilters({
-      category: "",
-      projectType: "",
-      technology: "",
+  const filteredProjects = useMemo(() => {
+    if (!projects) return [];
+    return projects.data.filter((project: IProjectV2) => {
+      const matchType = !filter.platform || project.tags.platformId === filter.platform;
+      const matchCategory = !filter.category || project.tags.categoryIds?.includes(filter.category);
+      const matchTech = !filter.technology || project.tags.technologyIds?.includes(filter.technology);
+      return matchType && matchCategory && matchTech;
     });
-    setNewDataProjects(dataProjects);
+  }, [projects, filter]);
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFilter((prev) => ({ ...prev, [name]: value }));
   };
-
-  useEffect(() => {
-    setNewDataProjects(dataProjects);
-  }, [isSuccess]);
-
-  useEffect(() => {
-    const filtered = dataProjects?.filter((project) => {
-      const matchType = filter.projectType === "" || project.projectType === filter.projectType;
-      const matchCategory = filter.category === "" || project.category.includes(filter.category);
-      const matchTechnology = filter.technology === "" || project.technologies.includes(filter.technology);
-      return matchType && matchCategory && matchTechnology;
-    });
-    setNewDataProjects(filtered);
-  }, [filter]);  
 
   return (
-    <div>
-      <title>{isSpanish ? 'Proyectos | KrlozMedina Portfolio Lab' : 'Projects | KrlozMedina Portfolio Lab'}</title>
-      <meta name="keyword" content="Proyectos, Full Stack, Electronica" />
+    <MainLayout isAdmin={false} links={NAV_LINKS_PROJECT.map(link => ({ ...link, isActive: false }))} language={language}>
+      <title>{`${TEXTS.hero.title[language]} | KrlozMedina Portfolio Lab`}</title>
       <meta name="description" content="Una demostración de ModalJS en Next.js" />
+      <meta name="keyword" content="Proyectos, Full Stack, Electronica" />
       <meta property="og:title" content="Demo - ModalJS" />
       <meta property="og:description" content="Una demostración de ModalJS en Next.js" />
       <meta property="og:image" content="https://tusitio.com/og-image.jpg" />
@@ -122,159 +79,124 @@ const Projects: React.FC = () => {
       <meta property="og:site_name" content="KrlozMedina Portfolio Lab" />
       <meta property="og:locale" content="es_CO" />
 
-      <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'}>
-        <Phrase
-          // phraseEnglish="Rewards and motivation are an oil change for the engines of a project. Do it regularly and frequently."
-          // phraseSpanish="Las recompensas y la motivación son un cambio de aceite para los motores del proyecto. Hazlo regularmente y con frecuencia."
-          phrase={isSpanish ? texts.phrase.es : texts.phrase.en}
-          author={texts.author}
+      <Phrase phrase={TEXTS.phrase[language]} author={TEXTS.author} />
+
+      <section>
+        <Intro title={TEXTS.hero.title[language]} intro={TEXTS.hero.intro[language]} />
+        <StatusNotice type="incomplete" language={language} />
+
+        <form className={style['projects__filter']}>
+          <fieldset className={style['projects__filter-fieldset']}>
+            <legend className={style['projects__filter-legend']}>{isSpanish ? 'Filtros' : 'Filters'}</legend>
+            <div>
+              <label>
+                {isSpanish ? 'Plataforma' : 'Platform'}
+                <select name="platform" value={filter.platform} onChange={handleFilterChange}>
+                  <option value="">{isSpanish ? 'Todos' : 'All'}</option>
+                  {PLATFORMS.map((platform) => (
+                    <option key={platform.id} value={platform[language].name}>{platform[language].name}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                {isSpanish ? 'Categoría' : 'Category'}
+                <select name="category" value={filter.category} onChange={handleFilterChange}>
+                  <option value="">{isSpanish ? 'Todos' : 'All'}</option>
+                  {CATEGORIES.map((category) => (
+                    <option key={category.id} value={category[language].name}>{category[language].name}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                {isSpanish ? 'Tecnología' : 'Technology'}
+                <select name="technology" value={filter.technology} onChange={handleFilterChange}>
+                  <option value="">{isSpanish ? 'Todos' : 'All'}</option>
+                  {TECHNOLOGIES.map(tech => (
+                    <option key={tech.id} value={tech.name}>{tech.name}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <button type="button" onClick={clearFilters}>
+              {isSpanish ? 'Limpiar' : 'Clear'}
+            </button>
+          </fieldset>
+        </form>
+
+        <Slider>
+          {isLoading && <Loading language={language} />}
+          {isError && <DatabaseError reason={error} language={language} />}
+          {!isLoading && filteredProjects.length === 0 && <NoData reason="no-match" language={language} />}
+          {!isLoading && filteredProjects.map((project, idx) => (
+            <ProjectCard key={idx} data={project} language={language} />
+          ))}
+        </Slider>
+      </section>
+
+      <section>
+        <Intro
+          title={TEXTS.successStories.title[language]}
+          intro={TEXTS.successStories.intro[language]}
         />
+        
+        <section className={style["projects__case-study"]}>
+          {
+            caseStudies.slice(0,2).map((caseStudy, index) => (
+              <div key={index} className={style["projects__case-study__content"]}>
+                {caseStudy.imageUrl && (
+                  <Image
+                    src={caseStudy.imageUrl}
+                    width={300}
+                    height={200}
+                    alt={caseStudy[language].title}
+                  />
+                )}
 
-        <section>
-          <Intro title={isSpanish ? texts.intro.es.title : texts.intro.en.title} intro={isSpanish ? texts.intro.es.intro : texts.intro.en.intro} />
-          <StatusNotice type="incomplete" language={isSpanish ? 'es' : 'en'} />
-
-          <form className={style['projects__filter']}>
-            <fieldset className={style['projects__filter-fieldset']}>
-              <legend className={style['projects__filter-legend']}>{isSpanish ? 'Filtros' : 'Filters'}</legend>
-              <div>
-                <label htmlFor="projectType" >
-                  {isSpanish ? 'Tipo de proyecto' : 'Project type'}
-                  <select
-                    name="projectType"
-                    value={filter.projectType}
-                    onChange={handlerFilter}
-                  >
-                    <option value="">{isSpanish ? 'Todos' : 'All'}</option>
-                    {PLATFORMS.map((type, index) => (
-                      <option value={type} key={index}>
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label htmlFor="category">
-                  {isSpanish ? 'Categoria' : 'Category'}
-                  <select
-                    name="category"
-                    value={filter.category}
-                    onChange={handlerFilter}
-                  >
-                    <option value="">{isSpanish ? 'Todos' : 'All'}</option>
-                    {CATEGORIES?.map((category, index) => (
-                      <option value={category} key={index}>
-                        {category}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label htmlFor="technology">
-                  {isSpanish ? 'Tecnología' : 'Technology'}
-                  <select
-                    name="technology"
-                    value={filter.technology}
-                    onChange={handlerFilter}
-                  >
-                    <option value="">{isSpanish ? 'Todos' : 'All'}</option>
-                    {dataTechnologies?.map((technology) => (
-                      <option value={technology.name} key={technology._id}>
-                        {technology.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-              <button onClick={handlerClear}>{isSpanish ? 'Limpiar' : 'Clear'}</button>
-            </fieldset>
-          </form>
-
-          {/* <button onClick={() => refetch()}>Reload</button> */}
-
-          <Slider>
-            {
-              isLoading
-              ? <Loading language={isSpanish ? 'es' : 'en'} />
-              : isError
-                ? <DatabaseError reason={errorProjects} language={isSpanish ? 'es' : 'en'} />
-                : newDataProjects?.length === 0
-                  ? <NoData reason="no-match" language={isSpanish ? 'es' : 'en'} />
-                  : newDataProjects?.map((element) => (
-                    <ProjectCard
-                      key={element._id}
-                      data={element}
-                      language={isSpanish ? 'es' : 'en'}
-                    />
-                  ))
-            }
-          </Slider>
-        </section>
-
-        <section>
-          <Intro
-            title={isSpanish ? texts.successStories.es.title : texts.successStories.en.title}
-            intro={isSpanish ? texts.successStories.en.intro : texts.successStories.en.intro}
-          />
-          
-          <section className={style["projects__case-study"]}>
-            {
-              caseStudies.slice(0,2).map((caseStudy, index) => (
-                <div key={index} className={style["projects__case-study__content"]}>
-                  {caseStudy.imageUrl && (
-                    <Image
-                      src={caseStudy.imageUrl}
-                      width={300}
-                      height={200}
-                      alt={isSpanish ? caseStudy.es.title : caseStudy.en.title}
-                      className={style["projects__case-study__image"]}
-                    />
+                <div className={style['projects__case-study__content-text']}>
+                  <h2 className={style["projects__case-study__title"]}>{caseStudy[language].title}</h2>
+                  {caseStudy.client && (
+                    <p>
+                      <strong>{isSpanish ? 'Cliente' : 'Client'}:</strong> {caseStudy.client}
+                    </p>
                   )}
-
-                  <div className={style['projects__case-study__content-text']}>
-                    <h2 className={style["projects__case-study__title"]}>{isSpanish ? caseStudy.es.title : caseStudy.en.title}</h2>
-                    {caseStudy.client && (
-                      <p>
-                        <strong>{isSpanish ? 'Cliente' : 'Client'}:</strong> {caseStudy.client}
-                      </p>
-                    )}
-                    <p>
-                      <strong>{isSpanish ? 'Reto' : 'Challenge'}:</strong> {isSpanish ? caseStudy.es.challenges : caseStudy.en.challenges}
-                    </p>
-                    <p>
-                      <strong>{isSpanish ? 'Solución' : 'Solution'}:</strong> {isSpanish ? caseStudy.es.solution : caseStudy.en.solution}
-                    </p>
-                    <p>
-                      <strong>{isSpanish ? 'Resultados' : 'Results'}:</strong> {isSpanish ? caseStudy.es.results : caseStudy.en.results}
-                    </p>
-                    {/* {caseStudy.testimonial && ( */}
-                      <blockquote>“{isSpanish ? caseStudy.testimonials[0].es : caseStudy.testimonials[0].en}”</blockquote>
-                    {/* )} */}
-                  </div>
+                  <p>
+                    <strong>{isSpanish ? 'Reto' : 'Challenge'}:</strong> {isSpanish ? caseStudy.es.challenges : caseStudy.en.challenges}
+                  </p>
+                  <p>
+                    <strong>{isSpanish ? 'Solución' : 'Solution'}:</strong> {isSpanish ? caseStudy.es.solution : caseStudy.en.solution}
+                  </p>
+                  <p>
+                    <strong>{isSpanish ? 'Resultados' : 'Results'}:</strong> {isSpanish ? caseStudy.es.results : caseStudy.en.results}
+                  </p>
+                  {/* {caseStudy.testimonial && ( */}
+                    <blockquote>“{caseStudy.testimonials[0][language]}”</blockquote>
+                  {/* )} */}
                 </div>
-              ))
-            }
-          </section>
+              </div>
+            ))
+          }
         </section>
+      </section>
 
-        <section className={style["projects__cta"]}>
-          <h2 className={style["projects__cta__title"]}>
-            {
-              isSpanish
-                ? '¿Te gustaría trabajar conmigo en tu próximo proyecto?'
-                : 'Would you like to work with me on your next project?'
-            }
-          </h2>
-          <div className={style["projects__cta__actions"]}>
-            <Link href="/contact" className={style["projects__cta__button--primary"]}>
-              {isSpanish ? 'Contáctame' : 'Contact me'}
-            </Link>
+      <section className={style["projects__cta"]}>
+        <h2 className={style["projects__cta__title"]}>
+          {
+            isSpanish
+              ? '¿Te gustaría trabajar conmigo en tu próximo proyecto?'
+              : 'Would you like to work with me on your next project?'
+          }
+        </h2>
+        <div className={style["projects__cta__actions"]}>
+          <Link href="/contact" className={style["projects__cta__button--primary"]}>
+            {isSpanish ? 'Contáctame' : 'Contact me'}
+          </Link>
 
-            <Link href="/projects/services" className={style["projects__cta__button--secondary"]}>
-              {isSpanish ? 'Explorar servicios' : 'Explore services'}
-            </Link>
-          </div>
-        </section>
-      </MainLayout>
-    </div>
+          <Link href="/projects/services" className={style["projects__cta__button--secondary"]}>
+            {isSpanish ? 'Explorar servicios' : 'Explore services'}
+          </Link>
+        </div>
+      </section>
+    </MainLayout>
   );
 };
 

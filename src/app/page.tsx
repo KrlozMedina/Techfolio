@@ -43,7 +43,6 @@ const HomePage: React.FC = () => {
               width={300}
               height={200}
               className={styles['home__main-img']}
-              priority
               loading='lazy'
             />
             <section>
