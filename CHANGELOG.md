@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/KrlozMedina/Techfolio/compare/v2.0.0...v2.1.0) (2025-05-11)
+
+
+### Features
+
+* **api-v2:** implementación de CRUD con filtros y soporte de idioma en la API de proyectos ([8f49600](https://github.com/KrlozMedina/Techfolio/commit/8f49600feb72114c592935a4b4d26e3e5145e0ac))
+* **auth:** creación de middleware para protección de rutas y validación de token ([efa9b8a](https://github.com/KrlozMedina/Techfolio/commit/efa9b8ab37195711d679206ff2b44854f740a093))
+
 ## [2.0.0](https://github.com/KrlozMedina/Techfolio/compare/v1.0.0...v2.0.0) (2025-05-02)
 
 
