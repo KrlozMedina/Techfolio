@@ -9,12 +9,12 @@ const ExperiencePage = () => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
   const links = [
-    { href: '/profile/about-me', title: isSpanish ? 'Sobre mí' : 'About me', isActive:false },
-    { href: '/profile/education', title: isSpanish ? 'Educación' : 'Education', isActive:false },
-    { href: '/profile/skills', title: isSpanish ? 'Habilidades' : 'Skills', isActive:false },
-    { href: '/profile/certifications', title: isSpanish ? 'Certificaciones' : 'Certifications', isActive:false },
-    { href: '/profile/experience', title: isSpanish ? 'Experiencia laboral' : 'Work experience', isActive:true },
-    { href: '/profile/achievements', title: isSpanish ? 'Logros' : 'Achievements', isActive:false },
+    { href: '/profile/about-me', title: {es: 'Sobre mí', en: 'About me'}, isActive:false },
+    { href: '/profile/education', title: {es: 'Educación', en: 'Education'}, isActive:false },
+    { href: '/profile/skills', title: {es: 'Habilidades', en: 'Skills'}, isActive:false },
+    { href: '/profile/certifications', title: {es: 'Certificaciones', en: 'Certifications'}, isActive:false },
+    { href: '/profile/experience', title: {es: 'Experiencia laboral', en: 'Work experience'}, isActive:true },
+    { href: '/profile/achievements', title: {es: 'Logros', en: 'Achievements'}, isActive:false },
   ]
 
   const experiences = [

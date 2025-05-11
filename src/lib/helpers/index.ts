@@ -1,2 +1,2 @@
-// Funciones auxiliares del backend (con lógica o acceso a BD).
-// generateSlug.ts, mapTechToCategory.ts
+export * from './auth';
+export * from './technology';

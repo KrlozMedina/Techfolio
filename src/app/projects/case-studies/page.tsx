@@ -17,17 +17,17 @@ const CaseStudiesPage: React.FC = () => {
 
   const links = [
     {
-      title: isSpanish ? "Servicios" : "Services",
+      title: {es: "Servicios", en: "Services"},
       href: "/projects/services",
       isActive: false,
     },
     {
-      title: isSpanish ? "Testimonios" : "Testimonials",
+      title: {es: "Testimonios", en: "Testimonials"},
       href: "/projects/testimonials",
       isActive: false,
     },
     {
-      title: isSpanish ? "Casos de éxito" : "Success Stories",
+      title: {es: "Casos de éxito", en: "Success Stories"},
       href: "/projects/case-studies",
       isActive: true,
     },

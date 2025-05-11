@@ -10,9 +10,13 @@ import styles from './Menu.module.css';
 import Logout from '@/components/atom/Logout/Logout';
 import ThemeToggle from '@/components/molecules/ThemeToggle/ThemeToggle';
 
+// --- Interfaces ---
 interface Link {
   href: string;
-  title: string;
+  title: {
+    es: string;
+    en: string;
+  };
 }
 
 interface MenuProps {
@@ -35,56 +39,40 @@ interface MenuAsideProps {
   language: 'es' | 'en';
 }
 
-// Base navigation items with icons and multilingual labels
+// --- Constants ---
 const navItems = [
   {
     href: '/projects',
-    label: {
-      es: 'Proyectos',
-      en: 'Projects'
-    },
+    label: { es: 'Proyectos', en: 'Projects' },
     icon: SiPolymerproject,
-    key: 'projects'
+    key: 'projects',
   },
   {
     href: '/profile',
-    label: {
-      es: 'Perfil',
-      en: 'Profile'
-    },
+    label: { es: 'Perfil', en: 'Profile' },
     icon: ImProfile,
-    key: 'about'
+    key: 'about',
   },
   {
     href: '/blog',
-    label: {
-      es: 'Blog',
-      en: 'Blog'
-    },
+    label: { es: 'Blog', en: 'Blog' },
     icon: ImBlog,
-    key: 'blog'
+    key: 'blog',
   },
   {
     href: '/contact',
-    label: {
-      es: 'Contactarme',
-      en: 'Contact me'
-    },
+    label: { es: 'Contactarme', en: 'Contact me' },
     icon: BiMessageDots,
-    key: 'contact'
+    key: 'contact',
   },
 ];
 
-//
-// COMPONENT: MenuLinks
-// Renders navigation links with icons and multilingual labels.
-// Supports both standard and mobile views.
-//
-const MenuLinks: React.FC<MenuLinksProps> = ({
-  isPhone = false,
-  links,
-  language = 'es'
-}) => {
+// --- COMPONENT: MenuLinks ---
+/**
+ * Renders the navigation links with icons and multilingual labels.
+ * Supports both standard and mobile views.
+ */
+const MenuLinks: React.FC<MenuLinksProps> = ({ isPhone = false, links, language }) => {
   const containerClass = isPhone ? styles['menu__container--phone'] : styles['menu__container'];
 
   return (
@@ -98,29 +86,31 @@ const MenuLinks: React.FC<MenuLinksProps> = ({
       ))}
 
       {/* Custom/Extra links (e.g., admin) */}
-      <div className={styles['menu__container--links']}>
-        {links?.map((link, index) => (
-          <a key={index} href={link.href}>{link.title}</a>
-        ))}
-      </div>
+      {links?.length && (
+        <div className={styles['menu__container--links']}>
+          {links.map((link, index) => (
+            <a key={index} href={link.href}>
+              {link.title[language]}
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
-//
-// COMPONENT: Menu
-// Basic version of the menu used in standard layouts.
-//
-const Menu: React.FC<MenuProps> = ({ language }) => {
-  return <MenuLinks language={language} />;
-};
+// --- COMPONENT: Menu ---
+/**
+ * Basic version of the menu used in standard layouts.
+ */
+const Menu: React.FC<MenuProps> = ({ language }) => <MenuLinks language={language} />;
 
-//
-// COMPONENT: MenuPhone
-// Mobile-friendly collapsible menu.
-// Includes toggle button, multilingual support, and logout (if admin).
-//
-const MenuPhone: React.FC<MenuPhoneProps> = ({ links, isAdmin, language='es' }) => {
+// --- COMPONENT: MenuPhone ---
+/**
+ * Mobile-friendly collapsible menu.
+ * Includes toggle button, multilingual support, and logout (if admin).
+ */
+const MenuPhone: React.FC<MenuPhoneProps> = ({ links, isAdmin, language }) => {
   const [menuOpen, setMenuOpen] = useState(false); // Menu open/close state
 
   return (
@@ -143,7 +133,7 @@ const MenuPhone: React.FC<MenuPhoneProps> = ({ links, isAdmin, language='es' }) 
           <LanguageToggleButtonMobile />
 
           {/* Admin logout button */}
-          {isAdmin && <Logout language={language}/>}
+          {isAdmin && <Logout language={language} />}
 
           {/* Theme toggle switch */}
           <ThemeToggle language={language} />
@@ -153,11 +143,11 @@ const MenuPhone: React.FC<MenuPhoneProps> = ({ links, isAdmin, language='es' }) 
   );
 };
 
-//
-// COMPONENT: MenuAside
-// Sidebar navigation menu for desktop views.
-// Shows text label on hover instead of icon.
-//
+// --- COMPONENT: MenuAside ---
+/**
+ * Sidebar navigation menu for desktop views.
+ * Shows text label on hover instead of icon.
+ */
 const MenuAside: React.FC<MenuAsideProps> = ({ language }) => {
   const [hover, setHover] = useState<string | null>(null); // Hover tracking
 
@@ -172,7 +162,7 @@ const MenuAside: React.FC<MenuAsideProps> = ({ language }) => {
         >
           {/* Display label on hover, icon otherwise */}
           {hover === key ? (
-            <p className='text-icon'>{label[language]}</p>
+            <p className="text-icon">{label[language]}</p>
           ) : (
             <Icon className="icon" />
           )}
@@ -182,5 +172,5 @@ const MenuAside: React.FC<MenuAsideProps> = ({ language }) => {
   );
 };
 
-// Export all three menu variants
+// --- Export Menu Components ---
 export { Menu, MenuPhone, MenuAside };

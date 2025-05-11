@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Sitemap generado para mejorar el rastreo de contenido por motores de búsqueda -->
+
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Página principal -->
   <url>
     <loc>https://krlozmedina.dev/</loc>
-    <priority>1.0</priority>
+    <lastmod>2025-01-01</lastmod> <!-- Última fecha de modificación -->
+    <changefreq>monthly</changefreq> <!-- Frecuencia estimada de cambios -->
+    <priority>1.0</priority> <!-- Alta prioridad para la página principal -->
   </url>
+
+  <!-- Página "Acerca de" -->
   <url>
-    <loc>https://krlozmedina.dev/about</loc>
+    <loc>https://krlozmedina.dev/profile/about</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://krlozmedina.dev/projects</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://krlozmedina.dev/contact</loc>
-    <priority>0.7</priority>
-  </url>
+
+  <!-- Puedes seguir agregando más páginas con la misma estructura -->
+  
 </urlset>

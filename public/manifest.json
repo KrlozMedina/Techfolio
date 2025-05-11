@@ -1,0 +1,31 @@
+{
+  "name": "Krloz Medina Portfolio",
+  "short_name": "Portafolio",
+  "description": "Portafolio profesional de Krloz Medina - Fullstack Developer & Especialista en Electrónica",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a202c",
+  "orientation": "portrait",
+
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.ico",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.ico",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ]
+}

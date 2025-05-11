@@ -1,14 +1,37 @@
 /* ========================
-   🌓 Sistema de Temas: Claro y Oscuro
-   ======================== */
+🎨 Sistema de Temas: Claro y Oscuro
+======================== */
 
-/* 🎯 Tema predeterminado según configuración del sistema */
+/* 🎨 Paleta de colores base (modo claro por defecto) */
+:root {
+  color-scheme: light;
+
+  /* 🧩 Variables comunes - se sobrescriben según tema */
+  --color-text: var(--color-text-light);
+  --color-text-soft: var(--color-text-light-soft);
+  --color-background: var(--color-bg-light);
+  --color-background-container: var(--color-bg-container-light);
+  --color-background-container-soft: var(--color-bg-container-soft-light);
+  --color-background-title: var(--color-bg-title-light);
+  --color-button-text: var(--color-button-text-light);
+  --color-button-bg: var(--color-button-bg-light);
+  --color-button-hover: var(--color-button-hover-light);
+  --color-bg-error: var(--color-bg-error-light);
+  --color-link: var(--color-link-light);
+  --color-link-hover: var(--color-link-hover-light);
+  --color-scrollbar-hover: var(--color-scrollbar-hover-light);
+}
+
+/* 🌙 Tema Oscuro automático basado en preferencia del sistema */
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
+
     --color-text: var(--color-text-dark);
+    --color-text-soft: var(--color-text-dark-soft);
     --color-background: var(--color-bg-dark);
     --color-background-container: var(--color-bg-container-dark);
+    --color-background-container-soft: var(--color-bg-container-soft-dark);
     --color-background-title: var(--color-bg-title-dark);
     --color-button-text: var(--color-button-text-dark);
     --color-button-bg: var(--color-button-bg-dark);
@@ -20,57 +43,63 @@
   }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-  --color-text: var(--color-text-light);
-  --color-background: var(--color-bg-light);
-  --color-background-container: var(--color-bg-container-light);
-  --color-background-title: var(--color-bg-title-light);
-  --color-button-text: var(--color-button-text-light);
-  --color-button-bg: var(--color-button-bg-light);
-  --color-button-hover: var(--color-button-hover-light);
-  --color-bg-error: var(--color-bg-error-light);
-  --color-link: var(--color-link-light);
-  --color-link-hover: var(--color-link-hover-light);
-  --color-scrollbar-hover: var(--color-scrollbar-hover-light);
-  }
+/* 🕹️ Sobrescritura manual con atributo [data-theme] */
+[data-theme="light"],
+[data-theme="dark"] {
+  color-scheme: attr(data-theme);
+
+  --color-text: var(--color-text-attr);
+  --color-text-soft: var(--color-text-soft-attr);
+  --color-background: var(--color-bg-attr);
+  --color-background-container: var(--color-bg-container-attr);
+  --color-background-container-soft: var(--color-bg-container-soft-attr);
+  --color-background-title: var(--color-bg-title-attr);
+  --color-button-text: var(--color-button-text-attr);
+  --color-button-bg: var(--color-button-bg-attr);
+  --color-button-hover: var(--color-button-hover-attr);
+  --color-bg-error: var(--color-bg-error-attr);
+  --color-link: var(--color-link-attr);
+  --color-link-hover: var(--color-link-hover-attr);
+  --color-scrollbar-hover: var(--color-scrollbar-hover-attr);
 }
 
-/* 🎛️ Anulación con atributo [data-theme] */
+/* 🎯 Aplicación de tema manual (mapeo real de variables) */
 [data-theme="light"] {
-  color-scheme: light;
-  --color-text: var(--color-text-light);
-  --color-background: var(--color-bg-light);
-  --color-background-container: var(--color-bg-container-light);
-  --color-background-title: var(--color-bg-title-light);
-  --color-button-text: var(--color-button-text-light);
-  --color-button-bg: var(--color-button-bg-light);
-  --color-button-hover: var(--color-button-hover-light);
-  --color-bg-error: var(--color-bg-error-light);
-  --color-link: var(--color-link-light);
-  --color-link-hover: var(--color-link-hover-light);
-  --color-scrollbar-hover: var(--color-scrollbar-hover-light);
+  --color-text-attr: var(--color-text-light);
+  --color-text-soft-attr: var(--color-text-light-soft);
+  --color-bg-attr: var(--color-bg-light);
+  --color-bg-container-attr: var(--color-bg-container-light);
+  --color-bg-container-soft-attr: var(--color-bg-container-soft-light);
+  --color-bg-title-attr: var(--color-bg-title-light);
+  --color-button-text-attr: var(--color-button-text-light);
+  --color-button-bg-attr: var(--color-button-bg-light);
+  --color-button-hover-attr: var(--color-button-hover-light);
+  --color-bg-error-attr: var(--color-bg-error-light);
+  --color-link-attr: var(--color-link-light);
+  --color-link-hover-attr: var(--color-link-hover-light);
+  --color-scrollbar-hover-attr: var(--color-scrollbar-hover-light);
 }
 
 [data-theme="dark"] {
-  color-scheme: dark;
-  --color-text: var(--color-text-dark);
-  --color-background: var(--color-bg-dark);
-  --color-background-container: var(--color-bg-container-dark);
-  --color-background-title: var(--color-bg-title-dark);
-  --color-button-text: var(--color-button-text-dark);
-  --color-button-bg: var(--color-button-bg-dark);
-  --color-button-hover: var(--color-button-hover-dark);
-  --color-bg-error: var(--color-bg-error-dark);
-  --color-link: var(--color-link-dark);
-  --color-link-hover: var(--color-link-hover-dark);
-  --color-scrollbar-hover: var(--color-scrollbar-hover-dark);
+  --color-text-attr: var(--color-text-dark);
+  --color-text-soft-attr: var(--color-text-dark-soft);
+  --color-bg-attr: var(--color-bg-dark);
+  --color-bg-container-attr: var(--color-bg-container-dark);
+  --color-bg-container-soft-attr: var(--color-bg-container-soft-dark);
+  --color-bg-title-attr: var(--color-bg-title-dark);
+  --color-button-text-attr: var(--color-button-text-dark);
+  --color-button-bg-attr: var(--color-button-bg-dark);
+  --color-button-hover-attr: var(--color-button-hover-dark);
+  --color-bg-error-attr: var(--color-bg-error-dark);
+  --color-link-attr: var(--color-link-dark);
+  --color-link-hover-attr: var(--color-link-hover-dark);
+  --color-scrollbar-hover-attr: var(--color-scrollbar-hover-dark);
 }
 
 /* 🌐 Estilo base del <body> */
 body {
   background-color: var(--color-background);
   color: var(--color-text);
-  /* transition: background-color 0.3s ease, color 0.3s ease; */
+  /* Transiciones suaves entre temas */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

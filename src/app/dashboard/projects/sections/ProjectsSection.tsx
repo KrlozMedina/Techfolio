@@ -1,33 +1,33 @@
 import { TextInput } from "@/components/atom/Form/FormElements";
 import Modal from "@/components/organisms/Modal/Modal";
-import { IProject } from "@/models/Project.model";
 import {
   useCreateProjectMutation,
   useDeleteProjectMutation,
   useGetProjectsQuery,
 } from "@/store/service/projectsApi";
 import { useGetTechnologiesQuery } from "@/store/service/technologiesApi";
-import { ErrorResponse, ITechnology } from "@/shared/types/common";
+import { ErrorResponse, ITechnology } from "@/shared/types";
 import React, { useContext, useEffect, useState } from "react";
 import LanguageContext, {
   LanguageContextType,
 } from "@/context/LanguageContext";
-// import { PROJECT_TYPE } from "@/types/constants";
 import style from "../page.module.css";
 import Image from "next/image";
 import { PLATFORMS } from "@/shared/constants/constants";
+import { IProjectV2Paginated } from "@/models/project/Project.interface";
 
 const ProjectsSection: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [projects, setProjects] = useState<IProject[]>([]);
+  const [projects, setProjects] = useState<IProjectV2Paginated>();
   const [technologies, setTechnologies] = useState<ITechnology[]>([]);
-  const { data: dataProjects, refetch } = useGetProjectsQuery(null);
+  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  // const language = isSpanish ? 'es' : 'en';
+  const { data: dataProjects, refetch } = useGetProjectsQuery();
   const { data: dataTechnologies, isLoading: isLoadingTechnologies } =
     useGetTechnologiesQuery(null);
   const [createProject, { isLoading, isError }] = useCreateProjectMutation();
   const [deleteProject] = useDeleteProjectMutation();
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
   const [projectData, setProjectData] = useState({
     title: "",
@@ -339,54 +339,54 @@ const ProjectsSection: React.FC = () => {
       </div>
 
       <div className={style["project__list"]}>
-        {projects.map((project, index) => (
+        {projects?.data.map((project, index) => (
           <div className={style["project__card"]} key={index}>
             <Image
-              src={project.imageUrl}
+              src={project.assets.main}
               width={200}
               height={300}
-              alt={`${project.title} screenshot`}
+              alt={`${project.projectInfo.es.title} screenshot`}
               className={style["project__card-image"]}
             />
-            <h2 className={style["project__card-title"]}>{project.title}</h2>
-            <p>{project.description}</p>
+            <h2 className={style["project__card-title"]}>{project.projectInfo.es.title}</h2>
+            <p>{project.projectInfo.es.description}</p>
             <p>
               <strong>{isSpanish ? "Categoría" : "Category"}:</strong>{" "}
-              {project.category.join(", ")}
+              {project.tags.categoryIds?.join(", ")}
             </p>
             <p>
-              <strong>{isSpanish ? "Rol" : "Rol"}:</strong> {project.role}
+              <strong>{isSpanish ? "Rol" : "Rol"}:</strong> {project.teamInfo.roleId}
             </p>
             <p>
               <strong>{isSpanish ? "Duración" : "Duration"}:</strong>{" "}
-              {project.duration}
+              {project.teamInfo.duration}
             </p>
             <p>
               <strong>{isSpanish ? "Tamaño del equipo" : "Team Size"}:</strong>{" "}
-              {project.teamSize}
+              {project.teamInfo.teamSize}
             </p>
             <p>
               <strong>{isSpanish ? "Prioridad" : "Priority"}:</strong>{" "}
-              {project.priority}
+              {project.importanceScore}
             </p>
             <p>
               <strong>{isSpanish ? "Tipo" : "Type"}:</strong>{" "}
-              {project.projectType}
+              {project.tags.platformId}
             </p>
             <p>
               <strong>{isSpanish ? "Tecnologías" : "Technologies"}:</strong>{" "}
-              {project.technologies.join(", ")}
+              {project.tags.technologyIds.join(", ")}
             </p>
             <div>
               <a
-                href={project.repositoryUrl}
+                href={project.urls.repository}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {isSpanish ? "Repositorio" : "Repository"}
               </a>
               <a
-                href={project.liveUrl}
+                href={project.urls.live}
                 target="_blank"
                 rel="noopener noreferrer"
               >

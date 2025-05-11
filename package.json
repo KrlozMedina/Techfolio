@@ -1,5 +1,5 @@
 {
-  "name": "portafolio",
+  "name": "techfolio",
   "version": "2.0.0",
   "private": true,
   "scripts": {
@@ -37,7 +37,8 @@
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "release-please": "^17.0.0",
-    "typescript": "^5.8.3"
+    "supertest": "^7.1.0",
+    "vitest": "^3.1.2"
   },
   "pnpm": {
     "overrides": {
