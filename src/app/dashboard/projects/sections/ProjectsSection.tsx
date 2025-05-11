@@ -14,19 +14,20 @@ import LanguageContext, {
 import style from "../page.module.css";
 import Image from "next/image";
 import { PLATFORMS } from "@/shared/constants/constants";
-import { IProjectV2 } from "@/models/project/Project.interface";
+import { IProjectV2Paginated } from "@/models/project/Project.interface";
 
 const ProjectsSection: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [projects, setProjects] = useState<IProjectV2[]>([]);
+  const [projects, setProjects] = useState<IProjectV2Paginated>();
   const [technologies, setTechnologies] = useState<ITechnology[]>([]);
-  const { data: dataProjects, refetch } = useGetProjectsQuery(null);
+  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  // const language = isSpanish ? 'es' : 'en';
+  const { data: dataProjects, refetch } = useGetProjectsQuery();
   const { data: dataTechnologies, isLoading: isLoadingTechnologies } =
     useGetTechnologiesQuery(null);
   const [createProject, { isLoading, isError }] = useCreateProjectMutation();
   const [deleteProject] = useDeleteProjectMutation();
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
   const [projectData, setProjectData] = useState({
     title: "",
@@ -338,7 +339,7 @@ const ProjectsSection: React.FC = () => {
       </div>
 
       <div className={style["project__list"]}>
-        {projects.map((project, index) => (
+        {projects?.data.map((project, index) => (
           <div className={style["project__card"]} key={index}>
             <Image
               src={project.assets.main}
@@ -392,7 +393,7 @@ const ProjectsSection: React.FC = () => {
                 {isSpanish ? "Demo en Vivo" : "Live Demo"}
               </a>
             </div>
-            <div onClick={() => handlerDeleteProject(project["id"])}>
+            <div onClick={() => handlerDeleteProject(project["_id"])}>
               <button>{isSpanish ? "Eliminar" : "Delete"}</button>
             </div>
           </div>

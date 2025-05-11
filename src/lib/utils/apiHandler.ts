@@ -1,15 +1,18 @@
 import { NextResponse } from "next/server";
 
-type HandlerFn = (req: Request, context?: any) => Promise<NextResponse>;
+// apiHandler acepta cualquier tipo de contexto
+export type HandlerFn<T = unknown> = (req: Request, context: T) => Promise<NextResponse>;
 
-export function apiHandler(handler: HandlerFn) {
-  return async (req: Request, context?: any) => {
+// apiHandler genérico
+export function apiHandler<T = unknown>(handler: HandlerFn<T>) {
+  return async (req: Request, context: T): Promise<NextResponse> => {
     try {
       return await handler(req, context);
-    } catch (error: any) {
-      console.error(`[API ERROR]: ${error.message || error}`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error(`[API ERROR]: ${message}`);
       return NextResponse.json(
-        { error: "Internal server error", details: error?.message },
+        { error: "Internal server error", details: message },
         { status: 500 }
       );
     }

@@ -10,19 +10,19 @@ const TestimonialsPage = () => {
 
   const links = [
     {
-      title: isSpanish ? "Servicios" : "Services",
+      title: {es: "Servicios", en: "Services"},
       href: "/projects/services",
-      isActive: false
+      isActive: false,
     },
     {
-      title: isSpanish ? "Testimonios" : "Testimonials",
+      title: {es: "Testimonios", en: "Testimonials"},
       href: "/projects/testimonials",
-      isActive: true
+      isActive: true,
     },
     {
-      title: isSpanish ? "Casos de éxito" : "Success Stories",
+      title: {es: "Casos de éxito", en: "Success Stories"},
       href: "/projects/case-studies",
-      isActive: false
+      isActive: false,
     },
   ];
 

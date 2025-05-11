@@ -1,54 +1,83 @@
-/* ========================
+/* =========================================================
 🎨 Color Design Tokens
-Centraliza colores base para usarlos en distintos temas
-======================== */
+Define variables CSS para tipografías, fondos, bordes, íconos,
+botones, enlaces, scrollbars y más.
+Estas variables permiten un diseño temático claro/oscuro coherente.
+========================================================= */
 
 :root {
-  /* === Texto === */
-  --color-text-light: #222222;
-  --color-text-dark: #CCCCCC;
-  --color-text-error: #b22222;
-  --color-text-muted: #555;
+  /* ========================
+  TEXT COLORS
+  ======================== */
+  --color-text-light: #222222;           /* Texto primario en fondo claro */
+  --color-text-light-soft: #CCCCCC;      /* Texto secundario en fondo claro */
+  --color-text-dark: #CCCCCC;            /* Texto primario en fondo oscuro */
+  --color-text-dark-soft: #222222;       /* Texto secundario en fondo oscuro */
+  --color-text-error: #b22222;           /* Texto de error */
+  --color-text-muted: #555;              /* Texto desactivado / menos importante */
 
-  /* === Icon === */
-  --color-icon-muted: #aaa;
+  /* ========================
+  ICON COLORS
+  ======================== */
+  --color-icon-muted: #aaa;              /* Íconos en estado inactivo */
 
-  /* === Fondos === */
-  --color-bg-light: #ffffff;
-  --color-bg-dark: #121212;
-  --color-bg-error-light: #fff0f0;
-  --color-bg-error-dark: #3b1e1e50;
-  --color-bg-container-light: rgba(240, 240, 240, 0.8);
-  --color-bg-container-dark: rgba(0, 0, 0, 0.9);
-  --color-bg-title-light: #e0e0e0;
-  --color-bg-title-dark: #353333;
-  --color-bg-disable: #cccccc;
+  /* ========================
+  BACKGROUND COLORS
+  ======================== */
+  --color-bg-light: #ffffff;             /* Fondo general claro */
+  --color-bg-dark: #121212;              /* Fondo general oscuro */
 
-  /* === Scrollbar === */
+  --color-bg-error-light: #fff0f0;       /* Fondo de error en tema claro */
+  --color-bg-error-dark: #3b1e1e50;      /* Fondo de error en tema oscuro */
+
+  --color-bg-container-light: rgba(240, 240, 240, 0.8);     /* Contenedores en tema claro */
+  --color-bg-container-dark: rgba(0, 0, 0, 0.8);             /* Contenedores en tema oscuro */
+
+  --color-bg-container-soft-light: rgba(0, 0, 0, 0.4);       /* Contenedor suave fondo claro */
+  --color-bg-container-soft-dark: rgba(240, 240, 240, 0.4);  /* Contenedor suave fondo oscuro */
+
+  --color-bg-title-light: #e0e0e0;       /* Fondos de títulos en modo claro */
+  --color-bg-title-dark: #353333;        /* Fondos de títulos en modo oscuro */
+
+  --color-bg-disable: #cccccc;           /* Fondo para elementos desactivados */
+
+  /* ========================
+  SCROLLBAR COLORS
+  ======================== */
   --color-scrollbar-hover-light: black;
   --color-scrollbar-hover-dark: white;
-  
-  /* === Botones === */
-  --color-button-text-light: #2c3e50;
-  --color-button-text-dark: #ffffff;
-  --color-button-bg-light: #7a9cad;
-  --color-button-bg-dark: #334d5a;
-  --color-button-hover-light: #5e7f91;
-  --color-button-hover-dark: #3f5f73;
-  
-  /* === Borders === */
-  --color-border: #6e6e6e;
-  --color-border-error: #791d1d;
-  --color-border-focus: #334d5a;
-  --color-border-shadow: rgba(0, 112, 243, 0.2);
 
-  /* === Links === */
+  /* ========================
+  BUTTON COLORS
+  ======================== */
+  --color-button-text-light: #2c3e50;    /* Texto botón en fondo claro */
+  --color-button-text-dark: #ffffff;     /* Texto botón en fondo oscuro */
+
+  --color-button-bg-light: #7a9cad;      /* Fondo de botón claro */
+  --color-button-bg-dark: #334d5a;       /* Fondo de botón oscuro */
+
+  --color-button-hover-light: #5e7f91;   /* Hover en modo claro */
+  --color-button-hover-dark: #3f5f73;    /* Hover en modo oscuro */
+
+  /* ========================
+  BORDER COLORS
+  ======================== */
+  --color-border: #6e6e6e;               /* Borde genérico */
+  --color-border-error: #791d1d;         /* Borde de error */
+  --color-border-focus: #334d5a;         /* Borde al enfocar */
+  --color-border-shadow: rgba(0, 112, 243, 0.2); /* Sombra de foco */
+
+  /* ========================
+  LINK COLORS
+  ======================== */
   --color-link-light: #7a9cad;
   --color-link-dark: #334d5a;
   --color-link-hover-light: #5e7f91;
   --color-link-hover-dark: #3f5f73;
 
-  /* === Favorite === */
+  /* ========================
+  CUSTOM PALETTE (favoritos / marca)
+  ======================== */
   --oscuro: #2c3e50;
   --medio: #334d5a;
   --claro: #395B64;

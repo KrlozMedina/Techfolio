@@ -19,7 +19,7 @@ export const projectsApi = createApi({
     /**
      * Obtener todos los proyectos (versión completa).
      */
-    getProjects: builder.query<IProjectV2[], void>({
+    getProjects: builder.query<IProjectV2Paginated, void>({
       query: () => "/", // GET /api/v2/projects
     }),
 

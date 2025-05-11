@@ -10,14 +10,14 @@
 */
 
 /* 🎨 Variables globales */
-@import './variables/colors.css';
-@import './variables/typography.css';
-@import './variables/spacing.css';
-@import './variables/layout.css';
-@import './variables/themes.css';
+@import '../styles/variables/colors.css';
+@import '../styles/variables/typography.css';
+@import '../styles/variables/spacing.css';
+@import '../styles/variables/layout.css';
+@import '../styles/variables/themes.css';
 
 /* 🔄 Reset de estilos */
-@import './base/reset.css';
+@import '../styles/base/reset.css';
 
 /* 📦 Estilos base del proyecto */
-@import './base/base.css';
+@import '../styles/base/base.css';

@@ -1,11 +1,15 @@
 // app/layout.tsx
+
 import localFont from "next/font/local";
 import { Metadata } from "next";
 import { Providers } from "@/providers/provider";
 import { LanguageContextProvider } from "@/context/LanguageContext";
-import "@/styles/globals.css";
+import "./globals.css";
 
-// Carga de fuentes locales
+// =======================
+// 📦 Fuentes Locales
+// =======================
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -18,17 +22,21 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-// Metadatos para SEO y redes sociales
+// =======================
+// 📈 Metadatos Globales
+// =======================
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://krlozmedina.dev"), // ✅ Soluciona la advertencia sobre URLs absolutas
+
   title: {
     default: "KrlozMedina Portfolio Lab",
     template: "%s | KrlozMedina Portfolio Lab",
   },
+
   description:
     "Desarrollador de Software e Ingeniero en Control y Automatización. Descubre mis proyectos, habilidades y experiencia integrando tecnología, electrónica y programación.",
-  icons: {
-    icon: "./favicon.ico",
-  },
+
   keywords: [
     "KrlozMedina",
     "Carlos Alidio Medina Lopez",
@@ -41,6 +49,11 @@ export const metadata: Metadata = {
     "Electrónica",
     "Freelancer",
   ],
+
+  icons: {
+    icon: "./favicon.ico",
+  },
+
   openGraph: {
     title: "KrlozMedina | Portfolio Lab",
     description:
@@ -49,7 +62,7 @@ export const metadata: Metadata = {
     siteName: "KrlozMedina Portfolio Lab",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.jpg", // Se convierte automáticamente en absoluta por metadataBase
         width: 1200,
         height: 630,
         alt: "Portafolio de KrlozMedina",
@@ -58,8 +71,13 @@ export const metadata: Metadata = {
     locale: "es_CO",
     type: "website",
   },
+
   robots: "index, follow",
 };
+
+// =======================
+// 🌐 Root Layout
+// =======================
 
 export default function RootLayout({
   children,
@@ -70,12 +88,13 @@ export default function RootLayout({
     <html lang="es" suppressHydrationWarning>
       <head>
         <link rel="canonical" href="https://krlozmedina.dev" />
+        <link rel="manifest" href="/manifest.json" />
       </head>
+
       <body
         id="app"
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <span className="background__image" />
         <LanguageContextProvider>
           <Providers>{children}</Providers>
         </LanguageContextProvider>

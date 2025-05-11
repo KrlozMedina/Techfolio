@@ -1,59 +1,58 @@
 /* ========================
-  🔧 Estilos Base y Reset
-   ======================== */
+🔧 Estilos Base y Reset
+======================== */
 
-/* Reset básico y box model */
+/* Reset básico y herencia de box-sizing */
 *,
-*::after,
-*::before {
+*::before,
+*::after {
   box-sizing: inherit;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 html {
   box-sizing: border-box;
-  font-size: 62.5%; /* 1rem = 10px */
+  font-size: 62.5%; /* 1rem = 10px para facilitar el cálculo */
 }
 
 body {
   width: 100%;
   font-family: var(--font-family-text);
   color: var(--color-text);
-  /* background: linear-gradient(135deg, #2c3333, #395b64); */
-  /* background-size: 400%; */
-  /* animation: bgAnimation 15s infinite; */
+  /* Puedes habilitar el fondo animado si lo necesitas */
+  /* background: linear-gradient(135deg, #2c3333, #395b64);
+    background-size: 400%;
+    animation: bgAnimation 15s infinite; */
 }
 
-/* Animación de fondo */
-/* @keyframes bgAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-} */
+/* 🎞 Animación de fondo (desactivada por defecto) */
+/*
+@keyframes bgAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+*/
 
 /* ========================
-  🎛 Elementos Generales
-   ======================== */
+🎛 Elementos Generales
+======================== */
 
-/* Botones */
+/* Botones base */
 button {
+  display: block;
   width: max-content;
   height: fit-content;
-  padding: var(--space-sm) var(--space-lg);
   margin: var(--space-md) auto;
+  padding: var(--space-sm) var(--space-lg);
   font-size: var(--font-size-lg);
   color: var(--color-text);
   background-color: var(--color-button-bg);
   border: none;
   border-radius: var(--border-radius-md);
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -67,9 +66,10 @@ button:disabled {
 
 /* Enlaces */
 a {
+  color: var(--color-text);
   text-decoration: none;
   cursor: pointer;
-  color: var(--color-text);
+  transition: color 0.3s ease;
 }
 
 a:hover {
@@ -80,24 +80,26 @@ a:hover {
 .icon {
   font-size: var(--font-size-2xl);
   color: var(--color-text);
+  transition: transform 0.2s ease;
 }
 
 .icon:hover {
   transform: scale(1.1);
 }
 
+/* Texto con ícono */
 .text-icon {
   font-size: var(--font-size-xl);
   color: var(--color-text);
   padding: var(--space-sm);
-  border-radius: var(--border-radius);
   font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius);
   width: max-content;
 }
 
-/* Inputs y selects */
-select,
+/* Inputs, selects y textareas */
 input,
+select,
 textarea {
   width: 25rem;
   padding: var(--space-xs);
@@ -108,27 +110,29 @@ textarea {
   border: 2px solid var(--color-border);
   border-radius: var(--border-radius-lg);
   resize: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-select:focus,
 input:focus,
+select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--color-border-focus);
   box-shadow: 0 0 0 2px var(--color-border-shadow);
 }
 
-select:disabled,
 input:disabled,
+select:disabled,
 textarea:disabled {
   background-color: var(--color-bg-disable);
   cursor: not-allowed;
 }
 
 /* ========================
-  🧱 Layout y Contenedores
-   ======================== */
+🧱 Layout y Contenedores
+======================== */
 
+/* Contenedor principal */
 .container {
   width: var(--width-container);
   min-width: 32rem;
@@ -140,6 +144,7 @@ textarea:disabled {
   justify-content: space-between;
 }
 
+/* Imagen de fondo */
 .background__image {
   position: absolute;
   top: 0;
@@ -147,11 +152,12 @@ textarea:disabled {
   width: 100%;
   height: 100vh;
   opacity: 0.75;
-  background: url("https://i.imgur.com/mJqosp9.jpg") bottom / cover no-repeat;
+  background: url("/assets/background.png") bottom / cover no-repeat;
   transform: rotate(180deg);
 }
 
-fieldset{
+/* Agrupaciones (formularios) */
+fieldset {
   width: 100%;
   padding: var(--space-sm) var(--space-xl);
   border: 1px solid var(--color-border);
@@ -159,12 +165,11 @@ fieldset{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* min-width: 30rem; */
 }
 
 /* ========================
-  📱 Responsividad
-   ======================== */
+📱 Responsividad
+======================== */
 
 @media (max-width: 768px) {
   .logo-imagen {
@@ -186,15 +191,16 @@ fieldset{
     font-size: var(--font-size-xl);
   }
 
-  fieldset{
+  fieldset {
     padding: var(--space-xxs) var(--space-md);
   }
 }
 
 /* ========================
-  🧩 Utilidades
-   ======================== */
+🧩 Utilidades
+======================== */
 
+/* Ocultar elementos */
 .none {
-  display: none;
+  display: none !important;
 }

@@ -1,0 +1,28 @@
+/* Contenedor principal del aviso de estado */
+.notice__container {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Mejora la separación entre el icono y el texto */
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem; /* Bordes más suaves */
+  background-color: var(--color-background-container-soft);
+  color: var(--color-text-soft);
+  font-size: var(--font-size-xs);
+  border-left: 4px solid transparent; /* Establece un valor inicial */
+  transition: border-color 0.3s ease; /* Transición suave al cambiar el color */
+}
+
+/* Icono del aviso (izquierda) */
+.notice__container--icon {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Evita que se reduzca en tamaños pequeños */
+}
+
+/* Texto del aviso (derecha) */
+.notice__container--text {
+  margin: 0;
+}

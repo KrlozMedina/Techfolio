@@ -1,4 +1,3 @@
-// src/components/organisms/StatusNotice/StatusNotice.tsx
 import React from 'react';
 import {
   FaTools,
@@ -8,14 +7,24 @@ import {
   FaFlask,
   FaDatabase,
 } from 'react-icons/fa';
+import style from './Notice.module.css';
+
+// Tipos posibles para el tipo de mensaje
+type NoticeType = 'dummy' | 'construction' | 'incomplete' | 'maintenance' | 'comingSoon' | 'beta';
+type Language = 'es' | 'en';
 
 interface StatusNoticeProps {
-  type: 'dummy' | 'construction' | 'incomplete' | 'maintenance' | 'comingSoon' | 'beta';
-  language: 'es' | 'en';
-  className?: string;
+  type: NoticeType;
+  language: Language;
 }
 
-const messages = {
+// Mensajes por tipo y lenguaje
+const messages: Record<NoticeType, {
+  es: { title: string; description: string };
+  en: { title: string; description: string };
+  icon: JSX.Element;
+  color: string;
+}> = {
   dummy: {
     es: {
       title: 'Datos de prueba',
@@ -90,11 +99,15 @@ const messages = {
   },
 };
 
-const StatusNotice: React.FC<StatusNoticeProps> = ({
-  type,
-  language,
-  className = '',
-}) => {
+/**
+ * Componente StatusNotice
+ * Muestra una advertencia visual con ícono, color y mensaje personalizado
+ * según el estado de una sección del sistema.
+ *
+ * @param type - Tipo de aviso (dummy, construction, etc.)
+ * @param language - Idioma del mensaje ('es' o 'en')
+ */
+const StatusNotice: React.FC<StatusNoticeProps> = ({ type, language }) => {
   const message = messages[type];
   const content = message[language];
 
@@ -102,23 +115,18 @@ const StatusNotice: React.FC<StatusNoticeProps> = ({
     <div
       role="status"
       aria-live="polite"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        backgroundColor: '#f8f9fa',
-        borderLeft: `4px solid ${message.color}`,
-        padding: '1rem',
-        borderRadius: '4px',
-        marginBottom: '1rem',
-      }}
-      className={className}
+      style={{ borderLeft: `4px solid ${message.color}` }}
+      className={style['notice__container']}
     >
-      <div style={{ color: message.color, marginRight: '1rem', fontSize: '1.5rem' }}>
+      <div
+        style={{ color: message.color }}
+        className={style['notice__container--icon']}
+      >
         {message.icon}
       </div>
       <div>
         <strong>{content.title}</strong>
-        <p style={{ margin: 0 }}>{content.description}</p>
+        <p>{content.description}</p>
       </div>
     </div>
   );

@@ -1,8 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { GetProjectsV2Dto, CreateProjectV2Dto } from "@/lib/dtos/projects.dto";
 import connectDB from "@/lib/db/connectDB";
 import { ProjectV2 } from "@/models/project/Project.model";
 import { ZodError } from "zod";
+import { verifyOrClearToken } from "@/lib/utils";
 
 /**
  * Centralized validation for GET requests
@@ -25,7 +26,7 @@ function validateGetProjects(query: Record<string, string>) {
  * @returns Validated body
  * @throws {ZodError} If validation fails
  */
-function validateCreateProject(body: Record<string, any>) {
+function validateCreateProject(body: unknown) {
   const parseResult = CreateProjectV2Dto.safeParse(body);
   if (!parseResult.success) {
     console.error("Validation error:", parseResult.error.format());
@@ -40,8 +41,8 @@ function validateCreateProject(body: Record<string, any>) {
  * @param search - The search query (optional)
  * @returns A filter object for MongoDB query
  */
-function buildProjectFilter(status?: string, search?: string) {
-  const filter: any = {};
+function buildProjectFilter(status?: string, search?: string): Record<string, unknown> {
+  const filter: Record<string, unknown> = {};
   if (status) {
     filter.status = status;
   }
@@ -63,7 +64,7 @@ function buildProjectFilter(status?: string, search?: string) {
  * @param language - The language for the project content (default is 'es')
  * @returns Array of selected fields for MongoDB projection
  */
-function getFieldSelection(data: string, language: string) {
+function getFieldSelection(data: string, language: string): string[] {
   if (data === "simple") {
     return [`projectInfo.${language}`, "tags", "urls", "assets", "updatedAt"];
   }
@@ -75,7 +76,7 @@ function getFieldSelection(data: string, language: string) {
  * @param req - The incoming request
  * @returns JSON response containing the projects and pagination info
  */
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const query = Object.fromEntries(searchParams.entries());
 
@@ -93,29 +94,27 @@ export async function GET(req: Request) {
 
     const filter = buildProjectFilter(status, search);
 
-    const safeLimit = Math.min(Number(limit), 100);  // Limit results to 100 max
-    const safePage = Math.max(Number(page), 1);  // Ensure page starts from 1
+    const safeLimit = Math.min(Number(limit), 100);
+    const safePage = Math.max(Number(page), 1);
     const fields = getFieldSelection(data, language);
 
-    // MongoDB query setup
     const projectQuery = ProjectV2.find(filter)
       .skip((safePage - 1) * safeLimit)
       .limit(safeLimit)
       .sort("-importanceScore");
 
     if (fields.length > 0) {
-      projectQuery.select(fields);  // Apply field selection if needed
+      projectQuery.select(fields);
     }
 
-    // Fetch projects and total count in parallel
     const [projects, total] = await Promise.all([
       projectQuery.exec(),
       ProjectV2.countDocuments(filter),
     ]);
 
-    const totalPages = Math.ceil(total / safeLimit);  // Calculate total pages
+    const totalPages = Math.ceil(total / safeLimit);
 
-    return NextResponse.json(
+    const res = NextResponse.json(
       {
         data: projects,
         pagination: {
@@ -127,6 +126,8 @@ export async function GET(req: Request) {
       },
       { status: 200 }
     );
+
+    return verifyOrClearToken(req, res);
   } catch (error) {
     console.error("GET /v2/projects error:", error);
     return NextResponse.json(
@@ -141,17 +142,17 @@ export async function GET(req: Request) {
  * @param req - The incoming request
  * @returns JSON response with the created project or error message
  */
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const projectData = validateCreateProject(body);
 
     await connectDB();
 
-    // Create and save the project in the database
     const createdProject = await ProjectV2.create(projectData);
 
-    return NextResponse.json(createdProject, { status: 201 });
+    const res = NextResponse.json(createdProject, { status: 201 });
+    return verifyOrClearToken(req, res);
   } catch (error) {
     if (error instanceof ZodError) {
       console.error("Validation failed:", error.errors);
