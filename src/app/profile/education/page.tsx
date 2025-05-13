@@ -2,7 +2,7 @@
 
 import React, { useContext } from 'react'
 import LanguageContext from '@/context/LanguageContext'
-import MainLayout from '@/components/templates/MainLayout/MainLayout'
+import MainLayout from '@/components/layouts/MainLayout/MainLayout'
 import { Banner } from '@/components/molecules/CardViews/CardViews'
 import '@/styles/pages/Education.css'
 import Image from 'next/image'

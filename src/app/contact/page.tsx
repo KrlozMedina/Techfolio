@@ -2,7 +2,7 @@
 
 import React, { useContext } from 'react'
 import LanguageContext from '@/context/LanguageContext'
-import MainLayout from '@/components/templates/MainLayout/MainLayout'
+import MainLayout from '@/components/layouts/MainLayout/MainLayout'
 import '@/styles/pages/ContactMe.css'
 import emailjs from '@emailjs/browser';
 import { ImWhatsapp } from 'react-icons/im'

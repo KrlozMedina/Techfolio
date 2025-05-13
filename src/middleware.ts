@@ -40,10 +40,16 @@ export function middleware(request: NextRequest) {
  */
 export const config = {
   matcher: [
+    '/blog/:path*',
+    '/client/:path*',
+    '/contact/:path*',
     '/dashboard/:path*',
+    '/gallery/:path*',
+    '/login',
     '/profile/:path*',
     '/projects/:path*',
-    '/blog/:path*',
-    '/login',
+    '/resources/:path*',
+    '/resume/:path*',
+    '/unauthorized',
   ],
 };

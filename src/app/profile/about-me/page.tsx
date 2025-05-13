@@ -2,7 +2,7 @@
 
 import React, { useContext } from 'react'
 import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
-import MainLayout from '@/components/templates/MainLayout/MainLayout'
+import MainLayout from '@/components/layouts/MainLayout/MainLayout'
 import '@/styles/pages/AboutMe.css'
 import { MdCastForEducation, MdOutlineWorkOutline } from 'react-icons/md';
 import { GiSkills, GiThink, GiStairsGoal } from 'react-icons/gi'

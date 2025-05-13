@@ -1,6 +1,6 @@
 'use client'
 
-import MainLayout from '@/components/templates/MainLayout/MainLayout';
+import MainLayout from '@/components/layouts/MainLayout/MainLayout';
 import React, { useContext } from 'react';
 import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
 import style from './page.module.css'

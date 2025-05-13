@@ -1,6 +1,6 @@
 "use client";
 
-import MainLayout from "@/components/templates/MainLayout/MainLayout";
+import MainLayout from "@/components/layouts/MainLayout/MainLayout";
 import { useContext, useEffect, useState } from "react";
 import { useVerifyProfileQuery } from "@/store/service/authApi";
 import ProjectsSection from "./sections/ProjectsSection";

@@ -1,68 +1,57 @@
-'use client'
+'use client';
 
-import React, { useEffect } from 'react'
-import '@/styles/pages/NotFound.css'
+import React, { useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import ErrorTemplate from '@/components/templates/ErrorTemplate/ErrorTemplate';
 
-const NotFound: React.FC = () => {  
+/**
+ * Página personalizada para errores 404.
+ * Muestra un mensaje de "Página no encontrada" junto con una imagen ilustrativa.
+ */
+const NotFound: React.FC = () => {
   useEffect(() => {
-    document.title = "Not Found"
-  }, [])
+    document.title = "Not Found";
+  }, []);
 
   return (
-    <section className='not-found'>
-      <Image
-        className='not-found__image'
-        src="https://i.imgur.com/GMDwQGM.png"
-        width={300}
-        height={200}
-        alt="Bot not found"
-        loading='lazy'
-      />
+    <ErrorTemplate status='notFound' withBackground>
+      <h1 className="not-found__title">{"<404/>"}</h1>
 
-      <div className='not-found__description'>
-        <h1 className='not-found__title'>{"<404/>"}</h1>
-
-        <div className='not-found__p'>
-          <p className='not-found__sign'>{"<"}</p>
-          <p className='not-found__tag'>p</p>
-          <p className='not-found__sign'>{">"}</p>
-        </div>
-
-        <p className='not-found__text'>Page not found!!</p>
-
-        <div className='not-found__p'>
-          <p className='not-found__sign'>{"</"}</p>
-          <p className='not-found__tag'>p</p>
-          <p className='not-found__sign'>{">"}</p>
-        </div>
-
-        <p className='not-found__text'></p>
-
-        <div className='not-found__p'>
-          <p className='not-found__sign'>{"<"}</p>
-          <p className='not-found__tag'>a</p>
-          <p className='not-found__ref'>href</p>
-          <p>=</p>
-          <p className='not-found__tag'>{"{"}</p>
-          <Link className='not-found__link' href='/'>/</Link>
-          <p className='not-found__tag'>{"}"}</p>
-          <p className='not-found__sign'>{">"}</p>
-        </div>
-
-        <p className='not-found__text'>
-          <Link className='not-found__link' href="/">Return to home</Link>
-        </p>
-        
-        <div className='not-found__p'>
-          <p className='not-found__sign'>{"</"}</p>
-          <p className='not-found__tag'>a</p>
-          <p className='not-found__sign'>{">"}</p>
-        </div>
+      <div className="not-found__p">
+        <span className="not-found__sign">&lt;</span>
+        <span className="not-found__tag">p</span>
+        <span className="not-found__sign">&gt;</span>
       </div>
-    </section>
-  )
-}
 
-export default NotFound
+      <p className="not-found__text">Page not found!!</p>
+
+      <div className="not-found__p">
+        <span className="not-found__sign">&lt;/</span>
+        <span className="not-found__tag">p</span>
+        <span className="not-found__sign">&gt;</span>
+      </div>
+
+      <div className="not-found__p">
+        <span className="not-found__sign">&lt;</span>
+        <span className="not-found__tag">Link</span>
+        <span className="not-found__ref">href</span>=
+        <span className="not-found__tag">{'{'}</span>
+        <Link className="not-found__link" href="/">/</Link>
+        <span className="not-found__tag">{'}'}</span>
+        <span className="not-found__sign">&gt;</span>
+      </div>
+
+      <p className="not-found__text">
+        <Link className="not-found__link" href="/">Return to home</Link>
+      </p>
+
+      <div className="not-found__p">
+        <span className="not-found__sign">&lt;/</span>
+        <span className="not-found__tag">Link</span>
+        <span className="not-found__sign">&gt;</span>
+      </div>
+    </ErrorTemplate>
+  );
+};
+
+export default NotFound;

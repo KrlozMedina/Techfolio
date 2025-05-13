@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useContext } from 'react';
-import MainLayout from '@/components/templates/MainLayout/MainLayout';
+import MainLayout from '@/components/layouts/MainLayout/MainLayout';
 // import { Viewer, Worker } from '@react-pdf-viewer/core';
 // import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@/styles/pages/CV.css';

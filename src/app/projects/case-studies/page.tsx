@@ -5,7 +5,7 @@ import successCases from "@/mocks/caseStudies.json";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
-import MainLayout from "@/components/templates/MainLayout/MainLayout";
+import MainLayout from "@/components/layouts/MainLayout/MainLayout";
 import LanguageContext, {
   LanguageContextType,
 } from "@/context/LanguageContext";

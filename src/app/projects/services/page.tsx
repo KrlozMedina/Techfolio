@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useContext } from 'react';
-import MainLayout from '@/components/templates/MainLayout/MainLayout';
+import MainLayout from '@/components/layouts/MainLayout/MainLayout';
 import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
 import StatusNotice from '@/components/organisms/Notice/Notice';
 

@@ -8,9 +8,10 @@ import {
   FaDatabase,
 } from 'react-icons/fa';
 import style from './Notice.module.css';
+import { NoticeType } from '@/lib/config';
 
 // Tipos posibles para el tipo de mensaje
-type NoticeType = 'dummy' | 'construction' | 'incomplete' | 'maintenance' | 'comingSoon' | 'beta';
+// type NoticeType = 'dummy' | 'construction' | 'incomplete' | 'maintenance' | 'comingSoon' | 'beta';
 type Language = 'es' | 'en';
 
 interface StatusNoticeProps {

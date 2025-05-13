@@ -20,7 +20,7 @@ const Logout: React.FC<LogoutProps> = ({
   const handlerLogout = async () => {
       const { data: logoutSuccess, error } = await logout(null);
       if (logoutSuccess) {
-        router.push('/auth')
+        router.push('/login')
       } else {
         console.warn(error);
       }

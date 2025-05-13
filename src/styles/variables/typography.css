@@ -1,43 +1,36 @@
-/* ============================================================
-✍️ Variables de Tipografía
-Define fuentes, tamaños, pesos e interlineados para uso global
-============================================================ */
+/* ==========================================================================
+🎨 VARIABLES DE TIPOGRAFÍA EN CSS PURO
+========================================================================== */
 
-/* Importación de fuentes externas */
+/* 1. Fuentes externas (Google Fonts) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;700&display=swap');
 
+/* 2. Definición de variables CSS */
 :root {
-  /* ========================
-  FAMILIAS TIPOGRÁFICAS
-  ======================== */
-  --font-family-logo: 'Rubik Glitch', cursive;        /* Marca o logo */
-  --font-family-heading: 'Poppins', sans-serif;       /* Títulos y encabezados */
-  --font-family-text: 'Inter', sans-serif;            /* Texto general y cuerpo */
+  /* Familias tipográficas */
+  --font-family-logo: 'Rubik Glitch', cursive;
+  --font-family-heading: 'Poppins', sans-serif;
+  --font-family-text: 'Inter', sans-serif;
+  --font-family-retro: 'Rubik Marker Hatch', cursive;
 
-  /* ========================
-  TAMAÑOS DE FUENTE
-  Escala tipográfica basada en REM para diseño responsivo
-  ======================== */
-  --font-size-xs: 1.2rem;     /* Muy pequeño */
-  --font-size-sm: 1.4rem;     /* Pequeño */
-  --font-size-base: 1.6rem;   /* Base / cuerpo */
-  --font-size-md: 1.8rem;     /* Mediano */
-  --font-size-lg: 2.0rem;     /* Grande */
-  --font-size-xl: 2.4rem;     /* Muy grande */
-  --font-size-2xl: 3.2rem;    /* Extra grande */
-  --font-size-3xl: 4.8rem;    /* Titular o destacado */
+  /* Tamaños de fuente (basado en REM) */
+  --font-size-xs: 1.2rem;
+  --font-size-sm: 1.4rem;
+  --font-size-base: 1.6rem;
+  --font-size-md: 1.8rem;
+  --font-size-lg: 2rem;
+  --font-size-xl: 2.4rem;
+  --font-size-2xl: 3.2rem;
+  --font-size-3xl: 4.8rem;
+  --font-size-4xl: 6.4rem;
 
-  /* ========================
-  PESOS TIPOGRÁFICOS
-  ======================== */
-  --font-weight-regular: 400; /* Regular */
-  --font-weight-medium: 500;  /* Medio / semi bold */
-  --font-weight-bold: 700;    /* Negrita */
+  /* Pesos tipográficos */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
 
-  /* ========================
-  INTERLINEADO (line-height)
-  ======================== */
-  --line-height-tight: 1.25;    /* Compacto (títulos) */
-  --line-height-normal: 1.5;    /* Estándar (párrafos) */
-  --line-height-relaxed: 1.75;  /* Espaciado amplio (lectura cómoda) */
+  /* Interlineado */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
 }

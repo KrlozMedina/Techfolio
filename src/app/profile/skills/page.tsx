@@ -2,7 +2,7 @@
 
 import React, { useContext } from 'react';
 import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
-import MainLayout from '@/components/templates/MainLayout/MainLayout';
+import MainLayout from '@/components/layouts/MainLayout/MainLayout';
 import StatusNotice from '@/components/organisms/Notice/Notice';
 
 const SkillsPage = () => {

@@ -13,7 +13,6 @@ export * from './categories';
 export * from './technologies';
 export * from './language';
 export * from './enums';
-export * from './navLinks';
 
 // Exportación explícita de datos cargados desde JSON (para mantener consistencia con el sistema de módulos).
 export {

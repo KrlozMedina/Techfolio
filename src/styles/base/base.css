@@ -1,8 +1,7 @@
-/* ========================
-🔧 Estilos Base y Reset
-======================== */
+/* ============================================
+🔧 Reset y Tipografía Base
+============================================ */
 
-/* Reset básico y herencia de box-sizing */
 *,
 *::before,
 *::after {
@@ -13,33 +12,19 @@
 
 html {
   box-sizing: border-box;
-  font-size: 62.5%; /* 1rem = 10px para facilitar el cálculo */
+  font-size: 62.5%;
 }
 
 body {
   width: 100%;
   font-family: var(--font-family-text);
   color: var(--color-text);
-  /* Puedes habilitar el fondo animado si lo necesitas */
-  /* background: linear-gradient(135deg, #2c3333, #395b64);
-    background-size: 400%;
-    animation: bgAnimation 15s infinite; */
 }
 
-/* 🎞 Animación de fondo (desactivada por defecto) */
-/*
-@keyframes bgAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-*/
+/* ============================================
+🧩 Elementos Globales
+============================================ */
 
-/* ========================
-🎛 Elementos Generales
-======================== */
-
-/* Botones base */
 button {
   display: block;
   width: max-content;
@@ -47,6 +32,7 @@ button {
   margin: var(--space-md) auto;
   padding: var(--space-sm) var(--space-lg);
   font-size: var(--font-size-lg);
+  font-family: inherit;
   color: var(--color-text);
   background-color: var(--color-button-bg);
   border: none;
@@ -64,7 +50,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Enlaces */
 a {
   color: var(--color-text);
   text-decoration: none;
@@ -76,7 +61,6 @@ a:hover {
   color: var(--color-button-hover);
 }
 
-/* Iconos */
 .icon {
   font-size: var(--font-size-2xl);
   color: var(--color-text);
@@ -87,7 +71,6 @@ a:hover {
   transform: scale(1.1);
 }
 
-/* Texto con ícono */
 .text-icon {
   font-size: var(--font-size-xl);
   color: var(--color-text);
@@ -97,7 +80,6 @@ a:hover {
   width: max-content;
 }
 
-/* Inputs, selects y textareas */
 input,
 select,
 textarea {
@@ -128,11 +110,15 @@ textarea:disabled {
   cursor: not-allowed;
 }
 
-/* ========================
-🧱 Layout y Contenedores
-======================== */
+label {
+  font-weight: bold;
+  font-size: var(--font-size-sm);
+}
 
-/* Contenedor principal */
+/* ============================================
+📐 Layout y Contenedores
+============================================ */
+
 .container {
   width: var(--width-container);
   min-width: 32rem;
@@ -144,7 +130,6 @@ textarea:disabled {
   justify-content: space-between;
 }
 
-/* Imagen de fondo */
 .background__image {
   position: absolute;
   top: 0;
@@ -156,7 +141,6 @@ textarea:disabled {
   transform: rotate(180deg);
 }
 
-/* Agrupaciones (formularios) */
 fieldset {
   width: 100%;
   padding: var(--space-sm) var(--space-xl);
@@ -167,13 +151,112 @@ fieldset {
   justify-content: center;
 }
 
-/* ========================
+/* ============================================
+🔍 Página 404
+============================================ */
+
+.not-found__title {
+  font-size: var(--font-size-4xl);
+  color: var(--color-text-error);
+  text-align: center;
+  font-family: var(--font-family-retro);
+}
+
+.not-found__p {
+  display: inline-flex;
+  font-weight: var(--font-weight-bold);
+}
+
+.not-found__sign {
+  display: block;
+  color: var(--color-text-muted);
+}
+
+.not-found__tag {
+  color: var(--color-text-code);
+  width: 100%;
+  display: flex;
+}
+
+.not-found__ref {
+  margin-left: var(--space-md);
+  color: var(--color-text-property);
+}
+
+.not-found__text {
+  color: var(--color-text);
+  margin-left: var(--space-3xl);
+}
+
+.not-found__link {
+  padding: 0 var(--space-md);
+}
+
+.not-found__link:hover {
+  color: var(--color-text-visite);
+}
+
+/* ============================================
+🔍 Error Page
+============================================ */
+
+.error__title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-error);
+  font-family: var(--font-family-retro);
+}
+
+.error__message {
+  color: var(--color-text-code);
+  font-size: var(--font-size-lg);
+}
+
+.error__button-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: var(--space-md) auto;
+  padding: var(--space-lg);
+}
+
+.error__button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  margin: 0;
+}
+
+.error__button-retry {
+  background-color: #1976d2;
+  color: #fff;
+}
+
+.error__button-home {
+  background-color: #9e9e9e;
+  color: #fff;
+}
+
+/* ============================================
 📱 Responsividad
-======================== */
+============================================ */
 
 @media (max-width: 768px) {
   .logo-imagen {
     width: 60%;
+  }
+
+  .not-found__title {
+    font-size: var(--font-size-3xl);
+    margin: var(--space-md) auto;
+  }
+
+  .error__title {
+    font-size: var(--font-size-lg);
+  }
+
+  .error__message {
+    font-size: var(--font-size-sm);
   }
 }
 
@@ -196,11 +279,14 @@ fieldset {
   }
 }
 
-/* ========================
-🧩 Utilidades
-======================== */
+/* ============================================
+🧰 Utilidades
+============================================ */
 
-/* Ocultar elementos */
 .none {
   display: none !important;
+}
+
+.visible {
+  display: flex !important;
 }

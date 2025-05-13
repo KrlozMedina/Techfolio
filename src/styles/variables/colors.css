@@ -14,12 +14,16 @@ Estas variables permiten un diseño temático claro/oscuro coherente.
   --color-text-dark: #CCCCCC;            /* Texto primario en fondo oscuro */
   --color-text-dark-soft: #222222;       /* Texto secundario en fondo oscuro */
   --color-text-error: #b22222;           /* Texto de error */
-  --color-text-muted: #555;              /* Texto desactivado / menos importante */
+  --color-text-muted: #555;              /* Texto inactivo o deshabilitado */ 
+  --color-text-code: rgb(44, 72, 128);
+  --color-text-property: rgb(44, 195, 232);
+  --color-text-visite: purple;
 
   /* ========================
   ICON COLORS
   ======================== */
   --color-icon-muted: #aaa;              /* Íconos en estado inactivo */
+  --color-icon: #f39c12;
 
   /* ========================
   BACKGROUND COLORS

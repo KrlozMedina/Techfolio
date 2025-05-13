@@ -9,7 +9,7 @@ import { z } from 'zod';
 import { useLoginMutation } from '@/store/service/authApi';
 import { LanguageContext, LanguageContextType } from '@/context/LanguageContext';
 
-import MainLayout from '@/components/templates/MainLayout/MainLayout';
+import MainLayout from '@/components/layouts/MainLayout/MainLayout';
 import style from './page.module.css';
 
 const LoginPage: React.FC = () => {

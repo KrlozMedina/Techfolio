@@ -1,20 +1,18 @@
 "use client";
 
-import React, { useContext, useMemo, useState } from "react";
-import LanguageContext, { LanguageContextType } from "@/context/LanguageContext";
-import MainLayout from "@/components/templates/MainLayout/MainLayout";
+import React, { useMemo, useState } from "react";
 import Slider from "@/components/organisms/Slider/Slider";
 import { useGetProjectsSimpleDataQuery } from "@/store/service/projectsApi";
 import { ProjectCard } from "@/components/molecules/CardViews/CardViews";
 import { Intro, Phrase } from "@/components/atom/TextBlocks/TextsBlocks";
 import { DatabaseError, Loading, NoData } from "@/components/molecules/FeedbackStates/FeedbackStates";
-import StatusNotice from "@/components/organisms/Notice/Notice";
 import style from './page.module.css'
 import caseStudies from "@/mocks/caseStudies.json";
 import Image from "next/image";
 import Link from "next/link";
 import { IProjectV2 } from "@/models/interfaces";
-import { CATEGORIES, NAV_LINKS_PROJECT, PLATFORMS, TECHNOLOGIES } from "@/shared/constants";
+import { CATEGORIES, PLATFORMS, TECHNOLOGIES } from "@/shared/constants";
+import { useLanguage } from "@/hooks";
 
 const TEXTS = {
   hero: {
@@ -45,7 +43,7 @@ const TEXTS = {
 };
 
 const Projects: React.FC = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  const { isSpanish } = useLanguage();
   const language = isSpanish ? 'es' : 'en';
   const { data: projects, isLoading, isError, error } = useGetProjectsSimpleDataQuery(language);
   const [filter, setFilter] = useState({ category: "", platform: "", technology: "" });
@@ -67,7 +65,7 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <MainLayout isAdmin={false} links={NAV_LINKS_PROJECT.map(link => ({ ...link, isActive: false }))} language={language}>
+    <>
       <title>{`${TEXTS.hero.title[language]} | KrlozMedina Portfolio Lab`}</title>
       <meta name="description" content="Una demostración de ModalJS en Next.js" />
       <meta name="keyword" content="Proyectos, Full Stack, Electronica" />
@@ -83,7 +81,6 @@ const Projects: React.FC = () => {
 
       <section>
         <Intro title={TEXTS.hero.title[language]} intro={TEXTS.hero.intro[language]} />
-        <StatusNotice type="incomplete" language={language} />
 
         <form className={style['projects__filter']}>
           <fieldset className={style['projects__filter-fieldset']}>
@@ -126,7 +123,7 @@ const Projects: React.FC = () => {
         <Slider>
           {isLoading && <Loading language={language} />}
           {isError && <DatabaseError reason={error} language={language} />}
-          {!isLoading && filteredProjects.length === 0 && <NoData reason="no-match" language={language} />}
+          {!isLoading && !isError && filteredProjects.length === 0 && <NoData reason="no-match" language={language} />}
           {!isLoading && filteredProjects.map((project, idx) => (
             <ProjectCard key={idx} data={project} language={language} />
           ))}
@@ -196,7 +193,7 @@ const Projects: React.FC = () => {
           </Link>
         </div>
       </section>
-    </MainLayout>
+    </>
   );
 };
 

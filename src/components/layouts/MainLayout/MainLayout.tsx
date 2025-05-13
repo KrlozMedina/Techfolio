@@ -1,12 +1,11 @@
 import React, { ReactNode } from 'react';
-import { LanguageToggleButton } from '@/components/molecules/LanguageSelector/LanguageSelector';
 import Logo from '@/components/atom/Logo/Logo';
 import { MenuAside, MenuPhone } from '@/components/organisms/Menu/Menu';
 import style from './MainLayout.module.css';
 import Social from '@/components/molecules/SocialLinks/SocialLinks';
 import Logout from '@/components/atom/Logout/Logout';
 import Link from 'next/link';
-import ThemeToggle from '@/components/molecules/ThemeToggle/ThemeToggle';
+import SettingsButton from '@/components/organisms/SettingsPanel/SettingsPanel';
 
 // Defining the structure of the links that can be passed as props
 interface Link {
@@ -23,7 +22,7 @@ interface MainLayoutProps {
   children: ReactNode; // The child components to be rendered within the layout
   links?: Link[]; // An optional array of links for navigation
   controlPanel?: ReactNode; // Optional control panel for admin actions
-  isAdmin: boolean; // Flag indicating if the user is an admin
+  isAdmin?: boolean; // Flag indicating if the user is an admin
   language: 'es' | 'en'; // Language selection for content
 }
 
@@ -32,8 +31,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   children,
   links = [], // Default to an empty array if no links are provided
   controlPanel,
-  isAdmin,
-  language = 'es',
+  isAdmin = false,
+  language,
 }) => {
 
   // Function to render the navigation links dynamically
@@ -55,9 +54,12 @@ const MainLayout: React.FC<MainLayoutProps> = ({
     if (isAdmin) {
       return (
         <>
-          <span className={style['template__header--controlPanel']}>
-            {controlPanel} {/* Render the admin control panel */}
-          </span>
+          {
+            controlPanel && <span className={style['template__header--controlPanel']}>
+              {/* Render the admin control panel */}
+              {controlPanel}
+            </span>
+          }
           <span className={style['template__header--logout']}>
             <Logout language={language} /> {/* Render the logout button for admins */}
           </span>
@@ -107,8 +109,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
       {/* Sidebar with additional elements like the menu, language selector, and theme toggle */}
       <aside className={style['template__aside']}>
         <MenuAside language={language} />
-        <LanguageToggleButton />
-        <ThemeToggle language={language} />
+        <SettingsButton isFloating />
       </aside>
     </div>
   );

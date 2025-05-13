@@ -1,40 +1,42 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, useEffect, ReactNode, createContext } from 'react';
 
-// Defines the type for the language context, including the current language state and its setter.
+/**
+ * Tipo del contexto de idioma.
+ * `isSpanish` indica si el idioma actual es español.
+ * `setIsSpanish` permite cambiar el idioma.
+ */
 export interface LanguageContextType {
   isSpanish: boolean;
   setIsSpanish: (value: boolean) => void;
 }
 
-// Creates a context for managing language preference (Spanish or English).
-export const LanguageContext = React.createContext<LanguageContextType | undefined>(undefined);
+// Contexto para gestionar la preferencia de idioma.
+export const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 interface LanguageContextProviderProps {
   children: ReactNode;
 }
 
-// Context provider that manages language switching between Spanish and English.
-// It saves and retrieves the user's language preference from localStorage.
+/**
+ * Proveedor del contexto de idioma.
+ * Gestiona el cambio entre español e inglés y persiste la preferencia en localStorage.
+ */
 export function LanguageContextProvider({ children }: LanguageContextProviderProps) {
-  const [isSpanish, setIsSpanish] = useState<boolean>(false);
+  const [isSpanish, setIsSpanish] = useState<boolean>(true);
 
+  // Recuperar preferencia de idioma al montar el componente
   useEffect(() => {
-    // On component mount, retrieve the stored language preference from localStorage.
-    if (typeof window !== 'undefined') {
-      const valueIsSpanish = localStorage.getItem('isSpanish');
-      if (valueIsSpanish) {
-        setIsSpanish(valueIsSpanish === 'true');
-      }
+    const storedValue = localStorage.getItem('isSpanish');
+    if (storedValue !== null) {
+      setIsSpanish(storedValue === 'true');
     }
   }, []);
 
+  // Guardar preferencia de idioma en localStorage cada vez que cambia
   useEffect(() => {
-    // Whenever the language changes, save the new preference to localStorage.
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('isSpanish', isSpanish.toString());
-    }
+    localStorage.setItem('isSpanish', JSON.stringify(isSpanish));
   }, [isSpanish]);
 
   return (

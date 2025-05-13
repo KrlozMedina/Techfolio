@@ -1,10 +1,88 @@
-export default function Template({ children }: { children: React.ReactNode }) {
+'use client';
+
+import React, { ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
+
+import MainLayout from '@/components/layouts/MainLayout/MainLayout';
+import StatusNotice from '@/components/organisms/Notice/Notice';
+
+import { useLanguage } from '@/hooks';
+import { NoticeType, ROUTES_LIST } from '@/lib/config';
+
+/**
+ * Representa un texto multilingüe.
+ */
+type LocaleText = {
+  es: string;
+  en: string;
+};
+
+/**
+ * Estructura de un enlace de navegación multilingüe.
+ */
+type NavLink = {
+  title: LocaleText;
+  href: string;
+  isActive: boolean;
+};
+
+/**
+ * Crea un enlace de navegación multilingüe.
+ * @param es - Título en español
+ * @param en - Título en inglés
+ * @param href - Ruta del enlace
+ * @returns Objeto tipo NavLink
+ */
+const createNavLink = (es: string, en: string, href: string): NavLink => ({
+  title: { es, en },
+  href,
+  isActive: false,
+});
+
+/**
+ * Enlaces de navegación para la sección de proyectos.
+ */
+const NAV_LINKS_PROJECT: NavLink[] = [
+  createNavLink("Servicios", "Services", "/projects/services"),
+  createNavLink("Testimonios", "Testimonials", "/projects/testimonials"),
+  createNavLink("Casos de éxito", "Success Stories", "/projects/case-studies"),
+];
+
+/**
+ * Plantilla de layout para páginas de proyectos.
+ * Determina el idioma, navegación activa, estado de admin y avisos.
+ *
+ * @param children - Contenido hijo renderizado dentro del layout
+ */
+export default function Template({ children }: { children: ReactNode }) {
+  const { isSpanish } = useLanguage();
+  const path = usePathname();
+  const language = isSpanish ? 'es' : 'en';
+
+  // Ruta actual encontrada en la configuración global
+  const currentRoute = ROUTES_LIST.find(route => route.path === path);
+
+  // Mapear enlaces con estado activo basado en la ruta actual
+  const linksWithActive = NAV_LINKS_PROJECT.map(link => ({
+    ...link,
+    isActive: link.href === path,
+  }));
+
   return (
-    <div className="template-wrapper">
-              {/* <span className="background__image" /> */}
-              <h1>Hola mundo</h1>
-      
+    <MainLayout
+      language={language}
+      links={linksWithActive}
+      isAdmin={currentRoute?.isProtected ?? false}
+    >
+      {currentRoute?.notice?.map((notice, index) => (
+        <StatusNotice
+          key={index}
+          type={notice as NoticeType}
+          language={language}
+        />
+      ))}
+
       {children}
-    </div>
+    </MainLayout>
   );
 }
