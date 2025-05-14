@@ -2,17 +2,17 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AiOutlineClose } from 'react-icons/ai';
-import { SiPolymerproject } from 'react-icons/si';
-import { BiMessageDots } from 'react-icons/bi';
 import { TfiMenuAlt } from 'react-icons/tfi';
-import { ImBlog, ImProfile } from 'react-icons/im';
 import styles from './Menu.module.css';
+
 import Logout from '@/components/atom/Logout/Logout';
 import SettingsButton from '../SettingsPanel/SettingsPanel';
+import { useVerifyProfileQuery } from '@/store/service/authApi';
+import { navItems } from '@/lib/config';
 
-// --- Interfaces ---
+// --- Types ---
 interface NavLink {
-  href: string;
+  path: string;
   title: {
     es: string;
     en: string;
@@ -34,57 +34,47 @@ interface MenuLinksProps extends MenuProps {
 }
 
 // --- Constants ---
-const NAV_ITEMS = [
-  {
-    href: '/projects',
-    label: { es: 'Proyectos', en: 'Projects' },
-    icon: SiPolymerproject,
-    key: 'projects',
-  },
-  {
-    href: '/profile',
-    label: { es: 'Perfil', en: 'Profile' },
-    icon: ImProfile,
-    key: 'profile',
-  },
-  {
-    href: '/blog',
-    label: { es: 'Blog', en: 'Blog' },
-    icon: ImBlog,
-    key: 'blog',
-  },
-  {
-    href: '/contact',
-    label: { es: 'Contactarme', en: 'Contact me' },
-    icon: BiMessageDots,
-    key: 'contact',
-  },
-];
-
 const activeStyle = { color: 'var(--color-button-hover)' };
 
 /**
- * Returns the base path from the current pathname.
+ * Hook to get current base path for active link highlighting
  */
-const useActivePath = () => {
+const useActivePath = (): string => {
   const pathname = usePathname();
   return `/${pathname.split('/')[1]}`;
 };
 
 /**
- * Shared component to render menu links (used in all menu variants).
+ * Custom hook to get current navigation items based on auth state
+ */
+const useNavItems = () => {
+  const { data } = useVerifyProfileQuery(null);
+  return navItems(data?.isAuth ?? false);
+};
+
+/**
+ * Shared component to render menu links
  */
 const MenuLinks = ({ isPhone = false, links = [], language }: MenuLinksProps) => {
   const pathname = usePathname();
   const basePath = useActivePath();
+  const NAV_ITEMS = useNavItems();
+
   const containerClass = isPhone
     ? styles['menu__container--phone']
     : styles['menu__container'];
 
+      {console.warn(links)}
+
+
   return (
     <div className={containerClass}>
-      {NAV_ITEMS.map(({ href, label, icon: Icon, key }) => (
-        <Link href={href} key={key} style={href === basePath ? activeStyle : {}}>
+      {NAV_ITEMS.map(({ path, label, icon: Icon }) => (
+        <Link
+          key={path}
+          href={path}
+          style={path === basePath ? activeStyle : {}}
+        >
           <Icon className="icon" />
           {label[language]}
         </Link>
@@ -92,11 +82,11 @@ const MenuLinks = ({ isPhone = false, links = [], language }: MenuLinksProps) =>
 
       {links.length > 0 && (
         <div className={styles['menu__container--links']}>
-          {links.map(({ href, title }, index) => (
+          {links.map(({ path, title }, index) => (
             <a
               key={index}
-              href={href}
-              style={href === pathname ? activeStyle : {}}
+              href={path}
+              style={path === pathname ? activeStyle : {}}
             >
               {title[language]}
             </a>
@@ -108,26 +98,26 @@ const MenuLinks = ({ isPhone = false, links = [], language }: MenuLinksProps) =>
 };
 
 /**
- * Basic horizontal menu for standard layouts (desktop/tablet).
+ * Menu for desktop or standard layout
  */
-const Menu = ({ language }: MenuProps) => <MenuLinks language={language} />;
+const Menu = ({ language }: MenuProps) => (
+  <MenuLinks language={language} />
+);
 
 /**
- * Collapsible mobile menu with toggle icon.
+ * Collapsible mobile menu with toggle button
  */
 const MenuPhone = ({ links = [], isAdmin, language }: MenuPhoneProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
-      {!menuOpen && (
+      {!menuOpen ? (
         <TfiMenuAlt
           className={styles['icon-menu']}
           onClick={() => setMenuOpen(true)}
         />
-      )}
-
-      {menuOpen && (
+      ) : (
         <section className={styles['menu-phone__container']}>
           <AiOutlineClose
             className={styles['icon-menu']}
@@ -136,7 +126,6 @@ const MenuPhone = ({ links = [], isAdmin, language }: MenuPhoneProps) => {
 
           <MenuLinks isPhone links={links} language={language} />
           <SettingsButton className="visible" isFloating />
-
           {isAdmin && <Logout language={language} />}
         </section>
       )}
@@ -145,36 +134,38 @@ const MenuPhone = ({ links = [], isAdmin, language }: MenuPhoneProps) => {
 };
 
 /**
- * Sidebar menu for desktop with hover tooltip on icons.
+ * Vertical sidebar menu for desktop with hover tooltips
  */
 const MenuAside = ({ language }: MenuProps) => {
-  const [hover, setHover] = useState<string | null>(null);
+  const [hovered, setHovered] = useState<string | null>(null);
   const basePath = useActivePath();
+  const NAV_ITEMS = useNavItems();
 
   return (
     <div className={styles['menu-aside__container']}>
-      {NAV_ITEMS.map(({ href, label, icon: Icon, key }) => (
-        <Link
-          href={href}
-          key={key}
-          onMouseOver={() => setHover(key)}
-          onMouseLeave={() => setHover(null)}
-        >
-          {hover === key ? (
-            <p
-              className="text-icon"
-              style={href === basePath ? activeStyle : {}}
-            >
-              {label[language]}
-            </p>
-          ) : (
-            <Icon
-              className="icon"
-              style={href === basePath ? activeStyle : {}}
-            />
-          )}
-        </Link>
-      ))}
+      {NAV_ITEMS.map(({ path, label, icon: Icon }) => {
+        const routeKey = path.split('/')[1];
+
+        const isActive = path === basePath;
+        const isHovered = hovered === routeKey;
+
+        return (
+          <Link
+            key={path}
+            href={path}
+            onMouseOver={() => setHovered(routeKey)}
+            onMouseLeave={() => setHovered(null)}
+          >
+            {isHovered ? (
+              <p className="text-icon" style={isActive ? activeStyle : {}}>
+                {label[language]}
+              </p>
+            ) : (
+              <Icon className="icon" style={isActive ? activeStyle : {}} />
+            )}
+          </Link>
+        );
+      })}
     </div>
   );
 };

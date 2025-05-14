@@ -1,9 +1,9 @@
+---
 name: ✨ Solicitud de Nueva Funcionalidad
 description: Sugiere una idea o mejora para el proyecto.
 title: "[FEATURE] - título corto y descriptivo"
 labels: ["enhancement"]
 assignees: ["KrlozMedina"]
-
 body:
   - type: textarea
     id: que-funcionalidad
@@ -18,7 +18,7 @@ body:
     id: motivo
     attributes:
       label: ¿Por qué sería útil?
-      description: Explica por qué mejorarían el proyecto con esta funcionalidad.
+      description: Explica por qué mejoraría el proyecto esta funcionalidad.
 
   - type: textarea
     id: notas-extra

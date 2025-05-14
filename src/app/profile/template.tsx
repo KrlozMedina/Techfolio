@@ -43,9 +43,12 @@ const createNavLink = (es: string, en: string, path: string): NavLink => ({
  * Enlaces de navegación para la sección de proyectos.
  */
 const NAV_LINKS_PROJECT: NavLink[] = [
-  createNavLink("Servicios", "Services", "/projects/services"),
-  createNavLink("Testimonios", "Testimonials", "/projects/testimonials"),
-  createNavLink("Casos de éxito", "Success Stories", "/projects/case-studies"),
+  createNavLink("Sobre mí", "About me", "/profile/about-me"),
+  createNavLink("Educación", "Education", "/profile/education"),
+  createNavLink("Habilidades", "Skills", "/profile/skills"),
+  createNavLink("Certificaciones", "Certifications", "/profile/certifications"),
+  createNavLink("Experiencia laboral", "Work experience", "/profile/experience"),
+  createNavLink("Logros", "Achievements", "/profile/achievements"),
 ];
 
 /**

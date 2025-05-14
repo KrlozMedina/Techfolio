@@ -12,19 +12,19 @@ import { NoticeType, ROUTES_LIST } from '@/lib/config';
 /**
  * Representa un texto multilingüe.
  */
-type LocaleText = {
-  es: string;
-  en: string;
-};
+// type LocaleText = {
+//   es: string;
+//   en: string;
+// };
 
 /**
  * Estructura de un enlace de navegación multilingüe.
  */
-type NavLink = {
-  title: LocaleText;
-  path: string;
-  // isActive: boolean;
-};
+// type NavLink = {
+//   title: LocaleText;
+//   path: string;
+//   // isActive: boolean;
+// };
 
 /**
  * Crea un enlace de navegación multilingüe.
@@ -33,20 +33,23 @@ type NavLink = {
  * @param href - Ruta del enlace
  * @returns Objeto tipo NavLink
  */
-const createNavLink = (es: string, en: string, path: string): NavLink => ({
-  title: { es, en },
-  path,
-  // isActive: false,
-});
+// const createNavLink = (es: string, en: string, path: string): NavLink => ({
+//   title: { es, en },
+//   path,
+//   // isActive: false,
+// });
 
 /**
  * Enlaces de navegación para la sección de proyectos.
  */
-const NAV_LINKS_PROJECT: NavLink[] = [
-  createNavLink("Servicios", "Services", "/projects/services"),
-  createNavLink("Testimonios", "Testimonials", "/projects/testimonials"),
-  createNavLink("Casos de éxito", "Success Stories", "/projects/case-studies"),
-];
+// const NAV_LINKS_PROJECT: NavLink[] = [
+//   createNavLink("Sobre mí", "About me", "/profile/about-me"),
+//   createNavLink("Educación", "Education", "/profile/education"),
+//   createNavLink("Habilidades", "Skills", "/profile/skills"),
+//   createNavLink("Certificaciones", "Certifications", "/profile/certifications"),
+//   createNavLink("Experiencia laboral", "Work experience", "/profile/experience"),
+//   createNavLink("Logros", "Achievements", "/profile/achievements"),
+// ];
 
 /**
  * Plantilla de layout para páginas de proyectos.
@@ -63,15 +66,15 @@ export default function Template({ children }: { children: ReactNode }) {
   const currentRoute = ROUTES_LIST.find(route => route.path === path);
 
   // Mapear enlaces con estado activo basado en la ruta actual
-  const linksWithActive = NAV_LINKS_PROJECT.map(link => ({
-    ...link,
-    isActive: link.path === path,
-  }));
+  // const linksWithActive = NAV_LINKS_PROJECT.map(link => ({
+  //   ...link,
+  //   isActive: link.path === path,
+  // }));
 
   return (
     <MainLayout
       language={language}
-      links={linksWithActive}
+      // links={linksWithActive}
       isAdmin={currentRoute?.isProtected ?? false}
     >
       {currentRoute?.notice?.map((notice, index) => (

@@ -9,7 +9,7 @@ import SettingsButton from '@/components/organisms/SettingsPanel/SettingsPanel';
 
 // Defining the structure of the links that can be passed as props
 interface Link {
-  href: string;
+  path: string;
   title: {
     es: string;
     en: string;
@@ -40,7 +40,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
     return links.map((link, index) => (
       <Link
         key={index}
-        href={link.href}
+        href={link.path}
         className={style['template__link']}
         style={link.isActive ? { color: 'var(--color-button-hover)' } : {}}
       >

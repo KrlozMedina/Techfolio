@@ -1,36 +1,23 @@
+// Unauthorized state message
 .unauthorized {
   text-align: center;
-  margin-top: 10vh;
-  padding: 2rem;
-}
+  padding: var(--space-xl);
 
-.unauthorized__title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
+  // Main title
+  &__title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-md);
+  }
 
-.unauthorized__text {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
+  // Descriptive text
+  &__text {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-xs);
 
-.unauthorized__text--muted {
-  color: #666;
-  font-style: italic;
-}
-
-.unauthorized__button {
-  margin-top: 1rem;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  color: white;
-  background-color: #0070f3;
-  border: none;
-  border-radius: 0.4rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.unauthorized__button:hover {
-  background-color: #005bb5;
+    // Muted variation of text (e.g., additional info)
+    &--muted {
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+  }
 }

@@ -23,7 +23,6 @@ type LocaleText = {
 type NavLink = {
   title: LocaleText;
   path: string;
-  // isActive: boolean;
 };
 
 /**
@@ -36,16 +35,13 @@ type NavLink = {
 const createNavLink = (es: string, en: string, path: string): NavLink => ({
   title: { es, en },
   path,
-  // isActive: false,
 });
 
 /**
  * Enlaces de navegación para la sección de proyectos.
  */
 const NAV_LINKS_PROJECT: NavLink[] = [
-  createNavLink("Servicios", "Services", "/projects/services"),
-  createNavLink("Testimonios", "Testimonials", "/projects/testimonials"),
-  createNavLink("Casos de éxito", "Success Stories", "/projects/case-studies"),
+  createNavLink("Proyectos", "Projects", "/dashboard/projects"),
 ];
 
 /**

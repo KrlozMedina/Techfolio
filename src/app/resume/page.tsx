@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useContext } from 'react';
-import MainLayout from '@/components/layouts/MainLayout/MainLayout';
+// import MainLayout from '@/components/layouts/MainLayout/MainLayout';
 // import { Viewer, Worker } from '@react-pdf-viewer/core';
 // import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@/styles/pages/CV.css';
@@ -47,7 +47,7 @@ const CV = () => {
 // };
 
   return (
-    <MainLayout isAdmin={false} language={isSpanish ? 'es' : 'en'} >
+    <>
       <p className='phrase'>
         {isSpanish
           ? 'El éxito no es la clave de la felicidad. La felicidad es la clave del éxito.'
@@ -68,7 +68,7 @@ const CV = () => {
           <Viewer theme='dark' fileUrl='CV.pdf' />
         </Worker>
       </div> */}
-    </MainLayout>
+    </>
   );
 };
 
