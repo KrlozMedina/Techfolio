@@ -18,6 +18,8 @@ Estas variables permiten un diseño temático claro/oscuro coherente.
   --color-text-code: rgb(44, 72, 128);
   --color-text-property: rgb(44, 195, 232);
   --color-text-visite: purple;
+  --color-text-link-dark: #93c5fd;
+  --color-text-link-light: #1d4ed8;
 
   /* ========================
   ICON COLORS

@@ -1,0 +1,84 @@
+// Estilos para el footer principal
+.footer {
+  width: 100%;
+  color: var(--color-text);
+  padding: var(--space-xl);
+  font-size: var(--font-size-xxs);
+
+  // ─── Sección superior: columnas con información ────────────────
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+
+    &-column {
+      flex: 1;
+      min-width: 22rem;          // Asegura ancho mínimo para columnas
+      text-align: center;
+
+      // Título de cada columna
+      h4 {
+        margin-bottom: var(--space-xs);
+        font-weight: var(--font-weight-bold);
+      }
+
+      // Párrafos y listas comparten márgenes verticales
+      p,
+      ul {
+        margin: var(--space-xxs) 0;
+      }
+
+      // Lista sin estilos predeterminados, con márgenes y enlaces estilizados
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin: var(--space-xxs) 0;
+
+          a {
+            color: var(--color-text-link);
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ─── Sección inferior: redes sociales y textos de copyright ──────
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-md);
+    gap: var(--space-xs);
+
+    &-social {
+      display: flex;
+      gap: var(--space-md);
+      margin-bottom: var(--space-xs);
+
+      a {
+        color: var(--color-text);
+        font-size: var(--font-size-xs);
+
+        &:hover {
+          color: var(--color-text-link);
+        }
+      }
+    }
+
+    &-text {
+      margin: 0;
+      font-size: var(--font-size-xxs);
+      color: var(--color-text);
+    }
+  }
+}

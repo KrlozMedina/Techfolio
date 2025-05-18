@@ -7,7 +7,7 @@ import {
   FaFlask,
   FaDatabase,
 } from 'react-icons/fa';
-import style from './Notice.module.css';
+import style from './StatusNotice.module.css';
 import { NoticeType } from '@/lib/config';
 
 // Tipos posibles para el tipo de mensaje

@@ -1,0 +1,41 @@
+/**
+ * Estilos para el encabezado de las plantillas del sistema.
+ * Incluye navegación principal y enlaces.
+ */
+
+/* Encabezado principal */
+.template__header {
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--padding-small, 0.8rem);
+  text-align: center;
+}
+
+/* Contenedor de navegación */
+.template__nav {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 425px) {
+    display: none;
+  }
+}
+
+/* Enlaces de navegación */
+.template__link {
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}

@@ -3,8 +3,8 @@
 import React, { useMemo, useState } from "react";
 import Slider from "@/components/organisms/Slider/Slider";
 import { useGetProjectsSimpleDataQuery } from "@/store/service/projectsApi";
-import { ProjectCard } from "@/components/molecules/CardViews/CardViews";
-import { Intro, Phrase } from "@/components/atom/TextBlocks/TextsBlocks";
+import { ProjectCard } from "@/components/molecules/Cards/CardViews";
+import { Intro, Phrase } from "@/components/molecules/QuoteBlock/TextsBlocks";
 import { DatabaseError, Loading, NoData } from "@/components/molecules/FeedbackStates/FeedbackStates";
 import style from './page.module.css'
 import caseStudies from "@/mocks/caseStudies.json";

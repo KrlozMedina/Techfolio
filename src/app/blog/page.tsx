@@ -7,7 +7,7 @@ import style from './page.module.css'
 import Image from 'next/image';
 import articles from '@/mocks/articles.json';
 import tagsMock from '@/mocks/tags.json';
-import { Intro, Phrase } from '@/components/atom/TextBlocks/TextsBlocks';
+import { Intro, Phrase } from '@/components/molecules/QuoteBlock/TextsBlocks';
 // import StatusNotice from '@/components/organisms/Notice/Notice';
 
 const BlogPage = () => {

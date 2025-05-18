@@ -9,7 +9,7 @@ import styles from "./page.module.css";
 import LanguageContext, {
   LanguageContextType,
 } from "@/context/LanguageContext";
-import { Intro, Phrase } from "@/components/atom/TextBlocks/TextsBlocks";
+import { Intro, Phrase } from "@/components/molecules/QuoteBlock/TextsBlocks";
 // import StatusNotice from "@/components/organisms/Notice/Notice";
 
 const CaseStudiesPage: React.FC = () => {

@@ -1,0 +1,23 @@
+// Contenedor principal del layout que contiene sidebar y contenido principal
+.layoutContainer {
+  display: flex;                // Disposición en fila
+  flex-direction: row;          // Dirección horizontal
+  height: 100vh;                // Altura completa de la ventana
+  background-color: var(--color-background-container);
+}
+
+// Contenedor del contenido principal (header + contenido de página)
+.mainContent {
+  flex: 1;                     // Ocupa todo el espacio disponible restante
+  display: flex;
+  flex-direction: column;      // Apila verticalmente
+  overflow: hidden;            // Evita scroll externo
+  width: fit-content;          // Ajusta el ancho al contenido (si aplica)
+}
+
+// Área donde se renderiza el contenido dinámico de la página
+.pageContent {
+  flex: 1;                     // Ocupa todo el espacio vertical restante
+  padding: 1rem;               // Espaciado interno uniforme
+  overflow-y: auto;            // Scroll vertical si el contenido excede el contenedor
+}

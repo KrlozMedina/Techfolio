@@ -3,7 +3,7 @@ import { FaDatabase, FaFilter } from 'react-icons/fa';
 import styles from './FeedbackStates.module.scss';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
-import Spinner from '@/components/atom/Spinner/Spinner';
+import Spinner from '@/components/atom/feedback/Spinner';
 import ErrorTemplate from '@/components/templates/ErrorTemplate/ErrorTemplate';
 
 interface LoadingProps {

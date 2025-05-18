@@ -2,12 +2,12 @@
 
 import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Social from '@/components/molecules/SocialLinks/SocialLinks';
-import { Menu, MenuPhone, MenuAside } from '@/components/organisms/Menu/Menu';
 import { useLanguage } from '@/hooks';
 import styles from './page.module.css';
-import SettingsButton from '@/components/organisms/SettingsPanel/SettingsPanel';
+import SettingsButton from '@/components/organisms/SettingPanel/SettingsPanel';
+import Logo from '@/components/atom/media/Logo';
+import { FloatingMenu, MenuAside, MobileHamburgerMenu } from '@/components/molecules/Navbar';
 
 /**
  * 🏠 HomePage Component
@@ -38,21 +38,14 @@ const HomePage: React.FC = () => {
 
       <section className={styles['home__container']}>
         <header>
-          <MenuPhone isAdmin={false} language={isSpanish ? 'es' : 'en'} />
+          <MobileHamburgerMenu isAdmin={false} language={isSpanish ? 'es' : 'en'} />
           <SettingsButton />
         </header>
 
         <main className={styles['home__main']}>
           <section className={styles['home__main-info']}>
-            <Image
-              src="/assets/logo.png"
-              alt="Logo de Krloz Medina"
-              width={300}
-              height={200}
-              className={styles['home__main-img']}
-              loading="lazy"
-              priority={false}
-            />
+            <Logo />
+            
             <section>
               {/* 🗣️ Texto de presentación */}
               <h1>{text.greeting} Soy Carlos Medina</h1>
@@ -72,7 +65,7 @@ const HomePage: React.FC = () => {
             <Social />
           </section>
 
-          <Menu language={isSpanish ? 'es' : 'en'} />
+          <FloatingMenu language={isSpanish ? 'es' : 'en'} />
         </main>
 
         <aside className={styles['home__aside']}>

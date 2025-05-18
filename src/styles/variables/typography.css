@@ -14,6 +14,7 @@
   --font-family-retro: 'Rubik Marker Hatch', cursive;
 
   /* Tamaños de fuente (basado en REM) */
+  --font-size-xxs: 0,9rem;
   --font-size-xs: 1.2rem;
   --font-size-sm: 1.4rem;
   --font-size-base: 1.6rem;

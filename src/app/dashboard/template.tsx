@@ -3,8 +3,8 @@
 import React, { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 
-import MainLayout from '@/components/layouts/MainLayout/MainLayout';
-import StatusNotice from '@/components/organisms/Notice/Notice';
+import AuthLayout from '@/components/templates/AuthLayout/AuthLayout';
+import StatusNotice from '@/components/organisms/Notice/StatusNotice';
 
 import { useLanguage } from '@/hooks';
 import { NoticeType, ROUTES_LIST } from '@/lib/config';
@@ -65,11 +65,7 @@ export default function Template({ children }: { children: ReactNode }) {
   }));
 
   return (
-    <MainLayout
-      language={language}
-      links={linksWithActive}
-      isAdmin={currentRoute?.isProtected ?? false}
-    >
+    <AuthLayout lang={language} links={linksWithActive} >
       {currentRoute?.notice?.map((notice, index) => (
         <StatusNotice
           key={index}
@@ -79,6 +75,6 @@ export default function Template({ children }: { children: ReactNode }) {
       ))}
 
       {children}
-    </MainLayout>
+    </AuthLayout>
   );
 }

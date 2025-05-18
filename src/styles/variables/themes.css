@@ -9,6 +9,7 @@
   /* 🧩 Variables comunes - se sobrescriben según tema */
   --color-text: var(--color-text-light);
   --color-text-soft: var(--color-text-light-soft);
+  --color-text-link: var(--color-text-link-light);
   --color-background: var(--color-bg-light);
   --color-background-container: var(--color-bg-container-light);
   --color-background-container-soft: var(--color-bg-container-soft-light);
@@ -29,6 +30,7 @@
 
     --color-text: var(--color-text-dark);
     --color-text-soft: var(--color-text-dark-soft);
+    --color-text-link: var(--color-text-link-dark);
     --color-background: var(--color-bg-dark);
     --color-background-container: var(--color-bg-container-dark);
     --color-background-container-soft: var(--color-bg-container-soft-dark);
@@ -50,6 +52,7 @@
 
   --color-text: var(--color-text-attr);
   --color-text-soft: var(--color-text-soft-attr);
+  --color-text-link: var(--color-text-link-attr);
   --color-background: var(--color-bg-attr);
   --color-background-container: var(--color-bg-container-attr);
   --color-background-container-soft: var(--color-bg-container-soft-attr);
@@ -67,6 +70,7 @@
 [data-theme="light"] {
   --color-text-attr: var(--color-text-light);
   --color-text-soft-attr: var(--color-text-light-soft);
+  --color-text-link-attr: var(--color-text-link-light);
   --color-bg-attr: var(--color-bg-light);
   --color-bg-container-attr: var(--color-bg-container-light);
   --color-bg-container-soft-attr: var(--color-bg-container-soft-light);
@@ -83,6 +87,7 @@
 [data-theme="dark"] {
   --color-text-attr: var(--color-text-dark);
   --color-text-soft-attr: var(--color-text-dark-soft);
+  --color-text-link-attr: var(--color-text-link-dark);
   --color-bg-attr: var(--color-bg-dark);
   --color-bg-container-attr: var(--color-bg-container-dark);
   --color-bg-container-soft-attr: var(--color-bg-container-soft-dark);

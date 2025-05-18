@@ -1,6 +1,6 @@
 'use client';
 
-import Spinner from '@/components/atom/Spinner/Spinner';
+import Spinner from '@/components/atom/feedback/Spinner';
 import ErrorTemplate from '@/components/templates/ErrorTemplate/ErrorTemplate';
 import { useLanguage } from '@/hooks';
 import React from 'react';

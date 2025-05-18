@@ -3,8 +3,8 @@
 import React, { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 
-import MainLayout from '@/components/layouts/MainLayout/MainLayout';
-import StatusNotice from '@/components/organisms/Notice/Notice';
+import MainLayout from '@/components/templates/MainLayout/MainLayout';
+import StatusNotice from '@/components/organisms/Notice/StatusNotice';
 
 import { useLanguage } from '@/hooks';
 import { NoticeType, ROUTES_LIST } from '@/lib/config';

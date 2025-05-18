@@ -1,4 +1,4 @@
-import { TextInput } from "@/components/atom/Form/FormElements";
+// import { TextInput } from "@/components/atom/form/TextInput";
 import Modal from "@/components/organisms/Modal/Modal";
 import {
   useCreateProjectMutation,
@@ -15,6 +15,7 @@ import style from "../page.module.css";
 import Image from "next/image";
 import { PLATFORMS } from "@/shared/constants/constants";
 import { IProjectV2Paginated } from "@/models/project/Project.interface";
+import { TextInput } from "@/components/atom/form";
 
 const ProjectsSection: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
