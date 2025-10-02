@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://krlozmedina.dev"), // ✅ Soluciona la advertencia sobre URLs absolutas
 
   title: {
-    default: "KrlozMedina Portfolio Lab",
-    template: "%s | KrlozMedina Portfolio Lab",
+    default: "Techfolio KrlozMedina",
+    template: "%s | Techfolio KrlozMedina",
   },
 
   description:
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     description:
       "Descubre los proyectos de Carlos Medina, desarrollador fullstack e ingeniero en control y automatización.",
     url: "https://www.krlozmedina.dev",
-    siteName: "KrlozMedina Portfolio Lab",
+    siteName: "Techfolio Krloz Medina",
     images: [
       {
         url: "/og-image.jpg", // Se convierte automáticamente en absoluta por metadataBase

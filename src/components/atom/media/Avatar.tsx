@@ -3,60 +3,56 @@ import Image from 'next/image';
 
 interface AvatarProps {
   /**
-   * URL de la imagen del avatar.
-   */
-  src?: string;
-
-  /**
-   * Nombre del usuario para mostrar iniciales o para accesibilidad.
+   * Nombre del avatar (se usará para cargar la imagen desde `/assets/avatars/{name}.png`)
    */
   name: string;
 
   /**
-   * Tamaño en píxeles del avatar (ancho y alto).
-   * @default 40
+   * Ancho del avatar en píxeles. Por defecto: 40
    */
-  size?: number;
+  width: number;
 
   /**
-   * Si es `true`, mostrará solo las iniciales como fallback.
-   * @default true
+   * Alto del avatar en píxeles. Por defecto: 40
    */
-  fallback?: boolean;
+  height: number;
+
+  /**
+   * Clase CSS opcional para aplicar estilos personalizados
+   */
+  className?: string;
+
+  /**
+   * Estilos inline opcionales para el contenedor del avatar
+   */
+  style?: React.CSSProperties;
 }
 
 /**
- * Componente Avatar
- *
- * Muestra una imagen de perfil del usuario. Si la imagen no está disponible,
- * muestra las iniciales del nombre como alternativa.
+ * Componente Avatar que muestra una imagen del usuario basada en su nombre.
+ * La imagen se busca en la ruta `/assets/avatars/{name}.png`.
  */
-const Avatar: React.FC<AvatarProps> = ({ src, name, size = 40, fallback = true }) => {
-  const getInitials = () =>
-    name
-      .split(' ')
-      .map((n) => n[0]?.toUpperCase())
-      .slice(0, 2)
-      .join('');
-
+const Avatar: React.FC<AvatarProps> = ({
+  name,
+  width,
+  height,
+  className,
+  style,
+}) => {
   return (
     <div
-      className="rounded-full overflow-hidden flex items-center justify-center bg-gray-200 text-gray-600 font-semibold"
-      style={{ width: size, height: size }}
-      aria-label={name}
+      style={{ width, height, ...style }}
+      className={className}
+      aria-label={`Avatar de ${name}`}
       role="img"
     >
-      {src ? (
-        <Image
-          src={src}
-          alt={`Avatar de ${name}`}
-          width={size}
-          height={size}
-          className="object-cover"
-        />
-      ) : fallback ? (
-        <span>{getInitials()}</span>
-      ) : null}
+      <Image
+        src={`/assets/avatars/${name}.png`}
+        alt={`Avatar de ${name}`}
+        width={width}
+        height={height}
+        loading="lazy"
+      />
     </div>
   );
 };

@@ -1,23 +1,36 @@
-/* ========================
-   🌐 Estilos Globales
-   ======================== */
+/* ================================
+   🌐 GLOBAL STYLES - global.css
+================================ */
 
-/* ⚠️ Tailwind (Descomenta si usas Tailwind CSS) */
-/* 
+/* =====================================
+   📦 TAILWIND CSS (Enable if used)
+===================================== */
+/*
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
 */
 
-/* 🎨 Variables globales */
-@import '../styles/variables/colors.css';
-@import '../styles/variables/typography.css';
-@import '../styles/variables/spacing.css';
-@import '../styles/variables/layout.css';
-@import '../styles/variables/themes.css';
+/* =====================================
+   🎨 DESIGN TOKENS - Global Variables
+===================================== */
+@import '../styles/variables/colors.css';      /* 🎨 Paleta de colores */
+@import '../styles/variables/typography.css';  /* ✍️ Tipografías, tamaños, pesos */
+@import '../styles/variables/spacing.css';     /* 📏 Margenes, paddings */
+@import '../styles/variables/layout.css';      /* 📐 Reglas de layout (grid, flex) */
+@import '../styles/variables/themes.css';      /* 🌗 Temas claros/oscuros */
 
-/* 🔄 Reset de estilos */
-@import '../styles/base/reset.css';
+/* =====================================
+   🔄 CSS RESET
+===================================== */
+@import '../styles/base/reset.css'; /* Reestablece estilos base entre navegadores */
 
-/* 📦 Estilos base del proyecto */
-@import '../styles/base/base.css';
+/* =====================================
+   🧱 BASE STYLES
+===================================== */
+@import '../styles/base/base.css';  /* Estilos base globales del proyecto */
+
+/* =====================================
+   🔤 WEB FONTS
+===================================== */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,400&display=swap');

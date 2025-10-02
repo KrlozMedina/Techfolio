@@ -12,6 +12,8 @@
   --font-family-heading: 'Poppins', sans-serif;
   --font-family-text: 'Inter', sans-serif;
   --font-family-retro: 'Rubik Marker Hatch', cursive;
+  --font-family-quote: 'Merriweather', serif;
+  --font-family-title: 'DM Serif Display', serif;
 
   /* Tamaños de fuente (basado en REM) */
   --font-size-xxs: 0,9rem;

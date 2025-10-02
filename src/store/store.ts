@@ -1,13 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./slices/counterSlice";
+// import counterReducer from "./slices/counterSlice";
 import { projectsApi } from "./service/projectsApi";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { technologiesApi } from "./service/technologiesApi";
 import { authApi } from "./service/authApi";
+import filterReducer from './slices/filterSlice'
 
 export const store = configureStore({
   reducer: {
-    counterReducer,
+    filters: filterReducer,
     [projectsApi.reducerPath]: projectsApi.reducer,
     [technologiesApi.reducerPath]: technologiesApi.reducer,
     [authApi.reducerPath]: authApi.reducer,

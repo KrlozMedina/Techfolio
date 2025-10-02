@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { FaCode } from 'react-icons/fa';
-import style from './CardViews.module.css';
+import style from './CardViews.module.scss';
 import { Language } from '@/shared/constants';
 import { IProjectV2 } from '@/models/interfaces';
 

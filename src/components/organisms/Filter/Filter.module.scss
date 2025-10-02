@@ -1,0 +1,148 @@
+$bg-dark: #0e0e0e;
+$bg-card: #1e1e1e;
+$text-main: #fff;
+$text-muted: #aaa;
+$accent: #04f;
+
+.header {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: $text-main;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: $text-muted;
+  }
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+
+  .filterBtn {
+    background: none;
+    border: 2px solid $text-muted;
+    padding: 0.5rem 1rem;
+    color: $text-main;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: $accent;
+      color: $accent;
+    }
+
+    &.active {
+      background-color: $accent;
+      color: $bg-dark;
+      border-color: $accent;
+    }
+  }
+}
+
+.main {
+  padding: 2rem 1rem;
+  background: $bg-dark;
+  color: $text-main;
+}
+
+.sliderWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.sliderContainer {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.slider {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  min-width: 100%;
+  width: max-content;
+}
+
+.card {
+  background: $bg-card;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  width: 280px;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .cardContent {
+    padding: 1rem;
+
+    .cardCategory {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: $accent;
+      font-weight: bold;
+    }
+
+    .cardTitle {
+      font-size: 1.25rem;
+      margin: 0.5rem 0;
+    }
+
+    .cardDescription {
+      font-size: 1rem;
+      color: $text-muted;
+    }
+  }
+}
+
+.btnSlider {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: $text-main;
+  font-size: 2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  &.left {
+    left: 0.5rem;
+  }
+
+  &.right {
+    right: 0.5rem;
+  }
+}

@@ -22,6 +22,7 @@ export * from './categories';
 export * from './technologies';
 export * from './language';
 export * from './enums';
+export * from './quotes'
 
 export {
   FEATURES,

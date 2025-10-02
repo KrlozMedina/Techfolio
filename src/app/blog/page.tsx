@@ -7,7 +7,7 @@ import style from './page.module.css'
 import Image from 'next/image';
 import articles from '@/mocks/articles.json';
 import tagsMock from '@/mocks/tags.json';
-import { Intro, Phrase } from '@/components/molecules/QuoteBlock/TextsBlocks';
+// import { Intro, Phrase } from '@/components/templates/IntroTemplate/import React from 'react'; import style from './QuoteBlock.module.scss';  interface IntroBlockProps {   /**    * Título de la sección de introducción.    */   title: string;    /**    * Texto introductorio o descriptivo de la sección.    */   intro: string; }  /**  * 📘 IntroBlock  *  * Componente de presentación que muestra un título y una introducción para una sección de la página.  *   * Ideal para encabezados de secciones con contexto explicativo.  */ export const IntroBlock: React.FC<IntroBlockProps> = ({ title, intro }) => (   <section className={style['intro-section']}>     <h1 className={style['intro-section__title']}>{title}</h1>     <p className={style['intro-section__paragraph']}>{intro}</p>   </section> );';
 // import StatusNotice from '@/components/organisms/Notice/Notice';
 
 const BlogPage = () => {
@@ -34,17 +34,15 @@ const BlogPage = () => {
 
   return (
     <>
-      <Phrase
-        // phraseEnglish="We write to taste life twice, in the moment and in retrospect."
-        // phraseSpanish="Escribimos para saborear la vida dos veces, en el momento y en la retrospección."
+      {/* <Phrase
         phrase={isSpanish ? texts.phrase.es : texts.phrase.en}
         author={texts.author}
-      />
+      /> */}
 
-      <Intro
+      {/* <Intro
         title={isSpanish ? texts.intro.es.title : texts.intro.en.title}
         intro={isSpanish ? texts.intro.es.intro : texts.intro.en.intro}
-      />
+      /> */}
       {/* <StatusNotice
         type='dummy'
         language={isSpanish ? 'en' : 'en'}

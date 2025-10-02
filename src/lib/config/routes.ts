@@ -1,7 +1,5 @@
 import { IconType } from 'react-icons';
-import {
-  ImBlog, ImProfile,
-} from 'react-icons/im';
+import { ImBlog, ImProfile } from 'react-icons/im';
 import { BiMessageDots } from 'react-icons/bi';
 import { SiPolymerproject, SiBookstack } from 'react-icons/si';
 import { MdSpaceDashboard } from 'react-icons/md';
@@ -77,7 +75,7 @@ export const ROUTES_LIST: readonly RouteEntry[] = [
     label: { es: 'Perfil', en: 'Profile' },
     icon: ImProfile,
   },
-  { path: '/profile/about-me', isProtected: true, notice: ['maintenance'] },
+  { path: '/profile/about-me', isProtected: true, notice: ['maintenance', 'comingSoon'] },
   { path: '/profile/achievements', isProtected: true, notice: ['dummy', 'construction'] },
   { path: '/profile/certifications', isProtected: true, notice: ['dummy', 'construction'] },
   { path: '/profile/education', isProtected: true, notice: ['dummy', 'incomplete', 'maintenance'] },
