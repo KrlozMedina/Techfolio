@@ -1,12 +1,22 @@
-# 🛡 Reporte de Vulnerabilidades
+# 🛡 Política de Seguridad
 
-Si encuentras alguna vulnerabilidad de seguridad, **no** abras un issue público.
+## 📢 Reporte de Vulnerabilidades
 
-Por favor, contacta directamente:
+Si descubres una vulnerabilidad de seguridad, **no abras un issue público**.
 
-- 📧 Email: kamedinal16@outlook.com
-- 🔒 O crea un reporte privado en GitHub Security Advisories
+Por favor repórtala usando uno de los siguientes medios:
 
-Seguiremos el proceso de responsible disclosure para solucionar el problema lo antes posible.
+- 📧 Email: kamedinal16@outlook.com  
+- 🔒 GitHub Security Advisories (recomendado)
 
-Gracias por mantener seguro este proyecto.
+## ⏱ Tiempos de Respuesta
+
+Nos comprometemos a:
+- Confirmar recepción del reporte en un plazo máximo de **48 horas**
+- Entregar una evaluación inicial en un máximo de **5 días hábiles**
+
+## 🔐 Divulgación Responsable
+
+Solicitamos que se otorgue un tiempo razonable para investigar y corregir el problema antes de cualquier divulgación pública.
+
+Gracias por ayudar a mantener este proyecto seguro.

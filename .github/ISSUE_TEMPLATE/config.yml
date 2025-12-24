@@ -1,8 +1,10 @@
 blank_issues_enabled: false
+
 contact_links:
   - name: ❓ Soporte General
-    url: https://github.com/KrlozMedina/Techfolio/issues/new/choose
-    about: Si tienes dudas o preguntas generales, usa esta opción.
+    url: https://github.com/KrlozMedina/Techfolio/discussions
+    about: Preguntas generales, ideas o dudas sobre el proyecto.
+
   - name: 🛡 Reportar problema de seguridad
     url: mailto:kamedinal16@outlook.com
-    about: Si detectas una vulnerabilidad de seguridad, contáctanos por email.
+    about: Reporta vulnerabilidades de seguridad de forma responsable.

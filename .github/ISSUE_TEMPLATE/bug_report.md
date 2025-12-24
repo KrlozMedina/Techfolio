@@ -5,7 +5,7 @@ title: "[BUG] - título corto y descriptivo"
 labels: ["bug"]
 assignees: ["KrlozMedina"]
 body:
-  - type: textarea
+  - type: markdown
     id: que-pasa
     attributes:
       label: ¿Qué sucede?
@@ -14,7 +14,7 @@ body:
     validations:
       required: true
 
-  - type: textarea
+  - type: markdown
     id: pasos-reproducir
     attributes:
       label: Pasos para reproducir
@@ -34,8 +34,15 @@ body:
       description: Indica navegador y sistema operativo usado.
       placeholder: "Chrome 123, Windows 11"
 
-  - type: textarea
+  - type: markdown
     id: evidencia
     attributes:
       label: Evidencias (capturas/logs)
       description: Adjunta imágenes o logs si es posible.
+
+  - type: input
+    id: version
+    attributes:
+      label: Versión afectada
+      description: Indica la versión o commit donde ocurre el bug.
+      placeholder: "v2.2.0 / commit abc123"

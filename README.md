@@ -497,7 +497,15 @@ Agradecimientos especiales a:
 
 ## Licencia
 
-Este proyecto está licenciado bajo los términos de la [Licencia Creative Commons Atribución-NoComercial 4.0 Internacional (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/deed.es). Puedes consultar los detalles completos en el archivo [LICENSE.md](./LICENSE.md).
+El **código fuente** de este proyecto está licenciado bajo la **Licencia MIT**.  
+Consulta los términos completos en el archivo [LICENSE.md](./LICENSE.md).
+
+### Aclaración sobre el contenido
+
+El **contenido personal** de este portafolio —incluyendo textos, imágenes, diseño visual, branding, nombre y material descriptivo— es propiedad de **Carlos Alidio Medina Lopez** y **no está cubierto por la Licencia MIT**.
+
+No se autoriza el uso, redistribución o explotación de dicho contenido con fines comerciales o de representación personal sin consentimiento explícito del autor.
+
 
 ## Contacto
 

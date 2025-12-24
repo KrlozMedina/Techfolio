@@ -1,9 +1,10 @@
 ---
 name: ✨ Solicitud de Nueva Funcionalidad
 description: Sugiere una idea o mejora para el proyecto.
-title: "[FEATURE] - título corto y descriptivo"
+title: "[FEATURE] - "
 labels: ["enhancement"]
 assignees: ["KrlozMedina"]
+
 body:
   - type: textarea
     id: que-funcionalidad
@@ -14,14 +15,33 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: alcance
+    attributes:
+      label: Alcance
+      options:
+        - Frontend
+        - Backend
+        - API
+        - Infraestructura
+        - Documentación
+
   - type: textarea
     id: motivo
     attributes:
       label: ¿Por qué sería útil?
-      description: Explica por qué mejoraría el proyecto esta funcionalidad.
+      description: Explica el valor de esta funcionalidad.
+
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Criterios de aceptación
+      placeholder: |
+        - [ ] Funcionalidad implementada
+        - [ ] Pruebas pasan
+        - [ ] Documentación actualizada
 
   - type: textarea
     id: notas-extra
     attributes:
       label: Notas adicionales
-      description: Deja cualquier comentario extra, diseño o ideas relacionadas.

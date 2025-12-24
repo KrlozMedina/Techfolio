@@ -2,10 +2,14 @@
 
 ¿Necesitas ayuda con este proyecto?
 
-## 🚀 Opciones de soporte:
+## 🚀 Opciones de soporte
 
-- Busca en la documentación oficial del proyecto
-- Abre un nuevo [Issue](../../issues/new/choose) seleccionando la categoría adecuada
-- Pregunta en nuestro servidor de Discord (opcional)
+- Revisa la documentación del proyecto
+- Abre un [Issue](../../issues/new/choose) usando la plantilla correspondiente
+
+### ℹ️ Alcance del soporte
+- ✔️ Bugs reproducibles
+- ✔️ Errores de configuración documentados
+- ❌ Soporte personalizado o consultoría
 
 Gracias por usar este proyecto 🙌🏻
