@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.2.0](https://github.com/KrlozMedina/Techfolio/compare/v2.1.0...v2.2.0) (2025-12-24)
+
+
+### Features
+
+* **auth, menu, templates:** protección de rutas API, menú adaptativo y asignación de templates ([f64f0ff](https://github.com/KrlozMedina/Techfolio/commit/f64f0ffbd1e78147925b4c98f3bf117fb2e08291))
+* **layout, components:** creación de header, footer, modificación de sidebar y nuevo template ([15bcc0e](https://github.com/KrlozMedina/Techfolio/commit/15bcc0e35b3fc0bb7888a260520ee911cef07398))
+* **middleware, ui:** configuración dinámica de middleware y avatares para páginas de estado ([0cc03ee](https://github.com/KrlozMedina/Techfolio/commit/0cc03eebb7d17cb4f314c3927021ef414a14b348))
+
+
+### Bug Fixes
+
+* **update libraries:** update libraries and resolve pnpm build ([80bef52](https://github.com/KrlozMedina/Techfolio/commit/80bef52f6efc99687e458c93c57a0854232fd1d1))
+
 ## [2.1.0](https://github.com/KrlozMedina/Techfolio/compare/v2.0.0...v2.1.0) (2025-05-11)
 
 
