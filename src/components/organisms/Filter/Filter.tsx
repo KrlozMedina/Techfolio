@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './Filter.module.scss';
 
 type Project = {
@@ -60,7 +60,7 @@ const projects: Project[] = [
   },
 ];
 
-export default function ProjectSlider(): JSX.Element {
+export default function ProjectSlider(): React.JSX.Element {
   const [filter, setFilter] = useState<'all' | Project['category']>('all');
   const sliderRef = useRef<HTMLDivElement>(null);
 

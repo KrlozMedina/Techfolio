@@ -9,7 +9,7 @@ import styles from "./page.module.css";
 import LanguageContext, {
   LanguageContextType,
 } from "@/context/LanguageContext";
-import { Intro, Phrase } from "@/components/templates/IntroTemplate/IntroTemplate";
+// import { Intro, Phrase } from "@/components/templates/IntroTemplate/IntroTemplate";
 // import StatusNotice from "@/components/organisms/Notice/Notice";
 
 const CaseStudiesPage: React.FC = () => {
@@ -55,17 +55,17 @@ const CaseStudiesPage: React.FC = () => {
 
   return (
     <>
-      <Phrase
+      {/* <Phrase
         phrase={isSpanish ? texts.phrase.es : texts.phrase.en}
         author={texts.phrase.author}
-      />
+      /> */}
 
 
       <section>
-        <Intro
+        {/* <Intro
           title={isSpanish ? texts.intro.es.title : texts.intro.en.title}
           intro={isSpanish ? texts.intro.es.intro : texts.intro.en.intro}
-        />
+        /> */}
         {/* <StatusNotice type="dummy" language={isSpanish ? 'es' : 'en'} /> */}
 
         <section className={styles["page"]}>

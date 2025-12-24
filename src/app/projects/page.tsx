@@ -86,7 +86,7 @@ const Projects: React.FC = () => {
 
       <section>
         <IntroTemplate title={TEXTS.hero.title[language]} intro={TEXTS.hero.intro[language]} >
-          <Filter lang={language} filter={filter} setFilter={setFilter} />
+          {/* <Filter lang={language} filter={filter} setFilter={setFilter} /> */}
 
           <Slider>
             {isLoading && <Loading language={language} />}

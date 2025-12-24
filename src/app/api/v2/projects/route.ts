@@ -156,7 +156,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     if (error instanceof ZodError) {
       // console.error("Validation failed:", error.errors);
-      return NextResponse.json({ error: error.errors }, { status: 400 });
+      return NextResponse.json({ error: error }, { status: 400 });
     }
     console.error("POST /v2/projects error:", error);
     return NextResponse.json(

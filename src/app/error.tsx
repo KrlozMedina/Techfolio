@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { JSX } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/hooks';
 import ErrorTemplate from '@/components/templates/ErrorTemplate/ErrorTemplate';
