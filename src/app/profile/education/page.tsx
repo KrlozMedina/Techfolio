@@ -2,11 +2,11 @@
 
 import React, { useContext } from 'react'
 import LanguageContext from '@/context/LanguageContext'
-import MainLayout from '@/components/templates/MainLayout/MainLayout'
-import { Banner } from '@/components/molecules/CardViews/CardViews'
+// import MainLayout from '@/components/layouts/MainLayout/MainLayout'
+import { Banner } from '@/components/molecules/Cards/CardViews'
 import '@/styles/pages/Education.css'
 import Image from 'next/image'
-import StatusNotice from '@/components/organisms/Notice/Notice'
+// import StatusNotice from '@/components/organisms/Notice/Notice'
 
 // Define the context type if not already defined
 interface LanguageContextType {
@@ -118,14 +118,14 @@ const codeData: CodeItem[] = [
 const Education: React.FC = () => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
-  const links = [
-    { href: '/profile/about-me', title: {es: 'Sobre mí', en: 'About me'}, isActive:false },
-    { href: '/profile/education', title: {es: 'Educación', en: 'Education'}, isActive:true },
-    { href: '/profile/skills', title: {es: 'Habilidades', en: 'Skills'}, isActive:false },
-    { href: '/profile/certifications', title: {es: 'Certificaciones', en: 'Certifications'}, isActive:false },
-    { href: '/profile/experience', title: {es: 'Experiencia laboral', en: 'Work experience'}, isActive:false },
-    { href: '/profile/achievements', title: {es: 'Logros', en: 'Achievements'}, isActive:false },
-  ]
+  // const links = [
+  //   { href: '/profile/about-me', title: {es: 'Sobre mí', en: 'About me'}, isActive:false },
+  //   { href: '/profile/education', title: {es: 'Educación', en: 'Education'}, isActive:true },
+  //   { href: '/profile/skills', title: {es: 'Habilidades', en: 'Skills'}, isActive:false },
+  //   { href: '/profile/certifications', title: {es: 'Certificaciones', en: 'Certifications'}, isActive:false },
+  //   { href: '/profile/experience', title: {es: 'Experiencia laboral', en: 'Work experience'}, isActive:false },
+  //   { href: '/profile/achievements', title: {es: 'Logros', en: 'Achievements'}, isActive:false },
+  // ]
 
   const diplomas = [
     'https://i.imgur.com/hPTmVAj.jpg',
@@ -134,7 +134,7 @@ const Education: React.FC = () => {
   ]
 
   return (
-    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'}>
+    <>
       <p className='phrase'>
         {
           isSpanish
@@ -143,8 +143,8 @@ const Education: React.FC = () => {
         }
       </p>
 
-      <StatusNotice type='dummy' language={isSpanish ? 'es' : 'en'} />
-      <StatusNotice type='incomplete' language={isSpanish ? 'es' : 'en'} />
+      {/* <StatusNotice type='dummy' language={isSpanish ? 'es' : 'en'} /> */}
+      {/* <StatusNotice type='incomplete' language={isSpanish ? 'es' : 'en'} /> */}
 
       <p className='author'>Malcolm X</p>
 
@@ -191,7 +191,7 @@ const Education: React.FC = () => {
           }
         </div>
       </section>
-    </MainLayout>
+    </>
   )
 }
 

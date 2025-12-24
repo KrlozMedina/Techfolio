@@ -1,30 +1,30 @@
 'use client'
 
-import React, { useContext } from 'react';
-import MainLayout from '@/components/templates/MainLayout/MainLayout';
-import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
-import StatusNotice from '@/components/organisms/Notice/Notice';
+import React from 'react';
+// import MainLayout from '@/components/layouts/MainLayout/MainLayout';
+// import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
+// import StatusNotice from '@/components/organisms/Notice/Notice';
 
 const ServicesPage = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
-  const links = [
-    {
-      title: {es: "Servicios", en: "Services"},
-      href: "/projects/services",
-      isActive: true,
-    },
-    {
-      title: {es: "Testimonios", en: "Testimonials"},
-      href: "/projects/testimonials",
-      isActive: false,
-    },
-    {
-      title: {es: "Casos de éxito", en: "Success Stories"},
-      href: "/projects/case-studies",
-      isActive: false,
-    },
-  ];
+  // const links = [
+  //   {
+  //     title: {es: "Servicios", en: "Services"},
+  //     path: "/projects/services",
+  //     isActive: true,
+  //   },
+  //   {
+  //     title: {es: "Testimonios", en: "Testimonials"},
+  //     path: "/projects/testimonials",
+  //     isActive: false,
+  //   },
+  //   {
+  //     title: {es: "Casos de éxito", en: "Success Stories"},
+  //     path: "/projects/case-studies",
+  //     isActive: false,
+  //   },
+  // ];
 
   const services = [
     { id: 1, name: 'Desarrollo Web', description: 'Creación de sitios web modernos y responsivos.' },
@@ -34,8 +34,8 @@ const ServicesPage = () => {
   ];
 
   return (
-    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'} >
-      <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} />
+    <>
+      {/* <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} /> */}
       <div style={{ padding: '20px' }}>
         <h1>Servicios Ofrecidos</h1>
         <ul style={{ listStyle: 'none', padding: 0 }}>
@@ -47,7 +47,7 @@ const ServicesPage = () => {
           ))}
         </ul>
       </div>
-    </MainLayout>
+    </>
   );
 };
 

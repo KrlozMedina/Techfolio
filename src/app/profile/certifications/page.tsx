@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useContext } from 'react';
-import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
-import MainLayout from '@/components/templates/MainLayout/MainLayout';
-import StatusNotice from '@/components/organisms/Notice/Notice';
+import React from 'react';
+// import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
+// import MainLayout from '@/components/layouts/MainLayout/MainLayout';
+// import StatusNotice from '@/components/organisms/Notice/Notice';
 
 const certifications = [
   {
@@ -24,20 +24,20 @@ const certifications = [
 ];
 
 const CertificationsPage: React.FC = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
-  const links = [
-    { href: '/profile/about-me', title: {es: 'Sobre mí', en: 'About me'}, isActive:false },
-    { href: '/profile/education', title: {es: 'Educación', en: 'Education'}, isActive:false },
-    { href: '/profile/skills', title: {es: 'Habilidades', en: 'Skills'}, isActive:false },
-    { href: '/profile/certifications', title: {es: 'Certificaciones', en: 'Certifications'}, isActive:true },
-    { href: '/profile/experience', title: {es: 'Experiencia laboral', en: 'Work experience'}, isActive:false },
-    { href: '/profile/achievements', title: {es: 'Logros', en: 'Achievements'}, isActive:false },
-  ]
+  // const links = [
+  //   { href: '/profile/about-me', title: {es: 'Sobre mí', en: 'About me'}, isActive:false },
+  //   { href: '/profile/education', title: {es: 'Educación', en: 'Education'}, isActive:false },
+  //   { href: '/profile/skills', title: {es: 'Habilidades', en: 'Skills'}, isActive:false },
+  //   { href: '/profile/certifications', title: {es: 'Certificaciones', en: 'Certifications'}, isActive:true },
+  //   { href: '/profile/experience', title: {es: 'Experiencia laboral', en: 'Work experience'}, isActive:false },
+  //   { href: '/profile/achievements', title: {es: 'Logros', en: 'Achievements'}, isActive:false },
+  // ]
 
   return (
-    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'}>
-      <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} />
+    <>
+      {/* <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} /> */}
       <div style={{ padding: '20px' }}>
         <h1>Certificaciones Profesionales y Técnicas</h1>
         <ul>
@@ -50,7 +50,7 @@ const CertificationsPage: React.FC = () => {
           ))}
         </ul>
       </div>
-    </MainLayout>
+    </>
   );
 };
 

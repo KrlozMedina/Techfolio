@@ -1,8 +1,10 @@
 import React from 'react';
 import { FaDatabase, FaFilter } from 'react-icons/fa';
-import styles from './FeedbackStates.module.css';
+import styles from './FeedbackStates.module.scss';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import Spinner from '@/components/atom/feedback/Spinner';
+import ErrorTemplate from '@/components/templates/ErrorTemplate/ErrorTemplate';
 
 interface LoadingProps {
   language: 'es' | 'en';
@@ -19,10 +21,6 @@ interface DatabaseErrorProps {
 }
 
 const texts = {
-  loading: {
-    es: 'Cargando datos...',
-    en: 'Loading data...'
-  },
   noData: {
     filterTrue: {
       es: {
@@ -59,12 +57,10 @@ const texts = {
 
 export const Loading: React.FC<LoadingProps> = ({ language }) => {
   return (
-    <div className={styles['container']}>
-      <div className={styles['spinner']}></div>
-      <p className={styles['message']}>
-        {texts.loading[language]}
-      </p>
-    </div>
+    <ErrorTemplate status='loading' inContainer>
+    {/* <div className={styles['container']}> */}
+      <Spinner language={language} />
+    </ErrorTemplate>
   )
 }
 
@@ -72,25 +68,27 @@ export const NoData: React.FC<NoDataProps> = ({ reason, language='es' }) => {
   const isFilter = reason === 'no-match';
 
   return (
-    <div className={styles['container']}>
-      {isFilter ? (
-        <FaFilter className={styles['icon']} />
-      ) : (
-        <FaDatabase className={styles['icon']} />
-      )}
-      <h2 className={styles['title']}>
-        {isFilter
-          ? texts.noData.filterTrue[language].title
-          : texts.noData.filterFalse[language].title
-        }
-      </h2>
-      <p className={styles['subtitle']}>
-        {isFilter
-          ? texts.noData.filterTrue[language].subtitle
-          : texts.noData.filterFalse[language].subtitle
-        }
-      </p>
-    </div>
+    <ErrorTemplate status='noResults' inContainer>
+      <div className={styles['container']}>
+        {isFilter ? (
+          <FaFilter className={styles['icon']} />
+        ) : (
+          <FaDatabase className={styles['icon']} />
+        )}
+        <h2 className={styles['title']}>
+          {isFilter
+            ? texts.noData.filterTrue[language].title
+            : texts.noData.filterFalse[language].title
+          }
+        </h2>
+        <p className={styles['subtitle']}>
+          {isFilter
+            ? texts.noData.filterTrue[language].subtitle
+            : texts.noData.filterFalse[language].subtitle
+          }
+        </p>
+      </div>
+    </ErrorTemplate>
   );
 };
 
@@ -98,14 +96,16 @@ export const DatabaseError: React.FC<DatabaseErrorProps> = ({ reason, language='
   console.warn(reason)
   
   return (
-    <div className={styles["db-error-container"]}>
-      <div className={styles["db-error-icon"]}>⚠️</div>
-      <h2 className={styles["db-error-title"]}>
-        {texts.error[language].title}
-      </h2>
-      <p className={styles["db-error-message"]}>
-        {texts.error[language].message}
-      </p>
-    </div>
+    <ErrorTemplate status='serverError' inContainer>
+      <div className={styles["db-error-container"]}>
+        <div className={styles["db-error-icon"]}>⚠️</div>
+        <h2 className={styles["db-error-title"]}>
+          {texts.error[language].title}
+        </h2>
+        <p className={styles["db-error-message"]}>
+          {texts.error[language].message}
+        </p>
+      </div>
+    </ErrorTemplate>
   );
 };

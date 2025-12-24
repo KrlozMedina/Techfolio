@@ -1,0 +1,130 @@
+/* ================== Variables locales ================== */
+$button-size: 48px;
+$switch-height: 26px;
+$switch-knob-size: 20px;
+$knob-offset: 4px;
+
+/* ================== Placeholders reutilizables ================== */
+%panel-container-base {
+  position: absolute;
+  right: 0;
+  background: var(--color-background-container);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-md);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+%form-base {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+%switch-slider-base {
+  position: absolute;
+  cursor: pointer;
+  background-color: var(--color-background-container-soft);
+  border-radius: var(--border-radius-full);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.4s;
+}
+
+/* ================== Layout general ================== */
+.settings {
+  position: fixed;
+  z-index: 9999;
+
+  &-button {
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+  }
+
+  &-menu {
+    top: var(--space-lg);
+    right: 0;
+  }
+
+  &__button {
+    background-color: var(--color-background-container);
+  }
+}
+
+/* ================== Panel ================== */
+.panel__container {
+  @extend %panel-container-base;
+
+  &-button {
+    bottom: 5rem;
+  }
+
+  &-menu {
+    top: 5rem;
+  }
+}
+
+/* ================== Formularios ================== */
+.panel__form {
+  @extend %form-base;
+}
+
+.panel__switchWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.panel__icon {
+  font-size: var(--font-size-sm);
+  color: var(--color-icon);
+}
+
+/* ================== Interruptor (Switch) ================== */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: $button-size;
+  height: $switch-height;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .slider {
+      background-color: var(--color-background-container-soft);
+
+      &:before {
+        transform: translateX($button-size - $switch-knob-size - $knob-offset);
+      }
+    }
+  }
+}
+
+.slider {
+  @extend %switch-slider-base;
+
+  &:before {
+    position: absolute;
+    content: "";
+    height: $switch-knob-size;
+    width: $switch-knob-size;
+    left: $knob-offset;
+    bottom: 3px;
+    background-color: white;
+    border-radius: var(--border-radius-full);
+    transition: 0.4s;
+  }
+}
+
+@media (max-width: 425px) {
+  .settings {
+    display: none;
+  }
+}

@@ -30,19 +30,19 @@ export async function POST(request: NextRequest) {
       u => u.username === username
     );
 
-    const hola = {
-      ingreso: {
-        user: username,
-        pass: password
-      },
-      env: {
-        pass: AUTH_CONFIG.CREDENTIALS.password,
-        users: AUTH_CONFIG.CREDENTIALS.users
-      },
-      userActive: user,
-      hash: bcrypt.hashSync(password, 10)
-    }
-    console.log(hola)
+    // const hola = {
+    //   ingreso: {
+    //     user: username,
+    //     pass: password
+    //   },
+    //   env: {
+    //     pass: AUTH_CONFIG.CREDENTIALS.password,
+    //     users: AUTH_CONFIG.CREDENTIALS.users
+    //   },
+    //   userActive: user,
+    //   hash: bcrypt.hashSync(password, 10)
+    // }
+    // console.log(hola)
 
     if (!user) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });

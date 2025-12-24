@@ -1,9 +1,9 @@
+---
 name: 🐛 Reporte de Bug
 description: Reportar un error en el proyecto.
 title: "[BUG] - título corto y descriptivo"
 labels: ["bug"]
 assignees: ["KrlozMedina"]
-
 body:
   - type: textarea
     id: que-pasa

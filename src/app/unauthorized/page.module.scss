@@ -1,0 +1,23 @@
+// Unauthorized state message
+.unauthorized {
+  text-align: center;
+  padding: var(--space-xl);
+
+  // Main title
+  &__title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-md);
+  }
+
+  // Descriptive text
+  &__text {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-xs);
+
+    // Muted variation of text (e.g., additional info)
+    &--muted {
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+  }
+}

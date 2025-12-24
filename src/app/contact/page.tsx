@@ -2,13 +2,13 @@
 
 import React, { useContext } from 'react'
 import LanguageContext from '@/context/LanguageContext'
-import MainLayout from '@/components/templates/MainLayout/MainLayout'
+// import MainLayout from '@/components/layouts/MainLayout/MainLayout'
 import '@/styles/pages/ContactMe.css'
 import emailjs from '@emailjs/browser';
 import { ImWhatsapp } from 'react-icons/im'
 import { MdEmail, MdLocationOn } from 'react-icons/md'
-import Social from '@/components/molecules/SocialLinks/SocialLinks'
-import StatusNotice from '@/components/organisms/Notice/Notice'
+// import Social from '@/components/molecules/SocialLinks/SocialLinks'
+// import StatusNotice from '@/components/organisms/Notice/Notice'
 // import { MaintenanceNotice } from '@/components/organisms/Notice/Notice'
 
 // Define the context type if not already defined
@@ -39,7 +39,7 @@ const ContactMe: React.FC = () => {
   }
 
   return (
-    <MainLayout isAdmin={false} language={isSpanish ? 'es' : 'en'} >
+    <>
       <p className='phrase'>
         {
           isSpanish
@@ -50,7 +50,7 @@ const ContactMe: React.FC = () => {
 
       <p className='author'>Maya Angelou</p>
 
-      <StatusNotice type='maintenance' language={isSpanish ? 'es' : 'en'} />
+      {/* <StatusNotice type='maintenance' language={isSpanish ? 'es' : 'en'} /> */}
 
       <form id='contact' className='contact-form' onSubmit={sendEmail}>
         <fieldset className="main-contact-container">
@@ -61,7 +61,7 @@ const ContactMe: React.FC = () => {
             <span><MdEmail className='icon' /> kamedinal16@outlook.com</span>
             <span><MdLocationOn className='icon' /> Bogota, Colombia</span>
             <br />
-            <Social />
+            {/* <Social /> */}
           </section>
 
           <div className='contact--info-container'>
@@ -86,7 +86,7 @@ const ContactMe: React.FC = () => {
           </div>
         </fieldset>
       </form>
-    </MainLayout>
+    </>
   )
 }
 

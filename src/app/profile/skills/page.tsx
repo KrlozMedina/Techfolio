@@ -1,25 +1,25 @@
 'use client'
 
-import React, { useContext } from 'react';
-import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
-import MainLayout from '@/components/templates/MainLayout/MainLayout';
-import StatusNotice from '@/components/organisms/Notice/Notice';
+import React from 'react';
+// import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
+// import MainLayout from '@/components/layouts/MainLayout/MainLayout';
+// import StatusNotice from '@/components/organisms/Notice/Notice';
 
 const SkillsPage = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
-  const links = [
-    { href: '/profile/about-me', title: {es: 'Sobre mí', en: 'About me'}, isActive:false },
-    { href: '/profile/education', title: {es: 'Educación', en: 'Education'}, isActive:false },
-    { href: '/profile/skills', title: {es: 'Habilidades', en: 'Skills'}, isActive:true },
-    { href: '/profile/certifications', title: {es: 'Certificaciones', en: 'Certifications'}, isActive:false },
-    { href: '/profile/experience', title: {es: 'Experiencia laboral', en: 'Work experience'}, isActive:false },
-    { href: '/profile/achievements', title: {es: 'Logros', en: 'Achievements'}, isActive:false },
-  ]
+  // const links = [
+  //   { href: '/profile/about-me', title: {es: 'Sobre mí', en: 'About me'}, isActive:false },
+  //   { href: '/profile/education', title: {es: 'Educación', en: 'Education'}, isActive:false },
+  //   { href: '/profile/skills', title: {es: 'Habilidades', en: 'Skills'}, isActive:true },
+  //   { href: '/profile/certifications', title: {es: 'Certificaciones', en: 'Certifications'}, isActive:false },
+  //   { href: '/profile/experience', title: {es: 'Experiencia laboral', en: 'Work experience'}, isActive:false },
+  //   { href: '/profile/achievements', title: {es: 'Logros', en: 'Achievements'}, isActive:false },
+  // ]
 
   return (
-    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'} >
-      <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} />
+    <>
+      {/* <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} /> */}
       <div className="skills-page">
         <h1>Mis Habilidades</h1>
 
@@ -54,7 +54,7 @@ const SkillsPage = () => {
           </ul>
         </section>
       </div>
-    </MainLayout>
+    </>
   );
 };
 

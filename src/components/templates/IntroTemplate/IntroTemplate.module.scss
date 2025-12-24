@@ -1,0 +1,26 @@
+/* ================================
+   📘 Intro Section Styles
+   ================================ */
+
+.intro-section {
+  margin-bottom: var(--space-2xl); // Añadido para separar visualmente del siguiente bloque
+
+  &__title {
+    text-transform: uppercase;
+    font-family: var(--font-family-title); // Tipografía principal definida en variables
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-2xl);
+    color: var(--color-text);
+    margin: var(--space-md) 0;
+    padding: 0 1.5%;
+  }
+
+  &__paragraph {
+    font-size: var(--font-size-base);
+    text-align: justify;
+    color: var(--color-secondary-text);
+    line-height: 1.6;
+    margin: var(--space-xl) 0;
+    padding: 0 2.5%;
+  }
+}

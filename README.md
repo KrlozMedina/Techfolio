@@ -1,4 +1,4 @@
-# KrlozMedina Portfolio Lab
+# Techfolio Krloz Medina
 
 ### 🧠 Código + Creatividad | Portafolio Web y Proyectos Maker
 
@@ -19,7 +19,7 @@
 
 ---
 
-**Krloz Portfolio Lab** es un portafolio digital interactivo que reúne mis proyectos como desarrollador full stack, combinando creatividad, diseño y tecnología. Este espacio fue diseñado como una vitrina profesional para mostrar tanto soluciones técnicas como ideas innovadoras en desarrollo web y proyectos maker.
+**Techfolio KrlozMedina** es un portafolio digital interactivo que reúne mis proyectos como desarrollador full stack, combinando creatividad, diseño y tecnología. Este espacio fue diseñado como una vitrina profesional para mostrar tanto soluciones técnicas como ideas innovadoras en desarrollo web y proyectos maker.
 
 Desarrollado con **Next.js**, **CSS** y una **API personalizada**, este portafolio ofrece una experiencia visual moderna e intuitiva que permite a los visitantes explorar fácilmente mis habilidades, formación académica y experiencia laboral.
 
@@ -35,6 +35,7 @@ Desarrollado con **Next.js**, **CSS** y una **API personalizada**, este portafol
 
 ## 📑 Tabla de Contenido
 - [✨ Características Principales](#características-principales)
+- [🖼️ Avatares del Sistema](#avatares-del-sistema)
 - [🛠️ Tecnologías Utilizadas](#tecnologías-utilizadas)
 - [🎨 Diseño y Experiencia de Usuario](#diseño-y-experiencia-de-usuario-ux)
 - [🔍 SEO y Accesibilidad](#seo-y-accesibilidad)
@@ -45,49 +46,85 @@ Desarrollado con **Next.js**, **CSS** y una **API personalizada**, este portafol
 - [🤝 Contribuciones](#contribuciones)
 - [📝 Licencia](#licencia)
 - [📬 Contacto](#contacto)
+
 <!-- - [💡 Inspiración y Agradecimientos](#inspiración-y-agradecimientos) -->
 
-## Características Principales
+## ✨ Características Principales
 
-- **Portafolio interactivo y moderno**: Interfaz atractiva y funcional que presenta tus proyectos de forma visual e intuitiva.
-- **Diseño responsive**: Totalmente adaptado para verse perfectamente en dispositivos móviles, tabletas y pantallas de escritorio.
-- **Gestión dinámica de contenido**: Conectado a una API personalizada que permite mantener el contenido actualizado sin modificar el código fuente.
-- **Soporte multilingüe**: Experiencia bilingüe en español e inglés, ideal para ampliar tu audiencia.
-- **Navegación fluida**: Transiciones suaves entre secciones, descripciones detalladas y enlaces a repositorios y demostraciones.
-- **Tecnologías destacadas por proyecto**: Muestra las herramientas y stacks usados en cada proyecto con íconos y enlaces relevantes.
-- **Integración con redes sociales**: Enlaces directos a perfiles profesionales como LinkedIn, GitHub, Twitter, entre otros.
-- **Despliegue online**: Preparado para ser alojado en plataformas como GitHub Pages, Netlify o Vercel.
-- **Escalable y mantenible**: Diseñado para que puedas agregar fácilmente nuevos proyectos, logros o secciones a medida que avances en tu carrera.
+- **Portafolio interactivo y moderno**: Interfaz atractiva, profesional y funcional que presenta tus proyectos de manera visual e intuitiva.
+- **Diseño responsive**: Totalmente adaptable a dispositivos móviles, tabletas y pantallas de escritorio.
+- **Gestión dinámica de contenido**: Conectado a una API personalizada que permite actualizar el contenido sin necesidad de modificar el código fuente.
+- **Soporte multilingüe**: Interfaz bilingüe en español e inglés, ideal para ampliar tu alcance global.
+- **Navegación fluida**: Transiciones suaves entre secciones, con descripciones detalladas, enlaces a repositorios y demostraciones.
+- **Tecnologías destacadas por proyecto**: Cada proyecto muestra las tecnologías utilizadas con íconos, nombres y enlaces relevantes.
+- **Integración con redes sociales**: Enlaces a tus perfiles profesionales (LinkedIn, GitHub, Twitter, entre otros).
+- **Avatar de usuario**: Componente visual personalizado que representa al usuario autenticado dentro de la interfaz.
+- **Autenticación de usuarios y roles**: Implementación de inicio de sesión con control de acceso según el rol (ej. administrador).
+- **Protección de rutas**: Acceso restringido a secciones privadas del sitio mediante autenticación.
+- **Despliegue online**: Preparado para ser alojado en plataformas como Vercel, Netlify o GitHub Pages.
+- **Escalable y mantenible**: Arquitectura modular que permite agregar fácilmente nuevos proyectos, secciones o funcionalidades.
 
-## Tecnologías Utilizadas
+## Avatares del Sistema
+
+Se han integrado avatares ilustrativos para representar visualmente diferentes estados y respuestas del sistema. Estos avatares ayudan a mejorar la experiencia del usuario, brindando un toque amigable y expresivo a cada situación que pueda surgir durante el uso de la aplicación.
+
+### 🎨 Detalles de los Avatares
+
+| Situación                     | Código HTTP | Descripción Visual                                 | Estado     |
+|------------------------------|-------------|----------------------------------------------------|------------|
+| Error general del sistema    | —           | Chispas volando, expresión de susto                | ✅ Creado  |
+| Error del servidor           | 500         | Electricidad, cejas fruncidas                      | ✅ Creado  |
+| Página no encontrada         | 404         | Buscando con una lupa, cara de duda                | ✅ Creado  |
+| Filtros sin resultados       | —           | Bandeja vacía, encogimiento de hombros             | ✅ Creado  |
+| Guardado exitoso de datos    | 200         | Pulgar arriba, fondo luminoso                      | ✅ Creado  |
+| Cargando datos               | —           | Engranajes girando detrás                          | ✅ Creado  |
+| Acceso denegado              | 403         | Brazos cruzados, fondo oscuro                      | ✅ Creado  |
+| Confirmación de eliminación  | —           | Botón rojo, mirada decidida                        | ✅ Creado  |
+| Usuario no autenticado       | 401         | Tocando puerta cerrada, cara confundida            | ✅ Creado  |
+
+### 🧩 Formato de las Imágenes
+
+- Estilo: Ilustración digital semirrealista (antropomórfico)
+- Dimensiones: Alta resolución
+- Fondo: Transparente (`.png`)
+- Uso: Integrados en pantallas de estado del frontend
+
+
+## 🛠️ Tecnologías Utilizadas
 
 El desarrollo de este portafolio combina herramientas modernas para ofrecer una experiencia fluida, personalizable y escalable:
 
 ### 🔧 Lenguajes y Frameworks
 - **Next.js** – Framework de React para renderizado híbrido (SSR/SSG) y rutas dinámicas.
-- **React** – Librería principal para la construcción de interfaces interactivas.
-- **CSS Modules** – Para estilos encapsulados y mantenibles.
+- **React** – Librería principal para construir interfaces interactivas y reutilizables.
 - **JavaScript (ES6+)** – Lenguaje base para la lógica del cliente.
+- **CSS Modules / SCSS** – Para estilos encapsulados, reutilizables y mantenibles.
 
-### 🎨 Diseño y Experiencia
+### 📦 Gestión de Estado
+- **Redux Toolkit** – Manejo global del estado con lógica centralizada y simplificada.
+- **Redux Persist** – Persistencia del estado entre sesiones en el navegador.
+
+### 🎨 Diseño y Experiencia de Usuario
 - **Figma** – Bocetado y prototipado visual previo al desarrollo.
-- **Responsive Design** – Adaptado a dispositivos móviles, tablets y escritorios.
+- **Diseño Responsive** – Adaptado a dispositivos móviles, tablets y escritorios.
 
 ### 📡 Backend y Datos
-- **API personalizada (REST)** – Gestiona dinámicamente los datos del portafolio.
-- **MongoDB** – Base de datos NoSQL para almacenar proyectos, estudios y experiencias.
+- **API personalizada (REST)** – Gestión dinámica del contenido del portafolio.
+- **MongoDB + Mongoose** – Base de datos NoSQL para almacenar información estructurada mediante esquemas definidos.
+- **JWT (JSON Web Tokens)** – Para autenticación segura y protección de rutas privadas.
 
 ### ☁️ Hosting y Despliegue
-- **Vercel** – Despliegue continuo y hosting optimizado para proyectos Next.js.
-- **GitHub** – Control de versiones y colaboración abierta.
+- **Vercel** – Hosting optimizado y despliegue continuo para proyectos con Next.js.
+- **GitHub** – Control de versiones, colaboración abierta y automatización mediante Actions.
 
 ### 🧰 Herramientas de Desarrollo
-- **ESLint** – Para mantener un código limpio y consistente.
-- **Prettier** – Formateador automático para estilos de código uniformes.
 - **pnpm** – Gestor de paquetes rápido y eficiente.
-- **GitHub Actions** – Automatización de tareas como despliegues o pruebas.
+- **ESLint** – Análisis estático para mantener un código limpio y consistente.
+- **Prettier** – Formateador de código para una estructura uniforme.
+- **GitHub Actions** – Automatización de flujos de trabajo como despliegues o pruebas.
 
-> Estas herramientas me permiten mantener el portafolio actualizado, modular y preparado para escalar o integrar nuevas funcionalidades fácilmente.
+> Estas tecnologías permiten mantener el portafolio actualizado, modular, seguro y preparado para escalar o integrar nuevas funcionalidades con facilidad.
+
 
 ## Diseño y Experiencia de Usuario (UX)
 
@@ -144,25 +181,20 @@ La estructura de este proyecto está organizada de forma modular para facilitar 
 ### Árbol de Carpetas
 ```plaintext
 ├── app
-│   ├── aboutme
 │   ├── api
-│   │   └── v1
+│   │   ├── v1
+│   │   │   ├── auth
+│   │   │   ├── projects
+│   │   │   └── technologies
+│   │   └── v2
 │   │       ├── auth
-│   │       │   ├── login
-│   │       │   └── logout
-│   │       ├── projects
-│   │       └── technologies
-│   ├── auth
-│   │   └── login
+│   │       └── projects
 │   ├── blog
 │   ├── clients
 │   ├── contact
-│   ├── contactme
-│   ├── cv
 │   ├── dashboard
-│   │   └── sections
-│   ├── education
-│   ├── fonts
+│   │   ├── projects
+│   │   │   └── sections
 │   ├── gallery
 │   ├── login
 │   ├── profile
@@ -171,118 +203,152 @@ La estructura de este proyecto está organizada de forma modular para facilitar 
 │   │   ├── certifications
 │   │   ├── education
 │   │   ├── experience
-│   │   └── skills
+│   │   ├── skills
 │   ├── projects
 │   │   ├── case-studies
 │   │   ├── services
 │   │   └── testimonials
-│   ├── register
 │   ├── resources
-│   └── resume
-├── assets
+│   ├── resume
+│   └── unauthorized
 ├── components
 │   ├── atom
-│   │   ├── Form
-│   │   ├── Logo
-│   │   ├── Logout
-│   │   └── TextBlocks
+│   │   ├── buttons
+│   │   ├── feedback
+│   │   ├── form
+│   │   └── media
 │   ├── molecules
 │   │   ├── Cards
-│   │   └── Loading
+│   │   ├── FeedbackStates
+│   │   ├── Footer
+│   │   ├── LanguageToggle
+│   │   ├── Navbar
+│   │   ├── QuoteBlock
+│   │   ├── SocialLinks
+│   │   └── ThemeToggle
 │   ├── organisms
-│   │   ├── Menu
+│   │   ├── Headers
 │   │   ├── Modal
-│   │   ├── Slider
-│   │   └── Social
+│   │   ├── Notice
+│   │   ├── SettingPanel
+│   │   └── Slider
 │   └── templates
+│       ├── AuthLayout
+│       ├── ErrorTemplate
 │       └── MainLayout
+├── context
+├── hooks
 ├── lib
-├── mock
+│   ├── config
+│   ├── db
+│   ├── dtos
+│   ├── helpers
+│   ├── middleware
+│   ├── utils
+│   └── validators
+├── mocks
 ├── models
-├── redux
-│   ├── context
-│   ├── features
+│   └── project
+├── providers
+├── shared
+│   ├── config
+│   ├── constants
+│   ├── types
+│   └── utils
+├── store
 │   ├── service
-├── styles
-│   ├── components
-│   └── pages
-└── types
+│   ├── slices
+└── styles
+    ├── base
+    ├── pages
+    └── variables
 ```
 
 ### Explicación de las Carpetas
-1. `app/`
-Esta carpeta contiene todas las páginas y recursos principales de la aplicación. Está organizada en módulos que agrupan rutas relacionadas con diferentes secciones de la aplicación.
-    - `aboutme/`: Información personal del desarrollador.
-    - `api/`: Endpoints de la API, organizados por versión (en este caso, `v1`).
-    - `auth/`: Páginas y rutas relacionadas con el login y el registro.
-    - `blog/`: Página de blog con entradas relacionadas.
-    - `clients/`: Información sobre clientes.
-    - `contact/`: Página de contacto.
-    - `dashboard/`: Panel de administración que contiene secciones como proyectos y tecnologías.
-    - `education/`: Sección educativa.
-    - `profile/`: Información detallada del perfil, como logros, certificaciones, experiencia, y habilidades.
-    - `projects/`: Sección de proyectos, incluyendo testimonios y estudios de caso.
-    - `resources/`: Página de recursos adicionales.
-    - `resume/`: Página con el currículum del desarrollador.
 
-2. `assets/`
-Contiene archivos estáticos como imágenes, íconos, y otros recursos multimedia.
+1. `app/`  
+Esta carpeta contiene todas las páginas y recursos principales de la aplicación. Está organizada en módulos que agrupan rutas relacionadas con diferentes secciones de la aplicación:
+- `api/`: Endpoints de la API, organizados por versión (`v1`, `v2`) y sus respectivos recursos como `auth`, `projects` y `technologies`.
+- `blog/`: Página de blog con entradas relacionadas.
+- `clients/`: Información sobre clientes.
+- `contact/`: Página de contacto.
+- `dashboard/`: Panel de administración que contiene secciones como proyectos y sus subsecciones.
+- `login/`: Página de inicio de sesión.
+- `profile/`: Información detallada del perfil, incluyendo secciones como `about-me`, `achievements`, `certifications`, `education`, `experience` y `skills`.
+- `projects/`: Sección de proyectos, con subsecciones para `case-studies`, `services` y `testimonials`.
+- `resources/`: Página de recursos adicionales.
+- `resume/`: Página con el currículum del desarrollador.
+- `unauthorized/`: Página que muestra acceso denegado o autorización insuficiente.
 
-3. `components/`
-Aquí se encuentran los componentes reutilizables divididos por tipos: átomos, moléculas, organismos y plantillas.
-    - `atom/`: Componentes más simples y fundamentales como formularios, logos y texto.
-    - `molecules/`: Componentes compuestos por varios átomos, como banners y tarjetas.
-    - `organisms/`: Componentes complejos como menús y modales.
-    - `templates/`: Plantillas de disposición general, como el diseño principal.
+2. `components/`  
+Contiene los componentes reutilizables divididos por niveles de complejidad siguiendo Atomic Design:  
+- `atom/`: Componentes más simples y fundamentales como botones, formularios, feedback y medios.  
+- `molecules/`: Componentes compuestos por varios átomos, como tarjetas, estados de feedback, pie de página, barra de navegación, entre otros.  
+- `organisms/`: Componentes más complejos como encabezados, modales, paneles de configuración y sliders.  
+- `templates/`: Plantillas de disposición general como `AuthLayout`, `ErrorTemplate` y `MainLayout`.
 
-4. `lib/`
-Contiene utilidades y funciones compartidas, como el archivo `connectDB.js` para establecer la conexión a la base de datos.
+3. `context/`  
+Define contextos de React para compartir estado o lógica entre componentes sin necesidad de prop drilling.
 
-5. `mock/`
-Datos ficticios utilizados para pruebas y desarrollo, como el archivo `caseStudies.json`.
+4. `hooks/`  
+Hooks personalizados para reutilizar lógica React en distintos componentes.
 
-6. `models/`
-Modelos de datos que definen la estructura de las entidades de la base de datos, como blogs, proyectos y tecnologías.
+5. `lib/`  
+Contiene utilidades y funciones compartidas, configuraciones, validadores, middleware, helpers y conexión a la base de datos.
 
-7. `redux/`
-Contiene la configuración de Redux para manejar el estado global de la aplicación, incluyendo slices, contexto de lenguaje, y la integración de APIs.
+6. `mocks/`  
+Datos ficticios para pruebas y desarrollo.
 
-8. `styles/`
-Estilos globales y específicos de componentes y páginas.
+7. `models/`  
+Modelos que definen la estructura de las entidades de datos, como proyectos.
 
-9. `types/`
-Define los tipos TypeScript utilizados en toda la aplicación, como `common.ts` para tipos generales y `constants.ts` para valores constantes.
+8. `providers/`  
+Componentes que proveen contextos o servicios globales a la aplicación.
+
+9. `shared/`  
+Contiene configuraciones, constantes, tipos y utilidades compartidas en toda la aplicación.
+
+10. `store/`  
+Configuración de Redux para manejar el estado global, incluyendo slices y servicios.
+
+11. `styles/`  
+Estilos globales y específicos organizados en:  
+- `base/` para estilos base,  
+- `pages/` para estilos específicos de páginas,  
+- `variables/` para variables CSS y temas.
+
+---
 
 ### 🌐 Rutas del Portafolio
 
 #### Páginas Públicas
-- `/`: Página de inicio con una presentación general y enlaces a las secciones principales del portafolio.
-- `/projects`: Página que muestra una lista de proyectos destacados, con enlaces a sus detalles.
-    - `/projects/service`: Subpágina dedicada a servicios ofrecidos, incluyendo descripciones y ejemplos.
-    - `/projects/testimonial`: Subpágina que presenta testimonios de clientes o colaboradores.
-    - `/projects/case-studies`: Subpágina que detalla estudios de caso, mostrando procesos y resultados de proyectos específicos.
-- `/profile`: Página principal del perfil profesional, con información personal, logros, experiencia, etc.
-    - `/profile/aboutme`: Subpágina que ofrece una biografía detallada del autor.
-    - `/profile/education`: Subpágina que lista la formación académica y certificaciones obtenidas.
-    - `/profile/skills`: Subpágina que muestra las habilidades técnicas y blandas.
-    - `/profile/certifications`: Subpágina que enumera las certificaciones profesionales.
-    - `/profile/experience`: Subpágina que describe la experiencia laboral y proyectos anteriores.
-    - `/profile/achievements`: Subpágina que destaca logros y reconocimientos obtenidos.
-- `/blog`: Página que presenta artículos, publicaciones técnicas o reflexiones del autor.
-- `/contact`: Página con un formulario de contacto para que los visitantes puedan comunicarse.
-- `/clients`: Página que muestra una lista de clientes anteriores o actuales, con testimonios o casos de éxito.
-- `/gallery`: Página que presenta una galería de imágenes o proyectos visuales.
-- `/resume`: Página que muestra el currículum vitae del autor, con opción de descarga.
+- `/`: Página de inicio con presentación general y enlaces a las secciones principales.
+- `/projects`: Lista de proyectos destacados.
+  - `/projects/services`: Servicios ofrecidos.
+  - `/projects/testimonials`: Testimonios de clientes o colaboradores.
+  - `/projects/case-studies`: Estudios de caso detallados.
+- `/profile`: Perfil profesional con información personal, logros y experiencia.
+  - `/profile/about-me`
+  - `/profile/education`
+  - `/profile/skills`
+  - `/profile/certifications`
+  - `/profile/experience`
+  - `/profile/achievements`
+- `/blog`: Blog con artículos y publicaciones.
+- `/contact`: Formulario de contacto.
+- `/clients`: Lista de clientes con testimonios y casos de éxito.
+- `/gallery`: Galería de imágenes o proyectos visuales.
+- `/resume`: Currículum vitae con opción de descarga.
 
-#### Rutas privadas
-- `/dashboard`: Página de administración interna (accesible solo para el autor), que permite gestionar proyectos, tecnologías y otras secciones del portafolio.
-- `/auth/login`: Pagina para iniciar sesión.
+#### Rutas Privadas
+- `/dashboard`: Panel de administración interno (solo para el autor), para gestionar proyectos y tecnologías.
+- `/login`: Página de inicio de sesión.
 
 #### Rutas de API
-- `/api/v1/auth/login`: Ruta para iniciar sesión, validando las credenciales del usuario.
-- `/api/v1/auth/logout`: Ruta para cerrar sesión, invalidando la sesión activa.
-- `/api/v1/projects`: Ruta que maneja las operaciones relacionadas con los proyectos, como obtener, agregar, editar o eliminar proyectos.
-- `/api/v1/technologies`: Ruta que maneja las operaciones relacionadas con las tecnologías, como obtener, agregar, editar o eliminar tecnologías.
+- `/api/v1/auth/login`: Inicio de sesión y validación de credenciales.
+- `/api/v1/auth/logout`: Cierre de sesión.
+- `/api/v1/projects`: Gestión de proyectos (CRUD).
+- `/api/v1/technologies`: Gestión de tecnologías (CRUD).
 
 ## Demostración en Vivo
 

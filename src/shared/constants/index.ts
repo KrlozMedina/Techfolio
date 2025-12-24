@@ -1,21 +1,29 @@
 /**
- * Punto centralizado de exportación de constantes del sistema.
- * Esto incluye roles, características, tecnologías, categorías, rutas y otros elementos de configuración global.
+ * Punto centralizado para exportar todas las constantes del sistema.
+ *
+ * Este archivo actúa como un barril (barrel file) que reúne y expone constantes globales,
+ * como roles de usuario, características disponibles, plataformas, categorías,
+ * tecnologías, idiomas y enumeraciones usadas en la aplicación.
+ *
+ * Además, exporta datos cargados desde archivos JSON para mantener la consistencia
+ * y facilitar su importación desde un único lugar.
+ *
+ * Constantes exportadas incluyen:
+ * - FEATURES: Características del sistema definidas en JSON.
+ * - ROLES: Roles de usuario definidos en JSON.
+ * - Plataformas, Categorías, Tecnologías, Idiomas, y Enums definidos en archivos TS separados.
  */
 
-// Importación de archivos JSON que contienen estructuras de datos.
 import FEATURES from './features.json';
 import ROLES from './roles.json';
 
-// Exportación de constantes estructuradas desde otros archivos.
 export * from './platforms';
 export * from './categories';
 export * from './technologies';
 export * from './language';
 export * from './enums';
-export * from './navLinks';
+export * from './quotes'
 
-// Exportación explícita de datos cargados desde JSON (para mantener consistencia con el sistema de módulos).
 export {
   FEATURES,
   ROLES,

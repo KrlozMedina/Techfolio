@@ -5,33 +5,33 @@ import successCases from "@/mocks/caseStudies.json";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
-import MainLayout from "@/components/templates/MainLayout/MainLayout";
+// import MainLayout from "@/components/layouts/MainLayout/MainLayout";
 import LanguageContext, {
   LanguageContextType,
 } from "@/context/LanguageContext";
-import { Intro, Phrase } from "@/components/atom/TextBlocks/TextsBlocks";
-import StatusNotice from "@/components/organisms/Notice/Notice";
+// import { Intro, Phrase } from "@/components/templates/IntroTemplate/IntroTemplate";
+// import StatusNotice from "@/components/organisms/Notice/Notice";
 
 const CaseStudiesPage: React.FC = () => {
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
-  const links = [
-    {
-      title: {es: "Servicios", en: "Services"},
-      href: "/projects/services",
-      isActive: false,
-    },
-    {
-      title: {es: "Testimonios", en: "Testimonials"},
-      href: "/projects/testimonials",
-      isActive: false,
-    },
-    {
-      title: {es: "Casos de éxito", en: "Success Stories"},
-      href: "/projects/case-studies",
-      isActive: true,
-    },
-  ];
+  // const links = [
+  //   {
+  //     title: {es: "Servicios", en: "Services"},
+  //     path: "/projects/services",
+  //     isActive: false,
+  //   },
+  //   {
+  //     title: {es: "Testimonios", en: "Testimonials"},
+  //     path: "/projects/testimonials",
+  //     isActive: false,
+  //   },
+  //   {
+  //     title: {es: "Casos de éxito", en: "Success Stories"},
+  //     path: "/projects/case-studies",
+  //     isActive: true,
+  //   },
+  // ];
 
   const texts = {
     intro: {
@@ -54,19 +54,19 @@ const CaseStudiesPage: React.FC = () => {
   };
 
   return (
-    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'}>
-      <Phrase
+    <>
+      {/* <Phrase
         phrase={isSpanish ? texts.phrase.es : texts.phrase.en}
         author={texts.phrase.author}
-      />
+      /> */}
 
 
       <section>
-        <Intro
+        {/* <Intro
           title={isSpanish ? texts.intro.es.title : texts.intro.en.title}
           intro={isSpanish ? texts.intro.es.intro : texts.intro.en.intro}
-        />
-        <StatusNotice type="dummy" language={isSpanish ? 'es' : 'en'} />
+        /> */}
+        {/* <StatusNotice type="dummy" language={isSpanish ? 'es' : 'en'} /> */}
 
         <section className={styles["page"]}>
           <div className={styles["caseList"]}>
@@ -123,7 +123,7 @@ const CaseStudiesPage: React.FC = () => {
           </div>
         </section>
       </section>
-    </MainLayout>
+    </>
   );
 };
 

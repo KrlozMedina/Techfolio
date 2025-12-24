@@ -1,4 +1,4 @@
-import { TextInput } from "@/components/atom/Form/FormElements";
+// import { TextInput } from "@/components/atom/form/TextInput";
 import Modal from "@/components/organisms/Modal/Modal";
 import {
   useCreateProjectMutation,
@@ -15,6 +15,7 @@ import style from "../page.module.css";
 import Image from "next/image";
 import { PLATFORMS } from "@/shared/constants/constants";
 import { IProjectV2Paginated } from "@/models/project/Project.interface";
+// import { TextInput } from "@/components/atom/form";
 
 const ProjectsSection: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -146,14 +147,14 @@ const ProjectsSection: React.FC = () => {
                   {isSpanish ? "Agregar proyecto" : "Add project"}
                 </legend>
 
-                <TextInput
+                {/* <TextInput
                   label={isSpanish ? "Titulo:" : "Title:"}
                   value={projectData.title}
                   onChange={(e) => setTitleAndSlug(e.target.value)}
                   id="title"
                   type="text"
                   required
-                />
+                /> */}
 
                 <div>
                   <label htmlFor="description">
@@ -192,7 +193,7 @@ const ProjectsSection: React.FC = () => {
                   </select>
                 </div>
 
-                <TextInput
+                {/* <TextInput
                   label={isSpanish ? "URL del repositorio:" : "Repository URL:"}
                   value={projectData.repositoryUrl}
                   onChange={(e) =>
@@ -204,9 +205,9 @@ const ProjectsSection: React.FC = () => {
                   id="repositoryUrl"
                   type="url"
                   required
-                />
+                /> */}
 
-                <TextInput
+                {/* <TextInput
                   label={isSpanish ? "URL de la demo:" : "Live URL:"}
                   value={projectData.liveUrl}
                   onChange={(e) =>
@@ -218,9 +219,9 @@ const ProjectsSection: React.FC = () => {
                   id="liveUrl"
                   type="url"
                   required
-                />
+                /> */}
 
-                <TextInput
+                {/* <TextInput
                   label={isSpanish ? "URL de la imagen:" : "Image URL:"}
                   value={projectData.imageUrl}
                   onChange={(e) =>
@@ -232,9 +233,9 @@ const ProjectsSection: React.FC = () => {
                   id="imageUrl"
                   type="url"
                   required
-                />
+                /> */}
 
-                <TextInput
+                {/* <TextInput
                   label={
                     isSpanish ? "Role en el proyecto:" : "Role in the project:"
                   }
@@ -247,9 +248,9 @@ const ProjectsSection: React.FC = () => {
                   }
                   id="role"
                   type="text"
-                />
+                /> */}
 
-                <TextInput
+                {/* <TextInput
                   label={isSpanish ? "Tamaño del equipo:" : "Team size:"}
                   value={projectData.teamSize}
                   onChange={(e) =>
@@ -261,9 +262,9 @@ const ProjectsSection: React.FC = () => {
                   id="teamSize"
                   type="number"
                   min={0}
-                />
+                /> */}
 
-                <TextInput
+                {/* <TextInput
                   label={
                     isSpanish ? "Duración del proyecto:" : "Project duration:"
                   }
@@ -276,9 +277,9 @@ const ProjectsSection: React.FC = () => {
                   }
                   id="duration"
                   type="text"
-                />
+                /> */}
 
-                <TextInput
+                {/* <TextInput
                   label={
                     isSpanish ? "Prioridad del proyecto:" : "Project priority:"
                   }
@@ -294,7 +295,7 @@ const ProjectsSection: React.FC = () => {
                   min={0}
                   max={10}
                   required
-                />
+                /> */}
 
                 <div>
                   <label htmlFor="projectType">

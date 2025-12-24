@@ -1,30 +1,30 @@
 'use client';
 
-import React, { useContext } from 'react';
-import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
-import MainLayout from '@/components/templates/MainLayout/MainLayout';
-import StatusNotice from '@/components/organisms/Notice/Notice';
+import React from 'react';
+// import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
+// import MainLayout from '@/components/layouts/MainLayout/MainLayout';
+// import StatusNotice from '@/components/organisms/Notice/Notice';
 
 const TestimonialsPage = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
-  const links = [
-    {
-      title: {es: "Servicios", en: "Services"},
-      href: "/projects/services",
-      isActive: false,
-    },
-    {
-      title: {es: "Testimonios", en: "Testimonials"},
-      href: "/projects/testimonials",
-      isActive: true,
-    },
-    {
-      title: {es: "Casos de éxito", en: "Success Stories"},
-      href: "/projects/case-studies",
-      isActive: false,
-    },
-  ];
+  // const links = [
+  //   {
+  //     title: {es: "Servicios", en: "Services"},
+  //     path: "/projects/services",
+  //     isActive: false,
+  //   },
+  //   {
+  //     title: {es: "Testimonios", en: "Testimonials"},
+  //     path: "/projects/testimonials",
+  //     isActive: true,
+  //   },
+  //   {
+  //     title: {es: "Casos de éxito", en: "Success Stories"},
+  //     path: "/projects/case-studies",
+  //     isActive: false,
+  //   },
+  // ];
 
   const testimonials = [
     {
@@ -45,8 +45,8 @@ const TestimonialsPage = () => {
   ];
 
   return (
-    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'} >
-      <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} />
+    <>
+      {/* <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} /> */}
       <div className="testimonials-page">
         <h1>Testimonials</h1>
         <div className="testimonials-list">
@@ -90,7 +90,7 @@ const TestimonialsPage = () => {
                   }
               `}</style>
       </div>
-    </MainLayout>
+    </>
   );
 };
 

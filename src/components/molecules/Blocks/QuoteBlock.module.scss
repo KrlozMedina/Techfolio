@@ -1,0 +1,57 @@
+/* ------------------------------
+  QuoteBlock Component Styles
+------------------------------ */
+
+.quote-block {
+  width: 100%;
+  padding: 0 var(--space-lg);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-2xl);
+
+  &__avatar {
+    min-width: 28rem;
+    text-align: center;
+  }
+
+  &__content {
+    width: 50%;
+    min-width: 28rem;
+    align-content: end;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  &__text {
+    font-family: var(--font-family-quote);
+    font-size: var(--font-size-lg);
+    margin: 0 var(--space-lg) 0 auto;
+  }
+
+  &__author {
+    font-family: var(--font-family-quote);
+    font-size: var(--font-size-xl);
+    text-align: end;
+    margin: 0 var(--space-lg) 0 auto;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    &__text,
+    &__author {
+      width: 100%;
+      margin: 0 auto;
+    }
+    
+    &__text {
+      text-align: justify;
+    }
+
+    &__author {
+      text-align: end;
+    }
+  }
+}

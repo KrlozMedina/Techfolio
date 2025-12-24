@@ -1,19 +1,19 @@
 "use client";
 
-import MainLayout from "@/components/templates/MainLayout/MainLayout";
-import { useContext, useEffect, useState } from "react";
+// import MainLayout from "@/components/layouts/MainLayout/MainLayout";
+import { useEffect, useState } from "react";
 import { useVerifyProfileQuery } from "@/store/service/authApi";
 import ProjectsSection from "./sections/ProjectsSection";
 // import TechnologiesSection from "./sections/TechnologiesSection";
 import { useRouter } from "next/navigation";
-import LanguageContext, { LanguageContextType } from "@/context/LanguageContext";
-import style from "./page.module.css";
+// import LanguageContext, { LanguageContextType } from "@/context/LanguageContext";
+// import style from "./page.module.css";
 
 const DashboardPage: React.FC = () => {
   const { data: verify, isLoading, error } = useVerifyProfileQuery(null);
   // const searchParams = useSearchParams();
   const router = useRouter();
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
   console.log(verify);
   console.warn(error);
@@ -25,7 +25,7 @@ const DashboardPage: React.FC = () => {
     }
   }, [isLoading===false]);
 
-  const [collection, setCollection] = useState<string>("projects");
+  const [collection] = useState<string>("projects");
 
   // useEffect(() => {
   //   const initialCollection = searchParams.get("collection");
@@ -34,32 +34,32 @@ const DashboardPage: React.FC = () => {
   //   }
   // }, [searchParams]);
 
-  const handleChange = (value: string) => {
-    setCollection(value);
-    router.push(`?collection=${value}`);
-  };
+  // const handleChange = (value: string) => {
+  //   setCollection(value);
+  //   router.push(`?collection=${value}`);
+  // };
 
-  const controlPanel = () => {
-    return (
-      <div className={style['dashboard-container']}>
-          <form className={style['dashboard-form']}>
-            <label htmlFor="collection">{isSpanish ? 'Seleccionar colección' : 'Select collection'}:</label>
-            <select
-              id="collection"
-              name="collection"
-              value={collection}
-              onChange={(e) => handleChange(e.target.value)}
-            >
-              <option value="projects">{isSpanish ? 'Proyectos' : 'Projects'}</option>
-              {/* <option value="technologies">{isSpanish ? 'Tecnologías' : 'Technologies'}</option> */}
-            </select>
-          </form>
-        </div>
-    )
-  }
+  // const controlPanel = () => {
+  //   return (
+  //     <div className={style['dashboard-container']}>
+  //         <form className={style['dashboard-form']}>
+  //           <label htmlFor="collection">{isSpanish ? 'Seleccionar colección' : 'Select collection'}:</label>
+  //           <select
+  //             id="collection"
+  //             name="collection"
+  //             value={collection}
+  //             onChange={(e) => handleChange(e.target.value)}
+  //           >
+  //             <option value="projects">{isSpanish ? 'Proyectos' : 'Projects'}</option>
+  //             {/* <option value="technologies">{isSpanish ? 'Tecnologías' : 'Technologies'}</option> */}
+  //           </select>
+  //         </form>
+  //       </div>
+  //   )
+  // }
 
   return (
-    <MainLayout controlPanel={controlPanel()} isAdmin={true} language={isSpanish ? 'es' : 'en'} >
+    <>
       {/* <div className={style['dashboard-container']}>
         <form className={style['dashboard-form']}>
           <label htmlFor="collection">{isSpanish ? 'Seleccionar colección' : 'Select collection'}:</label>
@@ -78,7 +78,7 @@ const DashboardPage: React.FC = () => {
 
       {collection === "projects" && (<ProjectsSection />)}
       {/* {collection === "technologies" && (<TechnologiesSection />)} */}
-    </MainLayout>
+    </>
   );
 };
 

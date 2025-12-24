@@ -1,20 +1,13 @@
 'use client';
 
-import React, { useContext } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
-
-// Componentes UI
 import Social from '@/components/molecules/SocialLinks/SocialLinks';
-import { LanguageToggleButton } from '@/components/molecules/LanguageSelector/LanguageSelector';
-import ThemeToggle from '@/components/molecules/ThemeToggle/ThemeToggle';
-import { Menu, MenuPhone, MenuAside } from '@/components/organisms/Menu/Menu';
-
-// Contexto de idioma
-import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
-
-// Estilos
+import { useLanguage } from '@/hooks';
 import styles from './page.module.css';
+import SettingsButton from '@/components/organisms/SettingPanel/SettingsPanel';
+import Logo from '@/components/atom/media/Logo';
+import { FloatingMenu, MenuAside, MobileHamburgerMenu } from '@/components/molecules/Navbar';
 
 /**
  * 🏠 HomePage Component
@@ -22,7 +15,7 @@ import styles from './page.module.css';
  * Muestra presentación, enlaces sociales y navegación.
  */
 const HomePage: React.FC = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  const { isSpanish } = useLanguage();
 
   // 🌍 Texto dinámico según idioma
   const text = {
@@ -45,22 +38,14 @@ const HomePage: React.FC = () => {
 
       <section className={styles['home__container']}>
         <header>
-          <MenuPhone isAdmin={false} language={isSpanish ? 'es' : 'en'} />
-          <LanguageToggleButton />
-          <ThemeToggle language={isSpanish ? 'es' : 'en'} />
+          <MobileHamburgerMenu isAdmin={false} language={isSpanish ? 'es' : 'en'} />
+          <SettingsButton />
         </header>
 
         <main className={styles['home__main']}>
           <section className={styles['home__main-info']}>
-            <Image
-              src="/assets/logo.png"
-              alt="Logo de Krloz Medina"
-              width={300}
-              height={200}
-              className={styles['home__main-img']}
-              loading="lazy"
-              priority={false}
-            />
+            <Logo />
+            
             <section>
               {/* 🗣️ Texto de presentación */}
               <h1>{text.greeting} Soy Carlos Medina</h1>
@@ -80,7 +65,7 @@ const HomePage: React.FC = () => {
             <Social />
           </section>
 
-          <Menu language={isSpanish ? 'es' : 'en'} />
+          <FloatingMenu language={isSpanish ? 'es' : 'en'} />
         </main>
 
         <aside className={styles['home__aside']}>

@@ -1,64 +1,66 @@
 'use client';
 
-import React from 'react';
+import React, { JSX } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/hooks';
+import ErrorTemplate from '@/components/templates/ErrorTemplate/ErrorTemplate';
 
 interface ErrorPageProps {
   error: Error;
   reset: () => void;
 }
 
-export default function ErrorPage({ error, reset }: ErrorPageProps) {
+/**
+ * Página de error general que se muestra cuando ocurre una excepción en la aplicación.
+ * Proporciona opciones accesibles para reintentar o regresar al inicio.
+ *
+ * @param {ErrorPageProps} props - Props que incluyen el objeto `error` y la función `reset`.
+ * @returns {JSX.Element} El componente de la página de error.
+ */
+export default function ErrorPage({ error, reset }: ErrorPageProps): JSX.Element {
+  const { isSpanish } = useLanguage();
+
+  const messages = {
+    title: isSpanish ? 'Algo malio sal 🤖💥' : "Somethin' went wrung 🤖💥",
+    fallback: isSpanish
+      ? 'Ha ocurrido un error inesperado. Por favor, intenta nuevamente.'
+      : 'An unexpected error occurred. Please try again.',
+    retry: isSpanish ? 'Reintentar' : 'Retry',
+    home: isSpanish ? 'Ir al inicio' : 'Go to home',
+  };
+
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        padding: '2rem'
-      }}
-    >
-      <h1 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#d32f2f' }}>
-        Algo salió mal 😢
+    <ErrorTemplate status="generalError" withBackground>
+      {/* Heading principal de la página */}
+      <h1 className="error__title" role="heading" aria-level={1}>
+        {messages.title}
       </h1>
 
-      <p style={{ color: '#fff', marginBottom: '1.5rem' }}>
-        {error.message || 'Ha ocurrido un error inesperado. Por favor, intenta nuevamente.'}
+      {/* Mensaje de error visible y accesible para lectores de pantalla */}
+      <p className="error__message" role="alert">
+        {error.message || messages.fallback}
       </p>
 
-      <div style={{ display: 'flex', gap: '1rem' }}>
+      {/* Contenedor de botones con navegación accesible */}
+      <div className="error__button-container" role="group" aria-label={isSpanish ? 'Opciones de navegación' : 'Navigation options'}>
         <button
           onClick={reset}
-          style={{
-            padding: '0.5rem 1rem',
-            backgroundColor: '#1976d2',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '0.25rem',
-            cursor: 'pointer'
-          }}
+          className="error__button error__button-retry"
+          aria-label={isSpanish ? 'Reintentar operación' : 'Retry operation'}
         >
-          Reintentar
+          {messages.retry}
         </button>
 
+        {/* Se usa aria-label para describir mejor el destino del enlace */}
         <Link href="/" passHref>
           <button
-            style={{
-              padding: '0.5rem 1rem',
-              backgroundColor: '#9e9e9e',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '0.25rem',
-              cursor: 'pointer'
-            }}
+            className="error__button error__button-home"
+            aria-label={isSpanish ? 'Ir a la página de inicio' : 'Go to homepage'}
           >
-            Ir al inicio
+            {messages.home}
           </button>
         </Link>
       </div>
-    </div>
+    </ErrorTemplate>
   );
 }

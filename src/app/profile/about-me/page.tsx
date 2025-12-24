@@ -2,31 +2,31 @@
 
 import React, { useContext } from 'react'
 import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
-import MainLayout from '@/components/templates/MainLayout/MainLayout'
+// import MainLayout from '@/components/layouts/MainLayout/MainLayout'
 import '@/styles/pages/AboutMe.css'
 import { MdCastForEducation, MdOutlineWorkOutline } from 'react-icons/md';
 import { GiSkills, GiThink, GiStairsGoal } from 'react-icons/gi'
 import { MdTravelExplore, MdOutlineSocialDistance } from "react-icons/md"
-import Social from '@/components/molecules/SocialLinks/SocialLinks';
+// import Social from '@/components/molecules/SocialLinks/SocialLinks';
 import Image from 'next/image'
-import StatusNotice from '@/components/organisms/Notice/Notice'
+// import StatusNotice from '@/components/organisms/Notice/Notice'
 
 const AboutMe: React.FC = () => {
   // document.title = 'About me'
 
   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
-  const links = [
-    { href: '/profile/about-me', title: {es: 'Sobre mí', en:'About me'}, isActive:true },
-    { href: '/profile/education', title: {es: 'Educación', en: 'Education'}, isActive:false },
-    { href: '/profile/skills', title: {es: 'Habilidades', en: 'Skills'}, isActive:false },
-    { href: '/profile/certifications', title: {es: 'Certificaciones', en: 'Certifications'}, isActive:false },
-    { href: '/profile/experience', title: {es: 'Experiencia laboral', en: 'Work experience'}, isActive:false },
-    { href: '/profile/achievements', title: {es: 'Logros', en: 'Achievements'}, isActive:false },
-  ]
+  // const links = [
+  //   { href: '/profile/about-me', title: {es: 'Sobre mí', en:'About me'}, isActive:true },
+  //   { href: '/profile/education', title: {es: 'Educación', en: 'Education'}, isActive:false },
+  //   { href: '/profile/skills', title: {es: 'Habilidades', en: 'Skills'}, isActive:false },
+  //   { href: '/profile/certifications', title: {es: 'Certificaciones', en: 'Certifications'}, isActive:false },
+  //   { href: '/profile/experience', title: {es: 'Experiencia laboral', en: 'Work experience'}, isActive:false },
+  //   { href: '/profile/achievements', title: {es: 'Logros', en: 'Achievements'}, isActive:false },
+  // ]
 
   return (
-    <MainLayout isAdmin={false} links={links} language={isSpanish ? 'es' : 'en'}>
+    <>
       <p className='phrase'>
         {
           isSpanish
@@ -37,7 +37,7 @@ const AboutMe: React.FC = () => {
 
       <p className='author'>Tao Te Ching</p>
 
-      <StatusNotice type='incomplete' language={isSpanish ? 'es' : 'en'} />
+      {/* <StatusNotice type='incomplete' language={isSpanish ? 'es' : 'en'} /> */}
 
       <Image 
         src="https://i.imgur.com/cy2PG85.jpg" 
@@ -317,9 +317,9 @@ const AboutMe: React.FC = () => {
           }
         </span>
 
-        <Social />
+        {/* <Social /> */}
       </section>
-    </MainLayout>
+    </>
   )
 }
 
