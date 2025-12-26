@@ -5,6 +5,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { technologiesApi } from "./service/technologiesApi";
 import { authApi } from "./service/authApi";
 import filterReducer from './slices/filterSlice'
+import { caseStudiesApi } from "./service/caseStudiesApi";
 
 export const store = configureStore({
   reducer: {
@@ -12,8 +13,16 @@ export const store = configureStore({
     [projectsApi.reducerPath]: projectsApi.reducer,
     [technologiesApi.reducerPath]: technologiesApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    [caseStudiesApi.reducerPath]: caseStudiesApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([projectsApi.middleware, technologiesApi.middleware, authApi.middleware])
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
+    [
+      projectsApi.middleware, 
+      technologiesApi.middleware,
+      authApi.middleware,
+      caseStudiesApi.middleware
+    ]
+  )
 })
 
 setupListeners(store.dispatch)

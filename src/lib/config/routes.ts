@@ -18,7 +18,8 @@ export type NoticeType =
   | 'incomplete'
   | 'maintenance'
   | 'comingSoon'
-  | 'beta';
+  | 'beta'
+  | 'bugs';
 
 /**
  * Representa una entrada de ruta en la aplicación.
@@ -86,7 +87,7 @@ export const ROUTES_LIST: readonly RouteEntry[] = [
   {
     path: '/blog',
     isProtected: true,
-    notice: ['dummy', 'incomplete'],
+    notice: ['dummy', 'incomplete', 'bugs'],
     label: { es: 'Blog', en: 'Blog' },
     icon: ImBlog,
   },

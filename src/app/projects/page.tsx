@@ -7,11 +7,11 @@ import { ProjectCard } from "@/components/molecules/Cards/CardViews";
 import { IntroTemplate } from "@/components/templates/IntroTemplate/IntroTemplate";
 import { DatabaseError, Loading, NoData } from "@/components/molecules/FeedbackStates/FeedbackStates";
 import style from './page.module.scss'
-import caseStudies from "@/mocks/caseStudies.json";
+import caseStudies from "@/mocks/caseStudies.mock";
 import Image from "next/image";
 import { IProjectV2 } from "@/models/interfaces";
 import { useLanguage } from "@/hooks";
-import { QuoteBlock } from "@/components/molecules/Blocks";
+import { QuoteBlock } from "@/components/molecules/blocks";
 import Filter from "@/components/organisms/Filter/Filter";
 import CTA from "@/components/molecules/Cards/CTA";
 import { CATEGORIES, PLATFORMS, TECHNOLOGIES } from "@/shared/constants";

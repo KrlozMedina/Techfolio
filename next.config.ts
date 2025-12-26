@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'www.flickr.com' },
       { protocol: 'https', hostname: 'live.staticflickr.com' },
       { protocol: 'https', hostname: 'localhost' },
+      { protocol: 'https', hostname: 'picsum.photos' },
     ],
   },
 };

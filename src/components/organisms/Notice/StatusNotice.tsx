@@ -6,6 +6,7 @@ import {
   FaHourglassHalf,
   FaFlask,
   FaDatabase,
+  FaBug
 } from 'react-icons/fa';
 import style from './StatusNotice.module.css';
 import { NoticeType } from '@/lib/config';
@@ -97,6 +98,18 @@ const messages: Record<NoticeType, {
     },
     icon: <FaFlask />,
     color: '#007bff',
+  },
+  bugs: {
+    es: {
+      title: 'Bug',
+      description: 'Esta página presenta errores conocidos o comportamientos inesperados.',
+    },
+    en: {
+      title: 'Bug',
+      description: 'This page has known bugs or unexpected behavior.',
+    },
+    icon: <FaBug />,
+    color: '#dc3545', // rojo para errores
   },
 };
 

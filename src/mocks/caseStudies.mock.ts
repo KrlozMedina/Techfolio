@@ -1,4 +1,37 @@
-[
+export interface CaseStudyLocale {
+  title: string
+  summary: string
+  description: string
+  challenges: string
+  solution: string
+  results: string
+}
+
+export interface Testimonial {
+  es: string
+  en: string
+  interviewee: {
+    name: string
+    position: string
+  }
+}
+
+export interface CaseStudy {
+  es: CaseStudyLocale
+  en: CaseStudyLocale
+  testimonials: Testimonial[]
+  client: string
+  imageUrl: string
+  tags: string[]
+  date: string
+  isFeatured: boolean
+  link: string
+  rating: number
+}
+
+export const caseStudies: CaseStudy[] = [
+  // 👉 el resto de objetos va igual, sin cambios estructurales
+  // [
   {
     "es": {
       "title": "Automatización Inteligente para TechCorp Solutions",
@@ -31,7 +64,7 @@
     "tags": ["Automatización", "IA", "Gestión empresarial"],
     "date": "2023-10-12T00:00:00.000Z",
     "isFeatured": true,
-    "link": "/case-studies/techcorp-automation",
+    "link": "case-studies/techcorp-automation",
     "rating": 5
   },
   {
@@ -66,7 +99,7 @@
     "tags": ["IoT", "Energía renovable", "Monitoreo"],
     "date": "2023-08-15T00:00:00.000Z",
     "isFeatured": false,
-    "link": "/case-studies/greenenergy-iot",
+    "link": "case-studies/greenenergy-iot",
     "rating": 4
   },
   {
@@ -101,7 +134,7 @@
     "tags": ["Educación", "E-learning", "Accesibilidad"],
     "date": "2024-01-25T00:00:00.000Z",
     "isFeatured": true,
-    "link": "/case-studies/edulearn-platform",
+    "link": "case-studies/edulearn-platform",
     "rating": 5
   },
   {
@@ -136,7 +169,7 @@
     "tags": ["Machine Learning", "Logística", "Optimización"],
     "date": "2023-09-05T00:00:00.000Z",
     "isFeatured": false,
-    "link": "/case-studies/fastdelivery-ml",
+    "link": "case-studies/fastdelivery-ml",
     "rating": 4
   },
   {
@@ -171,7 +204,7 @@
     "tags": ["Big Data", "E-commerce", "Personalización"],
     "date": "2023-11-18T00:00:00.000Z",
     "isFeatured": true,
-    "link": "/case-studies/shopnow-bigdata",
+    "link": "case-studies/shopnow-bigdata",
     "rating": 5
   },
   {
@@ -206,7 +239,10 @@
     "tags": ["RRHH", "IA", "Gestión de talento"],
     "date": "2024-02-08T00:00:00.000Z",
     "isFeatured": false,
-    "link": "/case-studies/peoplefirst-hr-ai",
+    "link": "case-studies/peoplefirst-hr-ai",
     "rating": 4
   }      
+// ]
 ]
+
+
