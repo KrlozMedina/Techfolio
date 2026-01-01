@@ -1,67 +1,83 @@
-'use client';
-
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import type { IconType } from 'react-icons';
 
 import styles from './Navbar.module.scss';
 import { useVerifyProfileQuery } from '@/store/service/authApi';
 import { navItems } from '@/lib/config';
-
-interface Props {
-  language: 'es' | 'en';
-}
+import { useLanguage } from '@/hooks';
+import { MenuProps, NavItem } from '@/lib/types/navigation';
 
 const ACTIVE_STYLE = { color: 'var(--color-button-hover)' };
 
 /**
- * Hook para obtener la ruta base del pathname actual
- * (por ejemplo, "/dashboard" de "/dashboard/stats")
+ * MenuAside
+ * Menú lateral de navegación con soporte de:
+ * - rutas activas
+ * - autenticación
+ * - i18n
+ * - accesibilidad básica
  */
-const useActivePath = (): string => {
-  const pathname = usePathname();
-  return `/${pathname.split('/')[1]}`;
-};
-
-/**
- * Componente MenuAside
- * - Renderiza un menú lateral con íconos o texto según hover.
- * - Muestra rutas personalizadas según el estado de autenticación.
- * 
- * @param language Idioma actual de la aplicación ('es' o 'en')
- */
-export const MenuAside: React.FC<Props> = ({ language }) => {
+export const MenuAside: React.FC<MenuProps> = () => {
+  // Item actualmente en hover
   const [hovered, setHovered] = useState<string | null>(null);
-  const basePath = useActivePath();
 
-  const { data } = useVerifyProfileQuery(null);
-  const NAV_ITEMS = navItems(data?.isAuth ?? false);
+  // Ruta actual
+  const pathname = usePathname();
+  const basePath = `/${pathname.split('/')[1]}`;
+
+  // Idioma activo
+  const { language } = useLanguage();
+
+  /**
+   * Obtiene los ítems del menú según estado de autenticación
+   */
+  const useNavItems = (): NavItem[] => {
+    const { data } = useVerifyProfileQuery(null);
+    return navItems(data?.isAuth ?? false) as NavItem[];
+  };
+
+  const NAV_ITEMS = useNavItems();
 
   return (
-    <div className={styles['menu-aside__container']}>
-      {NAV_ITEMS.map(({ path, label, icon: Icon }) => {
-        const routeKey = path.split('/')[1];
+    <nav
+      className={styles['menu-aside__container']}
+      aria-label="Main navigation"
+    >
+      {NAV_ITEMS.map(({ path, label, icon }) => {
+        const Icon = icon as IconType;
+        const key = path.split('/')[1];
         const isActive = path === basePath;
-        const isHovered = hovered === routeKey;
+        const text = label[language];
 
         return (
           <Link
             key={path}
             href={path}
-            onMouseOver={() => setHovered(routeKey)}
+            onMouseEnter={() => setHovered(key)}
             onMouseLeave={() => setHovered(null)}
-            aria-label={label[language]}
+            aria-label={text}
           >
-            {isHovered ? (
-              <p className="text-icon" style={isActive ? ACTIVE_STYLE : {}}>
-                {label[language]}
-              </p>
+            {hovered === key ? (
+              <span
+                className="text-icon"
+                style={isActive ? ACTIVE_STYLE : undefined}
+              >
+                {text}
+              </span>
             ) : (
-              <Icon className="icon" style={isActive ? ACTIVE_STYLE : {}} />
+              <Icon
+                className="icon"
+                aria-hidden
+                style={isActive ? ACTIVE_STYLE : undefined}
+              />
             )}
           </Link>
         );
       })}
-    </div>
+    </nav>
   );
 };
+
+export default MenuAside;
