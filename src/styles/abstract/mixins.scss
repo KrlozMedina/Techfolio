@@ -1,0 +1,46 @@
+// ================= FLEX COLUMN =================
+// Mixin para crear un contenedor flex en columna
+// Parametros:
+// $align   -> align-items (default: flex-start)
+// $justify -> justify-content (default: flex-start)
+// $gap     -> espacio entre elementos (default: var(--space-md))
+@mixin flex-column($align: flex-start, $justify: flex-start, $gap: var(--space-md)) {
+  display: flex;
+  flex-direction: column;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}
+
+// ================= MENU CONTAINER =================
+// Mixin para contenedores de menú con estilo base
+// Parametros:
+// $align     -> align-items para los elementos (default: flex-start)
+// $gap       -> espacio entre elementos (default: var(--space-2xl))
+// $font-size -> tamaño de fuente (default: var(--font-size-xl))
+@mixin menu-container($align: flex-start, $gap: var(--space-2xl), $font-size: var(--font-size-xl)) {
+  @include flex-column($align, flex-start, $gap);
+  padding: var(--space-lg);
+  width: max-content;
+  font-size: $font-size;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-background-container);
+}
+
+// ================= MEDIA QUERIES =================
+
+// Mobile: estilos para pantallas <= 425px
+@mixin respond-mobile {
+  @media (max-width: 425px) {
+    @content;
+  }
+}
+
+// Tablet: estilos para pantallas <= 767px
+@mixin respond-tablet {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
