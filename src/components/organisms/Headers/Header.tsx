@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import style from './Header.module.scss';
 import Logout from '@/components/atom/buttons/Logout';
-import Logo from '@/components/atom/media/Logo';
+import Logo from '@/components/atom/Logo/Logo';
 
 // --- Tipado ---
 interface NavLink {

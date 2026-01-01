@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import style from './MainLayout.module.css';
 import Link from 'next/link';
-import SettingsButton from '@/components/organisms/SettingPanel/SettingsPanel';
+import SettingsButton from '@/components/organisms/settings/SettingsButton';
 import Headers from '@/components/organisms/Headers/Header';
-import { MenuAside, MobileHamburgerMenu } from '@/components/molecules/Navbar';
+import { MenuAside, MobileHamburgerMenu } from '@/components/molecules/navbar';
 import Footer from '@/components/molecules/Footer/Footer';
 
 // Defining the structure of the links that can be passed as props

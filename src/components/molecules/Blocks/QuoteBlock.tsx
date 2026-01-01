@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from '@/components/atom/media/Avatar';
+import Avatar from '@/components/atom/Avatar/Avatar';
 import style from './QuoteBlock.module.scss';
 import { Language, Page, QUOTES } from '@/shared/constants';
 
