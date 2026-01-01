@@ -7,10 +7,10 @@ import { FaUsers } from 'react-icons/fa';
 import { IoMdImages } from 'react-icons/io';
 import { HiOutlineDocumentText } from 'react-icons/hi';
 
-// --- Tipos ---
+/* ===== Tipos ===== */
 
 /**
- * Tipos de avisos que indican el estado de desarrollo de una ruta.
+ * Tipos de aviso que pueden asociarse a una ruta
  */
 export type NoticeType =
   | 'dummy'
@@ -22,171 +22,129 @@ export type NoticeType =
   | 'bugs';
 
 /**
- * Representa una entrada de ruta en la aplicación.
+ * Definición de una ruta de la aplicación
  */
 export interface RouteEntry {
   path: string;
-  isProtected?: boolean;
-  notice?: NoticeType[];
+  isProtected: boolean;
+  notice: NoticeType[];
   label?: { es: string; en: string };
   icon?: IconType;
 }
 
-// --- Lista principal de rutas ---
+/**
+ * Configuración de un grupo de rutas
+ */
+interface RouteGroupConfig {
+  defaults: Pick<RouteEntry, 'isProtected' | 'notice'>;
+  routes: Array<{
+    path: string;
+    label?: RouteEntry['label'];
+    icon?: IconType;
+    notice?: NoticeType[];
+    isProtected?: boolean;
+  }>;
+}
+
+/* ===== Builder ===== */
 
 /**
- * Lista centralizada de rutas disponibles en la aplicación.
- * Define propiedades como protección por autenticación, etiquetas traducibles e iconos.
+ * Convierte grupos de rutas en un array plano de RouteEntry
  */
-export const ROUTES_LIST: readonly RouteEntry[] = [
-  // API
-  { path: '/api' },
+function buildRoutes(groups: RouteGroupConfig[]): RouteEntry[] {
+  return groups.flatMap(group =>
+    group.routes.map(route => ({
+      path: route.path,
+      isProtected: route.isProtected ?? group.defaults.isProtected,
+      notice: route.notice ?? group.defaults.notice,
+      label: route.label,
+      icon: route.icon,
+    }))
+  );
+}
 
-  // Dashboard
+/* ===== Configuración de rutas ===== */
+
+const ROUTE_GROUPS: RouteGroupConfig[] = [
   {
-    path: '/dashboard',
-    isProtected: true,
-    notice: ['beta', 'construction'],
-    label: { es: 'Dashboard', en: 'Dashboard' },
-    icon: MdSpaceDashboard,
+    defaults: { isProtected: false, notice: [] },
+    routes: [
+      { path: '/api' },
+      { path: '/login' },
+      { path: '/unauthorized', notice: ['dummy', 'maintenance'] },
+    ],
   },
   {
-    path: '/dashboard/projects',
-    isProtected: true,
-    notice: ['comingSoon', 'dummy', 'incomplete'],
+    defaults: { isProtected: false, notice: ['dummy', 'incomplete'] },
+    routes: [
+      { path: '/projects', label: { es: 'Proyectos', en: 'Projects' }, icon: SiPolymerproject },
+      { path: '/projects/case-studies' },
+      { path: '/projects/services', isProtected: true },
+      { path: '/projects/testimonials', isProtected: true },
+    ],
   },
-
-  // Projects
   {
-    path: '/projects',
-    isProtected: false,
-    notice: ['dummy', 'incomplete'],
-    label: { es: 'Proyectos', en: 'Projects' },
-    icon: SiPolymerproject,
+    defaults: { isProtected: false, notice: ['maintenance'] },
+    routes: [
+      { path: '/contact', label: { es: 'Contacto', en: 'Contact' }, icon: BiMessageDots },
+    ],
   },
-  { path: '/projects/case-studies', notice: ['beta', 'dummy', 'incomplete'] },
-  { path: '/projects/services', isProtected: true, notice: ['beta', 'dummy', 'construction'] },
-  { path: '/projects/testimonials', isProtected: true, notice: ['beta', 'dummy', 'construction'] },
-
-  // Profile
   {
-    path: '/profile',
-    isProtected: true,
-    notice: ['construction'],
-    label: { es: 'Perfil', en: 'Profile' },
-    icon: ImProfile,
+    defaults: { isProtected: true, notice: ['beta', 'construction'] },
+    routes: [
+      { path: '/dashboard', label: { es: 'Dashboard', en: 'Dashboard' }, icon: MdSpaceDashboard },
+      { path: '/dashboard/projects', notice: ['comingSoon'] },
+    ],
   },
-  { path: '/profile/about-me', isProtected: true, notice: ['maintenance', 'comingSoon'] },
-  { path: '/profile/achievements', isProtected: true, notice: ['dummy', 'construction'] },
-  { path: '/profile/certifications', isProtected: true, notice: ['dummy', 'construction'] },
-  { path: '/profile/education', isProtected: true, notice: ['dummy', 'incomplete', 'maintenance'] },
-  { path: '/profile/experience', isProtected: true, notice: ['dummy', 'construction'] },
-  { path: '/profile/skills', isProtected: true, notice: ['dummy', 'construction'] },
-
-  // Blog
   {
-    path: '/blog',
-    isProtected: true,
-    notice: ['dummy', 'incomplete', 'bugs'],
-    label: { es: 'Blog', en: 'Blog' },
-    icon: ImBlog,
+    defaults: { isProtected: true, notice: ['dummy', 'construction'] },
+    routes: [
+      { path: '/profile', label: { es: 'Perfil', en: 'Profile' }, icon: ImProfile, notice: ['construction'] },
+      { path: '/profile/about-me', notice: ['maintenance', 'comingSoon'] },
+      { path: '/profile/education', notice: ['incomplete', 'maintenance'] },
+    ],
   },
-
-  // Clients
   {
-    path: '/clients',
-    isProtected: true,
-    notice: ['beta', 'construction'],
-    label: { es: 'Clientes', en: 'Clients' },
-    icon: FaUsers,
+    defaults: { isProtected: true, notice: ['beta', 'construction'] },
+    routes: [
+      { path: '/blog', label: { es: 'Blog', en: 'Blog' }, icon: ImBlog, notice: ['dummy', 'incomplete', 'bugs'] },
+      { path: '/clients', label: { es: 'Clientes', en: 'Clients' }, icon: FaUsers },
+      { path: '/gallery', label: { es: 'Galería', en: 'Gallery' }, icon: IoMdImages },
+      { path: '/resources', label: { es: 'Recursos', en: 'Resources' }, icon: SiBookstack },
+    ],
   },
-
-  // Gallery
   {
-    path: '/gallery',
-    isProtected: true,
-    notice: ['beta', 'construction'],
-    label: { es: 'Galería', en: 'Gallery' },
-    icon: IoMdImages,
+    defaults: { isProtected: true, notice: ['dummy', 'maintenance'] },
+    routes: [
+      { path: '/resume', label: { es: 'Hoja de vida', en: 'Resume' }, icon: HiOutlineDocumentText },
+    ],
   },
+];
 
-  // Login
-  { path: '/login', isProtected: false, notice: [] },
+/* ===== Exportables ===== */
 
-  // Resources
-  {
-    path: '/resources',
-    isProtected: true,
-    notice: ['beta', 'construction'],
-    label: { es: 'Recursos', en: 'Resources' },
-    icon: SiBookstack,
-  },
+export const ROUTES_LIST = buildRoutes(ROUTE_GROUPS);
+// Todas las rutas aplanadas y listas para usar
 
-  // Contact
-  {
-    path: '/contact',
-    isProtected: false,
-    notice: ['maintenance'],
-    label: { es: 'Contacto', en: 'Contact' },
-    icon: BiMessageDots,
-  },
+export const PROTECTED_ROUTES = ROUTES_LIST.filter(r => r.isProtected).map(r => r.path);
+// Solo rutas que requieren autenticación
 
-  // Resume
-  {
-    path: '/resume',
-    isProtected: true,
-    notice: ['dummy', 'maintenance'],
-    label: { es: 'Hoja de vida', en: 'Resume' },
-    icon: HiOutlineDocumentText,
-  },
+export const PUBLIC_ROUTES = ['/login', '/unauthorized'];
+// Rutas siempre accesibles sin login
 
-  // Unauthorized
-  {
-    path: '/unauthorized',
-    notice: ['dummy', 'maintenance'],
-  },
-] as const;
-
-// --- Derivaciones útiles de rutas ---
-
-/**
- * Rutas que requieren autenticación.
- */
-export const PROTECTED_ROUTES = ROUTES_LIST
-  .filter(route => route.isProtected)
-  .map(route => route.path);
-
-/**
- * Rutas accesibles públicamente (sin autenticación).
- */
-export const PUBLIC_ROUTES: string[] = ['/login', '/unauthorized'];
-
-/**
- * Rutas utilizadas para redirección.
- */
 export const REDIRECT_ROUTES = {
   toLogin: '/unauthorized',
   toDashboard: '/dashboard',
-} as const;
+};
+// URLs de redirección por defecto
+
+export const NAV_ITEMS = ROUTES_LIST.filter(r => r.label && r.icon);
+// Rutas con etiqueta e icono para menús de navegación
 
 /**
- * Lista de ítems visibles en la navegación, usados en menús.
- * Se consideran válidos los que contienen etiqueta e icono.
- */
-export const NAV_ITEMS = ROUTES_LIST.filter(
-  (route): route is RouteEntry & { label: { es: string; en: string }; icon: IconType } =>
-    Boolean(route.label && route.icon)
-);
-
-/**
- * Devuelve los ítems de navegación visibles según el estado de autenticación.
- * @param isAuth Estado de autenticación del usuario
- * @returns Lista filtrada de rutas con ítems visibles
+ * Filtra rutas visibles en navegación según si el usuario está autenticado
+ * @param isAuth - true si el usuario está logueado
  */
 export function navItems(isAuth: boolean) {
-  return ROUTES_LIST.filter(
-    (route): route is RouteEntry & { label: { es: string; en: string }; icon: IconType } =>
-      Boolean(route.label && route.icon) &&
-      (isAuth || route.isProtected === false)
-  );
+  return NAV_ITEMS.filter(r => isAuth || r.isProtected === false);
 }
