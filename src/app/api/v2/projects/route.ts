@@ -60,10 +60,10 @@ function getFieldSelection(data: string, language: string): string[] {
  * GET handler
  */
 export async function GET(req: NextRequest) {
-  const session = await getSession();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  // const session = await getSession();
+  // if (!session) {
+  //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  // }
 
   const { searchParams } = new URL(req.url);
   const query = Object.fromEntries(searchParams.entries());

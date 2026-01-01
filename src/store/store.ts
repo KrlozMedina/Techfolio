@@ -1,31 +1,46 @@
-import { configureStore } from "@reduxjs/toolkit";
-// import counterReducer from "./slices/counterSlice";
-import { projectsApi } from "./service/projectsApi";
-import { setupListeners } from "@reduxjs/toolkit/query";
-import { technologiesApi } from "./service/technologiesApi";
-import { authApi } from "./service/authApi";
-import filterReducer from './slices/filterSlice'
-import { caseStudiesApi } from "./service/caseStudiesApi";
+/**
+ * Configuración del store de Redux Toolkit para la aplicación.
+ * Incluye slices locales y servicios RTK Query.
+ */
 
+import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
+
+import filterReducer from './slices/filterSlice'; // Slice local de filtros
+
+// Servicios RTK Query
+import { authApi } from './service/authApi';
+import { projectsApi } from './service/projectsApi';
+import { technologiesApi } from './service/technologiesApi';
+import { caseStudiesApi } from './service/caseStudiesApi';
+
+/**
+ * Configuración principal del store
+ * - `reducer`: Combina reducers locales y de RTK Query
+ * - `middleware`: Agrega middleware de cada servicio RTK Query
+ */
 export const store = configureStore({
   reducer: {
-    filters: filterReducer,
+    filters: filterReducer, // Slice local
+
+    [authApi.reducerPath]: authApi.reducer,
     [projectsApi.reducerPath]: projectsApi.reducer,
     [technologiesApi.reducerPath]: technologiesApi.reducer,
-    [authApi.reducerPath]: authApi.reducer,
     [caseStudiesApi.reducerPath]: caseStudiesApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
-    [
-      projectsApi.middleware, 
-      technologiesApi.middleware,
+
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(
       authApi.middleware,
+      projectsApi.middleware,
+      technologiesApi.middleware,
       caseStudiesApi.middleware
-    ]
-  )
-})
+    ),
+});
 
-setupListeners(store.dispatch)
+// Configuración adicional de listeners para RTK Query (ej. refetchOnFocus, refetchOnReconnect)
+setupListeners(store.dispatch);
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+/* ===== Tipos globales para Redux ===== */
+export type RootState = ReturnType<typeof store.getState>; // Tipo para el estado global
+export type AppDispatch = typeof store.dispatch; // Tipo para el dispatch de Redux
