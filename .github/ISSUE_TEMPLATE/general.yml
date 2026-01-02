@@ -1,6 +1,5 @@
----
 name: 📝 Issue general
-description: Reporta un bug, propone una mejora o plantea una tarea
+description: Reporta un bug, propone una mejora o plantea una tarea del portafolio
 title: "[ISSUE] - descripción corta"
 labels: ["triage"]
 assignees:
@@ -23,9 +22,22 @@ body:
   - type: textarea
     id: descripcion
     attributes:
-      label: Descripción
+      label: Descripción (Markdown)
       description: Describe claramente el problema, idea o tarea.
-      placeholder: Explica qué pasa o qué se necesita.
+      value: |
+        ## Alcance
+
+        ## Checklist general
+        - [ ] Objetivo claro
+        - [ ] Contenido breve y técnico
+        - [ ] Aporta valor a cliente freelance
+        - [ ] Responsive
+        - [ ] ES / EN implementado
+        - [ ] Navegación consistente
+        - [ ] Revisión final
+
+        ## Checklist específico
+        - [ ] Definir según el tipo de issue
     validations:
       required: true
 
@@ -53,7 +65,14 @@ body:
     attributes:
       label: Impacto
       options:
-        - label: Afecta funcionalidad existente
+        - label: Afecta funcionalidad
         - label: Afecta UX/UI
         - label: Afecta rendimiento
         - label: Afecta seguridad
+
+  - type: input
+    id: milestone
+    attributes:
+      label: Milestone
+      description: Asignar una etapa del proyecto
+      placeholder: Etapa 1 – Base del Portafolio (Core)
