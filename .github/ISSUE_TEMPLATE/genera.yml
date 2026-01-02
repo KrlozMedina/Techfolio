@@ -1,0 +1,59 @@
+---
+name: 📝 Issue general
+description: Reporta un bug, propone una mejora o plantea una tarea
+title: "[ISSUE] - descripción corta"
+labels: ["triage"]
+assignees:
+  - KrlozMedina
+
+body:
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo de issue
+      options:
+        - Bug
+        - Feature
+        - Mejora
+        - Documentación
+        - Tarea técnica
+    validations:
+      required: true
+
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Descripción
+      description: Describe claramente el problema, idea o tarea.
+      placeholder: Explica qué pasa o qué se necesita.
+    validations:
+      required: true
+
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto adicional
+      description: Información técnica, decisiones, referencias o capturas.
+      placeholder: Logs, links, screenshots, notas técnicas…
+
+  - type: dropdown
+    id: prioridad
+    attributes:
+      label: Prioridad
+      options:
+        - Baja
+        - Media
+        - Alta
+        - Crítica
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: impacto
+    attributes:
+      label: Impacto
+      options:
+        - label: Afecta funcionalidad existente
+        - label: Afecta UX/UI
+        - label: Afecta rendimiento
+        - label: Afecta seguridad

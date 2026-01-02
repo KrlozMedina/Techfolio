@@ -1,9 +1,10 @@
 'use client';
 
-import React, { JSX } from 'react';
+import { JSX } from 'react';
 import Link from 'next/link';
-import { useLanguage } from '@/hooks';
+// import { useLanguage } from '@/hooks';
 import ErrorTemplate from '@/components/templates/ErrorTemplate/ErrorTemplate';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface ErrorPageProps {
   error: Error;
@@ -18,15 +19,14 @@ interface ErrorPageProps {
  * @returns {JSX.Element} El componente de la página de error.
  */
 export default function ErrorPage({ error, reset }: ErrorPageProps): JSX.Element {
-  const { isSpanish } = useLanguage();
+  // const { isSpanish } = useLanguage();
+  const { t } = useTranslation();
 
   const messages = {
-    title: isSpanish ? 'Algo malio sal 🤖💥' : "Somethin' went wrung 🤖💥",
-    fallback: isSpanish
-      ? 'Ha ocurrido un error inesperado. Por favor, intenta nuevamente.'
-      : 'An unexpected error occurred. Please try again.',
-    retry: isSpanish ? 'Reintentar' : 'Retry',
-    home: isSpanish ? 'Ir al inicio' : 'Go to home',
+    title: t.error.title,
+    fallback: t.error.fallback,
+    retry: t.error.retry,
+    home: t.error.home,
   };
 
   return (
@@ -42,11 +42,11 @@ export default function ErrorPage({ error, reset }: ErrorPageProps): JSX.Element
       </p>
 
       {/* Contenedor de botones con navegación accesible */}
-      <div className="error__button-container" role="group" aria-label={isSpanish ? 'Opciones de navegación' : 'Navigation options'}>
+      <div className="error__button-container" role="group" aria-label={t.error.options}>
         <button
           onClick={reset}
           className="error__button error__button-retry"
-          aria-label={isSpanish ? 'Reintentar operación' : 'Retry operation'}
+          aria-label={t.error.retryLabel}
         >
           {messages.retry}
         </button>
@@ -55,7 +55,7 @@ export default function ErrorPage({ error, reset }: ErrorPageProps): JSX.Element
         <Link href="/" passHref>
           <button
             className="error__button error__button-home"
-            aria-label={isSpanish ? 'Ir a la página de inicio' : 'Go to homepage'}
+            aria-label={t.error.homeLabel}
           >
             {messages.home}
           </button>

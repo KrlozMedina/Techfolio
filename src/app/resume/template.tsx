@@ -58,9 +58,10 @@ import { NoticeType, ROUTES_LIST } from '@/lib/config';
  * @param children - Contenido hijo renderizado dentro del layout
  */
 export default function Template({ children }: { children: ReactNode }) {
-  const { isSpanish } = useLanguage();
+  // const { isSpanish } = useLanguage();
   const path = usePathname();
-  const language = isSpanish ? 'es' : 'en';
+  // const language = isSpanish ? 'es' : 'en';
+  const { language } = useLanguage();
 
   // Ruta actual encontrada en la configuración global
   const currentRoute = ROUTES_LIST.find(route => route.path === path);

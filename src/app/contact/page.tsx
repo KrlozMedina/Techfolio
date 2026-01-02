@@ -1,12 +1,13 @@
 'use client'
 
 import React, { useContext } from 'react'
-import LanguageContext from '@/context/LanguageContext'
+// import LanguageContext from '@/context/LanguageContext'
 // import MainLayout from '@/components/layouts/MainLayout/MainLayout'
 import '@/styles/pages/ContactMe.css'
 import emailjs from '@emailjs/browser';
 import { ImWhatsapp } from 'react-icons/im'
 import { MdEmail, MdLocationOn } from 'react-icons/md'
+import { useTranslation } from '@/hooks/useTranslation';
 // import Social from '@/components/molecules/SocialLinks/SocialLinks'
 // import StatusNotice from '@/components/organisms/Notice/Notice'
 // import { MaintenanceNotice } from '@/components/organisms/Notice/Notice'
@@ -17,7 +18,8 @@ interface LanguageContextType {
 }
 
 const ContactMe: React.FC = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType
+  const { t } = useTranslation();
 
   const sendEmail = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -42,9 +44,10 @@ const ContactMe: React.FC = () => {
     <>
       <p className='phrase'>
         {
-          isSpanish
-            ? "Aprendí que la gente olvidará lo que dijiste, olvidará lo que hiciste... pero nunca olvidará lo que le hiciste sentir."
-            : "I learned that people will forget what you said, they will forget what you did... but they will never forget how you made them feel."
+          t.phrases.contact
+          // isSpanish
+          //   ? "Aprendí que la gente olvidará lo que dijiste, olvidará lo que hiciste... pero nunca olvidará lo que le hiciste sentir."
+          //   : "I learned that people will forget what you said, they will forget what you did... but they will never forget how you made them feel."
         }
       </p>
 
@@ -54,7 +57,7 @@ const ContactMe: React.FC = () => {
 
       <form id='contact' className='contact-form' onSubmit={sendEmail}>
         <fieldset className="main-contact-container">
-          <legend className='title'>{isSpanish ? "Contactarme" : "Contact me"}</legend>
+          <legend className='title'>{t.contact.title}</legend>
 
           <section className='contact--data'>
             <span><ImWhatsapp className='icon' /> +57 3504312615</span>
@@ -66,23 +69,23 @@ const ContactMe: React.FC = () => {
 
           <div className='contact--info-container'>
             <div>
-              <label htmlFor="name">{isSpanish ? "Nombre" : "Name"}</label>
+              <label htmlFor="name">{t.contact.name}</label>
               <input name='user_name' type="text" required />
             </div>
 
             <div>
-              <label htmlFor="email">{isSpanish ? "Correo electrónico" : "Email"}</label>
+              <label htmlFor="email">{t.contact.email}</label>
               <input name='user_email' type="email" required />
             </div>
 
             <div>
-              <label htmlFor="subject">{isSpanish ? "Asunto" : "Subject"}</label>
+              <label htmlFor="subject">{t.contact.subject}</label>
               <input name='subject' type="text" required />
             </div>
 
             <textarea name="message" id="" cols={30} rows={10}></textarea>
 
-            <input type="submit" value={isSpanish ? "Enviar" : "Send"} />
+            <input type="submit" value={t.contact.send} />
           </div>
         </fieldset>
       </form>

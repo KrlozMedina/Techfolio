@@ -1,57 +1,140 @@
-'use client'
+'use client';
 
+import { useTranslation } from '@/hooks/useTranslation';
 import React from 'react';
 // import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
-// import MainLayout from '@/components/layouts/MainLayout/MainLayout';
-// import StatusNotice from '@/components/organisms/Notice/Notice';
 
-const certifications = [
-  {
-    title: 'Certified Kubernetes Administrator (CKA)',
-    issuer: 'The Linux Foundation',
-    date: 'June 2023',
+const TEXT = {
+  es: {
+    title: 'Certificaciones Profesionales y Técnicas',
+    issuedBy: 'Emitido por',
+    date: 'Fecha',
+    certifications: [
+      {
+        title: 'Certified Kubernetes Administrator (CKA)',
+        issuer: 'The Linux Foundation',
+        date: 'Junio 2023',
+      },
+      {
+        title: 'AWS Certified Solutions Architect – Associate',
+        issuer: 'Amazon Web Services',
+        date: 'Marzo 2023',
+      },
+      {
+        title: 'Microsoft Certified: Azure Developer Associate',
+        issuer: 'Microsoft',
+        date: 'Enero 2023',
+      },
+    ],
   },
-  {
-    title: 'AWS Certified Solutions Architect – Associate',
-    issuer: 'Amazon Web Services',
-    date: 'March 2023',
+  en: {
+    title: 'Professional and Technical Certifications',
+    issuedBy: 'Issued by',
+    date: 'Date',
+    certifications: [
+      {
+        title: 'Certified Kubernetes Administrator (CKA)',
+        issuer: 'The Linux Foundation',
+        date: 'June 2023',
+      },
+      {
+        title: 'AWS Certified Solutions Architect – Associate',
+        issuer: 'Amazon Web Services',
+        date: 'March 2023',
+      },
+      {
+        title: 'Microsoft Certified: Azure Developer Associate',
+        issuer: 'Microsoft',
+        date: 'January 2023',
+      },
+    ],
   },
-  {
-    title: 'Microsoft Certified: Azure Developer Associate',
-    issuer: 'Microsoft',
-    date: 'January 2023',
-  },
-];
+};
 
 const CertificationsPage: React.FC = () => {
   // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-
-  // const links = [
-  //   { href: '/profile/about-me', title: {es: 'Sobre mí', en: 'About me'}, isActive:false },
-  //   { href: '/profile/education', title: {es: 'Educación', en: 'Education'}, isActive:false },
-  //   { href: '/profile/skills', title: {es: 'Habilidades', en: 'Skills'}, isActive:false },
-  //   { href: '/profile/certifications', title: {es: 'Certificaciones', en: 'Certifications'}, isActive:true },
-  //   { href: '/profile/experience', title: {es: 'Experiencia laboral', en: 'Work experience'}, isActive:false },
-  //   { href: '/profile/achievements', title: {es: 'Logros', en: 'Achievements'}, isActive:false },
-  // ]
+  // const t = isSpanish ? TEXT.es : TEXT.en;
+  const { language } = useTranslation();
+  const text = TEXT[language]
 
   return (
-    <>
-      {/* <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} /> */}
-      <div style={{ padding: '20px' }}>
-        <h1>Certificaciones Profesionales y Técnicas</h1>
-        <ul>
-          {certifications.map((cert, index) => (
-            <li key={index} style={{ marginBottom: '15px' }}>
-              <h2>{cert.title}</h2>
-              <p><strong>Emitido por:</strong> {cert.issuer}</p>
-              <p><strong>Fecha:</strong> {cert.date}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
+    <section style={{ padding: '20px' }}>
+      <h1>{text.title}</h1>
+
+      <ul>
+        {text.certifications.map(cert => (
+          <li key={cert.title} style={{ marginBottom: '16px' }}>
+            <h2>{cert.title}</h2>
+            <p>
+              <strong>{text.issuedBy}:</strong> {cert.issuer}
+            </p>
+            <p>
+              <strong>{text.date}:</strong> {cert.date}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 };
 
 export default CertificationsPage;
+
+
+// 'use client'
+
+// import React from 'react';
+// // import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
+// // import MainLayout from '@/components/layouts/MainLayout/MainLayout';
+// // import StatusNotice from '@/components/organisms/Notice/Notice';
+
+// const certifications = [
+//   {
+//     title: 'Certified Kubernetes Administrator (CKA)',
+//     issuer: 'The Linux Foundation',
+//     date: 'June 2023',
+//   },
+//   {
+//     title: 'AWS Certified Solutions Architect – Associate',
+//     issuer: 'Amazon Web Services',
+//     date: 'March 2023',
+//   },
+//   {
+//     title: 'Microsoft Certified: Azure Developer Associate',
+//     issuer: 'Microsoft',
+//     date: 'January 2023',
+//   },
+// ];
+
+// const CertificationsPage: React.FC = () => {
+//   // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+
+//   // const links = [
+//   //   { href: '/profile/about-me', title: {es: 'Sobre mí', en: 'About me'}, isActive:false },
+//   //   { href: '/profile/education', title: {es: 'Educación', en: 'Education'}, isActive:false },
+//   //   { href: '/profile/skills', title: {es: 'Habilidades', en: 'Skills'}, isActive:false },
+//   //   { href: '/profile/certifications', title: {es: 'Certificaciones', en: 'Certifications'}, isActive:true },
+//   //   { href: '/profile/experience', title: {es: 'Experiencia laboral', en: 'Work experience'}, isActive:false },
+//   //   { href: '/profile/achievements', title: {es: 'Logros', en: 'Achievements'}, isActive:false },
+//   // ]
+
+//   return (
+//     <>
+//       {/* <StatusNotice type='construction' language={isSpanish ? 'es' : 'en'} /> */}
+//       <div style={{ padding: '20px' }}>
+//         <h1>Certificaciones Profesionales y Técnicas</h1>
+//         <ul>
+//           {certifications.map((cert, index) => (
+//             <li key={index} style={{ marginBottom: '15px' }}>
+//               <h2>{cert.title}</h2>
+//               <p><strong>Emitido por:</strong> {cert.issuer}</p>
+//               <p><strong>Fecha:</strong> {cert.date}</p>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default CertificationsPage;

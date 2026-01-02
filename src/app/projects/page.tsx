@@ -7,14 +7,12 @@ import { ProjectCard } from "@/components/molecules/Cards/CardViews";
 import { IntroTemplate } from "@/components/templates/IntroTemplate/IntroTemplate";
 import { DatabaseError, Loading, NoData } from "@/components/molecules/FeedbackStates/FeedbackStates";
 import style from './page.module.scss'
-import caseStudies from "@/mocks/caseStudies.json";
 import Image from "next/image";
 import { IProjectV2 } from "@/models/interfaces";
-import { useLanguage } from "@/hooks";
-import { QuoteBlock } from "@/components/molecules/Blocks";
-import Filter from "@/components/organisms/Filter/Filter";
 import CTA from "@/components/molecules/Cards/CTA";
-import { CATEGORIES, PLATFORMS, TECHNOLOGIES } from "@/shared/constants";
+import { caseStudies } from "@/mocks/caseStudies.mock";
+import { useTranslation } from "@/hooks/useTranslation";
+import { QuoteBlock } from "@/components/molecules/Block/QuoteBlock";
 
 const TEXTS = {
   hero: {
@@ -51,8 +49,9 @@ const TEXTS = {
 };
 
 const Projects: React.FC = () => {
-  const { isSpanish } = useLanguage();
-  const language = isSpanish ? 'es' : 'en';
+  // const { isSpanish } = useLanguage();
+  // const language = isSpanish ? 'es' : 'en';
+  const { t, language } = useTranslation();
   const { data: projects, isLoading, isError, error } = useGetProjectsSimpleDataQuery(language);
   const [filter, setFilter] = useState({ category: "", platform: "", technology: "" });
 
@@ -122,17 +121,17 @@ const Projects: React.FC = () => {
                     <h2 className={style["projects__case-study__title"]}>{caseStudy[language].title}</h2>
                     {caseStudy.client && (
                       <p>
-                        <strong>{isSpanish ? 'Cliente' : 'Client'}:</strong> {caseStudy.client}
+                        <strong>{t.projects.client}:</strong> {caseStudy.client}
                       </p>
                     )}
                     <p>
-                      <strong>{isSpanish ? 'Reto' : 'Challenge'}:</strong> {isSpanish ? caseStudy.es.challenges : caseStudy.en.challenges}
+                      <strong>{t.projects.challenge}:</strong> {caseStudy[language].challenges}
                     </p>
                     <p>
-                      <strong>{isSpanish ? 'Solución' : 'Solution'}:</strong> {isSpanish ? caseStudy.es.solution : caseStudy.en.solution}
+                      <strong>{t.projects.solution}:</strong> {caseStudy[language].solution}
                     </p>
                     <p>
-                      <strong>{isSpanish ? 'Resultados' : 'Results'}:</strong> {isSpanish ? caseStudy.es.results : caseStudy.en.results}
+                      <strong>{t.projects.results}:</strong> {caseStudy[language].results}
                     </p>
                     {/* {caseStudy.testimonial && ( */}
                     <blockquote>“{caseStudy.testimonials[0][language]}”</blockquote>

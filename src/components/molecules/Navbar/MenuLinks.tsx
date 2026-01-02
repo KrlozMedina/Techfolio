@@ -1,32 +1,17 @@
-'use client';
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import styles from './Navbar.module.scss';
 import { useVerifyProfileQuery } from '@/store/service/authApi';
 import { navItems } from '@/lib/config';
-
-interface NavLink {
-  path: string;
-  title: {
-    es: string;
-    en: string;
-  };
-}
-
-interface MenuProps {
-  language: 'es' | 'en';
-  links?: NavLink[];
-  isPhone?: boolean;
-  onlyIcons?: boolean;
-}
+import { useLanguage } from '@/hooks/useLanguage';
+import { MenuProps, NavItem } from '@/lib/types/navigation';
 
 const ACTIVE_STYLE = { color: 'var(--color-button-hover)' };
 
 /**
- * Hook para obtener la ruta base del pathname actual
- * (por ejemplo, "/dashboard" de "/dashboard/stats")
+ * Obtiene el path base de primer nivel
+ * Ej: /dashboard/settings → /dashboard
  */
 const useActivePath = (): string => {
   const pathname = usePathname();
@@ -34,29 +19,28 @@ const useActivePath = (): string => {
 };
 
 /**
- * Hook para obtener las rutas de navegación según estado de autenticación
+ * Obtiene los ítems del menú según estado de autenticación
  */
-const useNavItems = () => {
+const useNavItems = (): NavItem[] => {
   const { data } = useVerifyProfileQuery(null);
-  return navItems(data?.isAuth ?? false);
+  return navItems(data?.isAuth ?? false) as NavItem[];
 };
 
 /**
- * Componente MenuLinks
- * - Renderiza enlaces de navegación principales y adicionales.
- * - Destaca el enlace activo según la ruta actual.
- * - Adapta estilos para dispositivos móviles si `isPhone` es true.
- * 
- * @param language Código de idioma para mostrar etiquetas ('es' o 'en')
- * @param links Enlaces adicionales opcionales con path y título
- * @param isPhone Booleano que indica si el menú se renderiza en dispositivo móvil
+ * MenuLinks
+ * Navegación principal reutilizable.
+ *
+ * Props:
+ * - links: enlaces secundarios (footer / settings)
+ * - isPhone: layout móvil
+ * - onlyIcons: muestra solo iconos
  */
 export const MenuLinks: React.FC<MenuProps> = ({
-  language,
   links = [],
   isPhone = false,
   onlyIcons = false,
 }) => {
+  const { language } = useLanguage();
   const pathname = usePathname();
   const basePath = useActivePath();
   const NAV_ITEMS = useNavItems();
@@ -67,32 +51,38 @@ export const MenuLinks: React.FC<MenuProps> = ({
 
   return (
     <nav className={containerClass} aria-label="Main navigation">
-      {/* Enlaces principales */}
-      {NAV_ITEMS.map(({ path, label, icon: Icon }) => (
-        <Link
-          key={path}
-          href={path}
-          style={path === basePath ? ACTIVE_STYLE : {}}
-          aria-current={path === basePath ? 'page' : undefined}
-        >
-          <Icon className="icon" aria-hidden="true" />
-          {onlyIcons ? '' : label[language]}
-        </Link>
-      ))}
+      {NAV_ITEMS.map(({ path, label, icon: Icon }) => {
+        const isActive = path === basePath;
 
-      {/* Enlaces adicionales opcionales */}
+        return (
+          <Link
+            key={path}
+            href={path}
+            style={isActive ? ACTIVE_STYLE : {}}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            <Icon className={styles['icon']} aria-hidden />
+            {!onlyIcons && label[language]}
+          </Link>
+        );
+      })}
+
       {links.length > 0 && (
         <div className={styles['menu__container--links']}>
-          {links.map(({ path, title }) => (
-            <a
-              key={path}
-              href={path}
-              style={path === pathname ? ACTIVE_STYLE : {}}
-              aria-current={path === pathname ? 'page' : undefined}
-            >
-              {title[language]}
-            </a>
-          ))}
+          {links.map(({ path, title }) => {
+            const isActive = path === pathname;
+
+            return (
+              <Link
+                key={path}
+                href={path}
+                style={isActive ? ACTIVE_STYLE : {}}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {title[language]}
+              </Link>
+            );
+          })}
         </div>
       )}
     </nav>

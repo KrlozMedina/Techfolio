@@ -40,4 +40,11 @@ export const QUOTES: Partial<Record<Page, Quote>> = {
     },
     author: "Walt Disney",
   },
+  blog: {
+    phrase: {
+      es: 'Escribir es la manera más profunda de leer la vida.',
+      en: 'Writing is the deepest form of reading life.'
+    },
+    author: 'Francisco Umbral'
+  }
 };

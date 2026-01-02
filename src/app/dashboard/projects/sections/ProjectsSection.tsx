@@ -7,14 +7,15 @@ import {
 } from "@/store/service/projectsApi";
 import { useGetTechnologiesQuery } from "@/store/service/technologiesApi";
 import { ErrorResponse, ITechnology } from "@/shared/types";
-import React, { useContext, useEffect, useState } from "react";
-import LanguageContext, {
-  LanguageContextType,
-} from "@/context/LanguageContext";
+import React, { useEffect, useState } from "react";
+// import LanguageContext, {
+//   LanguageContextType,
+// } from "@/context/LanguageContext";
 import style from "../page.module.css";
 import Image from "next/image";
 import { PLATFORMS } from "@/shared/constants/constants";
 import { IProjectV2Paginated } from "@/models/project/Project.interface";
+import { useTranslation } from "@/hooks/useTranslation";
 // import { TextInput } from "@/components/atom/form";
 
 const ProjectsSection: React.FC = () => {
@@ -22,8 +23,9 @@ const ProjectsSection: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [projects, setProjects] = useState<IProjectV2Paginated>();
   const [technologies, setTechnologies] = useState<ITechnology[]>([]);
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
   // const language = isSpanish ? 'es' : 'en';
+  const { t } = useTranslation();
   const { data: dataProjects, refetch } = useGetProjectsQuery();
   const { data: dataTechnologies, isLoading: isLoadingTechnologies } =
     useGetTechnologiesQuery(null);
@@ -130,7 +132,8 @@ const ProjectsSection: React.FC = () => {
           onClick={() => setShowModal(true)}
           disabled={isLoadingTechnologies}
         >
-          {isSpanish ? "Agregar proyecto" : "Add project"}
+          {t.dashboard.projects.addProject}
+          {/* {isSpanish ? "Agregar proyecto" : "Add project"} */}
         </button>
 
         {showModal && (
@@ -144,7 +147,8 @@ const ProjectsSection: React.FC = () => {
             >
               <fieldset className={style["modal__fieldset"]}>
                 <legend className={style["modal__legend"]}>
-                  {isSpanish ? "Agregar proyecto" : "Add project"}
+                  {t.dashboard.projects.addProject}
+                  {/* {isSpanish ? "Agregar proyecto" : "Add project"} */}
                 </legend>
 
                 {/* <TextInput
@@ -158,7 +162,8 @@ const ProjectsSection: React.FC = () => {
 
                 <div>
                   <label htmlFor="description">
-                    {isSpanish ? "Descripción" : "Description"}:
+                    {t.dashboard.projects.descriptionLabel}
+                    {/* {isSpanish ? "Descripción" : "Description"}: */}
                   </label>
                   <textarea
                     name="description"
@@ -176,7 +181,8 @@ const ProjectsSection: React.FC = () => {
 
                 <div>
                   <label htmlFor="technologies">
-                    {isSpanish ? "Tecnologías" : "Technologies"}:
+                    {t.dashboard.projects.technologiesLabel}
+                    {/* {isSpanish ? "Tecnologías" : "Technologies"}: */}
                   </label>
                   <select
                     multiple
@@ -299,7 +305,8 @@ const ProjectsSection: React.FC = () => {
 
                 <div>
                   <label htmlFor="projectType">
-                    {isSpanish ? "Tipo de proyecto" : "Project type"}:
+                    {t.dashboard.projects.projectTypeLabel}
+                    {/* {isSpanish ? "Tipo de proyecto" : "Project type"}: */}
                   </label>
                   <select
                     name="projectType"
@@ -324,13 +331,13 @@ const ProjectsSection: React.FC = () => {
 
                 <button type="submit" disabled={isLoading}>
                   {
-                    isLoading
-                      ? isSpanish
-                        ? "Enviando"
-                        : "Sending"
-                      : isSpanish
-                        ? "Enviar"
-                        : "Submit"
+                    isLoading ? t.dashboard.projects.sending : t.dashboard.projects.submit
+                      // ? isSpanish
+                      //   ? "Enviando"
+                      //   : "Sending"
+                      // : isSpanish
+                      //   ? "Enviar"
+                      //   : "Submit"
                   }
                 </button>
               </fieldset>
@@ -352,30 +359,30 @@ const ProjectsSection: React.FC = () => {
             <h2 className={style["project__card-title"]}>{project.projectInfo.es.title}</h2>
             <p>{project.projectInfo.es.description}</p>
             <p>
-              <strong>{isSpanish ? "Categoría" : "Category"}:</strong>{" "}
+              <strong>{t.dashboard.projects.category}:</strong>{" "}
               {project.tags.categoryIds?.join(", ")}
             </p>
             <p>
-              <strong>{isSpanish ? "Rol" : "Rol"}:</strong> {project.teamInfo.roleId}
+              <strong>{t.dashboard.projects.role}:</strong> {project.teamInfo.roleId}
             </p>
             <p>
-              <strong>{isSpanish ? "Duración" : "Duration"}:</strong>{" "}
+              <strong>{t.dashboard.projects.duration}:</strong>{" "}
               {project.teamInfo.duration}
             </p>
             <p>
-              <strong>{isSpanish ? "Tamaño del equipo" : "Team Size"}:</strong>{" "}
+              <strong>{t.dashboard.projects.teamSize}:</strong>{" "}
               {project.teamInfo.teamSize}
             </p>
             <p>
-              <strong>{isSpanish ? "Prioridad" : "Priority"}:</strong>{" "}
+              <strong>{t.dashboard.projects.priority}:</strong>{" "}
               {project.importanceScore}
             </p>
             <p>
-              <strong>{isSpanish ? "Tipo" : "Type"}:</strong>{" "}
+              <strong>{t.dashboard.projects.type}:</strong>{" "}
               {project.tags.platformId}
             </p>
             <p>
-              <strong>{isSpanish ? "Tecnologías" : "Technologies"}:</strong>{" "}
+              <strong>{t.dashboard.projects.technologies}:</strong>{" "}
               {project.tags.technologyIds.join(", ")}
             </p>
             <div>
@@ -384,18 +391,19 @@ const ProjectsSection: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {isSpanish ? "Repositorio" : "Repository"}
+                {t.dashboard.projects.repository}
               </a>
               <a
                 href={project.urls.live}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {isSpanish ? "Demo en Vivo" : "Live Demo"}
+                {t.dashboard.projects.liveDemo}
+                {/* {isSpanish ? "Demo en Vivo" : "Live Demo"} */}
               </a>
             </div>
             <div onClick={() => handlerDeleteProject(project["_id"])}>
-              <button>{isSpanish ? "Eliminar" : "Delete"}</button>
+              <button>{t.dashboard.projects.delete}</button>
             </div>
           </div>
         ))}

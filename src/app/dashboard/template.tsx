@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 
 import AuthLayout from '@/components/templates/AuthLayout/AuthLayout';
@@ -51,9 +51,10 @@ const NAV_LINKS_PROJECT: NavLink[] = [
  * @param children - Contenido hijo renderizado dentro del layout
  */
 export default function Template({ children }: { children: ReactNode }) {
-  const { isSpanish } = useLanguage();
+  // const { isSpanish } = useLanguage();
   const path = usePathname();
-  const language = isSpanish ? 'es' : 'en';
+  // const language = isSpanish ? 'es' : 'en';
+  const { language } =useLanguage();
 
   // Ruta actual encontrada en la configuración global
   const currentRoute = ROUTES_LIST.find(route => route.path === path);

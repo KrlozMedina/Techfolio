@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react';
-import LanguageContext from '../../../context/LanguageContext'; // Language context for managing multilingual state
+// import LanguageContext from '../../../context/LanguageContext'; // Language context for managing multilingual state
 import { BiCaretDown, BiCaretUp } from 'react-icons/bi'; // Icons for dropdown indicators
 import style from './LanguageSelector.module.css'; // CSS module for component styles
+import { LanguageContext, LanguageContextType } from '@/context/LanguageContext';
 
 // Define the expected type for the LanguageContext values
-type LanguageContextType = {
-  isSpanish: boolean;
-  setIsSpanish: (language: boolean) => void;
-};
+// type LanguageContextType = {
+//   isSpanish: boolean;
+//   setIsSpanish: (language: boolean) => void;
+// };
 
 /**
  * COMPONENT: Language
@@ -17,7 +18,7 @@ type LanguageContextType = {
  * The chosen language is stored in context and saved to localStorage for persistence.
  */
 const LanguageToggleButton: React.FC = () => {
-  const { isSpanish, setIsSpanish } = useContext(LanguageContext) as LanguageContextType;
+  const { language } = useContext(LanguageContext) as LanguageContextType;
 
   // State to control dropdown visibility
   const [menuLanguage, setMenuLanguage] = useState<boolean>(false);
@@ -29,7 +30,7 @@ const LanguageToggleButton: React.FC = () => {
 
   // Sets the selected language and stores it in localStorage
   const setLanguage = (languageSpanish: boolean) => {
-    setIsSpanish(languageSpanish);
+    setLanguage(languageSpanish);
     localStorage.setItem('isSpanish', JSON.stringify(languageSpanish));
     handlerMenuLanguage(); // Close the menu after selection
   };
@@ -37,7 +38,7 @@ const LanguageToggleButton: React.FC = () => {
   return (
     <div className={style["language__container"]}>
       <button className={style["language__button"]} onClick={handlerMenuLanguage}>
-        {isSpanish ? "Idioma" : "Language"} {/* Show label based on selected language */}
+        {language ? "Idioma" : "Language"} {/* Show label based on selected language */}
         {/* Toggle icon based on menu state */}
         {menuLanguage ? (
           <BiCaretUp className={style["language__button--deploy"]} />
@@ -66,11 +67,11 @@ const LanguageToggleButton: React.FC = () => {
  * Displays language options directly without the need for a dropdown toggle.
  */
 const LanguageToggleButtonMobile: React.FC = () => {
-  const { setIsSpanish } = useContext(LanguageContext) as LanguageContextType;
+  const { language } = useContext(LanguageContext) as LanguageContextType;
 
   // Sets the selected language and stores it in localStorage
   const setLanguage = (languageSpanish: boolean) => {
-    setIsSpanish(languageSpanish);
+    setLanguage(languageSpanish);
     localStorage.setItem('isSpanish', JSON.stringify(languageSpanish));
   };
 

@@ -1,10 +1,12 @@
 import React, { ReactNode } from 'react';
 import style from './MainLayout.module.css';
 import Link from 'next/link';
-import SettingsButton from '@/components/organisms/SettingPanel/SettingsPanel';
+import SettingsButton from '@/components/organisms/settings/SettingsButton';
 import Headers from '@/components/organisms/Headers/Header';
-import { MenuAside, MobileHamburgerMenu } from '@/components/molecules/Navbar';
+// import { MenuAside, MobileHamburgerMenu } from '@/components/molecules/navbar/';
 import Footer from '@/components/molecules/Footer/Footer';
+import MobileHamburgerMenu from '@/components/molecules/Navbar/MobileHamburgerMenu';
+import MenuAside from '@/components/molecules/Navbar/MenuAside';
 
 // Defining the structure of the links that can be passed as props
 interface Link {
@@ -34,7 +36,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   return (
     <div className={style.template}>
       {/* Mobile menu for smaller devices */}
-      <MobileHamburgerMenu links={links} isAdmin={isAdmin} language={language} />
+      <MobileHamburgerMenu links={links} isAdmin={isAdmin} />
 
       <div className={style['template-container']}>
         <Headers language={language} links={links} isAdmin={isAdmin} />
@@ -52,7 +54,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
 
       {/* Sidebar with additional elements like the menu, language selector, and theme toggle */}
       <aside className={style['template__aside']}>
-        <MenuAside language={language} />
+        <MenuAside />
         <SettingsButton isFloating />
       </aside>
     </div>

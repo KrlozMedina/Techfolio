@@ -1,0 +1,133 @@
+@use '@/styles/abstract/mixins' as *;
+
+/* ================= VARIABLES SWITCH ================= */
+$button-size: 48px;       // ancho total del switch
+$switch-height: 26px;     // altura del switch
+$switch-knob-size: 20px;  // diámetro del knob
+$knob-offset: 4px;        // espacio entre knob y borde
+
+/* ================= PLACEHOLDERS REUTILIZABLES ================= */
+%panel-container-base {
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--color-background-container);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+%form-base {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+%switch-slider-base {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  background-color: var(--color-background-container-soft);
+  border-radius: var(--border-radius-full);
+  transition: 0.4s;
+}
+
+/* ================= SETTINGS ================= */
+.settings {
+  position: fixed;
+  z-index: 9999;
+
+  &-button {
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+  }
+
+  &-menu {
+    top: var(--space-lg);
+    right: 0;
+  }
+
+  &__button {
+    background-color: var(--color-background-container);
+  }
+}
+
+/* ================= PANEL ================= */
+.panel {
+  &__container {
+    @extend %panel-container-base;
+
+    &-button {
+      bottom: 5rem;
+    }
+
+    &-menu {
+      top: 5rem;
+    }
+  }
+
+  &__form {
+    @extend %form-base;
+  }
+
+  &__switchWrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  &__icon {
+    font-size: var(--font-size-sm);
+    color: var(--color-icon);
+  }
+}
+
+/* ================= SWITCH ================= */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: $button-size;
+  height: $switch-height;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .slider {
+      background-color: var(--color-background-container-soft);
+
+      &::before {
+        transform: translateX(
+          $button-size - $switch-knob-size - $knob-offset
+        );
+      }
+    }
+  }
+}
+
+.slider {
+  @extend %switch-slider-base;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: $knob-offset;
+    bottom: 3px;
+    width: $switch-knob-size;
+    height: $switch-knob-size;
+    background-color: #fff;
+    border-radius: var(--border-radius-full);
+    transition: 0.4s;
+  }
+}
+
+/* ================= MEDIA QUERIES ================= */
+@include respond-mobile {
+  .settings {
+    display: none; // oculta settings en mobile
+  }
+}

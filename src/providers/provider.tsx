@@ -1,20 +1,27 @@
-'use client'
+'use client';
 
-import { Provider } from 'react-redux' 
-import { store } from '../store/store' 
-import { ThemeClientProvider } from '@/providers/ThemeClientProvider'
+/**
+ * Archivo que centraliza todos los providers globales de la aplicación.
+ * Envuelve la app con Redux y manejo de tema (ThemeProvider) para toda la UI.
+ */
+
+import { Provider } from 'react-redux';
+import { store } from '@/store/store';
+import { ThemeClientProvider } from '@/providers/ThemeClientProvider';
 
 interface Props {
-  children: React.ReactNode;  // The children components that will be wrapped by the providers.
+  children: React.ReactNode; // Contenido que será envuelto por los providers
 }
 
-// This component wraps the application in the necessary context providers:
-// - It provides the Redux store to make the app's state available globally.
-// - It provides the theme context to manage the theme (light/dark).
-export const Providers = ({ children }: Props) => (
-  <Provider store={store}>  {/* Provides access to the Redux store globally. */}
-    <ThemeClientProvider>  {/* Provides access to the theme context for theme management. */}
-      {children}  {/* Renders the passed children components, allowing them to access the contexts. */}
-    </ThemeClientProvider>
-  </Provider>
-);
+/**
+ * Componente que envuelve la aplicación con todos los providers necesarios
+ * - Redux Provider: Para estado global de la app
+ * - ThemeClientProvider: Para manejo de tema y preferencias visuales
+ */
+export const Providers = ({ children }: Props) => {
+  return (
+    <Provider store={store}>
+      <ThemeClientProvider>{children}</ThemeClientProvider>
+    </Provider>
+  );
+};
