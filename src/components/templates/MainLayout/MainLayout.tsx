@@ -34,7 +34,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   return (
     <div className={style.template}>
       {/* Mobile menu for smaller devices */}
-      <MobileHamburgerMenu links={links} isAdmin={isAdmin} language={language} />
+      <MobileHamburgerMenu links={links} isAdmin={isAdmin} />
 
       <div className={style['template-container']}>
         <Headers language={language} links={links} isAdmin={isAdmin} />
@@ -52,7 +52,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
 
       {/* Sidebar with additional elements like the menu, language selector, and theme toggle */}
       <aside className={style['template__aside']}>
-        <MenuAside language={language} />
+        <MenuAside />
         <SettingsButton isFloating />
       </aside>
     </div>

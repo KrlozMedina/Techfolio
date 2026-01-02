@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useContext } from 'react';
-import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
+import { useTranslation } from '@/hooks/useTranslation';
+import React from 'react';
+// import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
 
 const TEXT = {
   es: {
@@ -53,8 +54,10 @@ const TEXT = {
 };
 
 const AchievementsPage: React.FC = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-  const t = isSpanish ? TEXT.es : TEXT.en;
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  // const t = isSpanish ? TEXT.es : TEXT.en;
+  const { language } = useTranslation();
+  const t = TEXT[language]
 
   return (
     <section style={{ padding: '20px' }}>

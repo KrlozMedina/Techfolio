@@ -33,8 +33,9 @@ const texts = {
 
 export default function UnauthorizedPage() {
   const router = useRouter();
-  const { isSpanish } = useLanguage();
-  const lang = isSpanish ? 'es' : 'en';
+  // const { isSpanish } = useLanguage();
+  // const lang = isSpanish ? 'es' : 'en';
+  const { language } = useLanguage();
 
   // ⏳ Redirección automática tras 5 segundos
   useEffect(() => {
@@ -50,12 +51,12 @@ export default function UnauthorizedPage() {
       <div className={style.unauthorized}>
         {/* 🔐 Título */}
         <h1 className={style.unauthorized__title}>
-          🔐 {texts.Unauthorized.title[lang]}
+          🔐 {texts.Unauthorized.title[language]}
         </h1>
 
         {/* 💬 Mensaje principal */}
         <p className={style.unauthorized__text}>
-          {texts.Unauthorized.message[lang]}
+          {texts.Unauthorized.message[language]}
         </p>
 
         {/* ⏱️ Aviso de redirección */}
@@ -65,12 +66,12 @@ export default function UnauthorizedPage() {
             style['unauthorized__text--muted']
           )}
         >
-          {texts.Unauthorized.redirect[lang]}
+          {texts.Unauthorized.redirect[language]}
         </p>
 
         {/* 🔁 Botón para ir al login manualmente */}
         <button onClick={() => router.push('/login')}>
-          {texts.Unauthorized.goToLogin[lang]}
+          {texts.Unauthorized.goToLogin[language]}
         </button>
       </div>
     </ErrorTemplate>

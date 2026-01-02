@@ -1,31 +1,34 @@
 'use client'
 
-import { useContext } from 'react'
+// import { useContext } from 'react'
 import Image from 'next/image'
-import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
+// import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
 import { Banner } from '@/components/molecules/Cards/CardViews'
 import { educationData } from '@/mocks/education.mock'
 import { skillsData } from '@/mocks/skills.mock'
 import '@/styles/pages/Education.css'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const diploma = 'https://i.imgur.com/hPTmVAj.jpg'
 
 export default function Education() {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType
-
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType
+  const { t } = useTranslation();
   return (
     <>
       <p className="phrase">
-        {isSpanish
+        {t.phrases.education}
+        {/* {isSpanish
           ? 'La educación es nuestro pasaporte para el futuro.'
-          : 'Education is our passport to the future.'}
+          : 'Education is our passport to the future.'} */}
       </p>
 
       <p className="author">Malcolm X</p>
 
       <section id="education" className="main-education-container">
         <h2 className="title">
-          {isSpanish ? 'Formación académica' : 'Educational background'}
+          {t.education.title}
+          {/* {isSpanish ? 'Formación académica' : 'Educational background'} */}
         </h2>
 
         <div className="main-education">
@@ -45,7 +48,8 @@ export default function Education() {
         </div>
 
         <h2 className="title">
-          {isSpanish ? 'Conocimientos' : 'Knowledge'}
+          {t.education.knowledge}
+          {/* {isSpanish ? 'Conocimientos' : 'Knowledge'} */}
         </h2>
 
         <div className="education-code-container">

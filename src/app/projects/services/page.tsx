@@ -1,25 +1,27 @@
 'use client'
 
 import React from 'react';
-import { useLanguage } from '@/hooks';
+// import { useLanguage } from '@/hooks';
 import { servicesData } from '@/mocks/services.mock';
 import styles from './page.module.css';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const ServicesPage: React.FC = () => {
-  const { isSpanish } = useLanguage();
-  const lang = isSpanish ? 'es' : 'en';
+  // const { isSpanish } = useLanguage();
+  // const lang = isSpanish ? 'es' : 'en';
+  const { t, language } = useTranslation();
 
   return (
     <section className={styles.page}>
       <header className={styles.header}>
-        <h1>{isSpanish ? 'Servicios Ofrecidos' : 'Offered Services'}</h1>
+        <h1>{t.service.title}</h1>
       </header>
 
       <ul className={styles.servicesList}>
         {servicesData.map(service => (
           <li key={service.id} className={styles.serviceItem}>
-            <h2>{service.name[lang]}</h2>
-            <p>{service.description[lang]}</p>
+            <h2>{service.name[language]}</h2>
+            <p>{service.description[language]}</p>
           </li>
         ))}
       </ul>

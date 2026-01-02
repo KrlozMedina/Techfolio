@@ -1,33 +1,39 @@
 'use client'
 
-import { useContext } from 'react'
-import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
+// import { useContext } from 'react'
+// import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
 import { experienceData } from '@/mocks/experience.mock'
+import { useTranslation } from '@/hooks/useTranslation'
 
 export default function ExperiencePage() {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType
+  const { t, language } = useTranslation();
 
   return (
     <section style={{ padding: '20px' }}>
       <h1>
-        {isSpanish ? 'Experiencia Profesional' : 'Professional Experience'}
+        {t.experience.title}
+        {/* {isSpanish ? 'Experiencia Profesional' : 'Professional Experience'} */}
       </h1>
 
       {experienceData.map(exp => (
         <article key={exp.id} style={{ marginBottom: '20px' }}>
           <h2>
-            {isSpanish ? exp.role.es : exp.role.en} — {exp.company}
+            {exp.role[language]}
+            {/* {isSpanish ? exp.role.es : exp.role.en} — {exp.company} */}
           </h2>
 
           <p>
             <strong>
-              {isSpanish ? 'Duración:' : 'Duration:'}
+              {t.experience.duration}
+              {/* {isSpanish ? 'Duración:' : 'Duration:'} */}
             </strong>{' '}
             {exp.duration}
           </p>
 
           <p>
-            {isSpanish ? exp.description.es : exp.description.en}
+            {exp.description[language]}
+            {/* {isSpanish ? exp.description.es : exp.description.en} */}
           </p>
         </article>
       ))}

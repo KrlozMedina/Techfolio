@@ -32,7 +32,7 @@ const sidebarTexts = {
  *
  * @param lang - Language code for rendering localized text.
  */
-export const Sidebar: React.FC<SidebarProps> = ({ lang }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ lang  }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleSidebar = () => setIsExpanded(prev => !prev);
@@ -45,7 +45,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ lang }) => {
     <aside className={sidebarClass} aria-label={sidebarTexts.aside[lang]}>
       {/* Navigation links */}
       <div className={styles['sidebar__top-section']}>
-        <MenuLinks language={lang} onlyIcons={!isExpanded} />
+        <MenuLinks onlyIcons={!isExpanded} />
       </div>
 
       {/* Toggle sidebar */}
@@ -59,3 +59,5 @@ export const Sidebar: React.FC<SidebarProps> = ({ lang }) => {
     </aside>
   );
 };
+
+export default Sidebar;

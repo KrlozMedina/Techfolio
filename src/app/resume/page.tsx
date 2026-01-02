@@ -1,13 +1,14 @@
 'use client'
 
-import React, { useContext } from 'react';
-import LanguageContext from '@/context/LanguageContext';
+import React from 'react';
+// import LanguageContext from '@/context/LanguageContext';
 import { FaFileDownload, FaJs, FaReact, FaNodeJs, FaDatabase, FaMicrochip, FaCogs, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 import styles from './page.module.scss';
+import { useTranslation } from '@/hooks/useTranslation';
 
-interface LanguageContextType {
-  isSpanish: boolean;
-}
+// interface LanguageContextType {
+//   isSpanish: boolean;
+// }
 
 const experienceMock = [
   {
@@ -51,7 +52,8 @@ const skillsMock = [
 ];
 
 const ResumePage: React.FC = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  const { t } = useTranslation();
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
 
   const downloadCV = () => {
     fetch('CV.pdf')
@@ -69,16 +71,18 @@ const ResumePage: React.FC = () => {
   return (
     <section className={styles.container}>
       <p className={styles.phrase}>
-        {isSpanish
+        {t.phrases.resume}
+        {/* {isSpanish
           ? 'El éxito no es la clave de la felicidad. La felicidad es la clave del éxito.'
-          : 'Success is not the key to happiness. Happiness is the key to success.'}
+          : 'Success is not the key to happiness. Happiness is the key to success.'} */}
       </p>
       <p className={styles.author}>Albert Schweitzer</p>
 
       <h2 className={styles.title}>
-        {isSpanish ? "Curriculum Vitae" : "Resume"}
+        {t.resume.title}
+        {/* {isSpanish ? "Curriculum Vitae" : "Resume"} */}
         <button onClick={downloadCV} style={{ marginLeft: '1rem' }}>
-          <FaFileDownload /> {isSpanish ? 'Descargar' : 'Download'}
+          <FaFileDownload /> {t.resume.download}
         </button>
       </h2>
 

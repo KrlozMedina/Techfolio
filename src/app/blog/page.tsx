@@ -7,6 +7,7 @@ import { QuoteBlock } from '@/components/molecules/blocks/QuoteBlock';
 import Spinner from '@/components/atom/feedback/Spinner';
 import style from './page.module.css';
 import Image from 'next/image';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface Article {
   id: string;
@@ -21,8 +22,9 @@ interface Article {
 const LIMIT = 9;
 
 const BlogPage: React.FC = () => {
-  const { isSpanish } = useLanguage();
-  const lang = isSpanish ? 'es' : 'en';
+  // const { isSpanish } = useLanguage();
+  // const lang = isSpanish ? 'es' : 'en';
+  const { t, language } = useTranslation();
 
   const [articles, setArticles] = useState<Article[]>([]);
   const [page, setPage] = useState(1);
@@ -37,7 +39,7 @@ const BlogPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`/api/v2/blog?lang=${lang}&limit=${LIMIT}&page=${page}`);
+      const res = await fetch(`/api/v2/blog?lang=${language}&limit=${LIMIT}&page=${page}`);
       if (!res.ok) throw new Error('Failed to fetch articles');
       const data = await res.json();
 
@@ -56,14 +58,14 @@ const BlogPage: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  }, [lang, page, hasMore, loading]);
+  }, [language, page, hasMore, loading]);
 
   // Reset al cambiar idioma
   useEffect(() => {
     setArticles([]);
     setPage(1);
     setHasMore(true);
-  }, [lang]);
+  }, [language]);
 
   // Scroll infinito con IntersectionObserver
   useEffect(() => {
@@ -81,13 +83,13 @@ const BlogPage: React.FC = () => {
 
   return (
     <>
-      <QuoteBlock page="blog" lang={lang} />
+      <QuoteBlock page="blog" lang={language} />
 
       <IntroTemplate
-        title={isSpanish ? 'Blog de Tecnología, Desarrollo y Automatización' : 'Technology, Development, and Automation Blog'}
-        intro={isSpanish ? 'Publicaciones sobre programación, desarrollo web y experiencias en proyectos reales.' : 'Posts about programming, web development, and real-world project experiences.'}
+        title={t.blog.title}
+        intro={t.blog.intro}
       >
-        {articles.length === 0 && loading && <Spinner language={lang} />}
+        {articles.length === 0 && loading && <Spinner language={language} />}
         {error && <p>Error: {error}</p>}
 
         <section className={style["article__container"]}>
@@ -104,14 +106,14 @@ const BlogPage: React.FC = () => {
                 ) : null)}
               </div>
               <div className={style['article-card__footer']}>
-                <a className={style["article-card__link"]} href={article.link}>{isSpanish ? 'Leer más' : 'Read more'}</a>
-                <span className={style["article-card__date"]}>{isSpanish ? 'Publicado:' : 'Published:'} {new Date(article.date).toLocaleDateString()}</span>
+                <a className={style["article-card__link"]} href={article.link}>{t.blog.readMore}</a>
+                <span className={style["article-card__date"]}>{t.blog.publish} {new Date(article.date).toLocaleDateString()}</span>
               </div>
             </div>
           ))}
         </section>
 
-        {loading && articles.length > 0 && <Spinner language={lang} />}
+        {loading && articles.length > 0 && <Spinner language={language} />}
         <div ref={observerRef}></div> {/* Sentinel para scroll infinito */}
       </IntroTemplate>
     </>

@@ -1,22 +1,23 @@
 'use client'
 
-import { useContext } from 'react'
-import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
+// import { useContext } from 'react'
+// import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
 import { skillsCategoriesData } from '@/mocks/skillsCategories.mock'
+import { useTranslation } from '@/hooks/useTranslation'
 // import { skillsCategoriesData } from '@/mocks/skills.categories'
 
 export default function SkillsPage() {
   // const { isSpanish } = useContext(LanguageContext) as LanguageContextType
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  const { t, language } = useTranslation();
 
   return (
     <section style={{ padding: 20 }}>
-      <h1>{isSpanish ? 'Mis Habilidades' : 'My Skills'}</h1>
+      <h1>{t.skills.title}</h1>
 
       {skillsCategoriesData.map(category => (
         <section key={category.id}>
-          <h2>{isSpanish ? category.title.es : category.title.en}</h2>
+          <h2>{category.title[language]}</h2>
           <ul>
             {category.items.map(item => (
               <li key={item}>{item}</li>

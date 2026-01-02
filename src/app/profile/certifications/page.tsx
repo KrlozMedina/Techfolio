@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useContext } from 'react';
-import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
+import { useTranslation } from '@/hooks/useTranslation';
+import React from 'react';
+// import LanguageContext, { LanguageContextType } from '@/context/LanguageContext';
 
 const TEXT = {
   es: {
@@ -51,22 +52,24 @@ const TEXT = {
 };
 
 const CertificationsPage: React.FC = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-  const t = isSpanish ? TEXT.es : TEXT.en;
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  // const t = isSpanish ? TEXT.es : TEXT.en;
+  const { language } = useTranslation();
+  const text = TEXT[language]
 
   return (
     <section style={{ padding: '20px' }}>
-      <h1>{t.title}</h1>
+      <h1>{text.title}</h1>
 
       <ul>
-        {t.certifications.map(cert => (
+        {text.certifications.map(cert => (
           <li key={cert.title} style={{ marginBottom: '16px' }}>
             <h2>{cert.title}</h2>
             <p>
-              <strong>{t.issuedBy}:</strong> {cert.issuer}
+              <strong>{text.issuedBy}:</strong> {cert.issuer}
             </p>
             <p>
-              <strong>{t.date}:</strong> {cert.date}
+              <strong>{text.date}:</strong> {cert.date}
             </p>
           </li>
         ))}

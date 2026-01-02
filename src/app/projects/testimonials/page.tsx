@@ -5,23 +5,25 @@ import { useLanguage } from '@/hooks';
 // import { testimonialsData } from '@/mocks/testimonials.mock';
 import styles from './page.module.css';
 import { testimonialsData } from '@/mocks/testimonials.mock';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const TestimonialsPage: React.FC = () => {
-  const { isSpanish } = useLanguage();
-  const lang = isSpanish ? 'es' : 'en';
+  // const { isSpanish } = useLanguage();
+  // const lang = isSpanish ? 'es' : 'en';
+  const { t, language } = useTranslation();
 
   return (
     <section className={styles.page}>
       <header className={styles.header}>
-        <h1>{isSpanish ? 'Testimonios' : 'Testimonials'}</h1>
+        <h1>{t.testimonials.title}</h1>
       </header>
 
       <ul className={styles.testimonialsList}>
         {testimonialsData.map(item => (
           <li key={item.id} className={styles.testimonialCard}>
             <h2>{item.name}</h2>
-            <h4>{item.role[lang]}</h4>
-            <p>{item.feedback[lang]}</p>
+            <h4>{item.role[language]}</h4>
+            <p>{item.feedback[language]}</p>
           </li>
         ))}
       </ul>

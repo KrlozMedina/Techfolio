@@ -5,15 +5,17 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useGetCaseStudiesQuery } from "@/store/service/caseStudiesApi";
-import { useLanguage } from "@/hooks";
+// import { useLanguage } from "@/hooks";
 
 import styles from "./page.module.css";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const CaseStudiesPage: React.FC = () => {
-  const { isSpanish } = useLanguage();
-  const lang = isSpanish ? "es" : "en";
+  // const { isSpanish } = useLanguage();
+  // const lang = isSpanish ? "es" : "en";
+  const { language } = useTranslation();
 
-  const { data, isLoading, isError } = useGetCaseStudiesQuery(lang);
+  const { data, isLoading, isError } = useGetCaseStudiesQuery(language);
 
   if (isLoading) return <p>Cargando...</p>;
   if (isError || !data) return <p>Error cargando casos</p>;
@@ -21,7 +23,7 @@ const CaseStudiesPage: React.FC = () => {
   return (
     <section className={styles.page}>
       <header className={styles.header}>
-        <h1>{lang === "es" ? "Casos de Éxito" : "Success Stories"}</h1>
+        <h1>{language === "es" ? "Casos de Éxito" : "Success Stories"}</h1>
       </header>
 
       <section className={styles.caseList}>
@@ -35,7 +37,7 @@ const CaseStudiesPage: React.FC = () => {
               <div className={styles.caseImage}>
                 <Image
                   src={caseItem.imageUrl}
-                  alt={caseItem[lang].title}
+                  alt={caseItem[language].title}
                   width={320}
                   height={220}
                   loading="lazy"
@@ -43,10 +45,10 @@ const CaseStudiesPage: React.FC = () => {
               </div>
 
               <div className={styles.caseContent}>
-                <h2>{caseItem[lang].title}</h2>
-                <p>{caseItem[lang].summary}</p>
-                {caseItem.testimonials?.[0]?.[lang] && (
-                  <blockquote>“{caseItem.testimonials[0][lang]}”</blockquote>
+                <h2>{caseItem[language].title}</h2>
+                <p>{caseItem[language].summary}</p>
+                {caseItem.testimonials?.[0]?.[language] && (
+                  <blockquote>“{caseItem.testimonials[0][language]}”</blockquote>
                 )}
               </div>
             </article>
@@ -56,11 +58,11 @@ const CaseStudiesPage: React.FC = () => {
 
       <section className={styles.cta}>
         <h3>
-          {lang === "es"
+          {language === "es"
             ? "¿Tu proyecto será el próximo?"
             : "Will your project be the next one?"}
         </h3>
-        <Link href="/contact">{lang === "es" ? "Contáctame" : "Contact"}</Link>
+        <Link href="/contact">{language === "es" ? "Contáctame" : "Contact"}</Link>
       </section>
     </section>
   );

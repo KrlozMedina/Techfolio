@@ -1,18 +1,20 @@
 'use client';
 
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 import { useLoginMutation } from '@/store/service/authApi';
-import { LanguageContext, LanguageContextType } from '@/context/LanguageContext';
+// import { LanguageContext, LanguageContextType } from '@/context/LanguageContext';
 
 import style from './page.module.css';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const LoginPage: React.FC = () => {
-  const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+  const { t } = useTranslation();
   const router = useRouter();
   const [login] = useLoginMutation();
   const [error, setError] = useState<string | null>(null);
@@ -20,16 +22,13 @@ const LoginPage: React.FC = () => {
   const loginSchema = z.object({
     username: z
       .string()
-      .min(3, isSpanish ? 'Mínimo 3 caracteres' : 'Minimum 3 characters')
-      .regex(/^[a-zA-Z0-9._-]+$/, isSpanish
-        ? 'Solo letras, números y . _ -'
-        : 'Only letters, numbers and . _ -'
-      ),
+      .min(3, t.login.messageUser1)
+      .regex(/^[a-zA-Z0-9._-]+$/, t.login.messageUser2),
     password: z
       .string()
-      .min(6, isSpanish ? 'Mínimo 6 caracteres' : 'Minimum 6 characters')
-      .regex(/[0-9]/, isSpanish ? 'Debe contener un número' : 'Must contain a number')
-      .regex(/[A-Z]/, isSpanish ? 'Debe contener una mayúscula' : 'Must contain an uppercase letter'),
+      .min(6, t.login.messagePass1)
+      .regex(/[0-9]/, t.login.messagePass2)
+      .regex(/[A-Z]/, t.login.messagePass3),
   });
 
   type LoginFormData = z.infer<typeof loginSchema>;
@@ -48,11 +47,7 @@ const LoginPage: React.FC = () => {
       await login(data).unwrap();
       router.push('/dashboard');
     } catch {
-      setError(
-        isSpanish
-          ? 'Usuario o contraseña incorrectos'
-          : 'Invalid username or password'
-      );
+      setError(t.login.error);
     }
   };
 
@@ -61,7 +56,7 @@ const LoginPage: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)} className={style['login__form']}>
         <fieldset>
           <legend className={style['login__title']}>
-            {isSpanish ? 'Iniciar sesión' : 'Login'}
+            {t.login.title}
           </legend>
 
           {error && (
@@ -71,21 +66,21 @@ const LoginPage: React.FC = () => {
           )}
 
           <label>
-            {isSpanish ? 'Usuario' : 'Username'}
+            {t.login.user}
             <input {...register('username')} disabled={isSubmitting} />
           </label>
           {errors.username && <p>{errors.username.message}</p>}
 
           <label>
-            {isSpanish ? 'Contraseña' : 'Password'}
+            {t.login.pass}
             <input type="password" {...register('password')} disabled={isSubmitting} />
           </label>
           {errors.password && <p>{errors.password.message}</p>}
 
           <button type="submit" disabled={isSubmitting}>
             {isSubmitting
-              ? isSpanish ? 'Ingresando…' : 'Logging in…'
-              : isSpanish ? 'Entrar' : 'Login'}
+              ? t.login.loginIn
+              : t.login.login}
           </button>
 
           <button
@@ -93,7 +88,7 @@ const LoginPage: React.FC = () => {
             onClick={() => router.push('/')}
             className={style['login__cancel']}
           >
-            {isSpanish ? 'Cancelar' : 'Cancel'}
+            {t.login.cancel}
           </button>
 
         </fieldset>

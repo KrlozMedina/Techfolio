@@ -2,17 +2,19 @@
 
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { useLanguage } from "@/hooks";
+// import { useLanguage } from "@/hooks";
 import { caseStudies } from "@/mocks/caseStudies.mock";
 import React from "react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
 const CaseStudyDetailPage: React.FC<Props> = async ({ params }) => {
-  const { isSpanish } = useLanguage();
-  const lang = isSpanish ? "es" : "en";
+  // const { isSpanish } = useLanguage();
+  // const lang = isSpanish ? "es" : "en";
+  const { t, language } = useTranslation();
 
   const resolvedParams = await params; // Desempaquetar la promesa
   const { slug } = resolvedParams;
@@ -23,7 +25,7 @@ const CaseStudyDetailPage: React.FC<Props> = async ({ params }) => {
 
   if (!caseStudy) notFound();
 
-  const content = caseStudy[lang];
+  const content = caseStudy[language];
 
   return (
     <article style={{ padding: "2rem", maxWidth: 900, margin: "0 auto" }}>
@@ -39,23 +41,23 @@ const CaseStudyDetailPage: React.FC<Props> = async ({ params }) => {
       />
 
       <section>
-        <h2>{isSpanish ? "Reto" : "Challenge"}</h2>
+        <h2>{t.caseStudies.slug.challenge}</h2>
         <p>{content.challenges}</p>
       </section>
 
       <section>
-        <h2>{isSpanish ? "Solución" : "Solution"}</h2>
+        <h2>{t.caseStudies.slug.solution}</h2>
         <p>{content.solution}</p>
       </section>
 
       <section>
-        <h2>{isSpanish ? "Resultados" : "Results"}</h2>
+        <h2>{t.caseStudies.slug.results}</h2>
         <p>{content.results}</p>
       </section>
 
       {caseStudy.testimonials?.length > 0 && (
         <blockquote style={{ marginTop: "2rem", fontStyle: "italic" }}>
-          “{caseStudy.testimonials[0][lang]}”
+          “{caseStudy.testimonials[0][language]}”
           <footer>
             — {caseStudy.testimonials[0].interviewee.name},{" "}
             {caseStudy.testimonials[0].interviewee.position}

@@ -3,7 +3,9 @@
 import Image from 'next/image';
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Spinner from '@/components/atom/feedback/Spinner';
-import { useLanguage } from '@/hooks/useLanguage';
+// import { useLanguage } from '@/hooks';
+import { useTranslation } from '@/hooks/useTranslation';
+// import { useLanguage } from '@/hooks/useLanguage';
 
 interface Client {
   id: number;
@@ -15,8 +17,9 @@ interface Client {
 const LIMIT = 5;
 
 const ClientsPage: React.FC = () => {
-  const { isSpanish } = useLanguage();
-  const lang = isSpanish ? 'es' : 'en';
+  // const { isSpanish } = useLanguage();
+  // const lang = isSpanish ? 'es' : 'en';
+  const { t, language } = useTranslation();
 
   const [clients, setClients] = useState<Client[]>([]);
   const [page, setPage] = useState(1);
@@ -30,7 +33,7 @@ const ClientsPage: React.FC = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`/api/v2/clients?lang=${lang}&page=${page}&limit=${LIMIT}`);
+      const res = await fetch(`/api/v2/clients?lang=${language}&page=${page}&limit=${LIMIT}`);
       if (!res.ok) throw new Error('Failed to fetch clients');
       const data = await res.json();
 
@@ -42,7 +45,7 @@ const ClientsPage: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  }, [lang, page, hasMore, loading]);
+  }, [language, page, hasMore, loading]);
 
   // Scroll infinito
   useEffect(() => {
@@ -61,11 +64,11 @@ const ClientsPage: React.FC = () => {
     setClients([]);
     setPage(1);
     setHasMore(true);
-  }, [lang]);
+  }, [language]);
 
   return (
     <div className="clients-page">
-      <h1 className="title">{isSpanish ? 'Clientes con los que he trabajado' : 'Clients I have worked with'}</h1>
+      <h1 className="title">{t.clients.title}</h1>
       <div className="clients-list">
         {clients.map(client => (
           <div key={client.id} className="client-card">
@@ -83,7 +86,7 @@ const ClientsPage: React.FC = () => {
         ))}
       </div>
 
-      {loading && <Spinner language={lang} />}
+      {loading && <Spinner language={language} />}
       <div ref={observerRef}></div>
     </div>
   );
