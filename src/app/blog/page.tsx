@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useLanguage } from '@/hooks/useLanguage';
 import { IntroTemplate } from '@/components/templates/IntroTemplate/IntroTemplate';
 import { QuoteBlock } from '@/components/molecules/blocks/QuoteBlock';
 import Spinner from '@/components/atom/feedback/Spinner';

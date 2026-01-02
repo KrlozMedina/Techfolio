@@ -4,12 +4,11 @@ import Social from '@/components/molecules/social/SocialLinks';
 import styles from './page.module.scss';
 import SettingsButton from '@/components/organisms/settings/SettingsButton';
 import Logo from '@/components/atom/Logo/Logo';
-import {
-  FloatingMenu,
-  MenuAside,
-  MobileHamburgerMenu,
-} from '@/components/molecules/navbar';
+// import { FloatingMenu, MenuAside, MobileHamburgerMenu } from '@/components/molecules/navbar/index';
 import { useTranslation } from '@/hooks/useTranslation';
+import MobileHamburgerMenu from '@/components/molecules/navbar/MobileHamburgerMenu';
+import FloatingMenu from '@/components/molecules/navbar/FloatingMenu';
+import MenuAside from '@/components/molecules/navbar/MenuAside';
 
 /**
  * HomeClient
