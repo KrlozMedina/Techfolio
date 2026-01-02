@@ -3,9 +3,8 @@ export const es = {
   home: {
     title: 'Hola! 👋🏼 Soy Carlos Medina',
     subtitle: 'Desarrollador Full Stack & Ingeniero en Control y Automatización',
-    intro1:
-      'Conecto el mundo digital con el físico: diseño, programo e implemento sistemas web e IoT.',
-    intro2: 'Explora mis trabajos, habilidades y trayectoria. ¡Bienvenido!',
+    intro1: 'Diseño y desarrollo soluciones web e IoT para integrar sistemas digitales con procesos físicos y operativos reales.',
+    intro2: '👉🏻 Explora mis proyectos y experiencia',
   },
   settings: {
     selectLanguage: 'Selecciona idioma:',

@@ -78,7 +78,7 @@ const ROUTE_GROUPS: RouteGroupConfig[] = [
     defaults: { isProtected: false, notice: ['dummy', 'incomplete'] },
     routes: [
       { path: '/projects', label: { es: 'Proyectos', en: 'Projects' }, icon: SiPolymerproject },
-      { path: '/projects/case-studies' },
+      { path: '/projects/case-studies', isProtected: true},
       { path: '/projects/services', isProtected: true },
       { path: '/projects/testimonials', isProtected: true },
     ],

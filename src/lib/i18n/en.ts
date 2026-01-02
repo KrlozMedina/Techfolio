@@ -1,11 +1,9 @@
 export const en = {
   home: {
     title: 'Hi! 👋🏼 I’m Carlos Medina',
-    subtitle: 'Full Stack Developer & Control and Automation Engineer',
-    intro1:
-      'Bridging the physical and digital world: I design, code, and implement web and IoT systems.',
-    intro2:
-      'This portfolio showcases my projects. Explore my work, skills, and background. Welcome!',
+    subtitle: 'Full Stack Developer & Control Automation Engineer',
+    intro1: 'I design and build web and IoT solutions that integrate digital systems with real-world operational processes.',
+    intro2: '👉🏻 Explore my work and experience',
   },
   settings: {
     selectLanguage: 'Select language:',

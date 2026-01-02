@@ -1,6 +1,6 @@
 'use client';
 
-import Social from '@/components/molecules/social/SocialLinks';
+import Social from '@/components/molecules/Social/SocialLinks';
 import styles from './page.module.scss';
 import SettingsButton from '@/components/organisms/settings/SettingsButton';
 import Logo from '@/components/atom/Logo/Logo';
