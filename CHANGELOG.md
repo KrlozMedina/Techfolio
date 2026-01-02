@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.1.0](https://github.com/KrlozMedina/Techfolio/compare/techfolio-v3.0.0...techfolio-v3.1.0) (2026-01-02)
+
+
+### Features
+
+* **i18n:** add multi-language support (es/en) ([cd4bd78](https://github.com/KrlozMedina/Techfolio/commit/cd4bd78fbfbafd51853c6e91790c4eec34d7b9a6))
+
+
+### Bug Fixes
+
+* **build:** fail build in vercel ([d429453](https://github.com/KrlozMedina/Techfolio/commit/d429453ae7511ec7e1b51e00c6e05236b714eaa6))
+* **build:** fix module resolution error in AuthLayout ([b4c9ef7](https://github.com/KrlozMedina/Techfolio/commit/b4c9ef76cfa7a4530a97d83d305963f50058fb7f))
+* **build:** fix module resolution error in AuthLayout ([e15768c](https://github.com/KrlozMedina/Techfolio/commit/e15768c727093d90b6ffdcb556368f74277257ae))
+* **i18n:** fix compilation errors caused by i18n implementation ([b7a026a](https://github.com/KrlozMedina/Techfolio/commit/b7a026afd2aff8b9ee24ad785cf6e24907646e67))
+* **vercel:** fix Vercel build compilation errors ([aeb223b](https://github.com/KrlozMedina/Techfolio/commit/aeb223bf4f7042966d8bc079e278ef8ca7de48f8))
+
 ## [3.0.0](https://github.com/KrlozMedina/Techfolio/compare/techfolio-v2.2.0...techfolio-v3.0.0) (2025-12-24)
 
 
