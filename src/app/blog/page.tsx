@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { IntroTemplate } from '@/components/templates/IntroTemplate/IntroTemplate';
-import { QuoteBlock } from '@/components/molecules/blocks/QuoteBlock';
+import { QuoteBlock } from '@/components/molecules/Block/QuoteBlock';
 import Spinner from '@/components/atom/feedback/Spinner';
 import style from './page.module.css';
 import Image from 'next/image';

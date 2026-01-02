@@ -12,7 +12,7 @@ import { IProjectV2 } from "@/models/interfaces";
 import CTA from "@/components/molecules/Cards/CTA";
 import { caseStudies } from "@/mocks/caseStudies.mock";
 import { useTranslation } from "@/hooks/useTranslation";
-import { QuoteBlock } from "@/components/molecules/blocks/QuoteBlock";
+import { QuoteBlock } from "@/components/molecules/Block/QuoteBlock";
 
 const TEXTS = {
   hero: {

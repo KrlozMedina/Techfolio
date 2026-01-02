@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import Header from '@/components/organisms/Headers/Header';
 // import { Sidebar } from '@/components/molecules/navbar';
 import styles from './AuthLayout.module.scss';
-import Sidebar from '@/components/molecules/navbar/Sidebar';
+import Sidebar from '@/components/molecules/Navbar/Sidebar';
 
 // Defining the structure of the links that can be passed as props
 interface Link {
