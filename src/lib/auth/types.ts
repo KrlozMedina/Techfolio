@@ -1,4 +1,6 @@
+export type UserRole = "admin" | "editor" | "viewer";
+
 export type AuthUser = {
   username: string;
-  isDummy: boolean;
+  role: UserRole;
 };

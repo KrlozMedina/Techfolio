@@ -1,13 +1,13 @@
 import { AuthUser } from './types';
 
-if (!process.env.JWT_PASSWORD) throw new Error('JWT_PASSWORD not set');
+if (!process.env.PASSWORD_HASH) throw new Error('JWT_PASSWORD not set');
 if (!process.env.JWT_SECRET) throw new Error('JWT_SECRET not set');
 
 export const AUTH_CONFIG = {
   COOKIE_NAME: 'authToken',
   TOKEN_EXPIRATION: 60 * 60, // 1 hora en segundos
   USERS: JSON.parse(process.env.STATIC_USERS || '[]') as AuthUser[],
-  PASSWORD_HASH: process.env.JWT_PASSWORD, // debe ser hash bcrypt
+  PASSWORD_HASH: process.env.PASSWORD_HASH, // debe ser hash bcrypt
 };
 
 export const JWT_SECRET = process.env.JWT_SECRET; // secret para JWT
