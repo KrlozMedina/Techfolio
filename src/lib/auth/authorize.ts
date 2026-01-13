@@ -1,32 +1,48 @@
 import { Permission } from "./permissions";
 import { UserRole } from "./types";
-// import { UserRole } from "./roles";
 
-export function authorize(role: UserRole, permission: Permission): boolean {
+/**
+ * authorize
+ * --------------------------------------------------
+ * Determina si un rol específico tiene permitido
+ * ejecutar una acción (permission).
+ *
+ * @param role - Rol del usuario (admin | editor | viewer)
+ * @param permission - Acción solicitada (read | create | update | delete)
+ * @returns boolean
+ *
+ * Implementa un esquema RBAC (Role-Based Access Control)
+ * simple y explícito.
+ */
+export function authorize(
+  role: UserRole,
+  permission: Permission
+): boolean {
+
+  /**
+   * Mapa estático de permisos por rol.
+   * Cada rol declara explícitamente qué acciones puede ejecutar.
+   */
   const rolePermissions: Record<UserRole, Permission[]> = {
     admin: [
-      "project:read",
-      "project:create",
-      "project:update",
-      "project:delete",
-      "technology:read",
-      "technology:create",
-      "technology:update",
-      "technology:delete",
+      "read",
+      "create",
+      "update",
+      "delete",
     ],
     editor: [
-      "project:read",
-      "project:create",
-      "project:update",
-      "technology:read",
-      "technology:create",
-      "technology:update",
+      "read",
+      "create",
+      "update",
     ],
     viewer: [
-      "project:read",
-      "technology:read",
+      "read",
     ],
   };
 
+  /**
+   * Retorna true si el permiso solicitado
+   * existe dentro de los permisos del rol.
+   */
   return rolePermissions[role]?.includes(permission);
 }

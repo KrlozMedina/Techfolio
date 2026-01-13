@@ -1,12 +1,27 @@
+/**
+ * PERMISSIONS
+ * --------------------------------------------------
+ * Lista de permisos posibles en el sistema.
+ * Se define como `as const` para mantener los valores literales
+ * y permitir tipado seguro.
+ */
 export const PERMISSIONS = {
-  PROJECT_READ: "project:read",
-  PROJECT_CREATE: "project:create",
-  PROJECT_UPDATE: "project:update",
-  PROJECT_DELETE: "project:delete",
-  TECHNOLOGY_READ: "technology:read",
-  TECHNOLOGY_CREATE: "technology:create",
-  TECHNOLOGY_UPDATE: "technology:update",
-  TECHNOLOGY_DELETE: "technology:delete",
+  READ: "read",
+  CREATE: "create",
+  UPDATE: "update",
+  DELETE: "delete",
 } as const;
 
+/**
+ * Permission
+ * --------------------------------------------------
+ * Tipo TypeScript que representa cualquiera de los permisos
+ * definidos en `PERMISSIONS`.
+ *
+ * Ejemplo:
+ *   let p: Permission;
+ *   p = "read";   // válido
+ *   p = "delete"; // válido
+ *   p = "foo";    // error de compilación
+ */
 export type Permission = typeof PERMISSIONS[keyof typeof PERMISSIONS];
