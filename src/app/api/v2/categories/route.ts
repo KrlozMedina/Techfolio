@@ -1,25 +1,25 @@
 import { PERMISSIONS } from "@/lib/auth/permissions";
 import { withAuthorization } from "@/lib/auth/withAuthorization";
-import { toCategoryListDTO } from "@/mappers/category.mapper";
+import { toCategoryReadDTO } from "@/mappers/category.mapper";
 import { createCategory, getCategories } from "@/services/category.service";
 import { LANGUAGES } from "@/shared/constants";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 /* =========================
-  Schemas
+  Validation Schemas
 ========================= */
 
 /**
- * Esquema de validación para query params.
- * Permite seleccionar el idioma del contenido.
+ * Valida los query params de la petición.
+ * Permite seleccionar el idioma del contenido retornado.
  */
 const querySchema = z.object({
   language: z.nativeEnum(LANGUAGES).optional(),
 });
 
 /**
- * Estructura base de contenido localizado
+ * Define la estructura de contenido localizado
  * para un idioma específico.
  */
 const localizedContentSchema = z.object({
@@ -28,42 +28,50 @@ const localizedContentSchema = z.object({
 });
 
 /**
- * Esquema para creación de categorías.
- * Obliga a enviar contenido en español e inglés.
+ * Contenido multilenguaje obligatorio.
  */
-const createCategorySchema = z.object({
+const contentSchema = z.object({
   es: localizedContentSchema,
   en: localizedContentSchema,
 });
 
+/**
+ * Payload esperado para crear una categoría.
+ */
+const createCategorySchema = z.object({
+  content: contentSchema,
+});
+
 /* =========================
-  GET
+  GET /categories
 ========================= */
 
 /**
- * Obtiene el listado de categorías.
- * - Soporta selección de idioma vía query param (?language=es|en)
- * - Devuelve DTOs optimizados para listados
+ * Retorna el listado de categorías.
+ *
+ * Comportamiento:
+ * - Acepta ?language=es|en (opcional)
+ * - Devuelve un DTO optimizado para listados
+ *
+ * Errores:
+ * - 400: query params inválidos
+ * - 500: error interno
  */
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const query = Object.fromEntries(searchParams.entries());
 
-    // Valida y normaliza el idioma
     const { language = "es" } = querySchema.parse(query);
 
-    // Obtiene entidades desde la capa de servicio
     const categories = await getCategories();
 
-    // Mapea entidades a DTO según idioma
     const response = categories.map((c) =>
-      toCategoryListDTO(c, language)
+      toCategoryReadDTO(c, language)
     );
 
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
-    // Error de validación de query params
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: "Invalid query parameters" },
@@ -71,7 +79,6 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Error no controlado
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -80,13 +87,22 @@ export async function GET(req: NextRequest) {
 }
 
 /* =========================
-  POST
+  POST /categories
 ========================= */
 
 /**
  * Crea una nueva categoría.
+ *
+ * Seguridad:
  * - Requiere permiso CREATE
- * - Valida estructura multilenguaje del body
+ *
+ * Validaciones:
+ * - Contenido multilenguaje obligatorio (es, en)
+ *
+ * Errores:
+ * - 400: body inválido
+ * - 401/403: autorización
+ * - 500: error interno
  */
 export const POST = withAuthorization(
   PERMISSIONS.CREATE,
@@ -94,15 +110,12 @@ export const POST = withAuthorization(
     try {
       const body = await req.json();
 
-      // Valida el payload de creación
       const data = createCategorySchema.parse(body);
 
-      // Persiste la categoría
       const created = await createCategory(data);
 
       return NextResponse.json(created, { status: 201 });
     } catch (error) {
-      // Error de validación del body
       if (error instanceof z.ZodError) {
         return NextResponse.json(
           { error: "Invalid request body" },
@@ -110,7 +123,6 @@ export const POST = withAuthorization(
         );
       }
 
-      // Error no controlado
       return NextResponse.json(
         { error: "Internal server error" },
         { status: 500 }

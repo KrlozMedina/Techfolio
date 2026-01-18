@@ -1,18 +1,44 @@
 /**
  * Representa la estructura base de una categoría.
- * Usada para tipado del schema y contratos internos.
+ * Se utiliza como contrato interno y para el tipado del schema de Mongoose.
  */
 export interface ICategory {
-  _id: string;        // Identificador MongoDB
-  slug: string;       // Slug único para URLs
+  /**
+   * Identificador único del documento en MongoDB.
+   * Generalmente corresponde a un ObjectId serializado.
+   */
+  _id: string;
 
-  es: {
-    title: string;
-    description: string;
-  };
+  /**
+   * Slug único de la categoría.
+   * Se usa para URLs legibles y búsquedas.
+   */
+  slug: string;
 
-  en: {
-    title: string;
-    description: string;
+  /**
+   * Contenido localizado por idioma.
+   */
+  content: {
+    /**
+     * Contenido en español.
+     */
+    es: {
+      /** Título de la categoría */
+      title: string;
+
+      /** Descripción de la categoría */
+      description: string;
+    };
+
+    /**
+     * Contenido en inglés.
+     */
+    en: {
+      /** Título de la categoría */
+      title: string;
+
+      /** Descripción de la categoría */
+      description: string;
+    };
   };
 }

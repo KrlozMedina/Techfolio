@@ -1,17 +1,31 @@
 /**
  * Contenido localizado de una categoría.
- * Representa los campos obligatorios por idioma.
+ *
+ * Define los campos mínimos obligatorios que debe tener
+ * una categoría para un idioma específico.
  */
 export type LocalizedCategoryContent = {
+  /** Título visible de la categoría */
   title: string;
+
+  /** Descripción de la categoría */
   description: string;
 };
 
 /**
- * DTO para creación de categoría.
- * - Requiere contenido completo en todos los idiomas soportados
+ * DTO para la creación de una categoría.
+ *
+ * Reglas:
+ * - Obliga a enviar el contenido completo para todos los idiomas soportados
+ * - Se utiliza como contrato de entrada en la capa de servicio / API
+ * - Garantiza consistencia multilenguaje desde la creación
  */
 export type CreateCategoryDTO = {
-  es: LocalizedCategoryContent;
-  en: LocalizedCategoryContent;
+  content: {
+    /** Contenido en español */
+    es: LocalizedCategoryContent;
+
+    /** Contenido en inglés */
+    en: LocalizedCategoryContent;
+  };
 };

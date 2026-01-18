@@ -4,9 +4,24 @@ import { CreateCategoryDTO } from "@/dto/category/category.create.dto";
 import { UpdateCategoryDTO } from "@/dto/category/category.update.dto";
 
 /**
+ * Servicio de categorías.
+ *
+ * Capa responsable de:
+ * - Gestionar la conexión a la base de datos
+ * - Encapsular el acceso al modelo Category
+ * - Mantener la lógica de persistencia desacoplada de la API
+ */
+
+/**
  * Crea una nueva categoría.
- * - Abre conexión a BD
- * - Dispara validaciones y hooks del schema
+ *
+ * Flujo:
+ * 1. Abre (o reutiliza) la conexión a MongoDB
+ * 2. Inserta el documento en la colección
+ * 3. Ejecuta validaciones y hooks definidos en el schema
+ *
+ * @param data DTO con el contenido multilenguaje de la categoría
+ * @returns Documento creado
  */
 export async function createCategory(data: CreateCategoryDTO) {
   await connectDB();
@@ -14,10 +29,16 @@ export async function createCategory(data: CreateCategoryDTO) {
 }
 
 /**
- * Actualiza una categoría por ID.
- * - Permite actualización parcial
- * - Retorna el documento actualizado
+ * Actualiza una categoría existente por su ID.
+ *
+ * Características:
+ * - Soporta actualizaciones parciales (PATCH semantics)
  * - Ejecuta validaciones del schema
+ * - Dispara hooks de actualización (ej. regeneración de slug)
+ *
+ * @param id Identificador de la categoría
+ * @param data DTO parcial con los campos a actualizar
+ * @returns Documento actualizado o null si no existe
  */
 export async function updateCategory(
   id: string,
@@ -28,14 +49,17 @@ export async function updateCategory(
     id,
     data,
     {
-      new: true,
-      runValidators: true,
+      new: true,          // retorna el documento actualizado
+      runValidators: true // aplica validaciones del schema
     }
   );
 }
 
 /**
- * Obtiene una categoría por ID.
+ * Obtiene una categoría por su ID.
+ *
+ * @param id Identificador de la categoría
+ * @returns Documento encontrado o null
  */
 export async function getCategoryById(id: string) {
   await connectDB();
@@ -43,7 +67,9 @@ export async function getCategoryById(id: string) {
 }
 
 /**
- * Obtiene todas las categorías.
+ * Obtiene todas las categorías registradas.
+ *
+ * @returns Lista completa de categorías
  */
 export async function getCategories() {
   await connectDB();
@@ -51,7 +77,10 @@ export async function getCategories() {
 }
 
 /**
- * Elimina una categoría por ID.
+ * Elimina una categoría por su ID.
+ *
+ * @param id Identificador de la categoría
+ * @returns Documento eliminado o null
  */
 export async function deleteCategory(id: string) {
   await connectDB();

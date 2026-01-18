@@ -1,48 +1,44 @@
 import { CategoryDocument } from "@/models/category/category.document";
-import { CategoryDetailDTO } from "@/dto/category/category.detail.dto";
-import { CategoryListDTO } from "@/dto/category/category.list.dto";
+import { CategoryReadDTO } from "@/dto/category/category.read.dto";
 import { Language, LANGUAGES } from "@/shared/constants";
 
 /**
- * Resuelve el contenido localizado de una categoría.
- * - Usa el idioma solicitado si existe
- * - Aplica fallback a español si no está disponible
+ * Obtiene el contenido localizado de una categoría según el idioma solicitado.
+ *
+ * Comportamiento:
+ * - Retorna el contenido en el idioma solicitado si existe.
+ * - Si no existe, aplica fallback al idioma español (ES).
+ *
+ * @param category Documento de categoría obtenido desde MongoDB
+ * @param lang Idioma solicitado (definido en LANGUAGES)
+ * @returns Contenido localizado de la categoría
  */
 function resolveLanguage(
   category: CategoryDocument,
   lang: Language
 ) {
-  if (category[lang]) return category[lang];
+  if (category.content[lang]) {
+    return category.content[lang];
+  }
 
   const fallback = LANGUAGES.ES;
-  return category[fallback];
+  return category.content[fallback];
 }
 
 /**
  * Mapper para listado de categorías.
- * Convierte el documento de Mongo a DTO localizado.
+ *
+ * Convierte un documento de MongoDB en un DTO listo para ser consumido
+ * por la capa de presentación, resolviendo el contenido según el idioma.
+ *
+ * @param category Documento de categoría
+ * @param lang Idioma solicitado
+ * @returns CategoryListDTO con contenido localizado
  */
-export function toCategoryListDTO(
+export function toCategoryReadDTO(
   category: CategoryDocument,
   lang: Language
-): CategoryListDTO {
-  const localized = resolveLanguage(category, lang);
-
-  return {
-    id: category._id.toString(),
-    title: localized.title,
-    description: localized.description,
-  };
-}
-
-/**
- * Mapper para detalle de categoría.
- * Incluye el slug además del contenido localizado.
- */
-export function toCategoryDetailDto(
-  category: CategoryDocument,
-  lang: Language
-): CategoryDetailDTO {
+): CategoryReadDTO {
   const localized = resolveLanguage(category, lang);
 
   return {
@@ -51,4 +47,4 @@ export function toCategoryDetailDto(
     title: localized.title,
     description: localized.description,
   };
-}
+};

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { toCategoryDetailDto } from "@/mappers/category.mapper";
 import { withAuthorization } from "@/lib/auth/withAuthorization";
 import { PERMISSIONS } from "@/lib/auth/permissions";
 import { Types } from "mongoose";
@@ -10,6 +9,7 @@ import {
 } from "@/services/category.service";
 import { z } from "zod";
 import { LANGUAGES } from "@/shared/constants";
+import { toCategoryReadDTO } from "@/mappers/category.mapper";
 
 /* =========================
   Utils & Schemas
@@ -36,13 +36,17 @@ const localizedContentSchema = z.object({
   description: z.string().min(1),
 });
 
+const contentSchema = z.object({
+  es: localizedContentSchema,
+  en: localizedContentSchema,
+})
+
 /**
  * Esquema del body para actualización de categoría
  * Requiere contenido en ES y EN
  */
 const updateCategorySchema = z.object({
-  es: localizedContentSchema,
-  en: localizedContentSchema,
+  content: contentSchema,
 });
 
 /* =========================
@@ -62,13 +66,16 @@ export async function GET(
   const { id } = await params;
 
   if (!isValidObjectId(id)) {
-    return NextResponse.json({ error: "Invalid id" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid id" },
+      { status: 400 }
+    );
   }
 
   try {
     const { searchParams } = new URL(req.url);
     const query = Object.fromEntries(searchParams.entries());
-    const { language = "es" } = querySchema.parse(query);
+    const { language = LANGUAGES.ES } = querySchema.parse(query);
 
     const cat = await getCategoryById(id);
     if (!cat) {
@@ -76,7 +83,7 @@ export async function GET(
     }
 
     return NextResponse.json(
-      toCategoryDetailDto(cat, language),
+      toCategoryReadDTO(cat, language),
       { status: 200 }
     );
   } catch (error) {
@@ -113,7 +120,10 @@ export const PUT = withAuthorization(
     const { id } = await params;
 
     if (!isValidObjectId(id)) {
-      return NextResponse.json({ error: "Invalid id" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid id" },
+        { status: 400 }
+      );
     }
 
     try {
@@ -122,10 +132,16 @@ export const PUT = withAuthorization(
 
       const updated = await updateCategory(id, data);
       if (!updated) {
-        return NextResponse.json({ error: "Not found" }, { status: 404 });
+        return NextResponse.json(
+          { error: "Not found" },
+          { status: 404 }
+        );
       }
 
-      return NextResponse.json(updated, { status: 200 });
+      return NextResponse.json(
+        updated,
+        { status: 200 }
+      );
     } catch (error) {
       if (error instanceof z.ZodError) {
         return NextResponse.json(
@@ -160,16 +176,25 @@ export const DELETE = withAuthorization(
     const { id } = await params;
 
     if (!isValidObjectId(id)) {
-      return NextResponse.json({ error: "Invalid id" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid id" },
+        { status: 400 }
+      );
     }
 
     try {
       const deleted = await deleteCategory(id);
       if (!deleted) {
-        return NextResponse.json({ error: "Not found" }, { status: 404 });
+        return NextResponse.json(
+          { error: "Not found" },
+          { status: 404 }
+        );
       }
 
-      return NextResponse.json({ success: true }, { status: 200 });
+      return NextResponse.json(
+        { success: true },
+        { status: 200 }
+      );
     } catch {
       return NextResponse.json(
         { error: "Internal server error" },

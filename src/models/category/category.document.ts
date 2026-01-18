@@ -1,31 +1,45 @@
 import { Document } from "mongoose";
 
 /**
- * Contenido localizado de una categoría.
- * Representa la información dependiente del idioma.
+ * Representa el contenido localizado de una categoría.
+ * Contiene únicamente información dependiente del idioma.
  */
 export interface LocalizedCategoryInfo {
+  /** Título visible de la categoría */
   title: string;
+
+  /** Descripción asociada a la categoría */
   description: string;
 }
 
 /**
- * Documento de categoría en MongoDB.
- * Extiende Document para incluir metadata de Mongoose.
+ * Modelo de documento de Categoría en MongoDB.
+ *
+ * Extiende `Document` para incluir las propiedades internas de Mongoose
+ * (_id, métodos de persistencia, etc.).
  */
 export interface CategoryDocument extends Document {
-  /** Identificador legible para URLs */
+  /**
+   * Identificador legible y único usado en URLs.
+   * Debe ser estable y no depender del idioma.
+   */
   slug: string;
 
-  /** Contenido en español */
-  es: LocalizedCategoryInfo;
+  /**
+   * Contenido multilenguaje de la categoría.
+   * Cada clave representa un idioma soportado.
+   */
+  content: {
+    /** Contenido en español */
+    es: LocalizedCategoryInfo;
 
-  /** Contenido en inglés */
-  en: LocalizedCategoryInfo;
+    /** Contenido en inglés */
+    en: LocalizedCategoryInfo;
+  };
 
   /** Fecha de creación del documento */
   createdAt: Date;
 
-  /** Fecha de última actualización */
+  /** Fecha de última actualización del documento */
   updatedAt: Date;
 }
