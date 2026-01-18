@@ -1,4 +1,4 @@
-import { ITechnology } from "@/shared/types";
+import { ITechnology } from "@/shared/types/http-error.types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const technologiesApi = createApi({

@@ -14,17 +14,16 @@
  * - Plataformas, Categorías, Tecnologías, Idiomas, y Enums definidos en archivos TS separados.
  */
 
-import FEATURES from './features.json';
-import ROLES from './roles.json';
+// import FEATURES from './features.json';
+// import ROLES from './roles.json';
 
-export * from './platforms';
-export * from './categories';
-export * from './technologies';
+export * from '../../mocks/platforms';
+// export * from '../../mocks/technologies';
 export * from './language';
-export * from './enums';
+// export * from './enums';
 export * from './quotes'
 
 export {
-  FEATURES,
-  ROLES,
+  // FEATURES,
+  // ROLES,
 };
