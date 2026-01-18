@@ -1,52 +1,86 @@
 // ======================
 // Project status
 // ======================
+
+/**
+ * Estado actual de un proyecto dentro de su ciclo de vida.
+ */
 export enum ProjectStatus {
-  DRAFT = 'draft',
-  PUBLISHED = 'published',
-  ARCHIVED = 'archived',
+  /** Borrador, no visible públicamente */
+  DRAFT = "draft",
+
+  /** Publicado y visible */
+  PUBLISHED = "published",
+
+  /** Archivado, sin cambios activos */
+  ARCHIVED = "archived",
+
+  /** Proyecto finalizado completamente */
+  FINISHED = "finished",
+
+  /** Proyecto en ejecución */
+  IN_PROGRESS = "in-progress",
+
+  /** Planeado pero no iniciado */
+  PLANNED = "planned",
+
+  /** Cancelado definitivamente */
+  CANCELLED = "cancelled",
+
+  /** En pausa temporal */
+  ON_HOLD = "on-hold",
 }
 
 // ======================
 // Project type
 // ======================
+
+/**
+ * Tipo de proyecto según su contexto profesional.
+ */
 export enum ProjectType {
-  PERSONAL = 'personal',
-  FREELANCE = 'freelance',
-  WORK = 'work',
+  /** Proyecto personal */
+  PERSONAL = "personal",
+
+  /** Proyecto freelance para terceros */
+  FREELANCE = "freelance",
+
+  /** Proyecto laboral / corporativo */
+  WORK = "work",
 }
 
 // ======================
 // Platforms
 // ======================
+
+/**
+ * Plataforma principal donde se ejecuta el proyecto.
+ */
 export enum Platform {
-  WEB = 'web',
-  MOBILE = 'mobile',
-  IOT = 'iot',
+  /** Aplicación web */
+  WEB = "web",
+
+  /** Aplicación móvil */
+  MOBILE = "mobile",
+
+  /** Proyecto de Internet of Things */
+  IOT = "iot",
 }
 
 // ======================
 // Team role
 // ======================
+
+/**
+ * Rol desempeñado dentro del equipo del proyecto.
+ */
 export enum TeamRole {
-  DEVELOPER = 'developer',
-  LEAD = 'lead',
-  DESIGNER = 'designer',
-}
+  /** Desarrollador */
+  DEVELOPER = "developer",
 
-// ======================
-// Languages
-// ======================
-export enum Language {
-  ES = 'es',
-  EN = 'en',
-}
+  /** Líder técnico o de proyecto */
+  LEAD = "lead",
 
-export enum ProjectStatus {
-  FINISHED = "finished",
-  IN_PROGRESS = "in-progress",
-  // ARCHIVED = "archived",
-  PLANNED = "planned",
-  CANCELLED = "cancelled",
-  ON_HOLD = "on-hold",
+  /** Diseñador UI/UX o visual */
+  DESIGNER = "designer",
 }
