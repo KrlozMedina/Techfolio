@@ -3,22 +3,6 @@ import { ICategory } from "./category.interface";
 import { slugify } from "@/lib/utils/slugify";
 
 /**
- * Definición reutilizable del contenido localizado.
- * Se aplica a cada idioma soportado por la categoría.
- */
-// const localizedInfo = {
-//   /**
-//    * Título de la categoría en un idioma específico.
-//    */
-//   title: { type: String, required: true },
-
-//   /**
-//    * Descripción de la categoría en un idioma específico.
-//    */
-//   description: { type: String, required: true },
-// };
-
-/**
  * Schema de Categoría.
  *
  * Características:
