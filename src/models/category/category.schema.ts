@@ -6,17 +6,17 @@ import { slugify } from "@/lib/utils/slugify";
  * Definición reutilizable del contenido localizado.
  * Se aplica a cada idioma soportado por la categoría.
  */
-const localizedInfo = {
-  /**
-   * Título de la categoría en un idioma específico.
-   */
-  title: { type: String, required: true },
+// const localizedInfo = {
+//   /**
+//    * Título de la categoría en un idioma específico.
+//    */
+//   title: { type: String, required: true },
 
-  /**
-   * Descripción de la categoría en un idioma específico.
-   */
-  description: { type: String, required: true },
-};
+//   /**
+//    * Descripción de la categoría en un idioma específico.
+//    */
+//   description: { type: String, required: true },
+// };
 
 /**
  * Schema de Categoría.
@@ -47,16 +47,16 @@ export const CategorySchema = new Schema<ICategory>(
        * Contenido en español.
        */
       es: {
-        type: localizedInfo,
-        required: true,
+        title: { type: String, required: true },
+        description: { type: String,required: true }
       },
 
       /**
        * Contenido en inglés.
        */
       en: {
-        type: localizedInfo,
-        required: true,
+        title: { type: String, required: true },
+        description: { type: String,required: true }
       },
     },
   },
@@ -102,14 +102,14 @@ CategorySchema.pre("findOneAndUpdate", function (next) {
   const update = this.getUpdate() as any;
 
   const langSource =
-    update?.$set?.en?.title ||
-    update?.$set?.es?.title ||
-    update?.en?.title ||
-    update?.es?.title;
+    update?.content.$set?.en?.title ||
+    update?.content.$set?.es?.title ||
+    update?.content.en?.title ||
+    update?.content.es?.title;
 
   if (langSource) {
     update.$set = {
-      ...(update.$set || {}),
+      ...(update.content.$set || {}),
       slug: slugify(langSource),
     };
   }
