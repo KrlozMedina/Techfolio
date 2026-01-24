@@ -1,5 +1,6 @@
 import connectDB from "@/lib/db/connectDB";
-import Technology from "@/models/Technology.model";
+import { Technology } from "@/models/technology/technology.model";
+// import Technology from "@/models/technology/Technology.model";
 import { NextResponse } from "next/server";
 
 // Interfaces

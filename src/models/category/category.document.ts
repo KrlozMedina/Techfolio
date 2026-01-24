@@ -4,7 +4,7 @@ import { Document } from "mongoose";
  * Representa el contenido localizado de una categoría.
  * Contiene únicamente información dependiente del idioma.
  */
-export interface LocalizedCategoryInfo {
+interface LocalizedCategoryInfo {
   /** Título visible de la categoría */
   title: string;
 

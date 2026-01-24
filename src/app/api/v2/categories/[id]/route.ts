@@ -8,7 +8,7 @@ import {
   updateCategory,
 } from "@/services/category.service";
 import { z } from "zod";
-import { LANGUAGES } from "@/shared/constants";
+import { LANGUAGES } from "@/shared/enums";
 import { toCategoryReadDTO } from "@/mappers/category.mapper";
 
 /* =========================
@@ -79,7 +79,10 @@ export async function GET(
 
     const cat = await getCategoryById(id);
     if (!cat) {
-      return NextResponse.json({ error: "Not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Not found" },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json(

@@ -1,2 +1,2 @@
-export type { IProjectV2 } from '@/models/project/Project.interface';
+export type { IProjectV2 } from '@/models/project/project.interface';
 

@@ -1,8 +1,7 @@
+import { CreateProjectDto, DeleteProjectDto, UpdateProjectDto } from "@/dto/project/projects.dto";
 import connectDB from "@/lib/db/connectDB";
-import { CreateProjectDto, DeleteProjectDto, UpdateProjectDto } from "@/lib/dtos";
 import { createSlugFromTitle, getCategoriesFromTechnologies } from "@/lib/helpers";
-// import { createSlugFromTitle, getCategoriesFromTechnologies } from "@/lib/helpers/technology";
-import { ProjectV1 as Project } from "@/models/project/Project.model";
+import { ProjectV1 as Project } from "@/models/project/project.model";
 import { NextResponse } from "next/server";
 
 // Types

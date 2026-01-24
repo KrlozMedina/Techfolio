@@ -2,7 +2,7 @@ import { PERMISSIONS } from "@/lib/auth/permissions";
 import { withAuthorization } from "@/lib/auth/withAuthorization";
 import { toCategoryReadDTO } from "@/mappers/category.mapper";
 import { createCategory, getCategories } from "@/services/category.service";
-import { LANGUAGES } from "@/shared/constants";
+import { LANGUAGES } from "@/shared/enums";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -62,7 +62,7 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const query = Object.fromEntries(searchParams.entries());
 
-    const { language = "es" } = querySchema.parse(query);
+    const { language = LANGUAGES.ES } = querySchema.parse(query);
 
     const categories = await getCategories();
 
@@ -70,7 +70,10 @@ export async function GET(req: NextRequest) {
       toCategoryReadDTO(c, language)
     );
 
-    return NextResponse.json(response, { status: 200 });
+    return NextResponse.json(
+      response,
+      { status: 200 }
+    );
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -114,7 +117,10 @@ export const POST = withAuthorization(
 
       const created = await createCategory(data);
 
-      return NextResponse.json(created, { status: 201 });
+      return NextResponse.json(
+        created,
+        { status: 201 }
+      );
     } catch (error) {
       if (error instanceof z.ZodError) {
         return NextResponse.json(

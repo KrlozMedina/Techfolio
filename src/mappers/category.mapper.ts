@@ -1,6 +1,6 @@
 import { CategoryDocument } from "@/models/category/category.document";
 import { CategoryReadDTO } from "@/dto/category/category.read.dto";
-import { Language, LANGUAGES } from "@/shared/constants";
+import { Language, LANGUAGES } from "@/shared/enums";
 
 /**
  * Obtiene el contenido localizado de una categoría según el idioma solicitado.

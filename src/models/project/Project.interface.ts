@@ -2,13 +2,22 @@
 // 📁 interfaces/project.interface.ts
 // ==========================
 
-import { ProjectStatus } from "@/shared/constants/enums";
+import { ArchitectureCommunication } from "@/shared/enums/architecture-communication.enum";
+import { ArchitectureStyle } from "@/shared/enums/architecture-style.enum";
+import { ArchitectureType } from "@/shared/enums/architecture-type.enum";
+import { DatabaseModel } from "@/shared/enums/database-model.enum";
+import { Platform } from "@/shared/enums/platform.enum";
+import { ProjectStatus } from "@/shared/enums/project-status.enum";
+import { ProjectType } from "@/shared/enums/project-type.enum";
+import { Role } from "@/shared/enums/role.enum";
+import { Types } from "mongoose";
 
 // ----------------------------------
 // 🧩 Campos de auditoría reutilizables
 // ----------------------------------
+
 /**
- * Define campos comunes de auditoría usados en varios modelos.
+ * Campos estándar de auditoría para control temporal de entidades.
  */
 export interface IAuditFields {
   createdAt?: Date;
@@ -20,7 +29,7 @@ export interface IAuditFields {
 // ----------------------------------
 
 /**
- * Contenido traducible por idioma.
+ * Estructura básica de contenido traducible.
  */
 export interface ILocalizedContent {
   title: string;
@@ -28,7 +37,7 @@ export interface ILocalizedContent {
 }
 
 /**
- * Información localizada para dos idiomas (es/en).
+ * Contenido localizado soportando español e inglés.
  */
 export interface ILocalizedInfo {
   es: ILocalizedContent;
@@ -40,9 +49,10 @@ export interface ILocalizedInfo {
 // ----------------------------------
 
 /**
- * Versión inicial de proyecto con estructura plana.
+ * Modelo inicial del proyecto (versión legacy).
+ * Mantiene una estructura simple y no modular.
  */
-export interface IProject extends IAuditFields {
+export interface IProjectV1 extends IAuditFields {
   _id: string;
   title: string;
   slug: string;
@@ -64,7 +74,7 @@ export interface IProject extends IAuditFields {
 // ----------------------------------
 
 /**
- * Información del equipo que desarrolló el proyecto.
+ * Información del equipo involucrado en el proyecto.
  */
 export interface ITeamInfo {
   roleId?: string;
@@ -73,17 +83,17 @@ export interface ITeamInfo {
 }
 
 /**
- * Etiquetas asociadas al proyecto como tecnologías, categorías o plataformas.
+ * Identificadores de entidades relacionadas al proyecto.
  */
 export interface IProjectTags {
-  platformId: string | string[];
+  technologyIds: string[]; // ObjectId en tiempo de ejecución
+  platformId: string;
   featureIds?: string[];
-  technologyIds: string[];
   categoryIds?: string[];
 }
 
 /**
- * URLs relacionadas al proyecto: repositorio, sitio en vivo, etc.
+ * URLs asociadas al proyecto.
  */
 export interface IProjectUrls {
   repository: string;
@@ -92,7 +102,7 @@ export interface IProjectUrls {
 }
 
 /**
- * Recursos visuales del proyecto (imágenes principales y miniaturas).
+ * Recursos visuales del proyecto.
  */
 export interface IProjectAssets {
   main: string;
@@ -100,26 +110,121 @@ export interface IProjectAssets {
 }
 
 /**
- * Proyecto modularizado (V2) con estructura escalable.
+ * Modelo principal del proyecto versión 2.
+ * Diseñado para ser escalable, tipado y multilenguaje.
  */
-export interface IProjectV2 extends IAuditFields {
-  _id: string;
-  projectInfo: ILocalizedInfo;
-  teamInfo: ITeamInfo;
-  tags: IProjectTags;
+export interface IProjectV2 {
+  _id: Types.ObjectId | string;
   slug: string;
-  urls: IProjectUrls;
-  assets: IProjectAssets;
+
+  /**
+   * Contenido localizado con información funcional del proyecto.
+   */
+  content: {
+    es: {
+      title: string;
+      description: string;
+      problem: string;
+      solution: string;
+    };
+    en: {
+      title: string;
+      description: string;
+      problem: string;
+      solution: string;
+    };
+  };
+
+  /**
+   * Información del equipo y tipo de proyecto.
+   */
+  teamInfo: {
+    role: Role;
+    teamSize: number;
+    duration: string;
+    projectType: ProjectType;
+  };
+
+  /**
+   * Definición de la arquitectura del sistema.
+   */
+  architecture: {
+    type: ArchitectureType;
+    style: ArchitectureStyle;
+    communication: ArchitectureCommunication[];
+    databaseModel: DatabaseModel;
+  };
+
+  /**
+   * Plataforma principal del proyecto.
+   */
+  platform: Platform;
+
+  /**
+   * Relaciones con otras entidades del dominio.
+   */
+  technologyIds: Array<Types.ObjectId | string>;
+  featureIds: Array<Types.ObjectId | string>;
+  categoryIds: Array<Types.ObjectId | string>;
+
+  /**
+   * Retos técnicos enfrentados durante el desarrollo.
+   */
+  technicalChallenges: string[];
+
+  /**
+   * Impacto generado por el proyecto.
+   */
+  impact: {
+    metrics: string[];
+    users: string;
+  };
+
+  /**
+   * Aprendizajes clave obtenidos.
+   */
+  learnings: string[];
+
+  /**
+   * URLs relevantes del proyecto.
+   */
+  urls: {
+    repository: string;
+    live: string | null;
+    documentation: string | null;
+  };
+
+  /**
+   * Recursos visuales del proyecto.
+   */
+  assets: {
+    main: string;
+    blur: string;
+  };
+
+  /**
+   * Prioridad relativa del proyecto.
+   */
   importanceScore: number;
+
+  /**
+   * Estado actual del proyecto.
+   */
   status: ProjectStatus;
+
+  /**
+   * Campos de auditoría.
+   */
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 // ----------------------------------
-// 📄 Paginación de respuestas (opcional)
+// 📄 Paginación de respuestas
 // ----------------------------------
 
 /**
- * Información de paginación para una lista de resultados.
+ * Metadatos de paginación para listados.
  */
 export interface IPaginationData {
   total: number;
@@ -129,7 +234,7 @@ export interface IPaginationData {
 }
 
 /**
- * Resultado de proyectos paginados (V2).
+ * Resultado paginado de proyectos V2.
  */
 export interface IProjectV2Paginated {
   data: IProjectV2[];

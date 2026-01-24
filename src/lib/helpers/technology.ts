@@ -1,4 +1,6 @@
-import Technology from "@/models/Technology.model";
+// import Technology from "@/models/technology/technology.model";
+
+import { Technology } from "@/models/technology/technology.model";
 
 /**
  * Convierte un título a un slug URL-friendly.

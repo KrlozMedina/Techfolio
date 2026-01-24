@@ -1,29 +1,37 @@
 /**
- * Punto centralizado para exportar todas las constantes del sistema.
+ * Shared enums and constants barrel file.
  *
- * Este archivo actúa como un barril (barrel file) que reúne y expone constantes globales,
- * como roles de usuario, características disponibles, plataformas, categorías,
- * tecnologías, idiomas y enumeraciones usadas en la aplicación.
+ * Centralizes and re-exports all enums and shared definitions
+ * used across the application (API, services, schemas, DTOs).
  *
- * Además, exporta datos cargados desde archivos JSON para mantener la consistencia
- * y facilitar su importación desde un único lugar.
- *
- * Constantes exportadas incluyen:
- * - FEATURES: Características del sistema definidas en JSON.
- * - ROLES: Roles de usuario definidos en JSON.
- * - Plataformas, Categorías, Tecnologías, Idiomas, y Enums definidos en archivos TS separados.
+ * Purpose:
+ * - Avoid deep import paths
+ * - Keep enum usage consistent
+ * - Improve maintainability and discoverability
  */
 
-// import FEATURES from './features.json';
-// import ROLES from './roles.json';
-
-export * from '../../mocks/platforms';
-// export * from '../../mocks/technologies';
+// Supported languages enum / constants
 export * from './language';
-// export * from './enums';
-export * from './quotes'
 
-export {
-  // FEATURES,
-  // ROLES,
-};
+// Shared quotes or text constants
+export * from './quotes';
+
+// Architecture-related enums
+export * from './architecture-communication.enum';
+export * from './architecture-style.enum';
+export * from './architecture-type.enum';
+
+// Database modeling strategy enum
+export * from './database-model.enum';
+
+// Target platform enum (web, mobile, backend, etc.)
+export * from './platform.enum';
+
+// Project lifecycle/status enum
+export * from './project-status.enum';
+
+// Project classification/type enum
+export * from './project-type.enum';
+
+// Team role enum
+export * from './role.enum';

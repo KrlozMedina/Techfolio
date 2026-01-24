@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 /**
  * Representa la estructura base de una categoría.
  * Se utiliza como contrato interno y para el tipado del schema de Mongoose.
@@ -7,7 +9,7 @@ export interface ICategory {
    * Identificador único del documento en MongoDB.
    * Generalmente corresponde a un ObjectId serializado.
    */
-  _id: string;
+  _id: Types.ObjectId | string;
 
   /**
    * Slug único de la categoría.
@@ -41,4 +43,6 @@ export interface ICategory {
       description: string;
     };
   };
+  createdAt?: Date;
+  updatedAt?: Date;
 }

@@ -32,7 +32,7 @@ export const CategorySchema = new Schema<ICategory>(
        */
       es: {
         title: { type: String, required: true },
-        description: { type: String,required: true }
+        description: { type: String, required: true },
       },
 
       /**

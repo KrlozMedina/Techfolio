@@ -4,7 +4,7 @@
  * Define los campos mínimos obligatorios que debe tener
  * una categoría para un idioma específico.
  */
-export type LocalizedCategoryContent = {
+type LocalizedCategoryContent = {
   /** Título visible de la categoría */
   title: string;
 
