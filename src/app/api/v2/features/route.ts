@@ -6,6 +6,7 @@ import { toFeatureListDTO } from "@/mappers/feature.mapper";
 import { createFeature, getFeatures, getTotalFeatures } from "@/services/features.service";
 import { LANGUAGES } from "@/shared/enums";
 import { FeatureDomain } from "@/shared/enums/feature-domain.enum";
+import { querySchema } from "@/shared/interfaces/query.schema";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 
@@ -17,16 +18,9 @@ import z from "zod";
  * - domain: dominio/categoría de la feature
  * - search: texto a buscar en títulos o descripciones
  */
-const querySchema = z.object({
-  limit: z.coerce.number().min(1).optional(),
-  page: z.coerce.number().min(1).optional(),
-  language: z.enum(LANGUAGES).optional(),
+const featuresQuerySchema = querySchema.extend({
   domain: z.enum(FeatureDomain).optional(),
-  search: z.string().optional().transform((val) => {
-    const trimmed = val?.trim();
-    return trimmed && trimmed.length > 0 ? trimmed : undefined;
-  }),
-});
+})
 
 /**
  * Construye el filtro para la consulta de features en MongoDB
@@ -78,7 +72,7 @@ export const GET = withAuthorization(
         language = LANGUAGES.ES,
         domain,
         search
-      } = querySchema.parse(query);
+      } = featuresQuerySchema.parse(query);
   
       // Límites seguros para evitar exceso de resultados
       const safeLimit = Math.min(limit, 100);
@@ -137,7 +131,6 @@ export const POST = withAuthorization(
         { status: 201 }
       );
     } catch (error) {
-      console.log(error);
       return handleApiError(error);
     }
   }

@@ -1,31 +1,49 @@
+import z from "zod";
+
 /**
- * Contenido localizado de una categoría.
- *
- * Define los campos mínimos obligatorios que debe tener
- * una categoría para un idioma específico.
+ * Schema para contenido localizado (por idioma).
+ * - title: requerido, máximo 25 caracteres
+ * - description: requerido, máximo 100 caracteres
+ */
+const localizedContentSchema = z.object({
+  title: z.string().min(1).max(25),
+  description: z.string().min(1).max(100),
+});
+
+/**
+ * Schema que agrupa los idiomas soportados.
+ * Actualmente soporta:
+ * - es (español)
+ * - en (inglés)
+ */
+const contentSchema = z.object({
+  es: localizedContentSchema,
+  en: localizedContentSchema,
+});
+
+/**
+ * Schema principal para crear una categoría.
+ * Requiere estructura completa de contenido por idioma.
+ */
+export const createCategorySchema = z.object({
+  content: contentSchema,
+});
+
+/**
+ * Tipo para contenido localizado.
  */
 type LocalizedCategoryContent = {
-  /** Título visible de la categoría */
   title: string;
-
-  /** Descripción de la categoría */
   description: string;
 };
 
 /**
- * DTO para la creación de una categoría.
- *
- * Reglas:
- * - Obliga a enviar el contenido completo para todos los idiomas soportados
- * - Se utiliza como contrato de entrada en la capa de servicio / API
- * - Garantiza consistencia multilenguaje desde la creación
+ * DTO para creación de categoría.
+ * Debe coincidir con el schema de validación.
  */
 export type CreateCategoryDTO = {
   content: {
-    /** Contenido en español */
     es: LocalizedCategoryContent;
-
-    /** Contenido en inglés */
     en: LocalizedCategoryContent;
   };
 };

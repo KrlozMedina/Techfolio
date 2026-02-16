@@ -1,111 +1,105 @@
+import { createCategorySchema } from "@/dto/category/category.create.dto";
 import { PERMISSIONS } from "@/lib/auth/permissions";
 import { withAuthorization } from "@/lib/auth/withAuthorization";
-import { toCategoryReadDTO } from "@/mappers/category.mapper";
-import { createCategory, getCategories } from "@/services/category.service";
+import { sanitizeRegex } from "@/lib/db/sanitize-regex";
+import { handleApiError } from "@/lib/http/handle-api-error";
+import { toCategoryListDTO } from "@/mappers/category.mapper";
+import {
+  createCategory,
+  getCategories,
+  getTotalCategories,
+} from "@/services/category.service";
 import { LANGUAGES } from "@/shared/enums";
+import { querySchema } from "@/shared/interfaces/query.schema";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
-
-/* =========================
-  Validation Schemas
-========================= */
 
 /**
- * Valida los query params de la petición.
- * Permite seleccionar el idioma del contenido retornado.
- */
-const querySchema = z.object({
-  language: z.nativeEnum(LANGUAGES).optional(),
-});
-
-/**
- * Define la estructura de contenido localizado
- * para un idioma específico.
- */
-const localizedContentSchema = z.object({
-  title: z.string().min(1),
-  description: z.string().min(1),
-});
-
-/**
- * Contenido multilenguaje obligatorio.
- */
-const contentSchema = z.object({
-  es: localizedContentSchema,
-  en: localizedContentSchema,
-});
-
-/**
- * Payload esperado para crear una categoría.
- */
-const createCategorySchema = z.object({
-  content: contentSchema,
-});
-
-/* =========================
-  GET /categories
-========================= */
-
-/**
- * Retorna el listado de categorías.
+ * Construye el filtro dinámico para búsqueda.
  *
- * Comportamiento:
- * - Acepta ?language=es|en (opcional)
- * - Devuelve un DTO optimizado para listados
- *
- * Errores:
- * - 400: query params inválidos
- * - 500: error interno
+ * - Sanitiza la expresión para evitar inyección Regex.
+ * - Realiza búsqueda case-insensitive.
+ * - Busca en título y descripción en ambos idiomas.
  */
-export async function GET(req: NextRequest) {
-  try {
-    const { searchParams } = new URL(req.url);
-    const query = Object.fromEntries(searchParams.entries());
+function buildCategoryFilter(search?: string) {
+  const filter: Record<string, unknown> = {};
 
-    const { language = LANGUAGES.ES } = querySchema.parse(query);
+  if (typeof search === "string" && search.trim().length > 0) {
+    const safeSearch = sanitizeRegex(search.trim());
 
-    const categories = await getCategories();
-
-    const response = categories.map((c) =>
-      toCategoryReadDTO(c, language)
-    );
-
-    return NextResponse.json(
-      response,
-      { status: 200 }
-    );
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: "Invalid query parameters" },
-        { status: 400 }
-      );
-    }
-
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    filter.$or = [
+      { "content.es.title": { $regex: safeSearch, $options: "i" } },
+      { "content.en.title": { $regex: safeSearch, $options: "i" } },
+      { "content.es.description": { $regex: safeSearch, $options: "i" } },
+      { "content.en.description": { $regex: safeSearch, $options: "i" } },
+    ];
   }
+
+  return filter;
 }
 
-/* =========================
-  POST /categories
-========================= */
+/**
+ * GET /categories
+ *
+ * - Requiere permiso READ.
+ * - Soporta paginación.
+ * - Soporta búsqueda por texto.
+ * - Permite seleccionar idioma.
+ */
+export const GET = withAuthorization(
+  PERMISSIONS.READ,
+  async (req: NextRequest) => {
+    try {
+      // Extrae query params
+      const query = Object.fromEntries(
+        req.nextUrl.searchParams.entries()
+      );
+
+      // Valida y parsea con Zod
+      const {
+        limit = 10,
+        page = 1,
+        language = LANGUAGES.ES,
+        search,
+      } = querySchema.parse(query);
+
+      // Protección adicional contra abuso
+      const safeLimit = Math.min(limit, 100);
+      const safePage = Math.min(Math.max(page, 1), 1000);
+
+      const filter = buildCategoryFilter(search);
+
+      // Ejecuta consultas en paralelo
+      const [categories, total] = await Promise.all([
+        getCategories(filter, safePage, safeLimit),
+        getTotalCategories(filter),
+      ]);
+
+      return NextResponse.json(
+        {
+          data: categories.map((category) =>
+            toCategoryListDTO(category, language)
+          ),
+          pagination: {
+            total,
+            limit: safeLimit,
+            currentPage: safePage,
+            totalPages: Math.ceil(total / safeLimit),
+          },
+        },
+        { status: 200 }
+      );
+    } catch (error) {
+      return handleApiError(error);
+    }
+  }
+);
 
 /**
- * Crea una nueva categoría.
+ * POST /categories
  *
- * Seguridad:
- * - Requiere permiso CREATE
- *
- * Validaciones:
- * - Contenido multilenguaje obligatorio (es, en)
- *
- * Errores:
- * - 400: body inválido
- * - 401/403: autorización
- * - 500: error interno
+ * - Requiere permiso CREATE.
+ * - Valida el body con Zod.
+ * - Devuelve únicamente el ID creado.
  */
 export const POST = withAuthorization(
   PERMISSIONS.CREATE,
@@ -113,26 +107,17 @@ export const POST = withAuthorization(
     try {
       const body = await req.json();
 
+      // Validación estricta del payload
       const data = createCategorySchema.parse(body);
 
       const created = await createCategory(data);
 
       return NextResponse.json(
-        created,
+        { id: created._id.toString() },
         { status: 201 }
       );
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        return NextResponse.json(
-          { error: "Invalid request body" },
-          { status: 400 }
-        );
-      }
-
-      return NextResponse.json(
-        { error: "Internal server error" },
-        { status: 500 }
-      );
+      return handleApiError(error);
     }
   }
 );

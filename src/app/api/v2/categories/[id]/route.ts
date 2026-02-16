@@ -7,202 +7,105 @@ import {
   getCategoryById,
   updateCategory,
 } from "@/services/category.service";
-import { z } from "zod";
-import { LANGUAGES } from "@/shared/enums";
-import { toCategoryReadDTO } from "@/mappers/category.mapper";
-
-/* =========================
-  Utils & Schemas
-========================= */
+import { toCategoryEntityDTO } from "@/mappers/category.mapper";
+import { handleApiError } from "@/lib/http/handle-api-error";
+import { updateCategorySchema } from "@/dto/category/category.update.dto";
 
 /**
- * Valida si un string es un ObjectId válido de MongoDB
+ * Valida que el id sea un ObjectId válido de MongoDB.
  */
 const isValidObjectId = (id: string) => Types.ObjectId.isValid(id);
 
 /**
- * Esquema de query params para GET
- * Permite filtrar el idioma de la respuesta
+ * GET /categories/:id
+ * 
+ * - Requiere permiso READ
+ * - Devuelve la categoría completa (multi-idioma)
  */
-const querySchema = z.object({
-  language: z.nativeEnum(LANGUAGES).optional(),
-});
-
-/**
- * Esquema de contenido localizado
- */
-const localizedContentSchema = z.object({
-  title: z.string().min(1),
-  description: z.string().min(1),
-});
-
-const contentSchema = z.object({
-  es: localizedContentSchema,
-  en: localizedContentSchema,
-})
-
-/**
- * Esquema del body para actualización de categoría
- * Requiere contenido en ES y EN
- */
-const updateCategorySchema = z.object({
-  content: contentSchema,
-});
-
-/* =========================
-  GET /categories/:id
-========================= */
-
-/**
- * Obtiene una categoría por ID.
- * - Valida ObjectId
- * - Soporta idioma vía query param (?language=es|en)
- * - Devuelve DTO localizado
- */
-export async function GET(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  const { id } = await params;
-
-  if (!isValidObjectId(id)) {
-    return NextResponse.json(
-      { error: "Invalid id" },
-      { status: 400 }
-    );
-  }
-
-  try {
-    const { searchParams } = new URL(req.url);
-    const query = Object.fromEntries(searchParams.entries());
-    const { language = LANGUAGES.ES } = querySchema.parse(query);
-
-    const cat = await getCategoryById(id);
-    if (!cat) {
-      return NextResponse.json(
-        { error: "Not found" },
-        { status: 404 }
-      );
-    }
-
-    return NextResponse.json(
-      toCategoryReadDTO(cat, language),
-      { status: 200 }
-    );
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: "Invalid query parameters" },
-        { status: 400 }
-      );
-    }
-
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
-  }
-}
-
-/* =========================
-  PUT /categories/:id
-========================= */
-
-/**
- * Actualiza una categoría existente.
- * - Requiere permiso UPDATE
- * - Valida ObjectId
- * - Valida body con Zod
- */
-export const PUT = withAuthorization(
-  PERMISSIONS.UPDATE,
-  async (
-    req: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
-  ) => {
-    const { id } = await params;
-
-    if (!isValidObjectId(id)) {
-      return NextResponse.json(
-        { error: "Invalid id" },
-        { status: 400 }
-      );
-    }
-
+export const GET = withAuthorization(
+  PERMISSIONS.READ,
+  async (_: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
     try {
-      const body = await req.json();
-      const data = updateCategorySchema.parse(body);
+      const { id } = await params;
 
-      const updated = await updateCategory(id, data);
-      if (!updated) {
-        return NextResponse.json(
-          { error: "Not found" },
-          { status: 404 }
-        );
+      if (!isValidObjectId(id)) {
+        return NextResponse.json({ error: "Invalid id" }, { status: 400 });
+      }
+
+      const category = await getCategoryById(id);
+
+      if (!category) {
+        return NextResponse.json({ error: "Not found" }, { status: 404 });
       }
 
       return NextResponse.json(
-        updated,
+        toCategoryEntityDTO(category),
         { status: 200 }
       );
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        return NextResponse.json(
-          { error: "Invalid request body" },
-          { status: 400 }
-        );
-      }
-
-      return NextResponse.json(
-        { error: "Internal server error" },
-        { status: 500 }
-      );
+      return handleApiError(error);
     }
   }
 );
 
-/* =========================
-  DELETE /categories/:id
-========================= */
+/**
+ * PUT /categories/:id
+ * 
+ * - Requiere permiso UPDATE
+ * - Valida body con Zod
+ * - Devuelve documento actualizado
+ */
+export const PUT = withAuthorization(
+  PERMISSIONS.UPDATE,
+  async (req: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
+    try {
+      const { id } = await params;
+
+      if (!isValidObjectId(id)) {
+        return NextResponse.json({ error: "Invalid id" }, { status: 400 });
+      }
+
+      const body = await req.json();
+      const data = updateCategorySchema.parse(body);
+
+      const updated = await updateCategory(id, data);
+
+      if (!updated) {
+        return NextResponse.json({ error: "Not found" }, { status: 404 });
+      }
+
+      return NextResponse.json(updated, { status: 200 });
+    } catch (error) {
+      return handleApiError(error);
+    }
+  }
+);
 
 /**
- * Elimina una categoría por ID.
+ * DELETE /categories/:id
+ * 
  * - Requiere permiso DELETE
- * - Valida ObjectId
+ * - Elimina categoría por ID
  */
 export const DELETE = withAuthorization(
   PERMISSIONS.DELETE,
-  async (
-    _: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
-  ) => {
-    const { id } = await params;
-
-    if (!isValidObjectId(id)) {
-      return NextResponse.json(
-        { error: "Invalid id" },
-        { status: 400 }
-      );
-    }
-
+  async (_: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
     try {
-      const deleted = await deleteCategory(id);
-      if (!deleted) {
-        return NextResponse.json(
-          { error: "Not found" },
-          { status: 404 }
-        );
+      const { id } = await params;
+
+      if (!isValidObjectId(id)) {
+        return NextResponse.json({ error: "Invalid id" }, { status: 400 });
       }
 
-      return NextResponse.json(
-        { success: true },
-        { status: 200 }
-      );
-    } catch {
-      return NextResponse.json(
-        { error: "Internal server error" },
-        { status: 500 }
-      );
+      const deleted = await deleteCategory(id);
+
+      if (!deleted) {
+        return NextResponse.json({ error: "Not found" }, { status: 404 });
+      }
+
+      return NextResponse.json({ success: true }, { status: 200 });
+    } catch (error) {
+      return handleApiError(error);
     }
   }
 );

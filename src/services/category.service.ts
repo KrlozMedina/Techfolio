@@ -2,25 +2,11 @@ import connectDB from "@/lib/db/connectDB";
 import { Category } from "@/models/category/category.model";
 import { CreateCategoryDTO } from "@/dto/category/category.create.dto";
 import { UpdateCategoryDTO } from "@/dto/category/category.update.dto";
+import { validateObjectId } from "@/lib/validators/validateObjectId";
 
 /**
- * Servicio de categorías.
- *
- * Capa responsable de:
- * - Gestionar la conexión a la base de datos
- * - Encapsular el acceso al modelo Category
- * - Mantener la lógica de persistencia desacoplada de la API
- */
-
-/**
- * Crea una nueva categoría.
- *
- * Flujo:
- * 1. Abre (o reutiliza) la conexión a MongoDB
- * 2. Inserta el documento en la colección
- * 3. Ejecuta validaciones y hooks definidos en el schema
- *
- * @param data DTO con el contenido multilenguaje de la categoría
+ * Crea una nueva categoría en la base de datos.
+ * @param data - Datos validados para la creación
  * @returns Documento creado
  */
 export async function createCategory(data: CreateCategoryDTO) {
@@ -29,60 +15,76 @@ export async function createCategory(data: CreateCategoryDTO) {
 }
 
 /**
- * Actualiza una categoría existente por su ID.
+ * Actualiza una categoría por ID.
+ * - Valida el ObjectId antes de consultar.
+ * - Devuelve el documento actualizado.
+ * - Ejecuta validaciones del schema de Mongoose.
  *
- * Características:
- * - Soporta actualizaciones parciales (PATCH semantics)
- * - Ejecuta validaciones del schema
- * - Dispara hooks de actualización (ej. regeneración de slug)
- *
- * @param id Identificador de la categoría
- * @param data DTO parcial con los campos a actualizar
- * @returns Documento actualizado o null si no existe
+ * @param id - ID de la categoría
+ * @param data - Datos parciales para actualizar
  */
 export async function updateCategory(
   id: string,
   data: UpdateCategoryDTO
 ) {
   await connectDB();
-  return Category.findByIdAndUpdate(
-    id,
-    data,
-    {
-      new: true,          // retorna el documento actualizado
-      runValidators: true // aplica validaciones del schema
-    }
-  );
+  validateObjectId(id);
+
+  return Category.findByIdAndUpdate(id, data, {
+    new: true,
+    runValidators: true,
+  });
 }
 
 /**
  * Obtiene una categoría por su ID.
- *
- * @param id Identificador de la categoría
- * @returns Documento encontrado o null
+ * @param id - ID válido de MongoDB
  */
 export async function getCategoryById(id: string) {
   await connectDB();
+  validateObjectId(id);
   return Category.findById(id);
 }
 
 /**
- * Obtiene todas las categorías registradas.
+ * Obtiene categorías con paginación.
  *
- * @returns Lista completa de categorías
+ * @param filter - Filtros dinámicos (ej: { active: true })
+ * @param safePage - Número de página (>=1)
+ * @param safeLimit - Cantidad de registros por página
  */
-export async function getCategories() {
+export async function getCategories(
+  filter: Record<string, unknown>,
+  safePage: number,
+  safeLimit: number
+) {
   await connectDB();
-  return Category.find();
+
+  return Category
+    .find(filter)
+    .skip((safePage - 1) * safeLimit)
+    .limit(safeLimit);
 }
 
 /**
- * Elimina una categoría por su ID.
+ * Devuelve el total de categorías según filtro.
+ * Útil para construir metadata de paginación.
  *
- * @param id Identificador de la categoría
- * @returns Documento eliminado o null
+ * @param filter - Filtros opcionales
+ */
+export async function getTotalCategories(
+  filter: Record<string, unknown> = {}
+) {
+  await connectDB();
+  return Category.countDocuments(filter);
+}
+
+/**
+ * Elimina una categoría por ID.
+ * @param id - ID válido de MongoDB
  */
 export async function deleteCategory(id: string) {
   await connectDB();
+  validateObjectId(id);
   return Category.findByIdAndDelete(id);
 }
