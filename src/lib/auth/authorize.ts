@@ -2,47 +2,33 @@ import { Permission } from "./permissions";
 import { UserRole } from "./types";
 
 /**
- * authorize
- * --------------------------------------------------
- * Determina si un rol específico tiene permitido
- * ejecutar una acción (permission).
- *
- * @param role - Rol del usuario (admin | editor | viewer)
- * @param permission - Acción solicitada (read | create | update | delete)
- * @returns boolean
- *
- * Implementa un esquema RBAC (Role-Based Access Control)
- * simple y explícito.
+ * Mapeo de roles de usuario a los permisos que tienen.
+ * - admin: puede leer, crear, actualizar y eliminar
+ * - editor: puede leer, crear y actualizar
+ * - viewer: solo puede leer
+ */
+const rolePermissions: Record<UserRole, Permission[]> = {
+  admin: ["read", "create", "update", "delete"],
+  editor: ["read", "create", "update"],
+  viewer: ["read"],
+};
+
+/**
+ * Verifica si un rol de usuario tiene un permiso específico.
+ * 
+ * @param role - Rol del usuario ('admin' | 'editor' | 'viewer')
+ * @param permission - Permiso a verificar ('read' | 'create' | 'update' | 'delete')
+ * @returns true si el rol tiene el permiso, false si no
  */
 export function authorize(
   role: UserRole,
   permission: Permission
 ): boolean {
+  // Obtiene los permisos asignados al rol
+  const permissions = rolePermissions[role];
 
-  /**
-   * Mapa estático de permisos por rol.
-   * Cada rol declara explícitamente qué acciones puede ejecutar.
-   */
-  const rolePermissions: Record<UserRole, Permission[]> = {
-    admin: [
-      "read",
-      "create",
-      "update",
-      "delete",
-    ],
-    editor: [
-      "read",
-      "create",
-      "update",
-    ],
-    viewer: [
-      "read",
-    ],
-  };
+  if (!permissions) return false; // Rol no encontrado, no autorizado
 
-  /**
-   * Retorna true si el permiso solicitado
-   * existe dentro de los permisos del rol.
-   */
-  return rolePermissions[role]?.includes(permission);
+  // Verifica si el permiso solicitado está incluido en la lista de permisos del rol
+  return permissions.includes(permission);
 }

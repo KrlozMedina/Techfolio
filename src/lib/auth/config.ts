@@ -1,35 +1,60 @@
-import { AuthUser } from './types';
+import { AuthUser } from "./types";
+import { z } from "zod";
 
 /**
- * Validación de variables de entorno críticas.
- * --------------------------------------------------
- * Si no existen, se lanza un error al iniciar la app.
+ * Validaciones de entorno necesarias para la autenticación.
+ * Si alguna variable crítica no está definida, el proceso falla al iniciar.
  */
 if (!process.env.PASSWORD_HASH)
-  throw new Error('JWT_PASSWORD not set');
+  throw new Error("PASSWORD_HASH not set");
 
 if (!process.env.JWT_SECRET)
-  throw new Error('JWT_SECRET not set');
+  throw new Error("JWT_SECRET not set");
+
+if (process.env.JWT_SECRET.length < 32)
+  throw new Error("JWT_SECRET must be at least 32 characters long");
 
 /**
- * Configuración de autenticación del sistema.
+ * Schema Zod para validar cada usuario estático.
+ * - username: nombre de usuario obligatorio
+ * - role: rol del usuario, solo puede ser 'admin', 'editor' o 'viewer'
+ */
+const AuthUserSchema = z.object({
+  username: z.string(),
+  role: z.enum(["admin", "editor", "viewer"]),
+});
+
+/**
+ * Schema Zod para validar el arreglo completo de usuarios estáticos.
+ */
+const StaticUsersSchema = z.array(AuthUserSchema);
+
+/**
+ * Array tipado de usuarios autenticados.
+ * Se llena al parsear la variable de entorno STATIC_USERS.
+ */
+let parsedUsers: AuthUser[] = [];
+
+try {
+  parsedUsers = StaticUsersSchema.parse(
+    JSON.parse(process.env.STATIC_USERS || "[]")
+  );
+} catch {
+  throw new Error("STATIC_USERS must be valid JSON with correct structure");
+}
+
+/**
+ * Configuración de autenticación exportada para usar en la aplicación.
  */
 export const AUTH_CONFIG = {
-  /** Nombre de la cookie donde se guardará el token JWT */
-  COOKIE_NAME: 'authToken',
-
-  /** Tiempo de expiración del token en segundos (1 hora) */
-  TOKEN_EXPIRATION: 60 * 60,
-
-  /**
-   * Usuarios estáticos cargados desde la variable de entorno.
-   * Debe ser un JSON válido que cumpla la interfaz AuthUser.
-   */
-  USERS: JSON.parse(process.env.STATIC_USERS || '[]') as AuthUser[],
-
-  /** Hash de contraseña principal (bcrypt) para autenticación */
-  PASSWORD_HASH: process.env.PASSWORD_HASH,
+  COOKIE_NAME: "authToken",        // Nombre de la cookie para almacenar JWT
+  TOKEN_EXPIRATION: 60 * 60,       // Expiración del token en segundos (1 hora)
+  USERS: parsedUsers,              // Usuarios estáticos validados
+  PASSWORD_HASH: process.env.PASSWORD_HASH, // Hash de contraseña global
 };
 
-/** Secret para firmar/verificar tokens JWT */
-export const JWT_SECRET = process.env.JWT_SECRET;
+/**
+ * Secreto usado para firmar y verificar JWTs.
+ * Debe ser seguro (mínimo 32 caracteres).
+ */
+export const JWT_SECRET: string = process.env.JWT_SECRET;

@@ -4,21 +4,17 @@ import { authorize } from "@/lib/auth/authorize";
 import { Permission } from "@/lib/auth/permissions";
 
 /**
- * HandlerContext
- * --------------------------------------------------
- * Contexto opcional que puede pasar parámetros
- * a los handlers de rutas.
+ * Contexto opcional que puede incluir parámetros de la ruta
  */
 type HandlerContext<P = unknown> = {
   params: P;
 };
 
 /**
- * Handler
- * --------------------------------------------------
- * Tipo genérico para handlers de rutas que reciben
- * NextRequest y un contexto opcional, y retornan
- * una promesa de NextResponse.
+ * Tipo de función handler de API Route o Middleware protegido
+ * - req: objeto NextRequest
+ * - context: contexto adicional con parámetros opcionales
+ * - devuelve un NextResponse
  */
 type Handler<P = unknown> = (
   req: NextRequest,
@@ -26,44 +22,52 @@ type Handler<P = unknown> = (
 ) => Promise<NextResponse>;
 
 /**
- * withAuthorization
- * --------------------------------------------------
- * Middleware de autorización para endpoints.
- *
- * Flujo:
- * 1. Obtiene la sesión del usuario mediante getSession().
- * 2. Si no hay sesión → retorna 401 Unauthorized.
- * 3. Si la sesión existe pero el rol no tiene permiso → retorna 403 Forbidden.
- * 4. Si pasa las validaciones → ejecuta el handler original.
- *
- * @param permission - Permiso requerido para acceder al endpoint
- * @param handler - Función handler que ejecuta la lógica real
- * @returns un handler protegido que aplica autorización
+ * Middleware de autorización para API routes de Next.js
+ * 
+ * Envuelve un handler y verifica:
+ * 1. Que exista sesión de usuario (cookie JWT válida)
+ * 2. Que el rol del usuario tenga el permiso requerido
+ * 
+ * @param permission - Permiso requerido para ejecutar la acción
+ * @param handler - Función handler original que se ejecutará si la autorización pasa
+ * @returns Nuevo handler que realiza la verificación de sesión y permisos
  */
 export function withAuthorization<P>(
   permission: Permission,
   handler: Handler<P>
 ): Handler<P> {
   return async (req, context) => {
-    const session = await getSession();
+    try {
+      // Obtiene la sesión del usuario a partir de la cookie
+      const session = await getSession(req);
 
-    // No hay sesión activa
-    if (!session) {
+      // Si no hay sesión o no tiene rol definido, devuelve 401
+      if (!session?.role) {
+        return NextResponse.json(
+          { error: "Unauthorized" },
+          { status: 401 }
+        );
+      }
+
+      // Verifica si el rol tiene el permiso requerido
+      const isAuthorized = authorize(session.role, permission);
+
+      // Si no tiene permiso, devuelve 403
+      if (!isAuthorized) {
+        return NextResponse.json(
+          { error: "Forbidden" },
+          { status: 403 }
+        );
+      }
+
+      // Usuario autorizado, ejecuta el handler original
+      return handler(req, context);
+    } catch (error) {
+      // Cualquier error en el proceso de autorización devuelve 401
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
       );
     }
-
-    // El rol no tiene el permiso requerido
-    if (!authorize(session.role, permission)) {
-      return NextResponse.json(
-        { error: "Forbidden" },
-        { status: 403 }
-      );
-    }
-    
-    // Ejecuta el handler original si pasa la autorización
-    return handler(req, context);
   };
 }
