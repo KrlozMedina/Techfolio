@@ -1,17 +1,23 @@
 /**
- * Dominio funcional de una feature.
- * Define el área principal a la que pertenece la funcionalidad.
+ * Enum representing different domains or areas of a feature.
+ * Useful for categorizing features by their focus in the application.
  */
 export enum FeatureDomain {
-  /** Funcionalidad técnica: autenticación, base de datos, APIs, integraciones */
-  TECHNICAL = "Technical",
+  /** Features related to technical implementation or low-level system behavior */
+  TECHNICAL = "TECHNICAL",
 
-  /** Funcionalidad de negocio: reservas, pagos, reportes, flujos */
-  FUNCTIONAL = "Functional",
+  /** Features that focus on business logic or functional requirements */
+  FUNCTIONAL = "FUNCTIONAL",
 
-  /** Elementos de interfaz de usuario */
+  /** Features that affect the user interface or user experience */
   UI = "UI",
 
-  /** Lógica específica del servidor */
-  BACKEND = "BackEnd",
+  /** Features related to backend processes, APIs, or server logic */
+  BACKEND = "BACKEND",
+
+  /** Features that address security concerns, vulnerabilities, or access control */
+  SECURITY = "SECURITY",
+
+  /** Features concerning the overall system architecture or design decisions */
+  ARCHITECTURE = "ARCHITECTURE",
 }

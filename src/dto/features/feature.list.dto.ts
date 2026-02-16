@@ -1,15 +1,19 @@
+import { FeatureDomain } from "@/shared/enums/feature-domain.enum";
+
 /**
- * DTO para listado de Features.
- * - Contiene solo la información básica necesaria para listados
- * - Localizado a un idioma específico
+ * DTO (Data Transfer Object) que representa una feature simplificada para listados.
+ * Se usa típicamente al mostrar múltiples features en una lista o tabla.
  */
 export interface FeatureListDTO {
-  /** ID del documento (ObjectId serializado) */
+  /** Identificador único de la feature */
   id: string;
 
-  /** Slug único legible para URLs */
-  slug: string;
-
-  /** Título de la feature en el idioma solicitado */
+  /** Título de la feature */
   title: string;
+
+  /** Descripción breve de la feature */
+  description: string;
+
+  /** Dominio o categoría de la feature, usando el enum FeatureDomain */
+  domain: FeatureDomain;
 }

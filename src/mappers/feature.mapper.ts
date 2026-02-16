@@ -1,18 +1,15 @@
-/**
- * Mappers para DTOs de Feature.
- * - Convierte documentos de Mongo a DTOs optimizados
- * - Resuelve contenido localizado según idioma solicitado
- */
-
-import { FeatureDetailDTO } from "@/dto/features/feature.detail.dto";
+import { FeatureEntityDTO } from "@/dto/features/feature.entity.dto";
 import { FeatureListDTO } from "@/dto/features/feature.list.dto";
 import { FeatureDocument } from "@/models/features/feature.document";
 import { Language, LANGUAGES } from "@/shared/enums";
 
 /**
- * Resuelve el contenido localizado de una feature.
- * - Usa el idioma solicitado si existe
- * - Aplica fallback a español si no está disponible
+ * Obtiene el contenido localizado de una feature según el idioma solicitado.
+ * Si no existe contenido en el idioma solicitado, devuelve el contenido en español como fallback.
+ *
+ * @param feature - Documento de feature de Mongoose
+ * @param lang - Idioma deseado
+ * @returns Contenido localizado (título y descripción)
  */
 function resolveLanguage(
   feature: FeatureDocument,
@@ -22,14 +19,18 @@ function resolveLanguage(
     return feature.content[lang];
   }
 
+  // Fallback al español si el idioma solicitado no existe
   const fallback = LANGUAGES.ES;
   return feature.content[fallback];
 }
 
 /**
- * Mapper para listado de features.
- * - Convierte un FeatureDocument a FeatureListDTO
- * - Incluye solo los campos necesarios para listados
+ * Convierte un FeatureDocument a FeatureListDTO para listados o previews.
+ * Incluye solo el contenido en el idioma solicitado y el dominio.
+ *
+ * @param feature - Documento de feature
+ * @param lang - Idioma deseado
+ * @returns FeatureListDTO con id, título, descripción y dominio
  */
 export function toFeatureListDTO(
   feature: FeatureDocument,
@@ -39,27 +40,24 @@ export function toFeatureListDTO(
 
   return {
     id: feature._id.toString(),
-    slug: feature.slug,
     title: localized.title,
+    description: localized.description,
+    domain: feature.domain,
   };
 }
 
 /**
- * Mapper para detalle de feature.
- * - Convierte un FeatureDocument a FeatureDetailDTO
- * - Incluye contenido completo y el dominio
+ * Convierte un FeatureDocument a FeatureEntityDTO completo.
+ * Mantiene todo el contenido multilenguaje y el dominio.
+ *
+ * @param feature - Documento de feature
+ * @returns FeatureEntityDTO
  */
-export function toFeatureDetailDTO(
+export function toFeatureEntityDTO(
   feature: FeatureDocument,
-  lang: Language
-): FeatureDetailDTO {
-  const localized = resolveLanguage(feature, lang);
-
+): FeatureEntityDTO {
   return {
-    id: feature._id.toString(),
-    slug: feature.slug,
-    title: localized.title,
-    description: localized.description,
+    content: feature.content,
     domain: feature.domain,
   };
 }

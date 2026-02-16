@@ -1,134 +1,144 @@
-/**
- * API Route para Features
- * 
- * - GET: Obtiene el listado de features
- *   - Soporta query param `language` para localización
- *   - Devuelve DTOs optimizados para listados
- * 
- * - POST: Crea una nueva feature
- *   - Requiere permiso CREATE
- *   - Valida estructura multilenguaje y dominio
- */
-
-import { PERMISSIONS } from "@/lib/auth/permissions";
-import { withAuthorization } from "@/lib/auth/withAuthorization";
+import { createFeatureSchema } from "@/dto/features/feature.create.dto";
+import { PERMISSIONS, withAuthorization } from "@/lib/auth";
+import { sanitizeRegex } from "@/lib/db/sanitize-regex";
+import { handleApiError } from "@/lib/http/handle-api-error";
 import { toFeatureListDTO } from "@/mappers/feature.mapper";
-import { createFeature, getFeatures } from "@/services/features.service";
+import { createFeature, getFeatures, getTotalFeatures } from "@/services/features.service";
 import { LANGUAGES } from "@/shared/enums";
 import { FeatureDomain } from "@/shared/enums/feature-domain.enum";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 
-/* =========================
-  Schemas
-========================= */
-
 /**
- * Esquema para query params
- * - Permite especificar idioma opcional
+ * Schema para validar y transformar los query params de GET /features
+ * - limit: cantidad de items por página (coerción a número)
+ * - page: número de página (coerción a número)
+ * - language: idioma para mostrar el contenido
+ * - domain: dominio/categoría de la feature
+ * - search: texto a buscar en títulos o descripciones
  */
 const querySchema = z.object({
+  limit: z.coerce.number().min(1).optional(),
+  page: z.coerce.number().min(1).optional(),
   language: z.enum(LANGUAGES).optional(),
+  domain: z.enum(FeatureDomain).optional(),
+  search: z.string().optional().transform((val) => {
+    const trimmed = val?.trim();
+    return trimmed && trimmed.length > 0 ? trimmed : undefined;
+  }),
 });
 
 /**
- * Estructura base de contenido localizado
- * - Obligatorio título y descripción
+ * Construye el filtro para la consulta de features en MongoDB
+ * - Permite filtrar por dominio
+ * - Permite búsqueda por texto en título y descripción (es y en)
+ * 
+ * @param search - Texto de búsqueda opcional
+ * @param domain - Dominio opcional
+ * @returns Filtro compatible con Mongoose
  */
-const localizedContentSchema = z.object({
-  title: z.string().min(1),
-  description: z.string().min(1),
-})
+function buildFeatureFilter(
+  search?: string,
+  domain?: FeatureDomain
+) {
+  const filter: Record<string, unknown> = {};
 
-const contentSchema = z.object({
-  es: localizedContentSchema,
-  en: localizedContentSchema,
-})
+  if (domain) filter.domain = domain;
+
+  if (typeof search === "string" && search.trim().length > 0) {
+    const safeSearch = sanitizeRegex(search.trim());
+
+    filter.$or = [
+      { "content.es.title": { $regex: safeSearch, $options: "i" } },
+      { "content.en.title": { $regex: safeSearch, $options: "i" } },
+      { "content.es.description": { $regex: safeSearch, $options: "i" } },
+      { "content.en.description": { $regex: safeSearch, $options: "i" } },
+    ];
+  }
+
+  return filter;
+}
 
 /**
- * Esquema para creación de feature
- * - Valida contenido en ambos idiomas
- * - Valida dominio de la feature
+ * GET /features
+ * Lista features con paginación, filtrado y búsqueda.
+ * Protegido por permiso READ.
  */
-const createFeatureSchema = z.object({
-  content: contentSchema,
-  domain: z.enum(FeatureDomain),
-});
-
-/* =========================
-  GET /features
-========================= */
-
-/**
- * Obtiene el listado de features.
- * - Soporta selección de idioma mediante query param
- * - Devuelve DTOs optimizados para listado
- */
-export async function GET(req: NextRequest) {
-  try {
-    const { searchParams } = new URL(req.url);
-    const query = Object.fromEntries(searchParams.entries());
-
-    const { language = LANGUAGES.ES } = querySchema.parse(query);
-
-    const features = await getFeatures();
-
-    const response = features.map(f =>
-      toFeatureListDTO(f, language)
-    );
-
-    return NextResponse.json(
-      response,
-      { status: 200 }
-    )
-  } catch (error) {
-    if (error instanceof z.ZodError) {
+export const GET = withAuthorization(
+  PERMISSIONS.READ,
+  async (req: NextRequest) => {
+    try {
+      // Obtiene los query params como objeto
+      const query = Object.fromEntries(req.nextUrl.searchParams.entries());
+  
+      // Valida y transforma los query params
+      const {
+        limit = 10,
+        page = 1,
+        language = LANGUAGES.ES,
+        domain,
+        search
+      } = querySchema.parse(query);
+  
+      // Límites seguros para evitar exceso de resultados
+      const safeLimit = Math.min(limit, 100);
+      const safePage = Math.min(Math.max(page, 1), 1000);
+  
+      // Construye filtro para MongoDB
+      const filter = buildFeatureFilter(search, domain);
+  
+      // Obtiene features y total de forma paralela
+      const [features, total] = await Promise.all([
+        getFeatures(filter, safePage, safeLimit),
+        getTotalFeatures(filter)
+      ]);
+  
+      // Retorna datos con paginación
       return NextResponse.json(
-        { error: "Invalid query parameters" },
-        { status: 400 },
+        {
+          data: features.map((feature) =>
+            toFeatureListDTO(feature, language)
+          ),
+          pagination: {
+            total,
+            limit: safeLimit,
+            currentPage: safePage,
+            totalPages: Math.ceil(total / safeLimit),
+          },
+        },
+        { status: 200 }
       );
-    };
-
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 },
-    );
-  };
-};
-
-/* =========================
-  POST /features
-========================= */
+    } catch (error) {
+      return handleApiError(error);
+    }
+  }
+);
 
 /**
+ * POST /features
  * Crea una nueva feature.
- * - Requiere permiso CREATE
- * - Valida contenido multilenguaje y dominio
+ * Protegido por permiso CREATE.
  */
 export const POST = withAuthorization(
   PERMISSIONS.CREATE,
   async (req: NextRequest) => {
     try {
       const body = await req.json();
-      const data = createFeatureSchema.parse(body);
-      const created = await createFeature(data);
 
+      // Valida el body usando Zod
+      const data = createFeatureSchema.parse(body);
+
+      // Crea la feature en la base de datos
+      const created = await createFeature(data);
+  
+      // Retorna solo el ID de la feature creada
       return NextResponse.json(
-        created,
-        { status: 201 },
+        { id: created._id },
+        { status: 201 }
       );
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        return NextResponse.json(
-          { error: "Invalid request body" },
-          { status: 400 },
-        );
-      };
-
-      return NextResponse.json(
-        { error: "Internal server error" },
-        { status: 500 }
-      );
-    };
+      console.log(error);
+      return handleApiError(error);
+    }
   }
 );

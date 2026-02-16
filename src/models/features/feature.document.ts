@@ -1,41 +1,37 @@
 import { FeatureDomain } from "@/shared/enums/feature-domain.enum";
-import { Document } from "mongoose";
+import { Document, Types } from "mongoose";
 
 /**
- * Contenido localizado de una feature.
- * Define los campos obligatorios por idioma.
+ * Información localizada de una feature en un idioma específico
  */
 interface LocalizedFeatureInfo {
   /** Título de la feature */
   title: string;
-
-  /** Descripción detallada de la feature */
+  /** Descripción de la feature */
   description: string;
 }
 
 /**
- * Documento Feature en MongoDB.
- * Representa una funcionalidad del sistema con soporte multilenguaje.
+ * Documento de Mongoose que representa una feature en la base de datos
  */
 export interface FeatureDocument extends Document {
-  /** Identificador legible para URLs */
-  slug: string;
+  /** ID único del documento */
+  _id: Types.ObjectId;
 
-  /**
-   * Contenido localizado por idioma.
-   * Debe existir al menos en español e inglés.
-   */
+  /** Contenido multilenguaje de la feature */
   content: {
+    /** Contenido en español */
     es: LocalizedFeatureInfo;
+    /** Contenido en inglés */
     en: LocalizedFeatureInfo;
   };
 
-  /** Dominio funcional de la feature */
+  /** Dominio o categoría de la feature (técnico, funcional, UI, etc.) */
   domain: FeatureDomain;
 
-  /** Fecha de creación */
+  /** Fecha de creación del documento */
   createdAt: Date;
 
-  /** Fecha de última actualización */
+  /** Fecha de última actualización del documento */
   updatedAt: Date;
 }
