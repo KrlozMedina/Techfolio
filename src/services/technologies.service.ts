@@ -1,19 +1,17 @@
 import { CreateTechnologyDTO } from "@/dto/technology/technology.create.dto";
 import { UpdateTechnologyDTO } from "@/dto/technology/technology.update.dto";
 import connectDB from "@/lib/db/connectDB";
+import { validateObjectId } from "@/lib/validators/validateObjectId";
 import { Technology } from "@/models/technology/technology.model";
 
 /**
- * Servicios para operaciones CRUD sobre la entidad Technology.
- * Cada función asegura la conexión a la base de datos antes de operar.
- */
-
-/**
- * Crea una nueva tecnología.
- * - Abre la conexión a la base de datos si no existe
- * - Dispara validaciones y hooks definidos en el schema
- * @param data - DTO con los datos de la tecnología a crear
- * @returns Documento de la tecnología creada
+ * Crea una nueva tecnología en la base de datos.
+ *
+ * - Establece conexión con MongoDB.
+ * - Inserta el documento usando el modelo Technology.
+ *
+ * @param data Datos validados para la creación.
+ * @returns Documento creado.
  */
 export async function createTechnology(data: CreateTechnologyDTO) {
   await connectDB();
@@ -21,58 +19,92 @@ export async function createTechnology(data: CreateTechnologyDTO) {
 }
 
 /**
- * Actualiza una tecnología por ID.
- * - Permite actualizar campos de forma parcial
- * - Ejecuta validaciones del schema y hooks correspondientes
- * - Retorna el documento actualizado
- * @param id - ID de la tecnología a actualizar
- * @param data - DTO con los campos a modificar
- * @returns Documento actualizado o null si no existe
+ * Actualiza una tecnología existente por su ID.
+ *
+ * - Valida que el ID sea un ObjectId válido.
+ * - Ejecuta validaciones del modelo.
+ * - Retorna el documento actualizado.
+ *
+ * @param id ID de la tecnología.
+ * @param data Campos a actualizar (parcial).
+ * @returns Documento actualizado o null.
  */
 export async function updateTechnology(
   id: string,
   data: UpdateTechnologyDTO
 ) {
   await connectDB();
-  return Technology.findByIdAndUpdate(
-    id,
-    data,
-    {
-      new: true,        // Retorna el documento actualizado
-      runValidators: true, // Aplica validaciones del schema
-    }
-  );
+  validateObjectId(id);
+
+  return Technology.findByIdAndUpdate(id, data, {
+    new: true,          // retorna el documento actualizado
+    runValidators: true // ejecuta validaciones del schema
+  });
 }
 
 /**
  * Obtiene una tecnología por su ID.
- * - Incluye la información del slug de la categoría asociada
- * @param id - ID de la tecnología
- * @returns Documento de la tecnología o null si no existe
+ *
+ * - Valida ObjectId.
+ * - Hace populate del campo `categoryId`
+ *   trayendo únicamente el `slug`.
+ *
+ * @param id ID de la tecnología.
+ * @returns Documento encontrado o null.
  */
 export async function getTechnologyById(id: string) {
   await connectDB();
+  validateObjectId(id);
+
   return Technology
     .findById(id)
-    .populate("categoryId", "slug"); // Solo trae el slug de la categoría
+    .populate("categoryId", "slug");
 }
 
 /**
- * Obtiene todas las tecnologías.
- * - Retorna un array de documentos
- * @returns Array de tecnologías
+ * Obtiene una lista paginada de tecnologías.
+ *
+ * @param filter Filtros aplicados a la consulta.
+ * @param safePage Número de página validado.
+ * @param safeLimit Límite de registros por página.
+ * @returns Lista de tecnologías.
  */
-export async function getTechnologies() {
+export async function getTechnologies(
+  filter: Record<string, unknown>,
+  safePage: number,
+  safeLimit: number
+) {
   await connectDB();
-  return Technology.find();
+
+  return Technology
+    .find(filter)
+    .skip((safePage - 1) * safeLimit)
+    .limit(safeLimit);
+}
+
+/**
+ * Obtiene el total de tecnologías según un filtro.
+ *
+ * @param filter Filtros aplicados.
+ * @returns Número total de documentos.
+ */
+export async function getTotalTechnologies(
+  filter: Record<string, unknown>
+) {
+  await connectDB();
+  return Technology.countDocuments(filter);
 }
 
 /**
  * Elimina una tecnología por su ID.
- * @param id - ID de la tecnología a eliminar
- * @returns Documento eliminado o null si no existía
+ *
+ * - Valida ObjectId.
+ *
+ * @param id ID de la tecnología.
+ * @returns Documento eliminado o null.
  */
 export async function deleteTechnology(id: string) {
   await connectDB();
+  validateObjectId(id);
   return Technology.findByIdAndDelete(id);
 }

@@ -2,36 +2,44 @@ import { ExperienceLevel } from "@/shared/enums/experience-level.enum";
 import { Document } from "mongoose";
 
 /**
- * Documento de tecnología en MongoDB.
- * Representa la estructura completa almacenada en la colección.
+ * Representa el documento de Tecnología tal como existe en MongoDB.
+ *
+ * Extiende de `Document` de Mongoose para incluir:
+ * - Propiedades propias del modelo.
+ * - Métodos internos de Mongoose.
+ * - Campos automáticos como `_id`.
+ *
+ * Este tipo se usa en la capa de persistencia
+ * (modelo / repositorio), no como DTO público.
  */
 export interface TechnologyDocument extends Document {
   /** Nombre de la tecnología */
   name: string;
 
-  /** Identificador único legible para URLs (slug) */
+  /** Slug único generado a partir del nombre */
   slug: string;
 
   /**
-   * Referencia a la categoría asociada.
-   * Puede ser solo el slug o un documento poblado de categoría.
+   * Categoría asociada.
+   * Puede estar populada (objeto con slug)
+   * dependiendo de la consulta.
    */
   categoryId: {
     slug: string;
   };
 
-  /** URL del icono de la tecnología (opcional) */
+  /** URL del ícono */
   iconUrl?: string;
 
-  /** URL del sitio web de la tecnología (opcional) */
+  /** URL del sitio web oficial */
   websiteUrl?: string;
 
-  /** Nivel de experiencia requerido o alcanzado */
+  /** Nivel de experiencia asociado */
   experienceLevel: ExperienceLevel;
 
-  /** Fecha de creación del documento */
+  /** Fecha de creación (timestamp automático) */
   createdAt: Date;
 
-  /** Fecha de última actualización del documento */
+  /** Fecha de última actualización (timestamp automático) */
   updatedAt: Date;
 }

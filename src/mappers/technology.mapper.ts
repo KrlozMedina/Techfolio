@@ -1,45 +1,51 @@
-import { TechnologyDetailDTO } from "@/dto/technology/technology.detail.dto";
+import { TechnologyEntityDTO } from "@/dto/technology/technology.entity.dto";
 import { TechnologyListDTO } from "@/dto/technology/technology.list.dto";
 import { TechnologyDocument } from "@/models/technology/technology.document";
 
 /**
- * Convierte un documento de tecnología de MongoDB
- * a un DTO optimizado para listados.
+ * Transforma un documento de MongoDB (TechnologyDocument)
+ * en un DTO ligero para listados.
  *
- * Este DTO contiene solo los campos necesarios
- * para mostrar en una lista o menú.
+ * Se usa típicamente en endpoints paginados donde
+ * no se requiere información extendida.
+ *
+ * @param technology Documento proveniente del modelo.
+ * @returns Objeto en formato TechnologyListDTO.
  */
 export function toTechnologyListDTO(
-  technology: TechnologyDocument
+  technology: TechnologyDocument,
 ): TechnologyListDTO {
   return {
     id: technology._id.toString(),
     name: technology.name,
-    iconUrl: technology.iconUrl,
-    websiteUrl: technology.websiteUrl,
+    icon: technology.iconUrl,
+    website: technology.websiteUrl,
   };
 }
 
 /**
- * Convierte un documento de tecnología de MongoDB
- * a un DTO de detalle.
+ * Transforma un documento de MongoDB (TechnologyDocument)
+ * en un DTO completo de entidad.
  *
- * Este DTO incluye campos completos, incluyendo:
- * - slug para URLs
- * - referencia a la categoría asociada
- * - nivel de experiencia
- * - icono y sitio web opcionales
+ * Requiere que `categoryId` esté populado,
+ * ya que accede a `categoryId.slug`.
+ *
+ * Se usa normalmente en:
+ * - GET por ID
+ * - Respuestas detalladas
+ *
+ * @param technology Documento proveniente del modelo.
+ * @returns Objeto en formato TechnologyEntityDTO.
  */
-export function toTechnologyDetailDTO(
+export function toTechnologyEntityDTO(
   technology: TechnologyDocument
-): TechnologyDetailDTO {
+): TechnologyEntityDTO {
   return {
     id: technology._id.toString(),
-    slug: technology.slug,
-    categoryId: technology.categoryId.slug,
+    category: technology.categoryId.slug,
     name: technology.name,
-    iconUrl: technology.iconUrl,
-    websiteUrl: technology.websiteUrl,
+    icon: technology.iconUrl,
+    website: technology.websiteUrl,
     experienceLevel: technology.experienceLevel,
   };
 }

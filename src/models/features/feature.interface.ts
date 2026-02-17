@@ -1,28 +1,27 @@
 import { FeatureDomain } from "@/shared/enums/feature-domain.enum";
+import { IPaginationData } from "@/shared/interfaces/pagination.interface";
 import { Types } from "mongoose";
 
 /**
- * Interface base de Feature.
+ * Representa la entidad Feature tal como existe en base de datos.
  *
- * Define la estructura tipada usada por:
- * - Schema de Mongoose
- * - Servicios y lógica de dominio
+ * Incluye:
+ * - Identificador (_id)
+ * - Slug único
+ * - Contenido multilenguaje (es, en)
+ * - Dominio funcional (FeatureDomain)
+ * - Timestamps opcionales
  */
 export interface IFeature {
-  /**
-   * Identificador único del documento.
-   * Puede ser ObjectId o string serializado.
-   */
+  /** Identificador único (ObjectId o string serializado) */
   _id: Types.ObjectId | string;
 
-  /**
-   * Slug único y legible para URLs.
-   */
+  /** Slug único para rutas o identificación pública */
   slug: string;
 
   /**
    * Contenido localizado por idioma.
-   * Cada idioma requiere título y descripción.
+   * Permite internacionalización (i18n).
    */
   content: {
     es: {
@@ -35,21 +34,44 @@ export interface IFeature {
     };
   };
 
-  /**
-   * Dominio funcional de la feature.
-   * Define su propósito (técnico, UI, backend, etc.).
-   */
+  /** Dominio al que pertenece la feature */
   domain: FeatureDomain;
 
-  /**
-   * Fecha de creación del documento.
-   * Gestionada automáticamente por Mongoose.
-   */
+  /** Fecha de creación */
   createdAt?: Date;
 
-  /**
-   * Fecha de última actualización.
-   * Gestionada automáticamente por Mongoose.
-   */
+  /** Fecha de última actualización */
   updatedAt?: Date;
+}
+
+/**
+ * Versión ligera de Feature para listados.
+ *
+ * Se utiliza en endpoints paginados
+ * donde no se requiere toda la estructura interna.
+ */
+export interface IFeatureList {
+  /** ID serializado */
+  id: string;
+
+  /** Título según idioma seleccionado */
+  title: string;
+
+  /** Descripción resumida */
+  description: string;
+
+  /** Dominio funcional */
+  domain: FeatureDomain;
+}
+
+/**
+ * Respuesta paginada de features.
+ *
+ * Contiene:
+ * - Lista de elementos transformados
+ * - Metadatos de paginación
+ */
+export interface IFeaturePaginated {
+  data: IFeatureList[];
+  pagination: IPaginationData;
 }

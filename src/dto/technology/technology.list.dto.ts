@@ -1,19 +1,22 @@
 /**
- * DTO para listar tecnologías.
+ * DTO base para listar tecnologías.
  *
- * Representa la información básica necesaria
- * para mostrar un listado de tecnologías.
+ * Representa la versión ligera de la entidad,
+ * utilizada normalmente en endpoints de listado (GET paginado).
+ *
+ * No incluye información extendida como categoría completa
+ * ni nivel de experiencia detallado.
  */
 export interface TechnologyListDTO {
-  /** ID de la tecnología (ObjectId serializado) */
+  /** Identificador único de la tecnología */
   id: string;
 
   /** Nombre de la tecnología */
   name: string;
 
-  /** URL del icono representativo (opcional) */
-  iconUrl?: string;
+  /** URL del ícono representativo (opcional) */
+  icon?: string;
 
-  /** URL del sitio web oficial o documentación (opcional) */
-  websiteUrl?: string;
+  /** URL del sitio web oficial (opcional) */
+  website?: string;
 }

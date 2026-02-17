@@ -1,24 +1,28 @@
 /**
- * Niveles de experiencia para habilidades o tecnologías.
+ * Define los niveles de experiencia disponibles.
  *
- * Se pueden usar para describir el dominio de un usuario o proyecto.
+ * Puede utilizarse para:
+ * - Clasificación de habilidades
+ * - Filtros de búsqueda
+ * - Reglas de negocio
+ * - Control de progresión
  */
 export enum ExperienceLevel {
-  /** Nivel inicial, explorando o aprendiendo */
-  EXPLORING = "Exploring",
+  /** Explorando el área, sin conocimientos formales */
+  EXPLORING = "EXPLORING",
 
-  /** Conocimientos básicos */
-  BASIC = "Basic",
+  /** Conocimientos básicos o introductorios */
+  BASIC = "BASIC",
 
-  /** Nivel intermedio, con cierta experiencia práctica */
-  INTERMEDIATE = "Intermediate",
+  /** Manejo funcional sin profundidad avanzada */
+  INTERMEDIATE = "INTERMEDIATE",
 
-  /** Nivel avanzado, dominio sólido de la tecnología */
-  ADVANCED = "Advanced",
+  /** Dominio sólido y experiencia práctica */
+  ADVANCED = "ADVANCED",
 
-  /** Nivel experto, altamente competente */
-  EXPERT = "Expert",
+  /** Alto nivel técnico y autonomía completa */
+  EXPERT = "EXPERT",
 
-  /** Nivel profesional, aplicado en entornos de trabajo real */
-  PROFESSIONAL = "Professional"
+  /** Nivel profesional aplicado en entorno laboral */
+  PROFESSIONAL = "PROFESSIONAL",
 }

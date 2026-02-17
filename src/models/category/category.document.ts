@@ -1,45 +1,42 @@
 import { Document } from "mongoose";
 
 /**
- * Representa el contenido localizado de una categoría.
- * Contiene únicamente información dependiente del idioma.
+ * Información localizada de una categoría.
+ *
+ * Permite almacenar contenido en distintos idiomas.
  */
 interface LocalizedCategoryInfo {
   /** Título visible de la categoría */
   title: string;
 
-  /** Descripción asociada a la categoría */
+  /** Descripción detallada de la categoría */
   description: string;
 }
 
 /**
- * Modelo de documento de Categoría en MongoDB.
+ * Documento de Categoría en MongoDB.
  *
- * Extiende `Document` para incluir las propiedades internas de Mongoose
- * (_id, métodos de persistencia, etc.).
+ * Extiende de `Document` de Mongoose e incluye:
+ * - Contenido multilenguaje (es, en).
+ * - Campos automáticos de timestamps.
+ *
+ * Este tipo se usa en la capa de persistencia,
+ * no como DTO público.
  */
 export interface CategoryDocument extends Document {
   /**
-   * Identificador legible y único usado en URLs.
-   * Debe ser estable y no depender del idioma.
-   */
-  slug: string;
-
-  /**
-   * Contenido multilenguaje de la categoría.
+   * Contenido localizado por idioma.
+   *
    * Cada clave representa un idioma soportado.
    */
   content: {
-    /** Contenido en español */
     es: LocalizedCategoryInfo;
-
-    /** Contenido en inglés */
     en: LocalizedCategoryInfo;
   };
 
-  /** Fecha de creación del documento */
+  /** Fecha de creación */
   createdAt: Date;
 
-  /** Fecha de última actualización del documento */
+  /** Fecha de última actualización */
   updatedAt: Date;
 }

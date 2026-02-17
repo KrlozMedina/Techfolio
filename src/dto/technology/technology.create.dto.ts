@@ -1,14 +1,39 @@
 import { ExperienceLevel } from "@/shared/enums/experience-level.enum";
+import { isValidObjectId } from "mongoose";
+import z from "zod";
 
 /**
- * DTO para creación de una tecnología.
+ * Schema de validación para crear una nueva tecnología.
  *
- * Campos:
- * - `name`: Nombre de la tecnología (obligatorio)
- * - `categoryId`: ID de la categoría a la que pertenece (obligatorio)
- * - `iconUrl`: URL opcional del ícono representativo
- * - `websiteUrl`: URL opcional del sitio oficial o referencia
- * - `experienceLevel`: Nivel de experiencia requerido o del usuario (obligatorio)
+ * Valida:
+ * - name: Nombre obligatorio de la tecnología.
+ * - categoryId: Debe ser un ObjectId válido de MongoDB.
+ * - iconUrl: URL opcional del ícono.
+ * - websiteUrl: URL opcional del sitio oficial.
+ * - experienceLevel: Nivel de experiencia basado en el enum ExperienceLevel.
+ */
+export const createTechnologySchema = z.object({
+  /** Nombre de la tecnología */
+  name: z.string(),
+
+  /** ID de la categoría (ObjectId válido de MongoDB) */
+  categoryId: z
+    .string()
+    .refine(isValidObjectId, { message: "Invalid categoryId" }),
+
+  /** URL del ícono representativo */
+  iconUrl: z.string().url().optional(),
+
+  /** URL del sitio web oficial */
+  websiteUrl: z.string().url().optional(),
+
+  /** Nivel de experiencia asociado a la tecnología */
+  experienceLevel: z.nativeEnum(ExperienceLevel),
+});
+
+/**
+ * DTO para la creación de una tecnología.
+ * Representa la estructura tipada esperada en la capa de aplicación.
  */
 export type CreateTechnologyDTO = {
   name: string;

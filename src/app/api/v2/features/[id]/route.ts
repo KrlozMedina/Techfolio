@@ -8,11 +8,6 @@ import { Types } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * Indica que el handler se ejecuta en Node.js runtime
- */
-export const runtime = "nodejs";
-
-/**
  * Valida que un string sea un ObjectId válido de MongoDB
  * @param id - String a validar
  * @returns true si es válido
