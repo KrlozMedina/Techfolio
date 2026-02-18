@@ -23,7 +23,7 @@ import { createTechnologySchema } from "@/dto/technology/technology.create.dto";
  * - category (slug)
  */
 const technologyQuerySchema = querySchema.extend({
-  experienceLevel: z.nativeEnum(ExperienceLevel).optional(),
+  experienceLevel: z.enum(ExperienceLevel).optional(),
   category: z.string().optional(), // se valida indirectamente por búsqueda
 });
 

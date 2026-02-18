@@ -1,4 +1,4 @@
-import { createFeatureSchema } from "@/dto/features/feature.create.dto";
+import { createFeatureSchema } from "@/dto/feature/feature.create.dto";
 import { PERMISSIONS, withAuthorization } from "@/lib/auth";
 import { sanitizeRegex } from "@/lib/db/sanitize-regex";
 import { handleApiError } from "@/lib/http/handle-api-error";

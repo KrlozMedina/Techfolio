@@ -1,4 +1,4 @@
-import { updateFeatureSchema } from "@/dto/features/feature.update.dto";
+import { updateFeatureSchema } from "@/dto/feature/feature.update.dto";
 import { PERMISSIONS } from "@/lib/auth/permissions";
 import { withAuthorization } from "@/lib/auth/withAuthorization";
 import { handleApiError } from "@/lib/http/handle-api-error";

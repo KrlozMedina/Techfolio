@@ -1,5 +1,5 @@
-import { CreateFeatureDTO } from "@/dto/features/feature.create.dto";
-import { UpdateFeatureDTO } from "@/dto/features/feature.update.dto";
+import { CreateFeatureDTO } from "@/dto/feature/feature.create.dto";
+import { UpdateFeatureDTO } from "@/dto/feature/feature.update.dto";
 import connectDB from "@/lib/db/connectDB";
 import { Feature } from "@/models/features/feature.model";
 import { validateObjectId } from "@/lib/validators/validateObjectId";

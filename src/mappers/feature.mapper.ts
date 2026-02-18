@@ -1,5 +1,5 @@
-import { FeatureEntityDTO } from "@/dto/features/feature.entity.dto";
-import { FeatureListDTO } from "@/dto/features/feature.list.dto";
+import { FeatureEntityDTO } from "@/dto/feature/feature.entity.dto";
+import { FeatureListDTO } from "@/dto/feature/feature.list.dto";
 import { FeatureDocument } from "@/models/features/feature.document";
 import { Language, LANGUAGES } from "@/shared/enums";
 
