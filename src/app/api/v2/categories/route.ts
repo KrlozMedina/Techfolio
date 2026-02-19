@@ -8,7 +8,7 @@ import {
   createCategory,
   getCategories,
   getTotalCategories,
-} from "@/services/category.service";
+} from "@/services/categories/categories.service";
 import { LANGUAGES } from "@/shared/enums";
 import { querySchema } from "@/shared/interfaces/query.schema";
 import { NextRequest, NextResponse } from "next/server";

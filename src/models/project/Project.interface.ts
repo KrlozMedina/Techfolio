@@ -1,242 +1,270 @@
-// ==========================
-// 📁 interfaces/project.interface.ts
-// ==========================
-
-import { ArchitectureCommunication } from "@/shared/enums/architecture-communication.enum";
-import { ArchitectureStyle } from "@/shared/enums/architecture-style.enum";
-import { ArchitectureType } from "@/shared/enums/architecture-type.enum";
-import { DatabaseModel } from "@/shared/enums/database-model.enum";
-import { Platform } from "@/shared/enums/platform.enum";
-import { ProjectStatus } from "@/shared/enums/project-status.enum";
-import { ProjectType } from "@/shared/enums/project-type.enum";
-import { Role } from "@/shared/enums/role.enum";
+import {
+  ArchitectureCommunication,
+  ArchitectureStyle,
+  ArchitectureType,
+  DatabaseModel,
+  Platform,
+  Status,
+  ProjectType,
+  Role,
+  Visibility,
+} from "@/shared/enums";
 import { Types } from "mongoose";
 
-// ----------------------------------
-// 🧩 Campos de auditoría reutilizables
-// ----------------------------------
+/**
+ * Identificador genérico de entidad.
+ * En la capa de aplicación se maneja como string,
+ * aunque en infraestructura puede mapearse a ObjectId.
+ */
+type EntityId = string;
 
 /**
- * Campos estándar de auditoría para control temporal de entidades.
+ * Campos de auditoría comunes.
  */
-export interface IAuditFields {
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+interface IAuditFields {
+  /** Fecha de creación en formato ISO */
+  createdAt?: string;
 
-// ----------------------------------
-// 🌐 Localización de contenido
-// ----------------------------------
-
-/**
- * Estructura básica de contenido traducible.
- */
-export interface ILocalizedContent {
-  title: string;
-  description: string;
+  /** Fecha de última actualización en formato ISO */
+  updatedAt?: string;
 }
 
 /**
- * Contenido localizado soportando español e inglés.
- */
-export interface ILocalizedInfo {
-  es: ILocalizedContent;
-  en: ILocalizedContent;
-}
-
-// ----------------------------------
-// 🛠️ Estructura de proyecto V1 (plana)
-// ----------------------------------
-
-/**
- * Modelo inicial del proyecto (versión legacy).
- * Mantiene una estructura simple y no modular.
+ * 📦 Modelo legado de proyecto (Versión 1).
+ *
+ * Representa una estructura plana utilizada
+ * antes de la refactorización hacia un modelo
+ * más orientado a dominio.
  */
 export interface IProjectV1 extends IAuditFields {
-  _id: string;
+  /** Identificador único del proyecto */
+  _id: EntityId;
+
+  /** Título principal */
   title: string;
+
+  /** Slug único para rutas */
   slug: string;
+
+  /** Descripción general */
   description: string;
+
+  /** Tecnologías usadas (texto libre) */
   technologies: string[];
+
+  /** URL del repositorio */
   repositoryUrl: string;
+
+  /** URL del despliegue en producción */
   liveUrl: string;
+
+  /** Imagen principal */
   imageUrl: string;
+
+  /** Categorías asociadas */
   category: string[];
+
+  /** Rol desempeñado */
   role: string;
+
+  /** Tamaño del equipo */
   teamSize: number;
+
+  /** Duración del proyecto */
   duration: string;
+
+  /** Prioridad para ordenamiento */
   priority: number;
+
+  /** Tipo de proyecto (string legacy) */
   projectType: string;
 }
 
-// ----------------------------------
-// 🧩 Modularización de V2 Project
-// ----------------------------------
-
 /**
- * Información del equipo involucrado en el proyecto.
+ * Contenido localizado por idioma.
  */
-export interface ITeamInfo {
-  roleId?: string;
-  teamSize?: number;
-  duration?: string;
+interface ILocalizedContent {
+  /** Título del proyecto */
+  title: string;
+
+  /** Descripción general */
+  description: string;
+
+  /** Problema que resuelve */
+  problem: string;
+
+  /** Solución implementada */
+  solution: string;
 }
 
 /**
- * Identificadores de entidades relacionadas al proyecto.
+ * Información técnica y aprendizaje localizado.
  */
-export interface IProjectTags {
-  technologyIds: string[]; // ObjectId en tiempo de ejecución
-  platformId: string;
-  featureIds?: string[];
-  categoryIds?: string[];
+interface ILocalizedInsights {
+  /** Retos técnicos enfrentados */
+  technicalChallenges: string[];
+
+  /** Impacto generado */
+  impact: {
+    /** Métrica relacionada a usuarios */
+    users: string;
+  };
+
+  /** Aprendizajes clave */
+  learnings: string[];
 }
 
 /**
- * URLs asociadas al proyecto.
- */
-export interface IProjectUrls {
-  repository: string;
-  live: string;
-  isDownloadable: boolean;
-}
-
-/**
- * Recursos visuales del proyecto.
- */
-export interface IProjectAssets {
-  main: string;
-  blur: string;
-}
-
-/**
- * Modelo principal del proyecto versión 2.
- * Diseñado para ser escalable, tipado y multilenguaje.
+ * 🚀 Modelo de dominio de proyecto (Versión 2).
+ *
+ * Diseño orientado a:
+ * - Internacionalización
+ * - Separación por contextos
+ * - Relaciones normalizadas
+ * - Tipado fuerte mediante enums
  */
 export interface IProjectV2 {
+  /** Identificador único (ObjectId en backend, string en API) */
   _id: Types.ObjectId | string;
+
+  /** Slug único para rutas públicas */
   slug: string;
 
   /**
-   * Contenido localizado con información funcional del proyecto.
+   * Contenido localizado del proyecto.
+   * Permite expansión futura a más idiomas.
    */
   content: {
-    es: {
-      title: string;
-      description: string;
-      problem: string;
-      solution: string;
-    };
-    en: {
-      title: string;
-      description: string;
-      problem: string;
-      solution: string;
-    };
+    es: ILocalizedContent;
+    en: ILocalizedContent;
   };
 
   /**
-   * Información del equipo y tipo de proyecto.
+   * Información del equipo y contexto organizacional.
    */
   teamInfo: {
+    /** Rol desempeñado */
     role: Role;
+
+    /** Número de integrantes */
     teamSize: number;
+
+    /** Duración del proyecto */
     duration: string;
+
+    /** Tipo de proyecto */
     projectType: ProjectType;
+
+    /** Empresa o cliente */
+    company: string;
   };
 
   /**
-   * Definición de la arquitectura del sistema.
+   * Arquitectura técnica del proyecto.
    */
   architecture: {
+    /** Tipo de arquitectura (monolith, microservices, etc.) */
     type: ArchitectureType;
+
+    /** Estilo arquitectónico */
     style: ArchitectureStyle;
-    communication: ArchitectureCommunication[];
+
+    /** Comunicación interna y externa */
+    communication: {
+      internal: ArchitectureCommunication[];
+      external: ArchitectureCommunication[];
+    };
+
+    /** Modelo de base de datos */
     databaseModel: DatabaseModel;
   };
 
   /**
-   * Plataforma principal del proyecto.
+   * Capacidades actuales y planificadas.
    */
+  capabilities: {
+    metrics: {
+      /** Funcionalidades actuales */
+      current: string[];
+
+      /** Funcionalidades futuras */
+      planned: string[];
+    };
+  };
+
+  /** Plataforma principal del proyecto */
   platform: Platform;
 
   /**
-   * Relaciones con otras entidades del dominio.
+   * Relaciones normalizadas con otras entidades.
    */
-  technologyIds: Array<Types.ObjectId | string>;
-  featureIds: Array<Types.ObjectId | string>;
-  categoryIds: Array<Types.ObjectId | string>;
-
-  /**
-   * Retos técnicos enfrentados durante el desarrollo.
-   */
-  technicalChallenges: string[];
-
-  /**
-   * Impacto generado por el proyecto.
-   */
-  impact: {
-    metrics: string[];
-    users: string;
+  relations: {
+    technologyIds: EntityId[];
+    featureIds: EntityId[];
+    categoryIds: EntityId[];
   };
 
   /**
-   * Aprendizajes clave obtenidos.
+   * Información técnica y de impacto por idioma.
    */
-  learnings: string[];
+  insights: {
+    es: ILocalizedInsights;
+    en: ILocalizedInsights;
+  };
+
+  /**
+   * Resultado y estado del proyecto.
+   */
+  outcome: {
+    /** Estado del resultado */
+    status: Status;
+
+    /** Casos de éxito asociados */
+    successCaseId: EntityId[] | null;
+  };
 
   /**
    * URLs relevantes del proyecto.
    */
   urls: {
+    /** Repositorio principal */
     repository: string;
+
+    /** URL en producción */
     live: string | null;
+
+    /** Documentación técnica */
     documentation: string | null;
   };
 
   /**
    * Recursos visuales del proyecto.
    */
-  assets: {
+  cover: {
+    /** Imagen principal */
     main: string;
+
+    /** Imagen optimizada tipo blur */
     blur: string;
   };
 
-  /**
-   * Prioridad relativa del proyecto.
-   */
+  /** Puntuación interna para ordenamiento o relevancia */
   importanceScore: number;
 
-  /**
-   * Estado actual del proyecto.
-   */
-  status: ProjectStatus;
+  /** Estado operativo del proyecto */
+  status: Status;
+
+  /** Nivel de visibilidad pública */
+  visibility: Visibility;
 
   /**
-   * Campos de auditoría.
+   * Línea temporal del proyecto.
    */
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+  timeline: {
+    /** Fecha de lanzamiento inicial (ISO string) */
+    initialRelease: string;
 
-// ----------------------------------
-// 📄 Paginación de respuestas
-// ----------------------------------
-
-/**
- * Metadatos de paginación para listados.
- */
-export interface IPaginationData {
-  total: number;
-  limit: number;
-  currentPage: number;
-  totalPages: number;
-}
-
-/**
- * Resultado paginado de proyectos V2.
- */
-export interface IProjectV2Paginated {
-  data: IProjectV2[];
-  pagination: IPaginationData;
+    /** Indica si tendrá expansión futura */
+    futureExpansion: boolean;
+  };
 }

@@ -10,8 +10,8 @@
 
 import { z } from "zod";
 import { urlValidator } from "@/lib/validators/common";
-import { LANGUAGES } from "@/shared/enums";
-import { ProjectStatus } from "@/shared/enums/project-status.enum";
+import { LANGUAGES, Platform, Status } from "@/shared/enums";
+// import { ProjectStatus } from "@/shared/enums/status.enum";
 
 /* =========================================================
  * 🔁 Reusable sub-schemas
@@ -127,7 +127,7 @@ const ProjectV2BaseSchema = z.object({
   urls: urlsSchema,
   assets: assetsSchema,
   importanceScore: z.number().min(1).max(10),
-  status: z.enum(ProjectStatus),
+  status: z.enum(Status),
 });
 
 /* =========================================================
@@ -170,8 +170,11 @@ export type UpdateProjectV2DtoType = z.infer<typeof UpdateProjectV2Dto>;
  * Query parameters for fetching projects (V2).
  */
 export const GetProjectsV2Dto = z.object({
-  status: z.enum(ProjectStatus).optional(),
+  status: z.enum(Status).optional(),
   search: z.string().max(100).optional(),
+  technology: z.string().optional(),
+  platform: z.enum(Platform).optional(),
+  feature: z.string().optional(),
   page: z.coerce.number().min(1).optional(),
   limit: z.coerce.number().min(1).max(100).optional(),
   id: z.string().optional(),

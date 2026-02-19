@@ -1,152 +1,79 @@
-/**
- * API route for managing projects (v2).
- * Includes:
- * - GET: list projects with filters, pagination and localization
- * - POST: create a new project with validation and authorization
- */
-
 import { NextRequest, NextResponse } from "next/server";
-import { GetProjectsV2Dto } from "@/dto/project/projects.dto";
-import { ProjectV2 } from "@/models/project/project.model";
-import z from "zod";
-import { createProject, getProjects } from "@/services/project.service";
-import { isValidObjectId } from "mongoose";
 import {
-  ArchitectureCommunication,
-  ArchitectureStyle,
-  ArchitectureType,
-  DatabaseModel,
-  LANGUAGES,
-  Platform,
-  ProjectStatus,
-  ProjectType,
-  Role
-} from "@/shared/enums";
+  createProject,
+  getProjects,
+  getTotalProjects
+} from "@/services/projects/projects.service";
+import { LANGUAGES, Platform, Status } from "@/shared/enums";
 import { toProjectListDTO } from "@/mappers/project.mapper";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { PERMISSIONS, withAuthorization } from "@/lib/auth";
-
-/* ================== Utils ================== */
-
-/**
- * Escapes special regex characters to avoid injection
- * when building MongoDB $regex queries.
- */
-function sanitizeSearch(input: string): string {
-  return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
+import { createProjectSchema } from "@/dto/project/project.create.dto";
+import { sanitizeRegex } from "@/lib/db/sanitize-regex";
+import { Technology } from "@/models/technology/technology.model";
+import { Feature } from "@/models/features/feature.model";
+import "@/models";
+import { querySchema } from "@/shared/interfaces/query.schema";
+import z from "zod";
 
 /**
- * Validates and parses query params for GET /projects
- * Throws ZodError if validation fails.
+ * Extiende el schema base de query para permitir:
+ * - status
+ * - technology (slug)
+ * - platform
+ * - feature (slug)
  */
-function validateGetProjects(query: Record<string, string>) {
-  const result = GetProjectsV2Dto.safeParse(query);
-  if (!result.success) {
-    throw result.error;
-  }
-  return result.data;
-}
-
-/* ================== Schemas ================== */
-
-/**
- * Schema for localized content per language.
- */
-const localizedContentSchema = z.object({
-  title: z.string().min(1),
-  description: z.string().min(1),
-  problem: z.string().min(1),
-  solution: z.string().min(1),
+const projectQuerySchema = querySchema.extend({
+  status: z.enum(Status).optional(),
+  technology: z.string().optional(),
+  platform: z.enum(Platform).optional(),
+  feature: z.string().optional(),
 });
 
 /**
- * Schema for multilingual project content.
+ * Construye dinámicamente el filtro Mongo en base
+ * a los parámetros de query recibidos.
+ *
+ * - Convierte slugs (technology, feature) a ObjectId.
+ * - Aplica filtro por status y platform.
+ * - Aplica búsqueda textual segura usando regex sanitizada.
  */
-const contentSchema = z.object({
-  es: localizedContentSchema,
-  en: localizedContentSchema,
-});
-
-/**
- * Schema describing team and project context.
- */
-const teamInfoSchema = z.object({
-  role: z.enum(Role),
-  teamSize: z.number().int().positive(),
-  duration: z.string(),
-  projectType: z.enum(ProjectType),
-});
-
-/**
- * Schema defining software architecture decisions.
- */
-const architectureSchema = z.object({
-  type: z.enum(ArchitectureType),
-  style: z.enum(ArchitectureStyle),
-  communication: z.array(z.enum(ArchitectureCommunication)).nonempty(),
-  databaseModel: z.enum(DatabaseModel),
-});
-
-/**
- * Schema for project impact information.
- */
-const impactSchema = z.object({
-  metrics: z.array(z.string()),
-  users: z.string(),
-});
-
-/**
- * Schema for project-related URLs.
- */
-const urlSchema = z.object({
-  repository: z.string().url(),
-  live: z.string().url().nullable(),
-  documentation: z.string().url().nullable(),
-});
-
-/**
- * Schema for visual assets.
- */
-const assetSchema = z.object({
-  main: z.string().min(1),
-  blur: z.string().min(1),
-});
-
-/**
- * Schema for creating a new project.
- * Used to validate POST request body.
- */
-const createProjectSchema = z.object({
-  content: contentSchema,
-  teamInfo: teamInfoSchema,
-  architecture: architectureSchema,
-  platform: z.enum(Platform),
-  technologyIds: z.array(z.string().refine(isValidObjectId)),
-  featureIds: z.array(z.string().refine(isValidObjectId)),
-  categoryIds: z.array(z.string().refine(isValidObjectId)),
-  technicalChallenges: z.array(z.string()),
-  impact: impactSchema,
-  learnings: z.array(z.string()),
-  urls: urlSchema,
-  assets: assetSchema,
-  importanceScore: z.number().min(1).max(5),
-  status: z.enum(ProjectStatus),
-});
-
-/* ================== Filters ================== */
-
-/**
- * Builds a MongoDB filter object based on
- * project status and text search.
- */
-function buildProjectFilter(status?: string, search?: string) {
+async function buildProjectFilter(
+  status?: Status,
+  search?: string,
+  technology?: string,
+  platform?: Platform,
+  feature?: string,
+) {
   const filter: Record<string, unknown> = {};
 
+  if (technology) {
+    const tech = await Technology.findOne({ slug: technology }).select("_id");
+
+    if (!tech) {
+      filter._id = null;
+      return filter;
+    }
+
+    filter["relations.technologyIds"] = tech._id;
+  }
+
+  if (feature) {
+    const feat = await Feature.findOne({ slug: feature }).select("_id");
+
+    if (!feat) {
+      filter._id = null;
+      return filter;
+    }
+
+    filter["relations.featureIds"] = feat._id;
+  }
+
   if (status) filter.status = status;
+  if (platform) filter.platform = platform;
 
   if (search) {
-    const safeSearch = sanitizeSearch(search);
+    const safeSearch = sanitizeRegex(search);
     filter.$or = [
       { "content.es.title": { $regex: safeSearch, $options: "i" } },
       { "content.en.title": { $regex: safeSearch, $options: "i" } },
@@ -158,35 +85,68 @@ function buildProjectFilter(status?: string, search?: string) {
   return filter;
 }
 
-/* ================== GET ================== */
-
 /**
- * GET /projects
- * Returns a paginated and filtered list of projects.
+ * GET /api/projects
+ *
+ * Lista proyectos con:
+ * - Filtros dinámicos
+ * - Búsqueda textual
+ * - Paginación
+ * - Selección de idioma
+ *
+ * Query params:
+ * - status (opcional)
+ * - technology (slug, opcional)
+ * - feature (slug, opcional)
+ * - platform (opcional)
+ * - search (opcional)
+ * - page (default 1)
+ * - limit (default 10, max 100)
+ * - language (opcional)
+ *
+ * Respuesta:
+ * {
+ *   data: ProjectListDTO[],
+ *   pagination: {
+ *     total: number,
+ *     limit: number,
+ *     currentPage: number,
+ *     totalPages: number
+ *   }
+ * }
  */
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
-    const query = Object.fromEntries(searchParams.entries());
+    const query = Object.fromEntries(req.nextUrl.searchParams.entries());
 
     const {
       status,
       search,
+      technology,
+      platform,
+      feature,
       limit = 10,
       page = 1,
       language = LANGUAGES.ES,
-    } = validateGetProjects(query);
+    } = projectQuerySchema.parse(query);
 
-    const safeLimit = Math.min(Number(limit), 100);
-    const safePage = Math.max(Number(page), 1);
-    const filter = buildProjectFilter(status, search);
+    const safeLimit = Math.min(limit, 100);
+    const safePage = Math.min(Math.max(page, 1), 1000);
+
+    const filter = await buildProjectFilter(
+      status,
+      search,
+      technology,
+      platform,
+      feature
+    );
 
     const [projects, total] = await Promise.all([
       getProjects(filter, safePage, safeLimit),
-      ProjectV2.countDocuments(filter),
+      getTotalProjects(filter),
     ]);
 
-    return NextResponse.json({
+    const response = {
       data: projects.map(p => toProjectListDTO(p, language)),
       pagination: {
         total,
@@ -194,18 +154,24 @@ export async function GET(req: NextRequest) {
         currentPage: safePage,
         totalPages: Math.ceil(total / safeLimit),
       },
-    });
+    };
+
+    return NextResponse.json(response, { status: 200 });
   } catch (error) {
     return handleApiError(error);
   }
 }
 
-/* ================== POST ================== */
-
 /**
- * POST /projects
- * Creates a new project.
- * Requires CREATE permission.
+ * POST /api/projects
+ *
+ * Crea un nuevo proyecto.
+ * - Requiere permiso CREATE.
+ * - Valida body con schema Zod.
+ *
+ * Respuestas:
+ * - 201: Proyecto creado
+ * - 400: Body inválido
  */
 export const POST = withAuthorization(
   PERMISSIONS.CREATE,

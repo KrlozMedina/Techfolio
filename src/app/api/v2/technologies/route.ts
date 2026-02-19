@@ -6,7 +6,7 @@ import {
   createTechnology,
   getTechnologies,
   getTotalTechnologies,
-} from "@/services/technologies.service";
+} from "@/services/technologies/technologies.service";
 import { toTechnologyListDTO } from "@/mappers/technology.mapper";
 import { ExperienceLevel } from "@/shared/enums/experience-level.enum";
 import { querySchema } from "@/shared/interfaces/query.schema";

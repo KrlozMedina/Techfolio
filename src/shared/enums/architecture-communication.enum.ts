@@ -1,23 +1,54 @@
 /**
- * Define los tipos de comunicación utilizados en la arquitectura del proyecto.
- * Permite describir cómo interactúan los distintos componentes del sistema.
+ * Define los distintos mecanismos de comunicación utilizados
+ * en arquitecturas de software y sistemas distribuidos.
+ *
+ * Cada valor representa un protocolo o estilo de integración
+ * comúnmente empleado para la interoperabilidad entre servicios,
+ * aplicaciones o dispositivos.
  */
 export enum ArchitectureCommunication {
-  /** Comunicación sin estado basada en HTTP */
+
+  /**
+   * Arquitectura basada en HTTP y principios REST.
+   * Comunicación síncrona request-response.
+   */
   REST = "REST",
 
-  /** Comunicación mediante consultas y mutaciones tipadas */
-  GRAPHQL = "GraphQL",
+  /**
+   * API basada en consultas tipadas mediante GraphQL.
+   * Permite solicitar únicamente los datos necesarios.
+   */
+  GRAPHQL = "GRAPHQL",
 
-  /** Comunicación bidireccional en tiempo real */
-  WEBSOCKET = "WebSocket",
+  /**
+   * Comunicación bidireccional persistente en tiempo real
+   * sobre una conexión TCP (generalmente sobre HTTP).
+   */
+  WEBSOCKET = "WEBSOCKET",
 
-  /** Arquitectura basada en eventos asíncronos */
-  EVENT_DRIVEN = "Event driven",
+  /**
+   * Arquitectura basada en eventos asíncronos.
+   * Los servicios reaccionan a eventos publicados.
+   */
+  EVENT_DRIVEN = "EVENT_DRIVEN",
 
-  /** Protocolo ligero de mensajería, común en IoT */
+  /**
+   * Protocolo ligero de mensajería publish/subscribe.
+   * Muy utilizado en IoT y sistemas embebidos.
+   */
   MQTT = "MQTT",
 
-  /** Protocolo industrial para interoperabilidad de sistemas */
-  OPCUA = "OPC UA",
+  /**
+   * OPC Unified Architecture.
+   * Estándar industrial para interoperabilidad en
+   * automatización y sistemas de control.
+   */
+  OPCUA = "OPCUA",
+
+  /**
+   * Java Database Connectivity.
+   * API para conexión y ejecución de consultas
+   * sobre bases de datos relacionales.
+   */
+  JDBC = "JDBC",
 }

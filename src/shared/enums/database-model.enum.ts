@@ -1,15 +1,51 @@
 /**
- * Enum que representa los tipos de modelos de base de datos que un proyecto puede utilizar.
- * - RELATIONAL: Bases de datos relacionales (SQL, MySQL, PostgreSQL, etc.).
- * - DOCUMENT: Bases de datos orientadas a documentos (MongoDB, CouchDB, etc.).
- * - KEY_VALUE: Bases de datos clave-valor (Redis, DynamoDB, etc.).
- * - GRAPH: Bases de datos de grafos (Neo4j, ArangoDB, etc.).
- * - TIMESERIES: Bases de datos de series temporales (InfluxDB, TimescaleDB, etc.).
+ * Define los principales modelos de bases de datos
+ * según su estructura de almacenamiento y consulta.
+ *
+ * Cada valor representa un paradigma distinto de
+ * organización y acceso a los datos.
  */
 export enum DatabaseModel {
-  RELATIONAL = "Relational",
-  DOCUMENT = "Document",
-  KEY_VALUE = "Key value",
-  GRAPH = "Graph",
-  TIMESERIES = "Time series",
+
+  /**
+   * Modelo relacional.
+   * Datos organizados en tablas con filas y columnas,
+   * utilizando SQL y relaciones mediante claves.
+   */
+  RELATIONAL = "RELATIONAL",
+
+  /**
+   * Modelo orientado a documentos.
+   * Almacena información en estructuras tipo JSON/BSON,
+   * flexible y sin esquema rígido.
+   */
+  DOCUMENT = "DOCUMENT",
+
+  /**
+   * Modelo clave-valor.
+   * Estructura simple basada en pares key-value,
+   * optimizada para alta velocidad de lectura/escritura.
+   */
+  KEY_VALUE = "KEY_VALUE",
+
+  /**
+   * Modelo de grafos.
+   * Representa datos como nodos y relaciones,
+   * ideal para estructuras altamente conectadas.
+   */
+  GRAPH = "GRAPH",
+
+  /**
+   * Modelo de series temporales.
+   * Optimizado para datos indexados por tiempo,
+   * común en monitoreo y telemetría.
+   */
+  TIMESERIES = "TIMESERIES",
+
+  /**
+   * Modelo híbrido.
+   * Combina múltiples paradigmas de almacenamiento
+   * dentro de un mismo motor de base de datos.
+   */
+  HYBRID = "HYBRID",
 }

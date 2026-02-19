@@ -6,7 +6,7 @@ import {
   deleteSuccessCase,
   getSuccessCaseById,
   updateSuccessCase
-} from "@/services/success-case.service";
+} from "@/services/success-cases/success-cases.service";
 import { LANGUAGES } from "@/shared/enums";
 import { querySchema } from "@/shared/interfaces/query.schema";
 import { Types } from "mongoose";

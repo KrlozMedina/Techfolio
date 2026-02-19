@@ -1,41 +1,79 @@
 /**
- * DTO que representa la información básica de un proyecto
- * utilizada en vistas de listado o resúmenes.
+ * DTO utilizado para representar un proyecto en vistas de listado.
+ *
+ * Contiene únicamente la información necesaria para mostrar
+ * tarjetas o resúmenes de proyectos.
+ *
+ * Este DTO NO expone el modelo completo de base de datos,
+ * sino una versión transformada y segura para la API pública.
  */
-export interface ProjectListDTO {
-  /** Identificador único del proyecto */
+export type ProjectListDTO = {
+  /**
+   * Identificador único del proyecto.
+   */
   id: string;
 
-  /** Slug único usado en URLs */
+  /**
+   * Slug único utilizado para rutas públicas.
+   */
   slug: string;
 
-  /** Título del proyecto según el idioma solicitado */
+  /**
+   * Título del proyecto según el idioma seleccionado.
+   */
   title: string;
 
-  /** Descripción corta del proyecto */
+  /**
+   * Descripción corta del proyecto.
+   */
   description: string;
 
-  /** Plataforma objetivo del proyecto (web, mobile, desktop, etc.) */
+  /**
+   * Plataforma principal del proyecto (ej: web, mobile).
+   */
   platform: string;
 
-  /** Lista de slugs de las features asociadas al proyecto */
+  /**
+   * Tipo o categoría del proyecto.
+   */
+  type: string;
+
+  /**
+   * Lista de features asociadas al proyecto.
+   * Generalmente representadas como slugs o identificadores.
+   */
   features: string[];
 
-  /** Lista de slugs de las categorías asociadas al proyecto */
-  categories: string[];
+  /**
+   * Tecnologías asociadas al proyecto.
+   * Estructura definida en el mapper correspondiente.
+   */
+  technologies: object[];
 
-  /** Lista de slugs de las tecnologías usadas en el proyecto */
-  technologies: string[];
+  /**
+   * Resultado o impacto principal del proyecto.
+   * Puede ser null si no existe información de resultado.
+   */
+  outcome: object | null;
 
-  /** URL del repositorio de código fuente */
+  /**
+   * URL del repositorio (ej: GitHub).
+   */
   repositoryUrl: string;
 
-  /** URL pública del proyecto desplegado (puede ser nula) */
+  /**
+   * URL pública del proyecto en producción.
+   * Puede ser null si no existe despliegue.
+   */
   liveUrl: string | null;
 
-  /** URL de la imagen principal del proyecto */
+  /**
+   * Imagen principal del proyecto.
+   */
   imageMain: string;
 
-  /** URL de la imagen blur usada como placeholder */
+  /**
+   * Versión blur o placeholder optimizado de la imagen principal.
+   */
   imageBlur: string;
-}
+};

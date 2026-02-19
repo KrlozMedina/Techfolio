@@ -6,7 +6,7 @@ import {
   deleteCategory,
   getCategoryById,
   updateCategory,
-} from "@/services/category.service";
+} from "@/services/categories/categories.service";
 import { toCategoryEntityDTO } from "@/mappers/category.mapper";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { updateCategorySchema } from "@/dto/category/category.update.dto";

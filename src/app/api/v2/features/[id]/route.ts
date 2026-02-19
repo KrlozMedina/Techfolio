@@ -3,7 +3,7 @@ import { PERMISSIONS } from "@/lib/auth/permissions";
 import { withAuthorization } from "@/lib/auth/withAuthorization";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { toFeatureEntityDTO } from "@/mappers/feature.mapper";
-import { deleteFeature, getFeatureById, updateFeature } from "@/services/features.service";
+import { deleteFeature, getFeatureById, updateFeature } from "@/services/features/features.service";
 import { Types } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 

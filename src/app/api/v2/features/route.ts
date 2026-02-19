@@ -3,7 +3,7 @@ import { PERMISSIONS, withAuthorization } from "@/lib/auth";
 import { sanitizeRegex } from "@/lib/db/sanitize-regex";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { toFeatureListDTO } from "@/mappers/feature.mapper";
-import { createFeature, getFeatures, getTotalFeatures } from "@/services/features.service";
+import { createFeature, getFeatures, getTotalFeatures } from "@/services/features/features.service";
 import { LANGUAGES } from "@/shared/enums";
 import { FeatureDomain } from "@/shared/enums/feature-domain.enum";
 import { querySchema } from "@/shared/interfaces/query.schema";

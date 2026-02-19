@@ -1,37 +1,42 @@
 import { Schema } from "mongoose";
 import { IProjectV1, IProjectV2 } from "@/models/project/project.interface";
-import { Role } from "@/shared/enums/role.enum";
-import { ProjectType } from "@/shared/enums/project-type.enum";
-import { ArchitectureType } from "@/shared/enums/architecture-type.enum";
-import { ArchitectureStyle } from "@/shared/enums/architecture-style.enum";
-import { DatabaseModel } from "@/shared/enums/database-model.enum";
-import { Platform } from "@/shared/enums/platform.enum";
-import { ProjectStatus } from "@/shared/enums/project-status.enum";
 import { slugify } from "@/lib/utils/slugify";
-import { ArchitectureCommunication } from "@/shared/enums/architecture-communication.enum";
-
-/* =========================================================
- * VALIDADORES Y HELPERS REUTILIZABLES
- * ========================================================= */
+import {
+  ArchitectureCommunication,
+  ArchitectureStyle,
+  ArchitectureType,
+  DatabaseModel,
+  Platform,
+  ProjectType,
+  Role,
+  Status,
+  Visibility,
+} from "@/shared/enums";
 
 /**
- * Valida URLs HTTP/HTTPS de forma básica.
+ * Validador básico de URL.
+ * Acepta URLs con o sin protocolo.
  */
 const isValidUrl = (url: string) =>
-  /^(https?:\/\/)?([\w.-]+)+(:\d+)?(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/.test(url);
+  /^(https?:\/\/)?([\w.-]+)+(:\d+)?(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/.test(
+    url
+  );
 
 /**
- * Campo string genérico.
+ * Helper para campos string simples.
  */
 const stringField = (required = true) => ({ type: String, required });
 
 /**
- * Campo array de strings.
+ * Helper para arrays de string.
  */
-const stringArrayField = (required = true) => ({ type: [String], required });
+const stringArrayField = (required = true) => ({
+  type: [String],
+  required,
+});
 
 /**
- * Campo URL con validación.
+ * Helper para campos URL con validación.
  */
 const urlField = (required = true) => ({
   type: String,
@@ -40,7 +45,7 @@ const urlField = (required = true) => ({
 });
 
 /**
- * Campo numérico con opciones.
+ * Helper para campos numéricos con restricciones opcionales.
  */
 const numberField = (
   options: Partial<{ required: boolean; min: number; max: number }> = {}
@@ -49,15 +54,14 @@ const numberField = (
   ...options,
 });
 
-/* =========================================================
- * SCHEMA PROJECT V1 (LEGACY / SIMPLE)
- * ========================================================= */
+/* ============================================================
+   ======================= PROJECT V1 =========================
+   ============================================================ */
 
 /**
- * Schema V1:
- * - Modelo plano y legacy
- * - No localizado
- * - Mantiene compatibilidad con proyectos antiguos
+ * 📦 Esquema legado (estructura plana).
+ * Utilizado antes de la migración a un modelo
+ * más modular y orientado a dominio.
  */
 export const projectV1Schema = new Schema<IProjectV1>(
   {
@@ -78,21 +82,54 @@ export const projectV1Schema = new Schema<IProjectV1>(
   { timestamps: true }
 );
 
-/* =========================================================
- * SCHEMA PROJECT V2 (ACTUAL)
- * ========================================================= */
+/* ============================================================
+   ======================= SUBSCHEMAS =========================
+   ============================================================ */
 
 /**
- * Schema V2:
- * - Soporte multilenguaje
- * - Arquitectura, plataforma y dominio explícitos
- * - Relaciones con Technology, Feature y Category
+ * Subdocumento de contenido localizado.
+ */
+const ContentSchema = new Schema(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    problem: { type: String, required: true },
+    solution: { type: String, required: true },
+  },
+  { _id: false }
+);
+
+/**
+ * Subdocumento de insights técnicos y métricas.
+ */
+const InsightSchema = new Schema(
+  {
+    technicalChallenges: [{ type: String }],
+    impact: {
+      users: { type: String },
+    },
+    learnings: [{ type: String }],
+  },
+  { _id: false }
+);
+
+/* ============================================================
+   ======================= PROJECT V2 =========================
+   ============================================================ */
+
+/**
+ * 🚀 Esquema principal del Proyecto V2.
+ *
+ * Diseño orientado a:
+ * - Internacionalización
+ * - Separación por contextos
+ * - Relaciones normalizadas
+ * - Validación fuerte con enums
  */
 export const ProjectV2Schema = new Schema<IProjectV2>(
   {
     /**
-     * Slug único del proyecto.
-     * Se genera automáticamente si no se envía.
+     * Slug único autogenerado.
      */
     slug: {
       type: String,
@@ -106,22 +143,12 @@ export const ProjectV2Schema = new Schema<IProjectV2>(
      * Contenido localizado (ES / EN).
      */
     content: {
-      es: {
-        title: { type: String, required: true },
-        description: { type: String, required: true },
-        problem: { type: String, required: true },
-        solution: { type: String, required: true },
-      },
-      en: {
-        title: { type: String, required: true },
-        description: { type: String, required: true },
-        problem: { type: String, required: true },
-        solution: { type: String, required: true },
-      },
+      es: ContentSchema,
+      en: ContentSchema,
     },
 
     /**
-     * Información del equipo.
+     * Información del equipo y contexto organizacional.
      */
     teamInfo: {
       role: {
@@ -136,10 +163,20 @@ export const ProjectV2Schema = new Schema<IProjectV2>(
         enum: Object.values(ProjectType),
         required: true,
       },
+      company: { type: String },
     },
 
     /**
-     * Arquitectura del proyecto.
+     * Plataforma principal.
+     */
+    platform: {
+      type: String,
+      enum: Object.values(Platform),
+      required: true,
+    },
+
+    /**
+     * Definición arquitectónica del sistema.
      */
     architecture: {
       type: {
@@ -152,54 +189,66 @@ export const ProjectV2Schema = new Schema<IProjectV2>(
         enum: Object.values(ArchitectureStyle),
         required: true,
       },
-      communication: [
-        {
-          type: String,
-          enum: Object.values(ArchitectureCommunication),
-          required: true,
-        },
-      ],
+      communication: {
+        internal: [
+          {
+            type: String,
+            enum: Object.values(ArchitectureCommunication),
+          },
+        ],
+        external: [
+          {
+            type: String,
+            enum: Object.values(ArchitectureCommunication),
+          },
+        ],
+      },
       databaseModel: {
         type: String,
         enum: Object.values(DatabaseModel),
-        required: true,
       },
     },
 
     /**
-     * Plataforma objetivo.
+     * Capacidades actuales y futuras.
      */
-    platform: {
-      type: String,
-      enum: Object.values(Platform),
-      required: true,
+    capabilities: {
+      metrics: {
+        current: [{ type: String }],
+        planned: [{ type: String }],
+      },
     },
 
     /**
-     * Relaciones (referencias).
+     * Relaciones normalizadas con otras entidades.
      */
-    technologyIds: [
-      { type: Schema.Types.ObjectId, ref: "Technology", required: true },
-    ],
-    featureIds: [
-      { type: Schema.Types.ObjectId, ref: "Feature", required: true },
-    ],
-    categoryIds: [
-      { type: Schema.Types.ObjectId, ref: "Category", required: true },
-    ],
-
-    /**
-     * Información cualitativa.
-     */
-    technicalChallenges: [{ type: String }],
-    impact: {
-      metrics: [{ type: String }],
-      users: { type: String },
+    relations: {
+      technologyIds: [
+        { type: Schema.Types.ObjectId, ref: "Technology", required: true },
+      ],
+      featureIds: [
+        { type: Schema.Types.ObjectId, ref: "Feature", required: true },
+      ],
+      categoryIds: [
+        { type: Schema.Types.ObjectId, ref: "Category", required: true },
+      ],
     },
-    learnings: [{ type: String }],
 
     /**
-     * URLs del proyecto.
+     * Insights por idioma.
+     */
+    insights: {
+      es: InsightSchema,
+      en: InsightSchema,
+    },
+
+    /**
+     * Relación con caso de éxito.
+     */
+    outcome: { type: Schema.Types.ObjectId, ref: "SuccessCase" },
+
+    /**
+     * URLs relevantes del proyecto.
      */
     urls: {
       repository: { type: String, required: true },
@@ -208,37 +257,54 @@ export const ProjectV2Schema = new Schema<IProjectV2>(
     },
 
     /**
-     * Recursos gráficos.
+     * Recursos visuales.
      */
-    assets: {
+    cover: {
       main: { type: String, required: true },
       blur: { type: String, required: true },
     },
 
     /**
-     * Peso del proyecto para ordenamiento.
+     * Score interno de relevancia.
      */
     importanceScore: { type: Number, required: true },
 
     /**
-     * Estado del proyecto.
+     * Estado operativo del proyecto.
      */
     status: {
       type: String,
-      enum: Object.values(ProjectStatus),
+      enum: Object.values(Status),
       required: true,
+    },
+
+    /**
+     * Nivel de visibilidad.
+     */
+    visibility: {
+      type: String,
+      enum: Object.values(Visibility),
+      required: true,
+    },
+
+    /**
+     * Línea temporal.
+     */
+    timeline: {
+      initialRelease: { type: Date },
+      futureExpansion: { type: Boolean },
     },
   },
   { timestamps: true }
 );
 
-/* =========================================================
- * HOOKS
- * ========================================================= */
+/* ============================================================
+   ======================= MIDDLEWARES ========================
+   ============================================================ */
 
 /**
- * Genera el slug automáticamente antes de validar,
- * usando el título en EN o ES.
+ * Genera automáticamente el slug antes de validar,
+ * usando el título en inglés o español.
  */
 ProjectV2Schema.pre("validate", function (next) {
   if (!this.slug) {
@@ -249,7 +315,8 @@ ProjectV2Schema.pre("validate", function (next) {
 });
 
 /**
- * Recalcula el slug si el título cambia en un update.
+ * Recalcula el slug si el título cambia
+ * en operaciones findOneAndUpdate.
  */
 ProjectV2Schema.pre("findOneAndUpdate", function (next) {
   const update = this.getUpdate() as any;

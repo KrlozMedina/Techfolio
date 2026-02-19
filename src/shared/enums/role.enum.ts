@@ -1,35 +1,65 @@
 /**
- * Defines the possible roles a team member can have within a project.
+ * Define los distintos roles técnicos que puede asumir
+ * una persona dentro de un proyecto tecnológico.
  *
- * Used in:
- * - Project team information
- * - Validation schemas (Zod)
- * - Business logic and filtering
- *
- * Each value represents a professional specialization or responsibility.
+ * Permite identificar responsabilidades principales
+ * y áreas de especialización.
  */
 export enum Role {
-  /** Developer responsible for both frontend and backend layers */
-  FULL_STACK = "Full Stack",
 
-  /** Specialist focused on user interface and client-side logic */
-  FRONTEND = "FrontEnd",
+  /**
+   * Desarrollador Full Stack.
+   * Participa tanto en frontend como en backend,
+   * incluyendo integración y base de datos.
+   */
+  FULL_STACK = "FULL_STACK",
 
-  /** Specialist focused on server-side logic and APIs */
-  BACKEND = "BackEnd",
+  /**
+   * Desarrollador Frontend.
+   * Responsable de la interfaz de usuario,
+   * experiencia y lógica del lado cliente.
+   */
+  FRONTEND = "FRONTEND",
 
-  /** Engineer focused on automation systems and control processes */
-  AUTOMATION = "Automation",
+  /**
+   * Desarrollador Backend.
+   * Encargado de la lógica de negocio,
+   * APIs, seguridad y persistencia.
+   */
+  BACKEND = "BACKEND",
 
-  /** Specialist in Internet of Things solutions */
+  /**
+   * Ingeniero de Automatización.
+   * Diseño e implementación de sistemas
+   * de control y procesos industriales.
+   */
+  AUTOMATION = "AUTOMATION",
+
+  /**
+   * Especialista en IoT.
+   * Desarrollo e integración de dispositivos
+   * conectados y sistemas distribuidos.
+   */
   IOT = "IOT",
 
-  /** Engineer focused on low-level and hardware-near development */
-  EMBEDDED = "Embedded",
+  /**
+   * Ingeniero de sistemas embebidos.
+   * Desarrollo de firmware y software
+   * en hardware dedicado.
+   */
+  EMBEDDED = "EMBEDDED",
 
-  /** Engineer responsible for CI/CD, infrastructure and deployment */
-  DEVOPS = "DevOps",
+  /**
+   * Ingeniero DevOps.
+   * Automatización de despliegues,
+   * infraestructura y pipelines CI/CD.
+   */
+  DEVOPS = "DEVOPS",
 
-  /** Technical leader responsible for architectural and technical decisions */
-  TECH_LEAD = "Tech Lead",
+  /**
+   * Líder técnico.
+   * Define decisiones arquitectónicas,
+   * estándares y guía al equipo.
+   */
+  TECH_LEAD = "TECH_LEAD",
 }

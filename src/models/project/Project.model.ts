@@ -1,29 +1,36 @@
 import mongoose from "mongoose";
 import { projectV1Schema, ProjectV2Schema } from "./project.schema";
-import { IProjectV1 } from "./project.interface";
+import { IProjectV1, IProjectV2 } from "./project.interface";
+
+/* ============================================================
+   ======================= PROJECT V1 =========================
+   ============================================================ */
 
 /**
- * ============================
- * MODELO PROJECT V1 (LEGACY)
- * ============================
+ * 📦 Modelo Mongoose para Project V1 (estructura legacy).
  *
- * - Usa el nombre de colección por defecto (`projects`)
- * - Mantiene compatibilidad con la versión antigua del proyecto
- * - Evita redefinir el modelo si ya existe (hot-reload / serverless)
+ * - Reutiliza el modelo si ya existe (evita OverwriteModelError en dev).
+ * - Mantiene compatibilidad con la colección original.
  */
 export const ProjectV1 =
   (mongoose.models.Project as mongoose.Model<IProjectV1>) ||
   mongoose.model<IProjectV1>("Project", projectV1Schema);
 
+/* ============================================================
+   ======================= PROJECT V2 =========================
+   ============================================================ */
+
 /**
- * ============================
- * MODELO PROJECT V2 (ACTUAL)
- * ============================
+ * 🚀 Modelo Mongoose para Project V2.
  *
- * - Modelo moderno con soporte multilenguaje y relaciones
- * - Usa explícitamente la colección `projectsV2`
- * - Previene errores de redefinición en entornos serverless
+ * - Usa colección explícita: "projectsV2".
+ * - Separado del modelo legacy.
+ * - Estructura orientada a dominio.
  */
 export const ProjectV2 =
-  mongoose.models.ProjectV2 ||
-  mongoose.model("ProjectV2", ProjectV2Schema, "projectsV2");
+  (mongoose.models.ProjectV2 as mongoose.Model<IProjectV2>) ||
+  mongoose.model<IProjectV2>(
+    "ProjectV2",
+    ProjectV2Schema,
+    "projectsV2"
+  );

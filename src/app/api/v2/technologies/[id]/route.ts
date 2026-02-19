@@ -6,7 +6,7 @@ import {
   deleteTechnology,
   getTechnologyById,
   updateTechnology,
-} from "@/services/technologies.service";
+} from "@/services/technologies/technologies.service";
 import { toTechnologyEntityDTO } from "@/mappers/technology.mapper";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { updateTechnologySchema } from "@/dto/technology/technology.update.dto";

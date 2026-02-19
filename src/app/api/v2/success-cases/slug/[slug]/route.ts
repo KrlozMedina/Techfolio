@@ -1,6 +1,6 @@
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { toSuccessCaseDetailDTO } from "@/mappers/success-case.mapper";
-import { getSuccessCaseBySlug } from "@/services/success-case.service";
+import { getSuccessCaseBySlug } from "@/services/success-cases/success-cases.service";
 import { LANGUAGES } from "@/shared/enums";
 import { querySchema } from "@/shared/interfaces/query.schema";
 import { NextRequest, NextResponse } from "next/server";

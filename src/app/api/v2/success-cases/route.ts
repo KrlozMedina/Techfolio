@@ -10,7 +10,7 @@ import {
   createSuccessCase,
   getSuccessCases,
   getTotalSuccessCases
-} from "@/services/success-case.service";
+} from "@/services/success-cases/success-cases.service";
 import { toSuccessCaseListDTO } from "@/mappers/success-case.mapper";
 import { createSuccessCaseSchema } from "@/dto/success-case/success-case.create.dto";
 import "@/models";
