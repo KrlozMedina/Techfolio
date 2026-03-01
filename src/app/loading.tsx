@@ -2,23 +2,25 @@
 
 /**
  * ==================================================
- * ⏳ Loading Screen
+ * ⏳ Loading Route (App Router)
  * --------------------------------------------------
- * Componente de estado de carga.
+ * Componente especial de Next.js que se renderiza
+ * automáticamente mientras la página o segmento
+ * está cargando datos.
  *
  * Responsabilidades:
- * - Mostrar feedback visual mientras se cargan datos.
- * - Reutilizar StatusTemplate como layout base.
- * - Renderizar Spinner como indicador animado.
+ * - Mostrar estado visual de carga
+ * - Reutilizar StatusTemplate como layout base
+ * - Renderizar Spinner accesible
  *
  * No contiene:
  * - Lógica de negocio
  * - Fetch
- * - Manejo de estado
+ * - Estado interno
  *
  * Nota:
- * Se marca como "use client" porque Spinner
- * probablemente usa animaciones o efectos del lado del cliente.
+ * Se marca como "use client" porque Spinner usa
+ * hooks (useTranslation) y requiere entorno cliente.
  * ==================================================
  */
 

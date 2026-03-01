@@ -2,16 +2,31 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import styles from './Navbar.module.scss';
-import { useVerifyProfileQuery } from '@/store/service/authApi';
+import { useVerifyProfileQuery } from '@/infrastructure/auth/auth.api';
 import { navItems } from '@/lib/config';
 import { useLanguage } from '@/hooks/useLanguage';
 import { MenuProps, NavItem } from '@/lib/types/navigation';
 
+/* ==================================================
+   🧭 NAVBAR - MenuLinks Component
+   --------------------------------------------------
+   Navegación principal reutilizable.
+
+   Características:
+   - Detecta ruta activa
+   - Adapta menú según autenticación
+   - Soporta layout móvil
+   - Soporta modo solo iconos
+   - Internacionalización integrada
+================================================== */
+
 const ACTIVE_STYLE = { color: 'var(--color-button-hover)' };
 
 /**
- * Obtiene el path base de primer nivel
- * Ej: /dashboard/settings → /dashboard
+ * Hook: useActivePath
+ * Obtiene el segmento base del path actual.
+ * Ejemplo:
+ *   /dashboard/settings → /dashboard
  */
 const useActivePath = (): string => {
   const pathname = usePathname();
@@ -19,7 +34,8 @@ const useActivePath = (): string => {
 };
 
 /**
- * Obtiene los ítems del menú según estado de autenticación
+ * Hook: useNavItems
+ * Retorna los ítems del menú según estado de autenticación.
  */
 const useNavItems = (): NavItem[] => {
   const { data } = useVerifyProfileQuery(null);
@@ -27,13 +43,12 @@ const useNavItems = (): NavItem[] => {
 };
 
 /**
- * MenuLinks
- * Navegación principal reutilizable.
+ * MenuLinks Component
  *
  * Props:
- * - links: enlaces secundarios (footer / settings)
+ * - links: enlaces secundarios
  * - isPhone: layout móvil
- * - onlyIcons: muestra solo iconos
+ * - onlyIcons: renderiza solo iconos
  */
 export const MenuLinks: React.FC<MenuProps> = ({
   links = [],

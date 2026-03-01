@@ -1,22 +1,58 @@
 import {
-  FaLinkedin, FaGithub, FaYoutube,
-  FaTwitter, FaFacebook, FaInstagram, FaTiktok
+  FaLinkedin,
+  FaGithub,
+  FaYoutube
 } from 'react-icons/fa';
-import style from './SocialLinks.module.scss';
+
+import styles from './SocialLinks.module.scss';
+import { Icon } from '@/components/atom/Icon/Icon';
+
+/**
+ * ==================================================
+ * 🌐 SocialLinks Component
+ * --------------------------------------------------
+ * Renderiza enlaces externos a redes sociales.
+ *
+ * Responsabilidades:
+ * - Mapear configuración declarativa de enlaces
+ * - Usar componente Icon como abstracción visual
+ * - Garantizar apertura en nueva pestaña segura
+ * - Proveer accesibilidad básica
+ *
+ * Accesibilidad:
+ * - aria-label describe destino del enlace
+ * - <nav> semántico con aria-label descriptivo
+ *
+ * Seguridad:
+ * - rel="noopener noreferrer" evita vulnerabilidades
+ *   al usar target="_blank"
+ * ==================================================
+ */
 
 const socialLinks = [
-  { icon: <FaLinkedin />, url: 'https://www.linkedin.com/in/carlos-alidio-medina-l%C3%B3pez-62406991/', label: 'LinkedIn' },
-  { icon: <FaGithub />, url: 'https://github.com/KrlozMedina', label: 'GitHub' },
-  { icon: <FaYoutube />, url: 'https://www.youtube.com/channel/UCwr2Oy0BSvLWbukMAi_Nk7g', label: 'YouTube' },
-  // { icon: <FaTwitter />, url: 'https://twitter.com/Krloz_Medina', label: 'Twitter' },
-  // { icon: <FaFacebook />, url: 'https://www.facebook.com/k.medina16', label: 'Facebook' },
-  // { icon: <FaInstagram />, url: 'https://www.instagram.com/krloz_medina/', label: 'Instagram' },
-  // { icon: <FaTiktok />, url: 'https://www.tiktok.com/@krlozmedina', label: 'TikTok' }
+  {
+    icon: FaLinkedin,
+    url: 'https://www.linkedin.com/in/...',
+    label: 'LinkedIn'
+  },
+  {
+    icon: FaGithub,
+    url: 'https://github.com/...',
+    label: 'GitHub'
+  },
+  {
+    icon: FaYoutube,
+    url: 'https://www.youtube.com/...',
+    label: 'YouTube'
+  }
 ];
 
-export default function Social() {
+export default function SocialLinks() {
   return (
-    <section className={style.social}>
+    <nav
+      className={styles.social}
+      aria-label="Social media links"
+    >
       {socialLinks.map(({ icon, url, label }) => (
         <a
           key={label}
@@ -24,11 +60,11 @@ export default function Social() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={label}
-          className='icon'
+          className={styles['social__link']}
         >
-          {icon}
+          <Icon icon={icon} />
         </a>
       ))}
-    </section>
+    </nav>
   );
 }

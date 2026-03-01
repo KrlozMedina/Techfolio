@@ -4,40 +4,56 @@ import { useThemeContext } from '@/context/ThemeContext';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useI18n } from '@/hooks/useI18n';
 import styles from './SettingsPanel.module.scss';
+import { FormField } from '@/components/molecules/FormField/FormField';
+import { Select } from '@/components/atom/Select/Select';
+import { Switch } from '@/components/atom/Switch/Switch';
 
 /**
- * Props del componente SettingsPanel
- * @property className - Clase CSS externa para posicionamiento/layout
+ * ==================================================
+ * ⚙ SettingsPanel
+ * --------------------------------------------------
+ * Panel de configuración global de la aplicación.
+ *
+ * Permite:
+ * - Cambiar idioma (ES / EN)
+ * - Alternar tema (light / dark)
+ *
+ * Arquitectura:
+ * - Atom / Molecule composition
+ * - Context API para estado global
+ * - Internacionalización desacoplada
+ * - Componentes accesibles
+ *
+ * Dependencias:
+ * - ThemeContext
+ * - LanguageContext
+ * - useI18n
+ * ==================================================
  */
+
 interface Props {
   className: string;
 }
 
-/**
- * Panel de configuración de la aplicación.
- *
- * Permite:
- * - Cambiar el idioma (ES / EN)
- * - Alternar el tema (light / dark)
- *
- * Depende de:
- * - ThemeContext para el estado del tema
- * - useLanguage para el idioma global
- * - useI18n para textos traducidos
- */
 export const SettingsPanel: React.FC<Props> = ({ className }) => {
-  // Estado y setter del idioma global
+
+  /* ===============================
+    🌍 Language
+  =============================== */
   const { language, setLanguage } = useLanguage();
 
-  // Estado del tema y función para alternarlo
+  /* ===============================
+    🎨 Theme
+  =============================== */
   const { theme, toggleTheme } = useThemeContext();
 
-  // Función de traducción según el idioma actual
+  /* ===============================
+    🌐 Translations
+  =============================== */
   const t = useI18n(language);
 
   /**
-   * Maneja el cambio de idioma desde el select
-   * Fuerza el tipo a idiomas soportados
+   * Maneja el cambio de idioma
    */
   const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setLanguage(e.target.value as 'es' | 'en');
@@ -45,43 +61,58 @@ export const SettingsPanel: React.FC<Props> = ({ className }) => {
 
   return (
     <div className={className}>
-      {/* Formulario de selección de idioma */}
+
+      {/* ===============================
+        🌍 LANGUAGE FORM
+      =============================== */}
       <form className={styles['panel__form']}>
-        <label htmlFor="language-select">
-          {t.settings.selectLanguage}
-        </label>
-        <select
-          id="language-select"
-          value={language}
-          onChange={handleLanguageChange}
+        <FormField
+          label={t.settings.selectLanguage}
+          htmlFor="language-select"
         >
-          <option value="es">🇪🇸 Español</option>
-          <option value="en">🇺🇸 English</option>
-        </select>
+          <Select
+            id="language-select"
+            name="language"
+            value={language}
+            onChange={handleLanguageChange}
+            aria-label={t.settings.selectLanguage}
+            size="sm"
+          >
+            <option value="es">🇪🇸 Español</option>
+            <option value="en">🇺🇸 English</option>
+          </Select>
+        </FormField>
       </form>
 
-      {/* Formulario de cambio de tema */}
+      {/* ===============================
+        🎨 THEME FORM
+      =============================== */}
       <form className={styles['panel__form']}>
-        <label htmlFor="theme-toggle">
-          {t.settings.theme}
-        </label>
-        <div className={styles['panel__switchWrapper']}>
-          <FaSun className={styles['panel__icon']} />
+        <FormField
+          label={t.settings.theme}
+          htmlFor="theme-toggle"
+        >
+          <div className={styles['panel__switchWrapper']}>
+            <FaSun
+              className={styles['panel__icon']}
+              aria-hidden
+            />
 
-          {/* Switch accesible para alternar tema */}
-          <label className={styles['switch']}>
-            <input
+            <Switch
               id="theme-toggle"
-              type="checkbox"
               checked={theme === 'dark'}
               onChange={toggleTheme}
+              ariaLabel={t.settings.theme}
             />
-            <span className={styles['slider']} />
-          </label>
 
-          <FaMoon className={styles['panel__icon']} />
-        </div>
+            <FaMoon
+              className={styles['panel__icon']}
+              aria-hidden
+            />
+          </div>
+        </FormField>
       </form>
+
     </div>
   );
 };

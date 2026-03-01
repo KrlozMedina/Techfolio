@@ -1,118 +1,178 @@
-@use "@/styles/abstract/mixins" as mix;
+@use "@/styles/abstracts/mixins" as mix;
 
-/* ================= MENU PRINCIPAL ================= */
+/* ==================================================
+  🧭 MAIN MENU SYSTEM
+  --------------------------------------------------
+  Incluye:
+  - Menú principal (desktop)
+  - Menú móvil
+  - Sidebar expandible
+  - Aside fijo
+  - Sección social
+  Implementado con:
+  - BEM
+  - Mixins reutilizables
+  - Design tokens
+  - Responsive helpers
+================================================== */
+
+
+/* ===============================
+  🧱 MENU PRINCIPAL (Desktop)
+================================= */
 .menu {
+
+  /* Contenedor base del menú */
   &__container {
     @include mix.menu-container;
 
+    /* Variante para móvil */
     &--phone {
       @include mix.menu-container(center, var(--space-lg));
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      align-items: center;
+      gap: 3rem;
+      padding: 10rem 0;
+      z-index: 1;
     }
 
+    /* Sub-bloque de enlaces */
     &--links {
       @include mix.flex-column(center, flex-start, var(--space-md));
-      font-size: var(--font-size-md);
+      font-size: var(--font-size-body-md);
     }
 
     a {
       display: flex;
       align-items: center;
+      color: var(--color-text);
     }
 
     .menu__icon {
-      font-size: var(--font-size-base);
+      font-size: var(--font-size-body-lg);
       margin-right: var(--space-sm);
+      color: var(--color-text-soft);
     }
   }
 
+  /* Botón hamburguesa */
   &__icon-toggle {
-    display: none; // solo visible en tablet/mobile
+    display: none;
     cursor: pointer;
+    font-size: var(--font-size-heading-lg);
+    color: var(--color-text);
+    z-index: 2;
   }
 }
 
-/* ================= MENU ASIDE (DESKTOP) ================= */
+
+/* ===============================
+  🧱 MENU ASIDE (Desktop fijo)
+================================= */
 .menu-aside {
   &__container {
     position: fixed;
+
     @include mix.flex-column(flex-end, space-between, var(--space-sm));
+
     padding: var(--space-xl);
     width: 7.6rem;
     height: min-content;
-    border-radius: var(--border-radius-full) 0 0 var(--border-radius-full);
-    background-color: var(--color-background-container);
+
+    border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+    background-color: var(--color-bg-container);
   }
 }
 
-/* ================= MENU MÓVIL ================= */
+
+/* ===============================
+  📱 MENU MÓVIL
+================================= */
 .menu-phone {
   &__container {
     position: absolute;
     z-index: 10;
     width: 100%;
-    height: 100vh;
-    padding: var(--space-sm);
-    background-color: var(--color-background-container);
-    display: none; // oculto por defecto
+    min-height: 100vh;
+
+    padding: var(--space-md);
+    background-color: var(--color-bg-container);
+
+    display: none;
+
     @include mix.flex-column(center, flex-start, var(--space-md));
 
     &.active {
-      display: flex; // se muestra al activarse
+      display: flex;
     }
   }
 }
 
-/* ================= SIDEBAR ================= */
+
+/* ===============================
+  📚 SIDEBAR
+================================= */
 .sidebar {
-  width: 60px;
-  height: 100vh;
-  background-color: var(--color-background-container);
+  width: 6rem; /* base colapsado */
+  min-height: 100vh;
+
+  background-color: var(--color-bg-container);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   overflow: hidden;
   transition: width 0.3s ease;
 
+  /* Expandido */
   &--expanded {
-    width: 250px; // ancho expandido
+    width: clamp(20rem, 22vw, 25rem);
   }
 
+  /* Sección superior */
   &__top-section {
-    padding: 1rem;
-    @include mix.flex-column(center, center, 1rem);
-    height: 95vh;
+    padding: var(--space-md);
+    @include mix.flex-column(center, center, var(--space-md));
   }
 
+  /* Botón toggle */
   &__toggle-btn {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: var(--font-size-body-lg);
     cursor: pointer;
-    color: #000;
+    color: var(--color-text);
     align-self: flex-end;
   }
 
+  /* Search */
   &__search {
-    background-color: #fff;
-    border-radius: 6px;
-    padding: 0.3rem 0.5rem;
+    background-color: var(--color-bg);
+    border-radius: var(--border-radius-md);
+    padding: var(--space-xs) var(--space-sm);
+
     display: flex;
     align-items: center;
 
     &-icon {
-      color: #888;
+      color: var(--color-text-soft);
     }
 
     input {
       border: none;
       outline: none;
-      margin-left: 0.5rem;
+      margin-left: var(--space-xs);
       width: 100%;
-      font-size: 0.9rem;
+      font-size: var(--font-size-body-md);
       background: transparent;
+      color: var(--color-text);
     }
   }
 
+  /* Menú interno */
   &__menu {
     display: flex;
     flex-direction: column;
@@ -120,53 +180,57 @@
     &-item {
       display: flex;
       align-items: center;
-      padding: 0.75rem 1rem;
-      gap: 1rem;
+      padding: var(--space-sm) var(--space-md);
+      gap: var(--space-md);
+
       text-decoration: none;
-      color: #000;
-      transition: background 0.2s;
+      color: var(--color-text);
+      transition: background 0.2s ease;
 
       &:hover {
-        background-color: #1ac3a7;
+        background-color: var(--color-button-hover);
       }
 
       svg {
-        font-size: 1.2rem;
+        font-size: var(--font-size-body-lg);
       }
 
       span {
-        font-size: 1rem;
+        font-size: var(--font-size-body-md);
       }
     }
   }
 
+  /* Social icons */
   &__social {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    padding: 1rem;
-    font-size: 1.2rem;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    font-size: var(--font-size-body-lg);
 
     a {
-      color: #000;
-      text-decoration: none;
+      color: var(--color-text-soft);
 
       &:hover {
-        color: #444;
+        color: var(--color-text);
       }
     }
   }
 }
 
-/* ================= MEDIA QUERIES ================= */
+
+/* ===============================
+  📱 MEDIA QUERIES
+================================= */
+
 @include mix.respond-tablet {
   .menu__container {
-    display: none; // menú desktop oculto en tablet
+    display: none;
   }
 
   .menu__icon-toggle {
-    display: initial; // visible en tablet
-    font-size: var(--font-size-xl);
+    display: initial;
     position: absolute;
     top: var(--space-sm);
     right: var(--space-sm);
@@ -179,6 +243,6 @@
 
 @include mix.respond-mobile {
   .menu-aside__container {
-    display: none; // sidebar desktop oculto en mobile
+    display: none;
   }
 }
