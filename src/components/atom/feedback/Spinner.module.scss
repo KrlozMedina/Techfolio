@@ -1,0 +1,65 @@
+@use '@/styles/abstracts/mixins' as *;
+
+/* ==================================================
+  🔄 SPINNER COMPONENT
+  --------------------------------------------------
+  Indicador visual de estado de carga.
+  Implementado con:
+  - CSS animation
+  - Design tokens
+  - Mixin reutilizable (flex-column)
+  - Metodología BEM
+================================================== */
+
+.spinner {
+
+  /* Contenedor centrado vertical y horizontalmente */
+  @include flex-column(center, center, var(--space-md));
+
+  padding: var(--space-xl);
+  text-align: center;
+
+
+  /* ==================================================
+    🌀 CIRCLE
+    --------------------------------------------------
+    - Forma circular mediante radius-full
+    - Simula movimiento usando diferencia de color
+    - Animación infinita de rotación
+  ================================================== */
+  &__circle {
+    width: 6rem;
+    height: 6rem;
+
+    border-radius: var(--radius-full);
+
+    border: 0.6rem solid var(--color-border);
+    border-top: 0.6rem solid var(--color-primary-500);
+
+    animation: spin 1s linear infinite;
+  }
+
+
+  /* ==================================================
+    📝 TEXTO OPCIONAL
+    --------------------------------------------------
+    Mensaje descriptivo bajo el spinner
+  ================================================== */
+  &__text {
+    margin-top: var(--space-md);
+    font-size: var(--font-size-body-md);
+    color: var(--color-text-soft);
+  }
+}
+
+
+/* ==================================================
+  🎞️ ANIMATION
+  --------------------------------------------------
+  Rotación continua 360°
+================================================== */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

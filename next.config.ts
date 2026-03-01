@@ -13,11 +13,12 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'www.luisllamas.es' },
       { protocol: 'https', hostname: 'wcdn-icons-png.flaticon.com' },
       { protocol: 'https', hostname: 'cdn-icons-png.flaticon.com' },
-      { protocol: 'https', hostname: 'cdn-icons-png.flaticon.com' },
       { protocol: 'https', hostname: 'www.flickr.com' },
       { protocol: 'https', hostname: 'live.staticflickr.com' },
       { protocol: 'https', hostname: 'localhost' },
       { protocol: 'https', hostname: 'picsum.photos' },
+      { protocol: 'https', hostname: 'webevolmind.b-cdn.net' },
+      { protocol: 'https', hostname: 'cdn.simpleicons.org' },
     ],
   },
 };

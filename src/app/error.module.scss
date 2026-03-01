@@ -1,0 +1,105 @@
+/* ==================================================
+  🚨 ERROR PAGE STYLES
+  --------------------------------------------------
+  Estilos específicos para página de error.
+  Implementación basada en:
+  - Design tokens (color, spacing, radius, motion)
+  - Metodología BEM
+  - Mobile-first
+================================================== */
+
+.error {
+
+  /* Contenedor principal */
+  padding: var(--space-3xl) 0;
+  text-align: center;
+
+
+  /* ==================================================
+    🏷 TITLE
+  ================================================== */
+  &__title {
+    font-size: var(--font-size-heading-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-error);
+    line-height: var(--line-height-tight);
+  }
+
+
+  /* ==================================================
+    💬 MESSAGE
+  ================================================== */
+  &__message {
+    margin-top: var(--space-md);
+    font-size: var(--font-size-body-lg);
+    color: var(--color-text-soft);
+  }
+
+
+  /* ==================================================
+    🎛 ACTIONS CONTAINER
+  ================================================== */
+  &__button-container {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+
+  /* ==================================================
+    🔘 BUTTON BASE
+    --------------------------------------------------
+    Estilo base compartido para acciones.
+  ================================================== */
+  &__button {
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-full);
+
+    font-size: var(--font-size-body-md);
+    font-weight: var(--font-weight-semibold);
+
+    border: none;
+    cursor: pointer;
+
+    transition: var(--transition-default);
+
+
+    /* ----------------------------------------------
+      🔁 Retry Action
+    ---------------------------------------------- */
+    &--retry {
+      background-color: var(--color-button-primary-bg);
+      color: var(--color-button-primary-text);
+
+      &:hover {
+        background-color: var(--color-button-primary-hover);
+      }
+    }
+
+
+    /* ----------------------------------------------
+      🏠 Home Action
+    ---------------------------------------------- */
+    &--home {
+      background-color: var(--color-button-secondary-bg);
+      color: var(--color-button-secondary-text);
+
+      &:hover {
+        background-color: var(--color-button-secondary-hover);
+      }
+    }
+  }
+
+
+  /* ==================================================
+    📱 Tablet and up (≥ 768px)
+    --------------------------------------------------
+    Ajuste tipográfico para pantallas mayores.
+  ================================================== */
+  @media (min-width: 768px) {
+    &__title {
+      font-size: var(--font-size-display);
+    }
+  }
+}

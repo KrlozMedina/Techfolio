@@ -1,23 +1,34 @@
 'use client';
 
-import Spinner from '@/components/atom/feedback/Spinner';
-import ErrorTemplate from '@/components/templates/ErrorTemplate/ErrorTemplate';
-// import { useLanguage } from '@/hooks';
-import { useTranslation } from '@/hooks/useTranslation';
-// import React from 'react';
-
 /**
- * Componente que representa una pantalla de carga.
- * Se muestra mientras el contenido principal está siendo procesado o cargado.
+ * ==================================================
+ * ⏳ Loading Screen
+ * --------------------------------------------------
+ * Componente de estado de carga.
+ *
+ * Responsabilidades:
+ * - Mostrar feedback visual mientras se cargan datos.
+ * - Reutilizar StatusTemplate como layout base.
+ * - Renderizar Spinner como indicador animado.
+ *
+ * No contiene:
+ * - Lógica de negocio
+ * - Fetch
+ * - Manejo de estado
+ *
+ * Nota:
+ * Se marca como "use client" porque Spinner
+ * probablemente usa animaciones o efectos del lado del cliente.
+ * ==================================================
  */
-export default function Loading() {
-  // const { isSpanish } = useLanguage();
-  const { language } = useTranslation();
 
+import Spinner from '@/components/atom/feedback/Spinner';
+import StatusTemplate from '@/components/templates/StatusTemplate/StatusTemplate';
+
+export default function Loading() {
   return (
-    <ErrorTemplate status='loading' withBackground>
-      {/* Spinner animado */}
-      <Spinner language={language} />
-    </ErrorTemplate>
+    <StatusTemplate status="loading" withBackground>
+      <Spinner />
+    </StatusTemplate>
   );
 }
