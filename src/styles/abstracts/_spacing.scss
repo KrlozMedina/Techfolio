@@ -1,0 +1,45 @@
+/* ==================================================
+  📏 SPACING & MOTION DESIGN TOKENS
+  --------------------------------------------------
+  Define:
+  - Sistema de espaciado basado en múltiplos de 4px
+  - Ritmo vertical consistente
+  - Tokens de transición reutilizables
+
+  Estos valores deben usarse en layout,
+  componentes y utilidades. No usar valores
+  hardcodeados.
+================================================== */
+
+:root {
+
+  /* ========================
+    SPACING SCALE
+    ------------------------------------------------
+    Base: 4px (0.25rem)
+    1rem = 10px (según configuración global)
+    Mantiene consistencia visual y ritmo vertical.
+  ======================== */
+
+  --space-xxs: 0.25rem;  /* 4px */
+  --space-xs: 0.5rem;    /* 8px */
+  --space-sm: 0.75rem;   /* 12px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+  --space-4xl: 5rem;     /* 80px */
+
+
+  /* ========================
+    MOTION TOKENS
+    ------------------------------------------------
+    Transiciones estandarizadas.
+    Evita definir "0.3s ease" repetido en componentes.
+  ======================== */
+
+  --transition-fast: 0.15s ease-in-out;      /* Hover sutil */
+  --transition-default: 0.25s ease-in-out;   /* Interacciones estándar */
+  --transition-slow: 0.4s ease-in-out;       /* Animaciones suaves */
+}

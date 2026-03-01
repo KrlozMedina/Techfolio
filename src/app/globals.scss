@@ -1,0 +1,36 @@
+/* ================================
+   🌐 GLOBAL STYLES - global.css
+================================ */
+
+/* =====================================
+   📦 TAILWIND CSS (Enable if used)
+===================================== */
+/*
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*/
+
+/* =====================================
+   🎨 DESIGN TOKENS - Global Variables
+===================================== */
+@use '@/styles/abstracts/_colors.scss';      /* 🎨 Paleta de colores */
+@use '@/styles/abstracts/_typography.scss';  /* ✍️ Tipografías, tamaños, pesos */
+@use '@/styles/abstracts/_spacing.scss';     /* 📏 Margenes, paddings */
+@use '@/styles/abstracts/_layout.scss';      /* 📐 Reglas de layout (grid, flex) */
+@use '@/styles/themes/_themes.scss';      /* 🌗 Temas claros/oscuros */
+@use '@/styles/themes/_light.scss';      /* 🌗 Temas claros/oscuros */
+@use '@/styles/themes/_dark.scss';      /* 🌗 Temas claros/oscuros */
+@use '@/styles/abstracts/_mixins.scss';     /* 🧩 Mixins reutilizables */
+@use '@/styles/base/_fonts.scss';      /* 🔤 Definición de fuentes tipográficas */
+@use '@/styles/abstracts/_radius.scss';      /* 📐 Radius Tokens */
+
+/* =====================================
+   🔄 CSS RESET
+===================================== */
+@use '@/styles/vendors/_normalize.scss'; /* Reestablece estilos base entre navegadores */
+
+/* =====================================
+   🧱 BASE STYLES
+===================================== */
+@use '@/styles/base/_base.scss';  /* Estilos base globales del proyecto */

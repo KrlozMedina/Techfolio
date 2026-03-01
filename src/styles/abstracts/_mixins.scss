@@ -1,0 +1,97 @@
+/* ==================================================
+  🧩 LAYOUT MIXINS
+  --------------------------------------------------
+  Utilidades reutilizables para:
+  - Estructura flex
+  - Contenedores de navegación
+  - Breakpoints responsivos
+  Evitan repetición de patrones comunes.
+================================================== */
+
+
+/* ==================================================
+  📦 FLEX COLUMN
+  --------------------------------------------------
+  Crea un contenedor flex en dirección columna.
+  Centraliza patrón repetido en:
+  - Cards
+  - Formularios
+  - Sidebars
+  - Menús verticales
+
+  @param $align   → align-items
+  @param $justify → justify-content
+  @param $gap     → separación entre elementos
+================================================== */
+
+@mixin flex-column(
+  $align: flex-start,
+  $justify: flex-start,
+  $gap: var(--space-md)
+) {
+  display: flex;
+  flex-direction: column;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}
+
+
+/* ==================================================
+  📋 MENU CONTAINER
+  --------------------------------------------------
+  Mixin especializado para contenedores de menú.
+  Extiende flex-column y aplica estilos base:
+
+  - Padding consistente
+  - Texto en uppercase
+  - Fondo semántico
+  - Radius definido por design tokens
+
+  @param $align     → alineación de ítems
+  @param $gap       → separación entre ítems
+  @param $font-size → tamaño tipográfico
+================================================== */
+
+@mixin menu-container(
+  $align: flex-start,
+  $gap: var(--space-2xl),
+  $font-size: var(--font-size-heading-md)
+) {
+  @include flex-column($align, flex-start, $gap);
+
+  padding: var(--space-lg);
+  width: max-content;
+
+  font-size: $font-size;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+
+  border-radius: var(--radius-xl);
+  background-color: var(--color-bg-container);
+}
+
+
+/* ==================================================
+  📱 RESPONSIVE MIXINS
+  --------------------------------------------------
+  Encapsulan breakpoints del sistema.
+  Evitan repetir media queries manualmente.
+  Mantienen consistencia en todo el proyecto.
+================================================== */
+
+
+/* Mobile → <= 425px */
+@mixin respond-mobile {
+  @media (max-width: 425px) {
+    @content;
+  }
+}
+
+
+/* Tablet → <= 768px */
+@mixin respond-tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}

@@ -1,0 +1,59 @@
+/* ==================================================
+  🌙 DARK THEME (Semantic Overrides)
+  Activo mediante: <html data-theme="dark">
+  Sobrescribe únicamente tokens semánticos.
+  No redefine tokens base.
+================================================== */
+
+[data-theme="dark"] {
+
+  /* ========================
+    BACKGROUND
+  ======================== */
+  --color-bg: #0a0a0a; /* near absolute black */
+  --color-bg-container: rgba(0, 0, 0, 0.8);
+
+  /* ========================
+    TEXT
+  ======================== */
+  --color-text: var(--color-gray-50);
+  --color-text-soft: var(--color-gray-400);
+  --color-text-error: var(--color-error-500);
+
+  /* ========================
+    ICONS
+  ======================== */
+  --color-icon-muted: var(--color-gray-600);
+
+  /* ========================
+    BORDERS
+  ======================== */
+  --color-border: var(--color-gray-600);
+  --color-border-strong: var(--color-gray-50);
+
+  /* ========================
+    EFFECTS
+  ======================== */
+  --color-shadow: rgba(0, 0, 0, 0.6);
+  --color-focus: var(--color-primary-300);
+
+  /* ========================
+    BUTTON STATES
+  ======================== */
+  --color-button-focus: var(--color-secondary-300);
+  --color-button-disable: var(--color-gray-700);
+
+  /* ========================
+    BUTTON - PRIMARY
+  ======================== */
+  --color-button-primary-bg: var(--color-primary-600);
+  --color-button-primary-hover: var(--color-primary-500);
+  --color-button-primary-text: var(--color-gray-50);
+
+  /* ========================
+    BUTTON - SECONDARY
+  ======================== */
+  --color-button-secondary-bg: var(--color-secondary-600);
+  --color-button-secondary-hover: var(--color-secondary-500);
+  --color-button-secondary-text: var(--color-gray-50);
+}
