@@ -1,144 +1,85 @@
-import React, { JSX } from 'react';
-import {
-  FaTools,
-  FaExclamationTriangle,
-  FaWrench,
-  FaHourglassHalf,
-  FaFlask,
-  FaDatabase,
-  FaBug
-} from 'react-icons/fa';
-import style from './StatusNotice.module.css';
-import { NoticeType } from '@/lib/config';
+import React from 'react';
+import style from './StatusNotice.module.scss';
 
-// Tipos posibles para el tipo de mensaje
-// type NoticeType = 'dummy' | 'construction' | 'incomplete' | 'maintenance' | 'comingSoon' | 'beta';
-type Language = 'es' | 'en';
+import { Icon } from '@/components/atom/Icon/Icon';
+import { noticeMeta, NoticeType } from '@/domain/notice/noticeMeta';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface StatusNoticeProps {
+  /** Tipo de aviso a renderizar */
   type: NoticeType;
-  language: Language;
 }
 
-// Mensajes por tipo y lenguaje
-const messages: Record<NoticeType, {
-  es: { title: string; description: string };
-  en: { title: string; description: string };
-  icon: JSX.Element;
-  color: string;
-}> = {
-  dummy: {
-    es: {
-      title: 'Datos de prueba',
-      description: 'Los datos mostrados son simulados y serán actualizados próximamente.',
-    },
-    en: {
-      title: 'Dummy Data',
-      description: 'The displayed data is simulated and will be updated soon.',
-    },
-    icon: <FaDatabase />,
-    color: '#6c757d',
-  },
-  construction: {
-    es: {
-      title: 'En construcción',
-      description: 'Esta sección está en desarrollo y estará disponible pronto.',
-    },
-    en: {
-      title: 'Under Construction',
-      description: 'This section is under development and will be available soon.',
-    },
-    icon: <FaTools />,
-    color: '#17a2b8',
-  },
-  incomplete: {
-    es: {
-      title: 'Página incompleta',
-      description: 'Esta página está en desarrollo y puede no contener toda la información.',
-    },
-    en: {
-      title: 'Incomplete Page',
-      description: 'This page is under development and may not contain all information.',
-    },
-    icon: <FaExclamationTriangle />,
-    color: '#ffc107',
-  },
-  maintenance: {
-    es: {
-      title: 'Mantenimiento',
-      description: 'Esta sección está en mantenimiento y estará disponible en breve.',
-    },
-    en: {
-      title: 'Maintenance',
-      description: 'This section is under maintenance and will be available shortly.',
-    },
-    icon: <FaWrench />,
-    color: '#6c757d',
-  },
-  comingSoon: {
-    es: {
-      title: 'Próximamente',
-      description: 'Esta funcionalidad estará disponible en una futura actualización.',
-    },
-    en: {
-      title: 'Coming Soon',
-      description: 'This feature will be available in a future update.',
-    },
-    icon: <FaHourglassHalf />,
-    color: '#28a745',
-  },
-  beta: {
-    es: {
-      title: 'Beta',
-      description: 'Esta funcionalidad está en fase beta y puede presentar inestabilidades.',
-    },
-    en: {
-      title: 'Beta',
-      description: 'This feature is in beta and may be unstable.',
-    },
-    icon: <FaFlask />,
-    color: '#007bff',
-  },
-  bugs: {
-    es: {
-      title: 'Bug',
-      description: 'Esta página presenta errores conocidos o comportamientos inesperados.',
-    },
-    en: {
-      title: 'Bug',
-      description: 'This page has known bugs or unexpected behavior.',
-    },
-    icon: <FaBug />,
-    color: '#dc3545', // rojo para errores
-  },
-};
-
 /**
- * Componente StatusNotice
- * Muestra una advertencia visual con ícono, color y mensaje personalizado
- * según el estado de una sección del sistema.
+ * =========================================================
+ * StatusNotice
+ * ---------------------------------------------------------
+ * Componente visual para mostrar mensajes de estado
+ * dinámicos según:
+ * - Tipo (NoticeType)
+ * - Configuración visual del dominio (noticeMeta)
+ * - Idioma activo (useTranslation)
  *
- * @param type - Tipo de aviso (dummy, construction, etc.)
- * @param language - Idioma del mensaje ('es' o 'en')
+ * Arquitectura:
+ * - noticeMeta → define icono y color (capa dominio).
+ * - t.notice[type] → define contenido textual (capa i18n).
+ * - StatusNotice → une ambas capas en la UI.
+ *
+ * Responsabilidades:
+ * - Renderizar icono dinámico.
+ * - Aplicar color según tipo.
+ * - Mostrar título y descripción traducidos.
+ * - Proveer accesibilidad básica (role + aria-live).
+ *
+ * Este componente desacopla:
+ * - Lógica visual (meta)
+ * - Contenido (traducción)
+ * - Presentación (SCSS)
+ * =========================================================
  */
-const StatusNotice: React.FC<StatusNoticeProps> = ({ type, language }) => {
-  const message = messages[type];
-  const content = message[language];
+const StatusNotice: React.FC<StatusNoticeProps> = ({ type }) => {
+
+  /**
+   * Hook de traducción para obtener textos según idioma activo.
+   */
+  const { t } = useTranslation();
+
+  /**
+   * Metadata del aviso:
+   * - icon
+   * - color
+   */
+  const meta = noticeMeta[type];
+
+  /**
+   * Contenido textual traducido.
+   */
+  const content = t.notice[type];
+
+  /**
+   * Componente de icono dinámico.
+   */
+  const IconComponent = meta.icon;
 
   return (
     <div
       role="status"
       aria-live="polite"
-      style={{ borderLeft: `4px solid ${message.color}` }}
-      className={style['notice__container']}
+      style={{ borderLeft: `4px solid ${meta.color}` }}
+      className={style.notice}
     >
       <div
-        style={{ color: message.color }}
-        className={style['notice__container--icon']}
+        className={style.notice__icon}
+        style={{ color: meta.color }}
       >
-        {message.icon}
+        <Icon
+          icon={IconComponent}
+          size={20}
+          ariaLabel="notice icon"
+        />
       </div>
-      <div>
+
+      <div className={style.notice__text}>
         <strong>{content.title}</strong>
         <p>{content.description}</p>
       </div>

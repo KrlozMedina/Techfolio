@@ -5,11 +5,11 @@ import { LanguageContextProvider } from '@/context/LanguageContext';
 import './globals.scss';
 
 /* ==================================================
-   📦 LOCAL FONTS (Optimized with next/font)
-   --------------------------------------------------
-   - Carga fuentes locales como variables CSS
-   - Evita FOUT
-   - Permite control tipográfico global
+  📦 LOCAL FONTS (Optimized with next/font)
+  --------------------------------------------------
+  - Carga fuentes locales como variables CSS
+  - Evita FOUT
+  - Permite control tipográfico global
 ================================================== */
 
 const geistSans = localFont({
@@ -25,16 +25,16 @@ const geistMono = localFont({
 });
 
 /* ==================================================
-   📈 GLOBAL METADATA (SEO + Social + PWA)
-   --------------------------------------------------
-   Configuración centralizada de:
-   - Title template
-   - Description
-   - Canonical
-   - Robots
-   - OpenGraph
-   - Twitter Cards
-   - Manifest
+  📈 GLOBAL METADATA (SEO + Social + PWA)
+  --------------------------------------------------
+  Configuración centralizada de:
+  - Title template
+  - Description
+  - Canonical
+  - Robots
+  - OpenGraph
+  - Twitter Cards
+  - Manifest
 ================================================== */
 
 const siteUrl = 'https://krlozmedina.dev';
@@ -43,15 +43,16 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: 'Techfolio KrlozMedina',
-    template: '%s | Techfolio KrlozMedina',
+    default:
+      'Carlos Medina | Full Stack Developer & Ingeniero en Control y Automatización',
+    template: '%s | Carlos Medina',
   },
 
   description:
-    'Desarrollador de Software e Ingeniero en Control y Automatización. Descubre mis proyectos, habilidades y experiencia integrando tecnología, electrónica y programación.',
+    'Desarrollador Full Stack e Ingeniero en Control y Automatización en Colombia. Especializado en aplicaciones web modernas, IoT y soluciones tecnológicas industriales.',
 
   alternates: {
-    canonical: '/',
+    canonical: siteUrl,
   },
 
   robots: {
@@ -66,17 +67,18 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: 'Techfolio KrlozMedina',
+    title:
+      'Carlos Medina | Full Stack Developer & Ingeniero en Control y Automatización',
     description:
-      'Descubre los proyectos de Carlos Medina, desarrollador fullstack e ingeniero en control y automatización.',
+      'Portafolio profesional con proyectos de desarrollo web, IoT y automatización industrial.',
     url: siteUrl,
-    siteName: 'Techfolio KrlozMedina',
+    siteName: 'Carlos Medina',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Portafolio de KrlozMedina',
+        alt: 'Carlos Medina - Full Stack & Control Engineer',
       },
     ],
     locale: 'es_CO',
@@ -85,20 +87,21 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Techfolio KrlozMedina',
+    title:
+      'Carlos Medina | Full Stack Developer & Ingeniero en Control y Automatización',
     description:
-      'Portafolio de Carlos Medina, desarrollador fullstack e ingeniero en control y automatización.',
+      'Proyectos reales de desarrollo web, IoT y automatización.',
     images: ['/og-image.jpg'],
   },
 };
 
 /* ==================================================
-   🌐 ROOT LAYOUT
-   --------------------------------------------------
-   - Define estructura HTML base
-   - Aplica fuentes globales
-   - Inyecta providers globales
-   - Renderiza fondo decorativo
+  🌐 ROOT LAYOUT
+  --------------------------------------------------
+  - Define estructura HTML base
+  - Aplica fuentes globales
+  - Inyecta providers globales
+  - Renderiza fondo decorativo
 ================================================== */
 
 export default function RootLayout({
@@ -121,6 +124,28 @@ export default function RootLayout({
             {children}
           </LanguageContextProvider>
         </Providers>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: 'Carlos Medina',
+              url: 'https://krlozmedina.dev',
+              jobTitle:
+                'Full Stack Developer & Ingeniero en Control y Automatización',
+              address: {
+                '@type': 'PostalAddress',
+                addressCountry: 'CO',
+              },
+              sameAs: [
+                'https://www.linkedin.com/in/krlozmedina/',
+                'https://github.com/KrlozMedina',
+              ],
+            }),
+          }}
+        />
       </body>
     </html>
   );

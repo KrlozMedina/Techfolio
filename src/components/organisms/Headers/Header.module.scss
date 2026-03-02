@@ -1,41 +1,115 @@
-/**
- * Estilos para el encabezado de las plantillas del sistema.
- * Incluye navegación principal y enlaces.
- */
+/* =====================================================
+  TEMPLATE HEADER
+  -----------------------------------------------------
+  Estilos del header principal del layout.
+  Incluye:
+  - Header sticky
+  - Navegación responsive
+  - Enlaces con estados (hover, focus, active)
+  ===================================================== */
 
-/* Encabezado principal */
-.template__header {
-  height: 10vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--padding-small, 0.8rem);
-  text-align: center;
-}
+.template {
 
-/* Contenedor de navegación */
-.template__nav {
-  width: 80%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  /* ===================================================
+    HEADER
+    ---------------------------------------------------
+    - Sticky en la parte superior.
+    - Mantiene visibilidad durante el scroll.
+    - Usa z-index configurable con fallback.
+    =================================================== */
+  &__header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-overlay, 10);
 
-  @media (max-width: 425px) {
-    display: none;
+    min-height: 4.5rem; // Altura base del header
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 var(--space-lg);
+
+    background-color: var(--color-bg-container);
+  }
+
+  /* ===================================================
+    NAVIGATION
+    ---------------------------------------------------
+    Oculta por defecto (mobile-first).
+    Visible desde tablet en adelante.
+    =================================================== */
+  &__nav {
+    display: none; // móvil primero
+  }
+
+  /* ===================================================
+    LINKS
+    ---------------------------------------------------
+    Estilo base para enlaces del header.
+    - Alineación centrada.
+    - Transiciones suaves.
+    - Soporte hover, focus-visible y active.
+    =================================================== */
+  &__link {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: var(--space-xs) var(--space-sm);
+
+    font-size: var(--font-size-body-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+
+    text-decoration: none;
+    border-radius: var(--radius-md);
+
+    transition: var(--transition-fast);
+
+    /* ================= HOVER ================= */
+    &:hover {
+      color: var(--color-primary-500);
+      background-color: var(--color-bg-container);
+    }
+
+    /* ================= FOCUS (Accesibilidad) ================= */
+    &:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 2px;
+    }
+
+    /* ================= ACTIVE MODIFIER ================= */
+    &--active {
+      color: var(--color-primary-500);
+
+      /* Indicador inferior activo */
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: calc(-1 * var(--space-xxs));
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-primary-500);
+        border-radius: var(--radius-full);
+      }
+    }
   }
 }
 
-/* Enlaces de navegación */
-.template__link {
-  text-decoration: none;
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-sm);
-  color: var(--color-text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    color: var(--color-primary);
+/* =====================================================
+  TABLET UP (≥ 640px)
+  -----------------------------------------------------
+  Activa navegación horizontal visible.
+  ===================================================== */
+@media (min-width: 640px) {
+  .template__nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-lg);
+    margin: 0 auto;
   }
 }

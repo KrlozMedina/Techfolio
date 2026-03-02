@@ -7,6 +7,8 @@ export const common: CommonLocale = {
     delete: 'Delete',
     download: 'Download',
     retry: 'Retry',
+    reset: "Reset",
+    seeMore: "See more",
   },
 
   fields: {
@@ -20,4 +22,24 @@ export const common: CommonLocale = {
     home: 'Home',
     back: 'Go back',
   },
+
+  enums: {
+    platforms: {
+      WEB: "Web",
+      MOBILE: "Mobile",
+      DESKTOP: "Desktop",
+      IOT: "IoT",
+      INDUSTRIAL: "Industrial",
+      BACKEND: "BackEnd",
+      API: "API",
+    }
+  },
+
+  spinner: {
+    message: 'Loading, please wait...',
+  },
+
+  label: {
+    logout: "Log out",
+  }
 };

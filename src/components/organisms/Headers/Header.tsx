@@ -1,62 +1,97 @@
 import React from 'react';
 import Link from 'next/link';
+import clsx from 'clsx';
 
-import style from './Header.module.scss';
-import Logout from '@/components/atom/buttons/Logout';
+import styles from './Header.module.scss';
+import Logout from '@/components/atom/Button/Logout';
 import Logo from '@/components/atom/Logo/Logo';
 
-// --- Tipado ---
+/**
+ * Representa un enlace de navegación del header.
+ */
 interface NavLink {
+  /** Ruta destino */
   path: string;
+
+  /** Títulos internacionalizados */
   title: {
     es: string;
     en: string;
   };
+
+  /** Indica si el enlace está activo */
   isActive: boolean;
 }
 
+/**
+ * Props del componente Header
+ */
 interface HeaderProps {
+  /** Lista de enlaces de navegación */
   links?: NavLink[];
+
+  /** Indica si el usuario es administrador */
   isAdmin?: boolean;
+
+  /** Idioma activo */
   language: 'es' | 'en';
 }
 
 /**
- * Header Component
- * Muestra el logo, los enlaces de navegación y, si es admin, el botón de logout.
+ * =========================================================
+ * Header
+ * ---------------------------------------------------------
+ * Componente de cabecera principal del layout.
+ *
+ * Responsabilidades:
+ * - Mostrar logo institucional.
+ * - Renderizar enlaces de navegación.
+ * - Resaltar enlace activo.
+ * - Mostrar botón de logout si el usuario es admin.
+ *
+ * Características:
+ * - Soporte i18n mediante prop `language`.
+ * - Estilos condicionales con clsx.
+ * - Basado en estructura BEM definida en SCSS.
+ * =========================================================
  */
 const Header: React.FC<HeaderProps> = ({
   links = [],
   isAdmin = false,
   language,
 }) => {
+
   /**
-   * Renderiza los enlaces de navegación en el idioma seleccionado.
+   * Genera los enlaces de navegación dinámicamente.
+   * Aplica clase modificadora si el link está activo.
    */
   const renderLinks = () =>
-    links.map(({ path, title, isActive }, index) => (
+    links.map(({ path, title, isActive }) => (
       <Link
-        key={index}
+        key={path}
         href={path}
-        className={style['template__link']}
-        style={isActive ? { color: 'var(--color-button-hover)' } : {}}
+        className={clsx(
+          styles['template__link'],
+          isActive && styles['template__link--active']
+        )}
       >
         {title[language]}
       </Link>
     ));
 
   return (
-    <header className={style['template__header']}>
-      {/* Logo del sistema */}
+    <header className={styles['template__header']}>
+
+      {/* Logo de marca (modo header) */}
       <Logo inHeader />
 
-      {/* Enlaces de navegación */}
-      <nav className={style['template__nav']}>
+      {/* Navegación principal */}
+      <nav className={styles['template__nav']}>
         {renderLinks()}
       </nav>
 
-      {/* Botón de logout si es administrador */}
-      {isAdmin && <Logout lang={language} />}
+      {/* Logout visible solo para administradores */}
+      {isAdmin && <Logout />}
     </header>
   );
 };

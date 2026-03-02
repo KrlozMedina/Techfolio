@@ -6,7 +6,6 @@ import styles from './Navbar.module.scss';
 import { MenuLinks } from './MenuLinks';
 import SettingsButton from '@/components/organisms/settings/SettingsButton';
 import Logout from '@/components/atom/Button/Logout';
-import { useLanguage } from '@/hooks/useLanguage';
 import { NavLink } from '@/lib/types/navigation';
 
 /**
@@ -61,11 +60,6 @@ export const MobileHamburgerMenu: React.FC<Props> = ({
   const [menuOpen, setMenuOpen] = useState(false);
 
   /**
-   * Obtiene el idioma actual desde el contexto global.
-   */
-  const { language } = useLanguage();
-
-  /**
    * Alterna el estado de visibilidad del menú.
    * Utiliza actualización funcional para evitar estados obsoletos.
    */
@@ -102,7 +96,7 @@ export const MobileHamburgerMenu: React.FC<Props> = ({
           <SettingsButton className="visible" isFloating />
 
           {/* Cierre de sesión visible únicamente para administradores */}
-          {isAdmin && <Logout lang={language} />}
+          {isAdmin && <Logout />}
         </section>
       )}
     </>
