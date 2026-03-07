@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getProjectBySlug } from "@/services/projects/projects.service";
-import { toProjectDetailDTO } from "@/mappers/project.mapper";
-import { LANGUAGES } from "@/shared/enums";
+import { toProjectDetailDTO } from "@/infrastructure/project/project.mapper";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { querySchema } from "@/shared/interfaces/query.schema";
+import "@/models"
+import { LANGUAGES } from "@/lib/i18n/language";
 
 /**
  * GET /api/projects/slug/[slug]

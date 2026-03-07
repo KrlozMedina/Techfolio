@@ -1,14 +1,14 @@
-import { createFeatureSchema } from "@/dto/feature/feature.create.dto";
+import { createFeatureSchema } from "@/infrastructure/feature/feature.create.dto";
 import { PERMISSIONS, withAuthorization } from "@/lib/auth";
 import { sanitizeRegex } from "@/lib/db/sanitize-regex";
 import { handleApiError } from "@/lib/http/handle-api-error";
-import { toFeatureListDTO } from "@/mappers/feature.mapper";
+import { toFeatureListDTO } from "@/infrastructure/feature/feature.mapper";
 import { createFeature, getFeatures, getTotalFeatures } from "@/services/features/features.service";
-import { LANGUAGES } from "@/shared/enums";
 import { FeatureDomain } from "@/shared/enums/feature-domain.enum";
 import { querySchema } from "@/shared/interfaces/query.schema";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
+import { LANGUAGES } from "@/lib/i18n/language";
 
 /**
  * Schema para validar y transformar los query params de GET /features

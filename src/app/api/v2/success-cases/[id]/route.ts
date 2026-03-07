@@ -1,16 +1,16 @@
-import { updateSuccessCaseSchema } from "@/dto/success-case/success-case.update.dto";
+import { updateSuccessCaseSchema } from "@/infrastructure/success-case/success-case.update.dto";
 import { PERMISSIONS, withAuthorization } from "@/lib/auth";
 import { handleApiError } from "@/lib/http/handle-api-error";
-import { toSuccessCaseEntityDTO } from "@/mappers/success-case.mapper";
+import { toSuccessCaseEntityDTO } from "@/infrastructure/success-case/success-case.mapper";
 import {
   deleteSuccessCase,
   getSuccessCaseById,
   updateSuccessCase
 } from "@/services/success-cases/success-cases.service";
-import { LANGUAGES } from "@/shared/enums";
 import { querySchema } from "@/shared/interfaces/query.schema";
 import { Types } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
+import { LANGUAGES } from "@/lib/i18n/language";
 
 /**
  * Valida si un string es un ObjectId válido de MongoDB.

@@ -1,0 +1,58 @@
+/* =====================================================
+  PROJECTS - FILTERS
+  -----------------------------------------------------
+  Estilos para el bloque de filtros de la sección
+  de proyectos.
+  Basado en metodología BEM y enfoque mobile-first.
+  ===================================================== */
+
+/* ============ PROJECTS (BLOCK) ============ */
+
+.projects {
+
+  /* ===================================================
+    FILTERS CONTAINER
+    ---------------------------------------------------
+    - Layout vertical en mobile.
+    - Espaciado consistente con design system.
+    =================================================== */
+  &__filters {
+    display: flex;
+    flex-direction: column;   /* Mobile first */
+    align-items: stretch;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  /* ===================================================
+    FILTER GROUP
+    ---------------------------------------------------
+    Agrupa label + input/select.
+    =================================================== */
+  &__filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+}
+
+
+/* =====================================================
+  DESKTOP (≥ 768px)
+  -----------------------------------------------------
+  - Layout horizontal.
+  - Alineación a la derecha.
+  ===================================================== */
+
+@media (min-width: 768px) {
+  .projects__filters {
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .projects__filter-group {
+    align-items: flex-end;
+  }
+}

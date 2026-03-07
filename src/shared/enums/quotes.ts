@@ -1,59 +1,45 @@
 /**
- * Lista de identificadores válidos para las páginas del sitio.
+ * =========================================================
+ * Page (Type)
+ * ---------------------------------------------------------
+ * Unión literal que define todas las páginas válidas
+ * dentro del sistema.
+ *
+ * Propósito:
+ * - Evitar strings mágicos.
+ * - Garantizar tipado fuerte en navegación.
+ * - Asegurar coherencia con i18n (t[page]).
+ * - Servir como contrato entre:
+ *    • Hero
+ *    • Layouts
+ *    • Rutas
+ *    • Configuración global
+ *
+ * Nota arquitectónica:
+ * Cada valor debe corresponder a:
+ * - Una clave en el diccionario de traducciones.
+ * - Una posible sección o ruta válida.
+ *
+ * Si se agrega una nueva página, debe:
+ * 1. Añadirse aquí.
+ * 2. Añadirse en i18n.
+ * 3. Añadirse en ROUTES_LIST si aplica.
+ * =========================================================
  */
 export type Page =
-  'about'       |
-  'blog'        |
-  'caseStudies' |
-  'clients'     |
-  'contact'     |
-  'dashboard'   |
-  'education'   |
-  'experience'  |
-  'gallery'     |
-  'profile'     |
-  'projects'    |
-  'resources'   |
-  'resume'      |
-  'service'     |
-  'skills'      |
-  'testimonials'
-  ;
-
-/**
- * Estructura de una cita inspiradora.
- */
-// interface Quote {
-//   /**
-//    * Frase en diferentes idiomas.
-//    */
-//   phrase: {
-//     es: string;
-//     en: string;
-//   };
-
-//   /**
-//    * Autor de la cita.
-//    */
-//   author: string;
-// }
-
-/**
- * Citas inspiradoras asociadas a diferentes páginas del sitio.
- */
-// export const QUOTES: Partial<Record<Page, Quote>> = {
-//   projects: {
-//     phrase: {
-//       es: "La mejor manera de empezar algo es dejar de hablar de ello y empezar a hacerlo.",
-//       en: "The way to get started is to stop talking and begin doing.",
-//     },
-//     author: "Walt Disney",
-//   },
-//   blog: {
-//     phrase: {
-//       es: 'Escribir es la manera más profunda de leer la vida.',
-//       en: 'Writing is the deepest form of reading life.'
-//     },
-//     author: 'Francisco Umbral'
-//   }
-// };
+  'about'        |
+  'blog'         |
+  'successCases' |
+  'clients'      |
+  'contact'      |
+  'dashboard'    |
+  'education'    |
+  'experience'   |
+  'gallery'      |
+  'profile'      |
+  'projects'     |
+  'resources'    |
+  'resume'       |
+  'service'      |
+  'skills'       |
+  'testimonials';

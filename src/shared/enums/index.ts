@@ -1,37 +1,67 @@
 /**
- * Shared enums and constants barrel file.
+ * =========================================================
+ * Shared Enums & Constants Barrel
+ * ---------------------------------------------------------
+ * Punto central de re-exportación para enums y constantes
+ * compartidas en toda la aplicación.
  *
- * Centralizes and re-exports all enums and shared definitions
- * used across the application (API, services, schemas, DTOs).
+ * Objetivos:
+ * - Evitar imports con rutas profundas.
+ * - Garantizar consistencia en el uso de enums.
+ * - Mejorar mantenibilidad y descubribilidad.
+ * - Servir como contrato transversal entre capas
+ *   (domain, application, infrastructure, UI).
  *
- * Purpose:
- * - Avoid deep import paths
- * - Keep enum usage consistent
- * - Improve maintainability and discoverability
+ * Uso recomendado:
+ *   import { StatusEnum, PlatformEnum } from '@/shared/enums';
+ *
+ * En lugar de:
+ *   import { StatusEnum } from '@/shared/enums/status.enum';
+ * =========================================================
  */
 
-// Supported languages enum / constants
-export * from './language';
 
-// Shared quotes or text constants
+/* =========================================================
+  Shared Quotes or Text Constants
+  ========================================================= */
 export * from './quotes';
 
-// Architecture-related enums
+
+/* =========================================================
+  Architecture Enums
+  ========================================================= */
 export * from './architecture-communication.enum';
 export * from './architecture-style.enum';
 export * from './architecture-type.enum';
 
-// Database modeling strategy enum
+
+/* =========================================================
+  Database Modeling Strategy
+  ========================================================= */
 export * from './database-model.enum';
 
-// Target platform enum (web, mobile, backend, etc.)
+
+/* =========================================================
+  Target Platform (web, mobile, backend, etc.)
+  ========================================================= */
 export * from './platform.enum';
 
-// Project lifecycle/status enum
-export * from './project-status.enum';
 
-// Project classification/type enum
+/* =========================================================
+  Project Lifecycle / Status
+  ========================================================= */
+export * from './status.enum';
+
+
+/* =========================================================
+  Project Classification / Type
+  ========================================================= */
 export * from './project-type.enum';
 
-// Team role enum
+
+/* =========================================================
+  Team, Visibility & Experience
+  ========================================================= */
 export * from './role.enum';
+export * from './visibility.enum';
+export * from './experience-level.enum';

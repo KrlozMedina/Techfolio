@@ -1,0 +1,127 @@
+/**
+ * =========================================================
+ * PROJECT OUTCOME (BLOCK)
+ * ---------------------------------------------------------
+ * Sección que muestra el resultado o impacto final de un
+ * proyecto.
+ *
+ * Contenido típico:
+ * - Label contextual (ej: Outcome / Result)
+ * - Título del resultado
+ * - Descripción del impacto
+ * - Imagen o media representativa
+ *
+ * Layout:
+ * - Mobile: contenido vertical
+ * - Desktop: texto + media en dos columnas
+ * =========================================================
+ */
+
+.outcome {
+
+  /**
+   * Contenedor principal
+   */
+  display: grid;
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-4xl);
+
+  align-items: center;
+
+  /**
+   * -------------------------------------------------------
+   * LABEL
+   * -------------------------------------------------------
+   * Pequeña etiqueta contextual sobre el resultado.
+   * Ej: "Outcome", "Results", "Impact"
+   */
+  &__label {
+    font-size: var(--font-size-body-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * TITLE
+   * -------------------------------------------------------
+   * Título principal del resultado del proyecto.
+   */
+  &__title {
+    font-size: var(--font-size-heading-lg);
+    margin: var(--space-sm) 0 var(--space-md);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * TEXT
+   * -------------------------------------------------------
+   * Descripción del impacto o resultado obtenido.
+   */
+  &__text {
+    font-size: var(--font-size-body-md);
+    line-height: var(--line-height-relaxed);
+
+    max-width: 52rem;
+    color: var(--color-text-soft);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * MEDIA
+   * -------------------------------------------------------
+   * Contenedor de la imagen o media representativa
+   * del resultado del proyecto.
+   */
+  &__media {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+
+    box-shadow: var(--shadow-md);
+
+    transition:
+      transform var(--transition-default),
+      box-shadow var(--transition-default);
+
+    /**
+     * Efecto hover para dar profundidad visual
+     */
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+
+  /**
+   * Imagen del resultado
+   */
+  &__image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+
+/**
+ * =========================================================
+ * RESPONSIVE - DESKTOP
+ * ---------------------------------------------------------
+ * En pantallas grandes:
+ * - Layout de dos columnas
+ * - Texto a la izquierda
+ * - Imagen o media a la derecha
+ * =========================================================
+ */
+
+@media (min-width: 900px) {
+
+  .outcome {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+  }
+
+}

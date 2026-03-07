@@ -4,17 +4,18 @@ import {
   getProjects,
   getTotalProjects
 } from "@/services/projects/projects.service";
-import { LANGUAGES, Platform, Status } from "@/shared/enums";
-import { toProjectListDTO } from "@/mappers/project.mapper";
+import { Platform, Status } from "@/shared/enums";
+import { toProjectListDTO } from "@/infrastructure/project/project.mapper";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { PERMISSIONS, withAuthorization } from "@/lib/auth";
-import { createProjectSchema } from "@/dto/project/project.create.dto";
+import { createProjectSchema } from "@/infrastructure/project/project.create.dto";
 import { sanitizeRegex } from "@/lib/db/sanitize-regex";
 import { Technology } from "@/models/technology/technology.model";
 import { Feature } from "@/models/features/feature.model";
 import "@/models";
 import { querySchema } from "@/shared/interfaces/query.schema";
 import z from "zod";
+import { LANGUAGES } from "@/lib/i18n/language";
 
 /**
  * Extiende el schema base de query para permitir:

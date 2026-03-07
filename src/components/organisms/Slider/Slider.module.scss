@@ -1,0 +1,133 @@
+/* =====================================================
+  CAROUSEL COMPONENT
+  -----------------------------------------------------
+  Componente horizontal scrollable con:
+  - Snap scrolling
+  - Soporte táctil
+  - Flechas de navegación
+  - Scrollbar personalizada
+  Basado en metodología BEM.
+  ===================================================== */
+
+
+/* ============================= */
+/* CAROUSEL ROOT */
+/* ============================= */
+
+.carousel {
+  position: relative;
+  width: 100%;
+}
+
+
+/* ============================= */
+/* TRACK (Scrollable Container) */
+/* ============================= */
+
+.carousel__track {
+  display: flex;
+  gap: var(--space-lg);
+  padding: var(--space-2xl) var(--space-xl);
+
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+
+  -webkit-overflow-scrolling: touch; /* Mejor experiencia en iOS */
+}
+
+/* Accesibilidad focus */
+
+.carousel__track:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: var(--space-xs);
+}
+
+
+/* ============================= */
+/* Scrollbar Customization */
+/* ============================= */
+
+.carousel__track::-webkit-scrollbar {
+  height: 0.6rem;
+}
+
+.carousel__track::-webkit-scrollbar-thumb {
+  background-color: var(--color-border-strong);
+  border-radius: var(--radius-full);
+}
+
+
+/* ============================= */
+/* SLIDE */
+/* ============================= */
+
+.carousel__slide {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  min-width: 28rem;
+}
+
+
+/* ============================= */
+/* ARROWS */
+/* ============================= */
+
+.carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-overlay, 20);
+
+  width: 3rem;
+  height: 3rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: var(--radius-full);
+
+  background-color: var(--color-bg-container);
+  color: var(--color-text);
+
+  cursor: pointer;
+
+  box-shadow: 0 var(--space-xs) var(--space-md) var(--color-shadow);
+  transition: var(--transition-fast);
+}
+
+.carousel__arrow:hover {
+  background-color: var(--color-primary-500);
+  color: var(--color-button-primary-text);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.carousel__arrow:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: var(--space-xs);
+}
+
+
+/* Arrow Positions */
+
+.carousel__arrow--left {
+  left: var(--space-sm);
+}
+
+.carousel__arrow--right {
+  right: var(--space-sm);
+}
+
+
+/* ============================= */
+/* MOBILE ADJUSTMENTS */
+/* ============================= */
+
+@media (max-width: 767px) {
+  .carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+}

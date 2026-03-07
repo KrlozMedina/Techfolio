@@ -7,9 +7,9 @@ import {
   getCategoryById,
   updateCategory,
 } from "@/services/categories/categories.service";
-import { toCategoryEntityDTO } from "@/mappers/category.mapper";
+import { toCategoryEntityDTO } from "@/infrastructure/category/category.mapper";
 import { handleApiError } from "@/lib/http/handle-api-error";
-import { updateCategorySchema } from "@/dto/category/category.update.dto";
+import { updateCategorySchema } from "@/infrastructure/category/category.update.dto";
 
 /**
  * Valida que el id sea un ObjectId válido de MongoDB.

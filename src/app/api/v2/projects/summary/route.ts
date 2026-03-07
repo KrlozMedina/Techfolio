@@ -1,6 +1,7 @@
 import { handleApiError } from "@/lib/http/handle-api-error";
+import { LANGUAGES } from "@/lib/i18n/language";
 import { getProjectsSummary } from "@/services/projects/projects.summary.service";
-import { LANGUAGES, Status } from "@/shared/enums";
+import { Status } from "@/shared/enums";
 import { querySchema } from "@/shared/interfaces/query.schema";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";

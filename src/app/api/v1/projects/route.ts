@@ -1,4 +1,4 @@
-import { CreateProjectDto, DeleteProjectDto, UpdateProjectDto } from "@/dto/project/projects.dto";
+import { CreateProjectDto, DeleteProjectDto, UpdateProjectDto } from "@/infrastructure/project/projects.dto";
 import connectDB from "@/lib/db/connectDB";
 import { createSlugFromTitle, getCategoriesFromTechnologies } from "@/lib/helpers";
 import { ProjectV1 as Project } from "@/models/project/project.model";

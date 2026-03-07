@@ -20,7 +20,7 @@
   &__header {
     position: sticky;
     top: 0;
-    z-index: var(--z-overlay, 10);
+    // z-index: var(--z-overlay, 10);
 
     min-height: 4.5rem; // Altura base del header
     display: flex;

@@ -1,0 +1,168 @@
+/**
+* =========================================================
+* PROJECT HERO (BLOCK)
+* ---------------------------------------------------------
+* Sección hero utilizada en la página de detalle de un
+* proyecto.
+*
+* Contiene:
+* - Título del proyecto
+* - Descripción
+* - Badges informativos
+* - Enlaces externos (demo, repo, etc.)
+* - Imagen principal del proyecto
+*
+* Layout:
+* - Mobile: columna
+* - Desktop: layout horizontal
+* =========================================================
+*/
+
+.hero {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--space-2xl);
+
+  margin: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+
+  /* =====================================================
+    CONTENT
+    -----------------------------------------------------
+    Contenedor del contenido textual
+    ===================================================== */
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  &__title {
+    font-size: var(--font-size-heading-lg);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  &__description {
+    font-size: var(--font-size-body-md);
+    color: var(--color-text-soft);
+  }
+
+  /* =====================================================
+    BADGES
+    -----------------------------------------------------
+    Información rápida del proyecto (estado, tipo, etc.)
+    ===================================================== */
+
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+
+    padding: var(--space-xxs) var(--space-xs);
+
+    border-radius: var(--radius-sm);
+
+    font-size: var(--font-size-body-xs);
+
+    background-color: var(--color-bg-container);
+    color: var(--color-text);
+  }
+
+  &__badge-label {
+    font-weight: var(--font-weight-semibold);
+    opacity: 0.7;
+  }
+
+  &__badge--status {
+    background-color: var(--color-success-100);
+    color: var(--color-success-700);
+    border-color: var(--color-success-300);
+  }
+
+  /* =====================================================
+    LINKS
+    -----------------------------------------------------
+    Enlaces de acción (demo, repo, documentación)
+    ===================================================== */
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: var(--space-xs) var(--space-sm);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+
+    font-size: var(--font-size-body-sm);
+    font-weight: var(--font-weight-medium);
+
+    text-decoration: none;
+    color: var(--color-text);
+
+    transition: var(--transition-fast);
+
+    &:hover {
+      background-color: var(--color-bg-container);
+    }
+  }
+
+  /* =====================================================
+    IMAGE
+    -----------------------------------------------------
+    Imagen principal del proyecto
+    ===================================================== */
+
+  &__image {
+    width: 100%;
+    height: auto;
+
+    max-width: 48rem;
+
+    border-radius: var(--radius-lg);
+
+    object-fit: cover;
+  }
+}
+
+
+/* =========================================================
+  RESPONSIVE (DESKTOP)
+  ---------------------------------------------------------
+  Layout horizontal para pantallas grandes
+  ========================================================= */
+
+@media (min-width: 900px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+
+    &__image {
+      flex: 1;
+      max-width: 54rem;
+    }
+
+    &__content {
+      flex: 1;
+    }
+  }
+}

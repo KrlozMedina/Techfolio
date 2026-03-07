@@ -1,7 +1,7 @@
 import { withAuthorization } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { PERMISSIONS } from "@/lib/auth";
-import { LANGUAGES, Status, Visibility } from "@/shared/enums";
+import { Status, Visibility } from "@/shared/enums";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { querySchema } from "@/shared/interfaces/query.schema";
 import z from "zod";
@@ -11,9 +11,10 @@ import {
   getSuccessCases,
   getTotalSuccessCases
 } from "@/services/success-cases/success-cases.service";
-import { toSuccessCaseListDTO } from "@/mappers/success-case.mapper";
-import { createSuccessCaseSchema } from "@/dto/success-case/success-case.create.dto";
+import { toSuccessCaseListDTO } from "@/infrastructure/success-case/success-case.mapper";
+import { createSuccessCaseSchema } from "@/infrastructure/success-case/success-case.create.dto";
 import "@/models";
+import { LANGUAGES } from "@/lib/i18n/language";
 
 /**
  * Extiende el esquema base de query agregando filtros específicos

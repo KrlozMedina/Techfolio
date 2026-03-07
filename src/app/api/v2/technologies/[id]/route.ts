@@ -7,9 +7,9 @@ import {
   getTechnologyById,
   updateTechnology,
 } from "@/services/technologies/technologies.service";
-import { toTechnologyEntityDTO } from "@/mappers/technology.mapper";
+import { toTechnologyEntityDTO } from "@/infrastructure/technology/technology.mapper";
 import { handleApiError } from "@/lib/http/handle-api-error";
-import { updateTechnologySchema } from "@/dto/technology/technology.update.dto";
+import { updateTechnologySchema } from "@/infrastructure/technology/technology.update.dto";
 
 /**
  * Valida si un string es un ObjectId válido de MongoDB.

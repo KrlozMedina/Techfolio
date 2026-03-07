@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Types } from "mongoose";
-import { toProjectDetailDTO } from "@/mappers/project.mapper";
-import { LANGUAGES } from "@/shared/enums";
+import { toProjectDetailDTO } from "@/infrastructure/project/project.mapper";
 import {
   deleteProject,
   getProjectById,
@@ -10,7 +9,8 @@ import {
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { PERMISSIONS, withAuthorization } from "@/lib/auth";
 import { querySchema } from "@/shared/interfaces/query.schema";
-import { updateProjectSchema } from "@/dto/project/project.update.dto";
+import { updateProjectSchema } from "@/infrastructure/project/project.update.dto";
+import { LANGUAGES } from "@/lib/i18n/language";
 
 const isValidObjectId = (id: string) => Types.ObjectId.isValid(id);
 

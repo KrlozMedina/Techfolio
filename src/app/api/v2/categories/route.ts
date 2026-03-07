@@ -1,17 +1,17 @@
-import { createCategorySchema } from "@/dto/category/category.create.dto";
+import { createCategorySchema } from "@/infrastructure/category/category.create.dto";
 import { PERMISSIONS } from "@/lib/auth/permissions";
 import { withAuthorization } from "@/lib/auth/withAuthorization";
 import { sanitizeRegex } from "@/lib/db/sanitize-regex";
 import { handleApiError } from "@/lib/http/handle-api-error";
-import { toCategoryListDTO } from "@/mappers/category.mapper";
+import { toCategoryListDTO } from "@/infrastructure/category/category.mapper";
 import {
   createCategory,
   getCategories,
   getTotalCategories,
 } from "@/services/categories/categories.service";
-import { LANGUAGES } from "@/shared/enums";
 import { querySchema } from "@/shared/interfaces/query.schema";
 import { NextRequest, NextResponse } from "next/server";
+import { LANGUAGES } from "@/lib/i18n/language";
 
 /**
  * Construye el filtro dinámico para búsqueda.

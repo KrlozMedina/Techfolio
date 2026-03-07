@@ -7,13 +7,13 @@ import {
   getTechnologies,
   getTotalTechnologies,
 } from "@/services/technologies/technologies.service";
-import { toTechnologyListDTO } from "@/mappers/technology.mapper";
+import { toTechnologyListDTO } from "@/infrastructure/technology/technology.mapper";
 import { ExperienceLevel } from "@/shared/enums/experience-level.enum";
 import { querySchema } from "@/shared/interfaces/query.schema";
 import { Category } from "@/models/category/category.model";
 import { sanitizeRegex } from "@/lib/db/sanitize-regex";
 import { handleApiError } from "@/lib/http/handle-api-error";
-import { createTechnologySchema } from "@/dto/technology/technology.create.dto";
+import { createTechnologySchema } from "@/infrastructure/technology/technology.create.dto";
 
 /**
  * Extensión del query schema base para el endpoint de tecnologías.
