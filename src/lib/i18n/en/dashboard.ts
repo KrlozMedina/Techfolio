@@ -3,6 +3,8 @@ import { DashboardLocale } from "../es/dashboard";
 export const dashboard: DashboardLocale = {
   hero: {
     title: '',
+    subtitle: '',
+    cta: '',
 
     quote: {
       text: '',

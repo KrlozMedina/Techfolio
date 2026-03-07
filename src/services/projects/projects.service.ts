@@ -2,16 +2,46 @@ import * as repo from "./projects.repository";
 import { validateObjectId } from "@/lib/validators/validateObjectId";
 import { SlugAlreadyExistsError } from "@/errors/domain/slug-already-exists.error";
 import connectDB from "@/lib/db/connectDB";
-import { CreateProjectDTO } from "@/dto/project/project.create.dto";
-import { UpdateProjectDTO } from "@/dto/project/project.update.dto";
+import { CreateProjectDTO } from "@/infrastructure/project/project.create.dto";
+import { UpdateProjectDTO } from "@/infrastructure/project/project.update.dto";
 
 /**
- * Obtiene proyectos paginados según filtro.
+ * =========================================================
+ * Project Service
+ * ---------------------------------------------------------
+ * Capa de servicio responsable de coordinar la lógica de
+ * aplicación relacionada con proyectos.
  *
- * @param {Record<string, unknown>} filter - Filtros dinámicos
- * @param {number} safePage - Número de página (>=1)
- * @param {number} safeLimit - Registros por página
- * @returns {Promise<any[]>} Lista de proyectos
+ * Arquitectura:
+ * Controller → Service → Repository → Database
+ *
+ * Responsabilidades:
+ * - Establecer conexión con la base de datos
+ * - Validar identificadores (ObjectId)
+ * - Manejar errores de dominio (ej. slug duplicado)
+ * - Delegar operaciones CRUD al repositorio
+ *
+ * =========================================================
+ */
+
+
+/**
+ * =========================================================
+ * getProjects
+ * ---------------------------------------------------------
+ * Obtiene una lista paginada de proyectos según filtros
+ * dinámicos proporcionados por el cliente.
+ *
+ * Usado principalmente en:
+ * - Listados de proyectos
+ * - Búsquedas
+ * - filtros del portafolio
+ *
+ * @param filter Filtros dinámicos de consulta
+ * @param safePage Número de página (>=1)
+ * @param safeLimit Cantidad de registros por página
+ * @returns Lista de proyectos
+ * =========================================================
  */
 export async function getProjects(
   filter: Record<string, unknown>,
@@ -22,12 +52,20 @@ export async function getProjects(
   return repo.findProjects(filter, safePage, safeLimit);
 }
 
+
 /**
- * Devuelve el total de proyectos según filtro.
- * Útil para metadata de paginación.
+ * =========================================================
+ * getTotalProjects
+ * ---------------------------------------------------------
+ * Devuelve el número total de proyectos que cumplen
+ * con los filtros aplicados.
  *
- * @param {Record<string, unknown>} filter - Filtros aplicados
- * @returns {Promise<number>} Total de proyectos encontrados
+ * Este valor se usa principalmente para construir
+ * metadatos de paginación.
+ *
+ * @param filter Filtros aplicados
+ * @returns Total de proyectos encontrados
+ * =========================================================
  */
 export async function getTotalProjects(
   filter: Record<string, unknown>
@@ -36,12 +74,21 @@ export async function getTotalProjects(
   return repo.countProjects(filter);
 }
 
+
 /**
- * Obtiene un proyecto por su ID.
- * - Valida que el ID sea un ObjectId válido.
+ * =========================================================
+ * getProjectById
+ * ---------------------------------------------------------
+ * Obtiene un proyecto específico utilizando su ObjectId.
  *
- * @param {string} id - ID del proyecto
- * @returns {Promise<any | null>} Proyecto encontrado o null
+ * Proceso:
+ * 1. Conectar a la base de datos
+ * 2. Validar que el ID sea un ObjectId válido
+ * 3. Consultar el repositorio
+ *
+ * @param id Identificador del proyecto
+ * @returns Proyecto encontrado o null
+ * =========================================================
  */
 export async function getProjectById(id: string) {
   await connectDB();
@@ -49,27 +96,43 @@ export async function getProjectById(id: string) {
   return repo.findProjectById(id);
 }
 
+
 /**
- * Obtiene un proyecto por su slug único.
+ * =========================================================
+ * getProjectBySlug
+ * ---------------------------------------------------------
+ * Obtiene un proyecto utilizando su slug público.
  *
- * @param {string} slug - Slug del proyecto
- * @returns {Promise<any | null>} Proyecto encontrado o null
+ * Los slugs se utilizan normalmente en rutas dinámicas:
+ * `/projects/[slug]`
+ *
+ * @param slug Slug único del proyecto
+ * @returns Proyecto encontrado o null
+ * =========================================================
  */
 export async function getProjectBySlug(slug: string) {
   await connectDB();
   return repo.findProjectBySlug(slug);
 }
 
+
 /**
- * Crea un nuevo proyecto.
- * - Maneja error de slug duplicado.
+ * =========================================================
+ * createProject
+ * ---------------------------------------------------------
+ * Crea un nuevo proyecto en la base de datos.
  *
- * @param {CreateProjectDTO} data - Datos validados del proyecto
- * @throws {SlugAlreadyExistsError} Si el slug ya existe
- * @returns {Promise<any>} Proyecto creado
+ * Maneja errores de dominio relacionados con:
+ * - slug duplicado (índice único en MongoDB)
+ *
+ * @param data Datos validados del proyecto
+ * @throws SlugAlreadyExistsError Si el slug ya existe
+ * @returns Proyecto creado
+ * =========================================================
  */
 export async function createProject(data: CreateProjectDTO) {
   await connectDB();
+
   try {
     return await repo.createProjectRepo(data);
   } catch (error: any) {
@@ -80,15 +143,24 @@ export async function createProject(data: CreateProjectDTO) {
   }
 }
 
+
 /**
- * Actualiza un proyecto existente.
- * - Valida ObjectId.
- * - Maneja error de slug duplicado.
+ * =========================================================
+ * updateProject
+ * ---------------------------------------------------------
+ * Actualiza un proyecto existente mediante su ID.
  *
- * @param {string} id - ID del proyecto
- * @param {UpdateProjectDTO} data - Datos de actualización
- * @throws {SlugAlreadyExistsError} Si el slug ya existe
- * @returns {Promise<any | null>} Proyecto actualizado o null
+ * Proceso:
+ * 1. Conectar a la base de datos
+ * 2. Validar el ObjectId
+ * 3. Delegar actualización al repositorio
+ * 4. Manejar errores de slug duplicado
+ *
+ * @param id Identificador del proyecto
+ * @param data Datos parciales de actualización
+ * @throws SlugAlreadyExistsError Si el slug ya existe
+ * @returns Proyecto actualizado o null
+ * =========================================================
  */
 export async function updateProject(
   id: string,
@@ -107,12 +179,21 @@ export async function updateProject(
   }
 }
 
+
 /**
- * Elimina un proyecto por su ID.
- * - Valida formato del ObjectId.
+ * =========================================================
+ * deleteProject
+ * ---------------------------------------------------------
+ * Elimina un proyecto existente mediante su ID.
  *
- * @param {string} id - ID del proyecto
- * @returns {Promise<any | null>} Proyecto eliminado o null
+ * Proceso:
+ * 1. Conectar a la base de datos
+ * 2. Validar el ObjectId
+ * 3. Ejecutar eliminación en el repositorio
+ *
+ * @param id Identificador del proyecto
+ * @returns Proyecto eliminado o null si no existe
+ * =========================================================
  */
 export async function deleteProject(id: string) {
   await connectDB();

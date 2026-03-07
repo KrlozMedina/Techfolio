@@ -1,32 +1,27 @@
-// import { TextInput } from "@/components/atom/form/TextInput";
 import Modal from "@/components/organisms/Modal/Modal";
 import {
   useCreateProjectMutation,
   useDeleteProjectMutation,
   useGetProjectsQuery,
-} from "@/store/service/projectsApi";
-import { useGetTechnologiesQuery } from "@/store/service/technologiesApi";
-import { ErrorResponse, ITechnology } from "@/shared/types";
+} from "@/infrastructure/project/projects.api";
+// import { useGetTechnologiesQuery } from "@/infrastructure/api/technologiesApi";
+import { ErrorResponse } from "@/shared/types/http-error.types";
 import React, { useEffect, useState } from "react";
-// import LanguageContext, {
-//   LanguageContextType,
-// } from "@/context/LanguageContext";
 import style from "../page.module.css";
 import Image from "next/image";
-import { PLATFORMS } from "@/shared/constants/constants";
-import { IProjectV2Paginated } from "@/models/project/Project.interface";
+import { PLATFORMS } from "@/shared/enums/constants";
+// import { IProjectV2Paginated } from "@/models/project/project.interface";
 import { useTranslation } from "@/hooks/useTranslation";
-// import { TextInput } from "@/components/atom/form";
+import { ITechnology } from "@/models/technology/technology.interface";
+import { useGetTechnologiesQuery } from "@/infrastructure/technology/technologies.api";
 
 const ProjectsSection: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [projects, setProjects] = useState<IProjectV2Paginated>();
+  // const [projects, setProjects] = useState<IProjectV2Paginated>();
   const [technologies, setTechnologies] = useState<ITechnology[]>([]);
-  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-  // const language = isSpanish ? 'es' : 'en';
-  const { t } = useTranslation();
-  const { data: dataProjects, refetch } = useGetProjectsQuery();
+  const { t, language } = useTranslation();
+  // const { data: dataProjects, refetch } = useGetProjectsQuery(language);
   const { data: dataTechnologies, isLoading: isLoadingTechnologies } =
     useGetTechnologiesQuery(null);
   const [createProject, { isLoading, isError }] = useCreateProjectMutation();
@@ -67,8 +62,8 @@ const ProjectsSection: React.FC = () => {
 
     listTechnology.forEach((name) => {
       const tech = technologies.find((tech) => tech.name === name);
-      if (tech && !listCategory.includes(tech.category)) {
-        listCategory.push(tech.category);
+      if (tech && !listCategory.includes(tech.categoryId.toString())) {
+        listCategory.push(tech.categoryId.toString());
       }
     });
 
@@ -99,7 +94,7 @@ const ProjectsSection: React.FC = () => {
         priority: 0,
         projectType: PLATFORMS[0],
       });
-      refetch();
+      // refetch();
     } catch (err) {
       const dataError = err as ErrorResponse;
       setErrorMessage(dataError.data?.error || "Unknown error");
@@ -109,21 +104,21 @@ const ProjectsSection: React.FC = () => {
   const handlerDeleteProject = async (id: string) => {
     try {
       await deleteProject(id);
-      refetch();
+      // refetch();
     } catch (err) {
       console.error(err);
     }
   };
 
-  useEffect(() => {
-    if (dataTechnologies) {
-      setTechnologies(dataTechnologies);
-    }
+  // useEffect(() => {
+  //   if (dataTechnologies) {
+  //     setTechnologies(dataTechnologies);
+  //   }
 
-    if (dataProjects) {
-      setProjects(dataProjects);
-    }
-  }, [dataProjects]);
+  //   if (dataProjects) {
+  //     setProjects(dataProjects);
+  //   }
+  // }, [dataProjects]);
 
   return (
     <>
@@ -131,9 +126,9 @@ const ProjectsSection: React.FC = () => {
         <button
           onClick={() => setShowModal(true)}
           disabled={isLoadingTechnologies}
+          className="btn"
         >
           {t.dashboard.projects.addProject}
-          {/* {isSpanish ? "Agregar proyecto" : "Add project"} */}
         </button>
 
         {showModal && (
@@ -148,22 +143,11 @@ const ProjectsSection: React.FC = () => {
               <fieldset className={style["modal__fieldset"]}>
                 <legend className={style["modal__legend"]}>
                   {t.dashboard.projects.addProject}
-                  {/* {isSpanish ? "Agregar proyecto" : "Add project"} */}
                 </legend>
-
-                {/* <TextInput
-                  label={isSpanish ? "Titulo:" : "Title:"}
-                  value={projectData.title}
-                  onChange={(e) => setTitleAndSlug(e.target.value)}
-                  id="title"
-                  type="text"
-                  required
-                /> */}
 
                 <div>
                   <label htmlFor="description">
                     {t.dashboard.projects.descriptionLabel}
-                    {/* {isSpanish ? "Descripción" : "Description"}: */}
                   </label>
                   <textarea
                     name="description"
@@ -182,7 +166,6 @@ const ProjectsSection: React.FC = () => {
                 <div>
                   <label htmlFor="technologies">
                     {t.dashboard.projects.technologiesLabel}
-                    {/* {isSpanish ? "Tecnologías" : "Technologies"}: */}
                   </label>
                   <select
                     multiple
@@ -306,7 +289,6 @@ const ProjectsSection: React.FC = () => {
                 <div>
                   <label htmlFor="projectType">
                     {t.dashboard.projects.projectTypeLabel}
-                    {/* {isSpanish ? "Tipo de proyecto" : "Project type"}: */}
                   </label>
                   <select
                     name="projectType"
@@ -329,15 +311,13 @@ const ProjectsSection: React.FC = () => {
 
                 {isError && <p style={{ color: "red" }}>{errorMessage}</p>}
 
-                <button type="submit" disabled={isLoading}>
+                <button 
+                  type="submit"
+                  disabled={isLoading}
+                  className="btn"
+                >
                   {
-                    isLoading ? t.dashboard.projects.sending : t.dashboard.projects.submit
-                      // ? isSpanish
-                      //   ? "Enviando"
-                      //   : "Sending"
-                      // : isSpanish
-                      //   ? "Enviar"
-                      //   : "Submit"
+                    isLoading ? t.dashboard.projects.sending : t.dashboard.projects.sending
                   }
                 </button>
               </fieldset>
@@ -346,21 +326,21 @@ const ProjectsSection: React.FC = () => {
         )}
       </div>
 
-      <div className={style["project__list"]}>
+      {/* <div className={style["project__list"]}>
         {projects?.data.map((project, index) => (
           <div className={style["project__card"]} key={index}>
             <Image
-              src={project.assets.main}
+              src={project.imageMain}
               width={200}
               height={300}
-              alt={`${project.projectInfo.es.title} screenshot`}
+              alt={`${project.title} screenshot`}
               className={style["project__card-image"]}
             />
-            <h2 className={style["project__card-title"]}>{project.projectInfo.es.title}</h2>
-            <p>{project.projectInfo.es.description}</p>
+            <h2 className={style["project__card-title"]}>{project.title}</h2>
+            <p>{project.description}</p>
             <p>
               <strong>{t.dashboard.projects.category}:</strong>{" "}
-              {project.tags.categoryIds?.join(", ")}
+              {project.categories?.join(", ")}
             </p>
             <p>
               <strong>{t.dashboard.projects.role}:</strong> {project.teamInfo.roleId}
@@ -379,35 +359,34 @@ const ProjectsSection: React.FC = () => {
             </p>
             <p>
               <strong>{t.dashboard.projects.type}:</strong>{" "}
-              {project.tags.platformId}
+              {project.platform}
             </p>
             <p>
               <strong>{t.dashboard.projects.technologies}:</strong>{" "}
-              {project.tags.technologyIds.join(", ")}
+              {project.technologies.join(", ")}
             </p>
             <div>
               <a
-                href={project.urls.repository}
+                href={project.repositoryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {t.dashboard.projects.repository}
               </a>
               <a
-                href={project.urls.live}
+                href={project.liveUrl || ""}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {t.dashboard.projects.liveDemo}
-                {/* {isSpanish ? "Demo en Vivo" : "Live Demo"} */}
               </a>
             </div>
-            <div onClick={() => handlerDeleteProject(project["_id"])}>
-              <button>{t.dashboard.projects.delete}</button>
+            <div onClick={() => handlerDeleteProject(project.id.toString())}>
+              <button className="btn">{t.common.actions.delete}</button>
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </>
   );
 };

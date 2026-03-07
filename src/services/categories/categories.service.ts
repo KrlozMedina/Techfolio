@@ -1,15 +1,50 @@
-import { CreateCategoryDTO } from "@/dto/category/category.create.dto";
+/**
+ * =========================================================
+ * Category Service
+ * ---------------------------------------------------------
+ * Este módulo implementa la capa de servicio para la
+ * entidad Category.
+ *
+ * Su responsabilidad es coordinar la lógica de aplicación
+ * antes de interactuar con la capa de repositorio.
+ *
+ * Flujo típico:
+ * Controller → Service → Repository → Database
+ *
+ * Responsabilidades:
+ * - establecer conexión con la base de datos
+ * - validar datos críticos (ej. ObjectId)
+ * - delegar operaciones CRUD al repositorio
+ *
+ * Arquitectura:
+ * - parte de la capa de aplicación
+ * - desacopla controladores de la lógica de persistencia
+ *
+ * Utilizado en:
+ * - controladores de API
+ * - endpoints CRUD de categorías
+ * =========================================================
+ */
+
+import { CreateCategoryDTO } from "@/infrastructure/category/category.create.dto";
 import connectDB from "@/lib/db/connectDB";
 import * as repo from "./categories.repository";
 import { validateObjectId } from "@/lib/validators/validateObjectId";
-import { UpdateCategoryDTO } from "@/dto/category/category.update.dto";
+import { UpdateCategoryDTO } from "@/infrastructure/category/category.update.dto";
 
 /**
+ * =========================================================
+ * createCategory
+ * ---------------------------------------------------------
  * Crea una nueva categoría.
- * Conecta a la DB y delega la creación al repositorio.
  *
- * @param {CreateCategoryDTO} data - Datos validados para la categoría
- * @returns {Promise<any>} Categoría creada
+ * Proceso:
+ * 1. Establece conexión con la base de datos.
+ * 2. Delegar la creación al repositorio.
+ *
+ * @param data Datos validados de la categoría
+ * @returns Categoría creada
+ * =========================================================
  */
 export async function createCategory(data: CreateCategoryDTO) {
   await connectDB();
@@ -17,12 +52,20 @@ export async function createCategory(data: CreateCategoryDTO) {
 }
 
 /**
- * Actualiza una categoría existente por ID.
- * Valida que el ID sea correcto antes de actualizar.
+ * =========================================================
+ * updateCategory
+ * ---------------------------------------------------------
+ * Actualiza una categoría existente por su ID.
  *
- * @param {string} id - ID de la categoría a actualizar
- * @param {UpdateCategoryDTO} data - Datos para actualizar
- * @returns {Promise<any>} Categoría actualizada o null si no existe
+ * Proceso:
+ * 1. Conectar a la base de datos.
+ * 2. Validar el ObjectId recibido.
+ * 3. Delegar la actualización al repositorio.
+ *
+ * @param id Identificador de la categoría
+ * @param data Datos de actualización
+ * @returns Categoría actualizada o null si no existe
+ * =========================================================
  */
 export async function updateCategory(id: string, data: UpdateCategoryDTO) {
   await connectDB();
@@ -31,11 +74,19 @@ export async function updateCategory(id: string, data: UpdateCategoryDTO) {
 }
 
 /**
- * Obtiene una categoría por su ID.
- * Valida que el ID sea correcto antes de consultar.
+ * =========================================================
+ * getCategoryById
+ * ---------------------------------------------------------
+ * Obtiene una categoría específica utilizando su ID.
  *
- * @param {string} id - ID de la categoría
- * @returns {Promise<any>} Categoría encontrada o null si no existe
+ * Proceso:
+ * 1. Conectar a la base de datos.
+ * 2. Validar el ObjectId.
+ * 3. Consultar en el repositorio.
+ *
+ * @param id Identificador de la categoría
+ * @returns Categoría encontrada o null
+ * =========================================================
  */
 export async function getCategoryById(id: string) {
   await connectDB();
@@ -44,12 +95,21 @@ export async function getCategoryById(id: string) {
 }
 
 /**
- * Obtiene un listado de categorías según filtro y paginación.
+ * =========================================================
+ * getCategories
+ * ---------------------------------------------------------
+ * Obtiene un listado de categorías aplicando
+ * filtros y paginación.
  *
- * @param {Record<string, unknown>} filter - Filtro de búsqueda
- * @param {number} safePage - Número de página (>=1)
- * @param {number} safeLimit - Cantidad máxima de registros por página
- * @returns {Promise<any[]>} Lista de categorías
+ * Proceso:
+ * 1. Conectar a la base de datos.
+ * 2. Delegar la consulta al repositorio.
+ *
+ * @param filter Filtro de búsqueda
+ * @param safePage Número de página (>=1)
+ * @param safeLimit Cantidad máxima de registros por página
+ * @returns Lista de categorías
+ * =========================================================
  */
 export async function getCategories(
   filter: Record<string, unknown>,
@@ -61,11 +121,22 @@ export async function getCategories(
 }
 
 /**
- * Obtiene el total de categorías según un filtro.
- * Útil para paginación.
+ * =========================================================
+ * getTotalCategories
+ * ---------------------------------------------------------
+ * Obtiene el número total de categorías que cumplen
+ * un filtro determinado.
  *
- * @param {Record<string, unknown>} [filter={}] - Filtro opcional
- * @returns {Promise<number>} Total de categorías que cumplen el filtro
+ * Este valor se utiliza principalmente para calcular
+ * metadatos de paginación.
+ *
+ * Proceso:
+ * 1. Conectar a la base de datos.
+ * 2. Delegar el conteo al repositorio.
+ *
+ * @param filter Filtro opcional
+ * @returns Número total de categorías
+ * =========================================================
  */
 export async function getTotalCategories(filter: Record<string, unknown> = {}) {
   await connectDB();
@@ -73,11 +144,19 @@ export async function getTotalCategories(filter: Record<string, unknown> = {}) {
 }
 
 /**
- * Elimina una categoría por su ID.
- * Valida que el ID sea correcto antes de eliminar.
+ * =========================================================
+ * deleteCategory
+ * ---------------------------------------------------------
+ * Elimina una categoría existente mediante su ID.
  *
- * @param {string} id - ID de la categoría a eliminar
- * @returns {Promise<any>} Categoría eliminada o null si no existe
+ * Proceso:
+ * 1. Conectar a la base de datos.
+ * 2. Validar el ObjectId.
+ * 3. Delegar la eliminación al repositorio.
+ *
+ * @param id Identificador de la categoría
+ * @returns Categoría eliminada o null si no existe
+ * =========================================================
  */
 export async function deleteCategory(id: string) {
   await connectDB();

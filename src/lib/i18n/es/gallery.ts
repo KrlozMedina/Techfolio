@@ -1,6 +1,8 @@
 export const gallery = {
   hero: {
     title: '',
+    subtitle: '',
+    cta: '',
     
     quote: {
       text: '',

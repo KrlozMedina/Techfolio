@@ -1,45 +1,64 @@
 import connectDB from "@/lib/db/connectDB";
+import { Language } from "@/lib/i18n";
+import { LANGUAGES } from "@/lib/i18n/language";
 import { ProjectV2 } from "@/models/project/project.model";
-import { Status, Language, LANGUAGES } from "@/shared/enums";
+import { Status } from "@/shared/enums";
 
 /**
- * Genera un resumen estadístico de proyectos publicados.
+ * =========================================================
+ * getProjectsSummary
+ * ---------------------------------------------------------
+ * Genera un resumen estadístico de los proyectos almacenados
+ * en la base de datos utilizando una agregación de MongoDB.
  *
- * Incluye:
- * - Total de proyectos
- * - Distribución por tecnologías
- * - Distribución por categorías
- * - Distribución por features
- * - Distribución por plataforma
- * - Distribución por outcome (casos)
- * - Elementos más utilizados por tipo
+ * Esta función está pensada para alimentar:
+ * - filtros dinámicos en la UI
+ * - dashboards analíticos
+ * - estadísticas del portafolio
  *
- * Utiliza aggregation con $facet para resolver todo en una sola consulta.
+ * Utiliza una única consulta con `$facet`, lo que permite
+ * obtener múltiples métricas en paralelo evitando múltiples
+ * consultas a la base de datos.
  *
- * @param {Status} status - Estado del proyecto (default: PUBLISHED)
- * @param {Language} language - Idioma para campos multilenguaje
- * @returns {Promise<{
- *   filters: {
- *     technologies: any[],
- *     categories: any[],
- *     features: any[],
- *     platform: any[],
- *     outcome: any[]
- *   },
- *   stats: {
- *     totalProjects: number,
- *     totalTechnologies: number,
- *     totalCategories: number,
- *     totalFeatures: number,
- *     totalPlatform: number,
- *     mostUsed: {
- *       Technology: any | null,
- *       Category: any | null,
- *       Feature: any | null,
- *       Platform: any | null
- *     }
- *   }
- * }>}
+ * =========================================================
+ * Información generada
+ * ---------------------------------------------------------
+ * Filters:
+ * - technologies → tecnologías utilizadas y su frecuencia
+ * - categories   → categorías asociadas a las tecnologías
+ * - features     → funcionalidades utilizadas en proyectos
+ * - platform     → plataformas de los proyectos
+ * - outcome      → casos de éxito asociados
+ *
+ * Stats:
+ * - totalProjects
+ * - totalTechnologies
+ * - totalCategories
+ * - totalFeatures
+ * - totalPlatform
+ * - mostUsed por tipo
+ *
+ * =========================================================
+ * Flujo de la agregación
+ * ---------------------------------------------------------
+ * 1. Filtrar proyectos por estado
+ * 2. Proyectar solo los campos necesarios
+ * 3. Ejecutar múltiples pipelines paralelos con `$facet`
+ * 4. Agrupar resultados y calcular frecuencias
+ * 5. Generar estadísticas derivadas
+ *
+ * =========================================================
+ * @param status
+ * Estado del proyecto a considerar.
+ * Default: Status.PUBLISHED
+ *
+ * @param language
+ * Idioma utilizado para resolver campos localizados.
+ * Default: LANGUAGES.ES
+ *
+ * @returns Resumen estadístico del portafolio
+ *
+ * =========================================================
  */
 export async function getProjectsSummary(
   status: Status = Status.PUBLISHED,
@@ -60,10 +79,25 @@ export async function getProjectsSummary(
       }
     },
 
+    /**
+     * ======================================================
+     * FACET
+     * ------------------------------------------------------
+     * Ejecuta múltiples agregaciones en paralelo.
+     * Cada pipeline genera un tipo de filtro o estadística.
+     * ======================================================
+     */
     {
       $facet: {
+
+        /** ================================
+         * Total de proyectos
+         * ================================ */
         totalProjects: [{ $count: "count" }],
 
+        /** ================================
+         * Tecnologías utilizadas
+         * ================================ */
         technologies: [
           {
             $lookup: {
@@ -118,6 +152,9 @@ export async function getProjectsSummary(
           }
         ],
 
+        /** ================================
+         * Categorías de tecnologías
+         * ================================ */
         categories: [
           {
             $lookup: {
@@ -155,6 +192,9 @@ export async function getProjectsSummary(
           { $sort: { name: 1 } }
         ],
 
+        /** ================================
+         * Features utilizadas
+         * ================================ */
         features: [
           {
             $lookup: {
@@ -180,6 +220,9 @@ export async function getProjectsSummary(
           { $project: { _id: 0, id: "$_id", name: 1, slug: 1, count: 1 } }
         ],
 
+        /** ================================
+         * Plataforma de los proyectos
+         * ================================ */
         platform: [
           {
             $group: { _id: "$platform", count: { $sum: 1 } }
@@ -188,6 +231,9 @@ export async function getProjectsSummary(
           { $sort: { platform: 1 } }
         ],
 
+        /** ================================
+         * Casos de éxito asociados
+         * ================================ */
         outcome: [
           {
             $addFields: {
@@ -202,7 +248,7 @@ export async function getProjectsSummary(
           },
           {
             $lookup: {
-              from: "cases",
+              from: "successCases",
               localField: "outcome",
               foreignField: "_id",
               as: "outcome"
@@ -247,6 +293,10 @@ export async function getProjectsSummary(
 
   const total = totalProjects[0]?.count ?? 0;
 
+  /**
+   * Devuelve el elemento más utilizado dentro
+   * de un conjunto de estadísticas.
+   */
   const getMostUsed = (arr: any[]) =>
     arr.length
       ? arr.reduce((max, item) => (item.count > max.count ? item : max))

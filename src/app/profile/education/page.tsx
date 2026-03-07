@@ -3,11 +3,12 @@
 // import { useContext } from 'react'
 import Image from 'next/image'
 // import LanguageContext, { LanguageContextType } from '@/context/LanguageContext'
-import { Banner } from '@/components/molecules/Cards/CardViews'
+// import { Banner } from '@/components/molecules/banner/Banner'
 import { educationData } from '@/mocks/education.mock'
 import { skillsData } from '@/mocks/skills.mock'
-import '@/styles/pages/Education.css'
+import './Education.css'
 import { useTranslation } from '@/hooks/useTranslation'
+import { Banner } from '@/components/molecules/education-banner/EducationBanner'
 
 const diploma = 'https://i.imgur.com/hPTmVAj.jpg'
 
@@ -17,7 +18,7 @@ export default function Education() {
   return (
     <>
       <p className="phrase">
-        {t.phrases.education}
+        {/* {t.education.hero.quote} */}
         {/* {isSpanish
           ? 'La educación es nuestro pasaporte para el futuro.'
           : 'Education is our passport to the future.'} */}
@@ -27,7 +28,7 @@ export default function Education() {
 
       <section id="education" className="main-education-container">
         <h2 className="title">
-          {t.education.title}
+          {t.education.hero.title}
           {/* {isSpanish ? 'Formación académica' : 'Educational background'} */}
         </h2>
 

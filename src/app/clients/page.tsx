@@ -68,7 +68,7 @@ const ClientsPage: React.FC = () => {
 
   return (
     <div className="clients-page">
-      <h1 className="title">{t.clients.title}</h1>
+      <h1 className="title">{t.clients.hero.title}</h1>
       <div className="clients-list">
         {clients.map(client => (
           <div key={client.id} className="client-card">
@@ -86,7 +86,7 @@ const ClientsPage: React.FC = () => {
         ))}
       </div>
 
-      {loading && <Spinner language={language} />}
+      {loading && <Spinner />}
       <div ref={observerRef}></div>
     </div>
   );

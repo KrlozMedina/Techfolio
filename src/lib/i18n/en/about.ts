@@ -3,7 +3,8 @@ import { AboutLocale } from "../es/about";
 export const about: AboutLocale = {
   hero: {
     title: 'About me',
-    
+    subtitle: '',
+    cta: '',
     quote: {
       text:
         'To know others is intelligence, to know oneself is wisdom. To manage others is strength, to manage oneself is true power.',

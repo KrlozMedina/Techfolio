@@ -1,16 +1,48 @@
 import connectDB from "@/lib/db/connectDB";
 import * as repo from "./success-cases.repository";
 import { validateObjectId } from "@/lib/validators/validateObjectId";
-import { CreateSuccessCaseDTO } from "@/dto/success-case/success-case.create.dto";
-import { UpdateSuccessCaseDTO } from "@/dto/success-case/success-case.update.dto";
+import { CreateSuccessCaseDTO } from "@/infrastructure/success-case/success-case.create.dto";
+import { UpdateSuccessCaseDTO } from "@/infrastructure/success-case/success-case.update.dto";
 
 /**
- * Obtiene casos de éxito paginados según filtro.
+ * =========================================================
+ * Success Case Service
+ * ---------------------------------------------------------
+ * Capa de servicio responsable de coordinar la lógica de
+ * aplicación relacionada con los casos de éxito.
  *
- * @param {Record<string, unknown>} filter - Filtros dinámicos
- * @param {number} safePage - Número de página (>=1)
- * @param {number} safeLimit - Cantidad de registros por página
- * @returns {Promise<any[]>} Lista de casos de éxito
+ * Arquitectura:
+ * Controller → Service → Repository → Database
+ *
+ * Responsabilidades:
+ * - establecer conexión con la base de datos
+ * - validar identificadores (ObjectId)
+ * - delegar operaciones CRUD al repositorio
+ *
+ * Esta capa no interactúa directamente con MongoDB,
+ * sino a través de la capa de repositorio.
+ * =========================================================
+ */
+
+
+/**
+ * =========================================================
+ * getSuccessCases
+ * ---------------------------------------------------------
+ * Obtiene una lista paginada de casos de éxito aplicando
+ * filtros dinámicos.
+ *
+ * Usado en:
+ * - listados de casos de éxito
+ * - dashboards
+ * - filtros del portafolio
+ *
+ * @param filter Filtros dinámicos de búsqueda
+ * @param safePage Número de página (>=1)
+ * @param safeLimit Cantidad de registros por página
+ *
+ * @returns Lista de casos de éxito
+ * =========================================================
  */
 export async function getSuccessCases(
   filter: Record<string, unknown>,
@@ -21,12 +53,20 @@ export async function getSuccessCases(
   return repo.findSuccessCases(filter, safePage, safeLimit);
 }
 
+
 /**
- * Devuelve el total de casos de éxito según filtro.
- * Útil para metadata de paginación.
+ * =========================================================
+ * getTotalSuccessCases
+ * ---------------------------------------------------------
+ * Devuelve la cantidad total de casos de éxito que cumplen
+ * con los filtros especificados.
  *
- * @param {Record<string, unknown>} filter - Filtros aplicados
- * @returns {Promise<number>} Total de documentos encontrados
+ * Se utiliza principalmente para construir metadata
+ * de paginación en listados.
+ *
+ * @param filter Filtros aplicados
+ * @returns Total de documentos encontrados
+ * =========================================================
  */
 export async function getTotalSuccessCases(
   filter: Record<string, unknown>
@@ -35,12 +75,21 @@ export async function getTotalSuccessCases(
   return repo.countSuccessCases(filter);
 }
 
+
 /**
- * Obtiene un caso de éxito por su ID.
- * - Valida que el ID sea un ObjectId válido.
+ * =========================================================
+ * getSuccessCaseById
+ * ---------------------------------------------------------
+ * Obtiene un caso de éxito específico mediante su ObjectId.
  *
- * @param {string} id - ID del caso
- * @returns {Promise<any | null>} Caso encontrado o null
+ * Proceso:
+ * 1. Conectar a la base de datos
+ * 2. Validar que el ID sea un ObjectId válido
+ * 3. Consultar el repositorio
+ *
+ * @param id Identificador del caso de éxito
+ * @returns Caso encontrado o null
+ * =========================================================
  */
 export async function getSuccessCaseById(id: string) {
   await connectDB();
@@ -48,35 +97,61 @@ export async function getSuccessCaseById(id: string) {
   return repo.findSuccessCaseById(id);
 }
 
+
 /**
- * Obtiene un caso de éxito por su slug único.
+ * =========================================================
+ * getSuccessCaseBySlug
+ * ---------------------------------------------------------
+ * Obtiene un caso de éxito mediante su slug público.
  *
- * @param {string} slug - Slug del caso
- * @returns {Promise<any | null>} Caso encontrado o null
+ * Este método se usa principalmente en rutas dinámicas:
+ * `/case-studies/[slug]`
+ *
+ * @param slug Slug único del caso de éxito
+ * @returns Caso encontrado o null
+ * =========================================================
  */
 export async function getSuccessCaseBySlug(slug: string) {
   await connectDB();
   return repo.findSuccessCaseBySlug(slug);
 }
 
+
 /**
- * Crea un nuevo caso de éxito.
+ * =========================================================
+ * createSuccessCase
+ * ---------------------------------------------------------
+ * Crea un nuevo caso de éxito en la base de datos.
  *
- * @param {CreateSuccessCaseDTO} data - Datos validados para la creación
- * @returns {Promise<any>} Documento creado
+ * Los datos deben estar previamente validados mediante
+ * schemas o DTOs en la capa de aplicación.
+ *
+ * @param data Datos validados para la creación
+ * @returns Documento creado
+ * =========================================================
  */
 export async function createSuccessCase(data: CreateSuccessCaseDTO) {
   await connectDB();
   return repo.createSuccessCaseRepo(data);
 }
 
+
 /**
- * Actualiza un caso de éxito existente.
- * - Valida formato del ObjectId.
+ * =========================================================
+ * updateSuccessCase
+ * ---------------------------------------------------------
+ * Actualiza un caso de éxito existente mediante su ID.
  *
- * @param {string} id - ID del caso
- * @param {UpdateSuccessCaseDTO} data - Datos de actualización
- * @returns {Promise<any | null>} Documento actualizado o null
+ * Proceso:
+ * 1. Conectar a la base de datos
+ * 2. Validar el ObjectId
+ * 3. Delegar la actualización al repositorio
+ *
+ * @param id Identificador del caso
+ * @param data Datos parciales de actualización
+ *
+ * @returns Documento actualizado o null si no existe
+ * =========================================================
  */
 export async function updateSuccessCase(
   id: string,
@@ -87,12 +162,21 @@ export async function updateSuccessCase(
   return repo.updateSuccessCaseRepo(id, data);
 }
 
+
 /**
- * Elimina un caso de éxito por su ID.
- * - Valida formato del ObjectId.
+ * =========================================================
+ * deleteSuccessCase
+ * ---------------------------------------------------------
+ * Elimina un caso de éxito existente mediante su ID.
  *
- * @param {string} id - ID del caso
- * @returns {Promise<any | null>} Documento eliminado o null
+ * Proceso:
+ * 1. Conectar a la base de datos
+ * 2. Validar el ObjectId
+ * 3. Ejecutar eliminación en el repositorio
+ *
+ * @param id Identificador del caso
+ * @returns Documento eliminado o null si no existe
+ * =========================================================
  */
 export async function deleteSuccessCase(id: string) {
   await connectDB();

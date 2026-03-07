@@ -1,6 +1,8 @@
 export const experience = {
   hero: {
     title: 'Experiencia Profesional',
+    subtitle: '',
+    cta: '',
 
     quote: {
       text: '',

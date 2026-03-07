@@ -13,7 +13,7 @@ export default function SkillsPage() {
 
   return (
     <section style={{ padding: 20 }}>
-      <h1>{t.skills.title}</h1>
+      <h1>{t.skills.hero.title}</h1>
 
       {skillsCategoriesData.map(category => (
         <section key={category.id}>

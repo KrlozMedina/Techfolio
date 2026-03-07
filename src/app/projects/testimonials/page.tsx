@@ -3,7 +3,7 @@
 import React from 'react';
 import { useLanguage } from '@/hooks';
 // import { testimonialsData } from '@/mocks/testimonials.mock';
-import styles from './page.module.css';
+import styles from './page.module.scss';
 import { testimonialsData } from '@/mocks/testimonials.mock';
 import { useTranslation } from '@/hooks/useTranslation';
 
@@ -15,7 +15,7 @@ const TestimonialsPage: React.FC = () => {
   return (
     <section className={styles.page}>
       <header className={styles.header}>
-        <h1>{t.testimonials.title}</h1>
+        <h1>{t.testimonials.hero.title}</h1>
       </header>
 
       <ul className={styles.testimonialsList}>

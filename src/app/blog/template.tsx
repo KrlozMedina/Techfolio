@@ -82,7 +82,7 @@ export default function Template({ children }: { children: ReactNode }) {
         <StatusNotice
           key={index}
           type={notice as NoticeType}
-          language={language}
+          // language={language}
         />
       ))}
 

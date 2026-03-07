@@ -20,7 +20,6 @@
   &__header {
     position: sticky;
     top: 0;
-    // z-index: var(--z-overlay, 10);
 
     min-height: 4.5rem; // Altura base del header
     display: flex;
@@ -29,7 +28,7 @@
 
     padding: 0 var(--space-lg);
 
-    background-color: var(--color-bg-container);
+    // background-color: var(--color-bg-container);
   }
 
   /* ===================================================

@@ -1,6 +1,8 @@
 export const dashboard = {
   hero: {
     title: '',
+    subtitle: '',
+    cta: '',
 
     quote: {
       text: '',

@@ -1,6 +1,8 @@
 export const skills = {
   hero: {
     title: 'Mis Habilidades',
+    subtitle: '',
+    cta: '',
 
     quote: {
       text: '',

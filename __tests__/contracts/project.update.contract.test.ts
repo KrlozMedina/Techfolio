@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 // import { UpdateProjectV2Dto } from "@/lib/dtos/project.schema";
-import { ProjectStatus } from "@/shared/constants/enums";
+import { ProjectStatus } from "@/shared/enums/enums";
 import { UpdateProjectV2Dto } from "@/app/schemas/dtos";
 
 const validBase = {

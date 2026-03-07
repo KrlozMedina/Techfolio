@@ -24,6 +24,7 @@ import { skills } from './skills';
 import { successCases } from './successCases';
 import { testimonials } from './testimonials';
 import { notice } from './notice';
+import { unauthorized } from './unauthorized';
 
 /**
  * =========================================================
@@ -76,5 +77,6 @@ export const en = {
   testimonials,
   feedbackStates,
   footer,
-  notice
+  notice,
+  unauthorized
 };

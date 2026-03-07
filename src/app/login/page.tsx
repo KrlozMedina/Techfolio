@@ -1,29 +1,88 @@
 'use client';
 
+/**
+ * =========================================================
+ * Login Page
+ * ---------------------------------------------------------
+ * Página de autenticación del sistema.
+ *
+ * Funcionalidades:
+ * - Validación de formulario con React Hook Form + Zod
+ * - Internacionalización mediante hook useTranslation
+ * - Autenticación usando RTK Query
+ * - Manejo de estados de error
+ * - Redirección al dashboard tras login exitoso
+ *
+ * Flujo:
+ * 1. Usuario ingresa credenciales
+ * 2. Validación cliente con Zod
+ * 3. Petición al endpoint de login
+ * 4. Si es exitoso → redirección a /dashboard
+ * 5. Si falla → se muestra mensaje de error
+ * =========================================================
+ */
+
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import clsx from 'clsx';
 
-import { useLoginMutation } from '@/store/service/authApi';
-// import { LanguageContext, LanguageContextType } from '@/context/LanguageContext';
-
-import style from './page.module.css';
+import { useLoginMutation } from '@/infrastructure/auth/auth.api';
 import { useTranslation } from '@/hooks/useTranslation';
 
+import styles from './page.module.scss';
+import { Button } from '@/components/atom/Button/Button';
+import { Input } from '@/components/atom/Input/Input';
+
 const LoginPage: React.FC = () => {
-  // const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
+
+  /**
+   * Hook de internacionalización
+   */
   const { t } = useTranslation();
+
+  /**
+   * Router de Next.js para redirecciones
+   */
   const router = useRouter();
+
+  /**
+   * Mutación RTK Query para login
+   */
   const [login] = useLoginMutation();
+
+  /**
+   * Estado para manejar errores del servidor
+   */
   const [error, setError] = useState<string | null>(null);
 
+  /**
+   * =========================================================
+   * Schema de validación
+   * ---------------------------------------------------------
+   * Define reglas de validación del formulario usando Zod
+   * =========================================================
+   */
   const loginSchema = z.object({
+
+    /**
+     * Username:
+     * - mínimo 3 caracteres
+     * - solo caracteres alfanuméricos, ".", "_" o "-"
+     */
     username: z
       .string()
       .min(3, t.login.messageUser1)
       .regex(/^[a-zA-Z0-9._-]+$/, t.login.messageUser2),
+
+    /**
+     * Password:
+     * - mínimo 6 caracteres
+     * - al menos un número
+     * - al menos una letra mayúscula
+     */
     password: z
       .string()
       .min(6, t.login.messagePass1)
@@ -31,8 +90,18 @@ const LoginPage: React.FC = () => {
       .regex(/[A-Z]/, t.login.messagePass3),
   });
 
+  /**
+   * Tipo inferido automáticamente desde el schema
+   */
   type LoginFormData = z.infer<typeof loginSchema>;
 
+  /**
+   * =========================================================
+   * React Hook Form
+   * ---------------------------------------------------------
+   * Maneja el estado del formulario y validación
+   * =========================================================
+   */
   const {
     register,
     handleSubmit,
@@ -41,212 +110,160 @@ const LoginPage: React.FC = () => {
     resolver: zodResolver(loginSchema),
   });
 
+  /**
+   * =========================================================
+   * Submit handler
+   * ---------------------------------------------------------
+   * Ejecuta login contra el backend.
+   * Si es exitoso redirige al dashboard.
+   * =========================================================
+   */
   const onSubmit = async (data: LoginFormData) => {
+
+    /**
+     * Limpia errores previos
+     */
     setError(null);
+
     try {
+
+      /**
+       * Ejecuta login vía RTK Query
+       */
       await login(data).unwrap();
+
+      /**
+       * Redirección al dashboard
+       */
       router.push('/dashboard');
+
     } catch {
+
+      /**
+       * Manejo de error de autenticación
+       */
       setError(t.login.error);
     }
   };
 
   return (
-    <section className={style['login__container']}>
-      <form onSubmit={handleSubmit(onSubmit)} className={style['login__form']}>
+
+    /**
+     * =========================================================
+     * Login Container
+     * =========================================================
+     */
+    <section className={styles['login__container']}>
+
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={styles['login__form']}
+      >
+
         <fieldset>
-          <legend className={style['login__title']}>
+
+          {/* =========================================================
+              Form Title
+          ========================================================= */}
+
+          <legend className={styles['login__title']}>
             {t.login.title}
           </legend>
 
+          {/* =========================================================
+              Server Error Message
+          ========================================================= */}
+
           {error && (
-            <div className={style['login__error-message']} role="alert">
+            <div
+              className={styles['login__error-message']}
+              role="alert"
+            >
               {error}
             </div>
           )}
 
-          <label>
+          {/* =========================================================
+              USERNAME FIELD
+          ========================================================= */}
+
+          <label className={styles['login__label']}>
             {t.login.user}
-            <input {...register('username')} disabled={isSubmitting} />
-          </label>
-          {errors.username && <p>{errors.username.message}</p>}
 
-          <label>
+            <Input
+              {...register("username")}
+              size="md"
+              disabled={isSubmitting}
+              className={clsx({
+                [styles["login__input--error"]]: errors.username,
+              })}
+            />
+          </label>
+
+          {errors.username && (
+            <p className={styles['login__input--message-error']}>
+              {errors.username.message}
+            </p>
+          )}
+
+          {/* =========================================================
+              PASSWORD FIELD
+          ========================================================= */}
+
+          <label className={styles['login__label']}>
             {t.login.pass}
-            <input type="password" {...register('password')} disabled={isSubmitting} />
+
+            <Input
+              type="password"
+              {...register("password")}
+              size="md"
+              disabled={isSubmitting}
+              aria-invalid={!!errors.password}
+              className={clsx({
+                [styles["login__input--error"]]: errors.password,
+              })}
+            />
           </label>
-          {errors.password && <p>{errors.password.message}</p>}
 
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting
-              ? t.login.loginIn
-              : t.login.login}
-          </button>
+          {errors.password && (
+            <p className={styles['login__input--message-error']}>
+              {errors.password.message}
+            </p>
+          )}
 
-          <button
+          {/* =========================================================
+              SUBMIT BUTTON
+          ========================================================= */}
+
+          <Button
+            type="submit"
+            variant="primary"
+            size="md"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? t.login.loginIn : t.login.login}
+          </Button>
+
+          {/* =========================================================
+              CANCEL BUTTON
+          ========================================================= */}
+
+          <Button
             type="button"
-            onClick={() => router.push('/')}
-            className={style['login__cancel']}
+            variant="ghost"
+            size="md"
+            className={styles["login__cancel"]}
+            onClick={() => router.push("/")}
           >
             {t.login.cancel}
-          </button>
+          </Button>
 
         </fieldset>
+
       </form>
+
     </section>
   );
 };
 
 export default LoginPage;
-
-
-// 'use client';
-
-// import React, { useState, useContext } from 'react';
-// import { useRouter } from 'next/navigation';
-// import { useForm } from 'react-hook-form';
-// import { zodResolver } from '@hookform/resolvers/zod';
-// import { z } from 'zod';
-
-// import { useLoginMutation } from '@/store/service/authApi';
-// import { LanguageContext, LanguageContextType } from '@/context/LanguageContext';
-
-// import MainLayout from '@/components/templates/MainLayout/MainLayout';
-// import style from './page.module.css';
-
-// const LoginPage: React.FC = () => {
-//   // 🌐 Multilanguage support
-//   const { isSpanish } = useContext(LanguageContext) as LanguageContextType;
-
-//   // 🔐 Redux Toolkit (RTK Query) mutation for login
-//   const [login] = useLoginMutation();
-
-//   // ⚠️ Local state for login error messages
-//   const [error, setError] = useState<string | null>(null);
-
-//   // 🚀 Router hook to navigate after login
-//   const router = useRouter();
-
-//   // ✅ Zod validation schema for login form
-//   const loginSchema = z.object({
-//     username: z
-//       .string()
-//       .min(3, isSpanish
-//         ? 'El usuario debe tener al menos 3 caracteres'
-//         : 'The username must be at least 3 characters long'
-//       )
-//       .regex(/^[a-zA-Z0-9._-]+$/, isSpanish
-//         ? 'Solo se permiten letras, números y . _ -'
-//         : 'Only letters, numbers, and . _ - are allowed'
-//       ),
-//     password: z
-//       .string()
-//       .min(6, isSpanish
-//         ? 'La contraseña debe tener al menos 6 caracteres'
-//         : 'The password must be at least 6 characters long'
-//       )
-//       .regex(/[0-9]/, isSpanish
-//         ? 'Debe tener un número'
-//         : 'It must contain a number'
-//       ),
-//   });
-
-//   // 📄 Infers the form data type from the schema
-//   type LoginFormData = z.infer<typeof loginSchema>;
-
-//   // 📝 React Hook Form setup with Zod schema resolver
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors, isSubmitting },
-//   } = useForm<LoginFormData>({
-//     resolver: zodResolver(loginSchema),
-//   });
-
-//   // 🔁 Handles form submission
-//   const onSubmit = async (data: LoginFormData) => {
-//     setError(null); // Reset previous error
-//     try {
-//       const { data: response, error: loginError } = await login(data);
-
-//       if (loginError) throw new Error('Login failed');
-
-//       // ✅ Redirect to dashboard if login is successful
-//       if (response) router.push('/dashboard');
-//     } catch (err) {
-//       console.warn(err);
-//       setError(isSpanish
-//         ? 'Credenciales inválidas. Intenta de nuevo.'
-//         : 'Invalid credentials. Please try again.'
-//       );
-//     }
-//   };
-
-//   // 🧩 Renders reusable input fields
-//   const renderInput = (
-//     id: keyof LoginFormData,
-//     label: string,
-//     type: string = 'text',
-//     placeholder?: string
-//   ) => (
-//     <>
-//       <label htmlFor={id} className={style['login__label']}>
-//         {label}:
-//         <input
-//           id={id}
-//           type={type}
-//           placeholder={placeholder || label}
-//           {...register(id)}
-//           disabled={isSubmitting}
-//           className={errors[id] ? style['login__input--error'] : ''}
-//           aria-invalid={!!errors[id]}
-//           aria-describedby={`${id}-error`}
-//         />
-//       </label>
-
-//       {errors[id] && (
-//         <p id={`${id}-error`} className={style['login__input--message-error']}>
-//           {errors[id]?.message}
-//         </p>
-//       )}
-//     </>
-//   );
-
-//   return (
-//     <MainLayout isAdmin={false} language={isSpanish ? 'es' : 'en'}>
-//       <section className={style['login__container']}>
-//         <form onSubmit={handleSubmit(onSubmit)} className={style['login__form']}>
-//           <fieldset>
-//             <legend className={style['login__title']}>
-//               {isSpanish ? 'Iniciar sesión' : 'Login'}
-//             </legend>
-
-//             {/* 🔴 Global error message */}
-//             {error && (
-//               <div
-//                 className={style['login__error-message']}
-//                 aria-live="polite"
-//                 role="alert"
-//               >
-//                 {error}
-//               </div>
-//             )}
-
-//             {/* 🧾 Form fields */}
-//             {renderInput('username', isSpanish ? 'Usuario' : 'Username')}
-//             {renderInput('password', isSpanish ? 'Contraseña' : 'Password', 'password')}
-
-//             {/* 🚪 Submit button */}
-//             <button type="submit" disabled={isSubmitting}>
-//               {isSpanish
-//                 ? isSubmitting ? 'Iniciando sesión...' : 'Iniciar sesión'
-//                 : isSubmitting ? 'Logging in...' : 'Login'}
-//             </button>
-//           </fieldset>
-//         </form>
-//       </section>
-//     </MainLayout>
-//   );
-// };
-
-// export default LoginPage;

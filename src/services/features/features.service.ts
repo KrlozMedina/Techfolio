@@ -1,16 +1,49 @@
+/**
+ * =========================================================
+ * Feature Service
+ * ---------------------------------------------------------
+ * Implementa la capa de servicio para la entidad Feature.
+ *
+ * Este módulo coordina la lógica de aplicación antes de
+ * interactuar con la capa de repositorio.
+ *
+ * Flujo arquitectónico:
+ * Controller → Service → Repository → Database
+ *
+ * Responsabilidades:
+ * - establecer conexión con la base de datos
+ * - validar identificadores (ObjectId)
+ * - delegar operaciones CRUD al repositorio
+ *
+ * Arquitectura:
+ * - parte de la capa de aplicación
+ * - desacopla controladores de la lógica de persistencia
+ *
+ * Utilizado en:
+ * - controladores de API
+ * - endpoints CRUD de features
+ * =========================================================
+ */
+
 import connectDB from "@/lib/db/connectDB";
 import * as repo from "./features.repository";
 import { validateObjectId } from "@/lib/validators/validateObjectId";
-import { CreateFeatureDTO } from "@/dto/feature/feature.create.dto";
-import { UpdateFeatureDTO } from "@/dto/feature/feature.update.dto";
+import { CreateFeatureDTO } from "@/infrastructure/feature/feature.create.dto";
+import { UpdateFeatureDTO } from "@/infrastructure/feature/feature.update.dto";
 
 /**
- * Crea una nueva feature.
- * - Establece conexión con la base de datos.
- * - Delegación al repositorio.
+ * =========================================================
+ * createFeature
+ * ---------------------------------------------------------
+ * Crea una nueva feature en la base de datos.
  *
- * @param {CreateFeatureDTO} data - Datos validados para la creación
- * @returns {Promise<any>} Feature creada
+ * Proceso:
+ * 1. Establece conexión con la base de datos.
+ * 2. Delegar la creación al repositorio.
+ *
+ * @param data Datos validados para la creación
+ * @returns Feature creada
+ * =========================================================
  */
 export async function createFeature(data: CreateFeatureDTO) {
   await connectDB();
@@ -18,13 +51,20 @@ export async function createFeature(data: CreateFeatureDTO) {
 }
 
 /**
- * Actualiza una feature existente por ID.
- * - Valida que el ID sea un ObjectId válido.
- * - Ejecuta validaciones del schema en el repositorio.
+ * =========================================================
+ * updateFeature
+ * ---------------------------------------------------------
+ * Actualiza una feature existente utilizando su ID.
  *
- * @param {string} id - ID de la feature
- * @param {UpdateFeatureDTO} data - Datos parciales de actualización
- * @returns {Promise<any>} Feature actualizada o null si no existe
+ * Proceso:
+ * 1. Conectar a la base de datos.
+ * 2. Validar que el ID sea un ObjectId válido.
+ * 3. Delegar la actualización al repositorio.
+ *
+ * @param id Identificador de la feature
+ * @param data Datos parciales de actualización
+ * @returns Feature actualizada o null si no existe
+ * =========================================================
  */
 export async function updateFeature(id: string, data: UpdateFeatureDTO) {
   await connectDB();
@@ -33,11 +73,19 @@ export async function updateFeature(id: string, data: UpdateFeatureDTO) {
 }
 
 /**
- * Obtiene una feature por su ID.
- * - Valida formato del ObjectId antes de consultar.
+ * =========================================================
+ * getFeatureById
+ * ---------------------------------------------------------
+ * Obtiene una feature específica mediante su ID.
  *
- * @param {string} id - ID de la feature
- * @returns {Promise<any>} Feature encontrada o null si no existe
+ * Proceso:
+ * 1. Conectar a la base de datos.
+ * 2. Validar formato del ObjectId.
+ * 3. Consultar en el repositorio.
+ *
+ * @param id Identificador de la feature
+ * @returns Feature encontrada o null si no existe
+ * =========================================================
  */
 export async function getFeatureById(id: string) {
   await connectDB();
@@ -46,12 +94,21 @@ export async function getFeatureById(id: string) {
 }
 
 /**
- * Obtiene un listado paginado de features.
+ * =========================================================
+ * getFeatures
+ * ---------------------------------------------------------
+ * Obtiene un listado paginado de features aplicando
+ * filtros dinámicos.
  *
- * @param {Record<string, unknown>} filter - Filtros dinámicos de búsqueda
- * @param {number} safePage - Número de página (>=1)
- * @param {number} safeLimit - Cantidad de registros por página
- * @returns {Promise<any[]>} Lista de features filtradas
+ * Proceso:
+ * 1. Conectar a la base de datos.
+ * 2. Delegar la consulta al repositorio.
+ *
+ * @param filter Filtros dinámicos de búsqueda
+ * @param safePage Número de página (>=1)
+ * @param safeLimit Cantidad de registros por página
+ * @returns Lista de features filtradas
+ * =========================================================
  */
 export async function getFeatures(
   filter: Record<string, unknown>,
@@ -63,11 +120,22 @@ export async function getFeatures(
 }
 
 /**
- * Devuelve el total de features según filtro.
- * Útil para metadata de paginación.
+ * =========================================================
+ * getTotalFeatures
+ * ---------------------------------------------------------
+ * Devuelve el número total de features que cumplen
+ * un filtro determinado.
  *
- * @param {Record<string, unknown>} [filter={}] - Filtros opcionales
- * @returns {Promise<number>} Total de documentos encontrados
+ * Este método se utiliza principalmente para calcular
+ * metadatos de paginación.
+ *
+ * Proceso:
+ * 1. Conectar a la base de datos.
+ * 2. Delegar el conteo al repositorio.
+ *
+ * @param filter Filtros opcionales
+ * @returns Total de documentos encontrados
+ * =========================================================
  */
 export async function getTotalFeatures(
   filter: Record<string, unknown> = {}
@@ -77,11 +145,19 @@ export async function getTotalFeatures(
 }
 
 /**
- * Elimina una feature por su ID.
- * - Valida que el ID sea correcto antes de eliminar.
+ * =========================================================
+ * deleteFeature
+ * ---------------------------------------------------------
+ * Elimina una feature existente mediante su ID.
  *
- * @param {string} id - ID de la feature
- * @returns {Promise<any>} Feature eliminada o null si no existe
+ * Proceso:
+ * 1. Conectar a la base de datos.
+ * 2. Validar el ObjectId.
+ * 3. Delegar la eliminación al repositorio.
+ *
+ * @param id Identificador de la feature
+ * @returns Feature eliminada o null si no existe
+ * =========================================================
  */
 export async function deleteFeature(id: string) {
   await connectDB();

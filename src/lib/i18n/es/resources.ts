@@ -1,6 +1,8 @@
 export const resources = {
   hero: {
     title: '',
+    subtitle: '',
+    cta: '',
 
     quote: {
       text: '',

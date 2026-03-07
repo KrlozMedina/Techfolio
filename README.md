@@ -234,7 +234,7 @@ La estructura de este proyecto está organizada de forma modular para facilitar 
 │   │   └── Slider
 │   └── templates
 │       ├── AuthLayout
-│       ├── ErrorTemplate
+│       ├── StatusTemplate
 │       └── MainLayout
 ├── context
 ├── hooks
@@ -285,7 +285,7 @@ Contiene los componentes reutilizables divididos por niveles de complejidad sigu
 - `atom/`: Componentes más simples y fundamentales como botones, formularios, feedback y medios.  
 - `molecules/`: Componentes compuestos por varios átomos, como tarjetas, estados de feedback, pie de página, barra de navegación, entre otros.  
 - `organisms/`: Componentes más complejos como encabezados, modales, paneles de configuración y sliders.  
-- `templates/`: Plantillas de disposición general como `AuthLayout`, `ErrorTemplate` y `MainLayout`.
+- `templates/`: Plantillas de disposición general como `AuthLayout`, `StatusTemplate` y `MainLayout`.
 
 3. `context/`  
 Define contextos de React para compartir estado o lógica entre componentes sin necesidad de prop drilling.

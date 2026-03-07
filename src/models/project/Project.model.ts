@@ -13,8 +13,8 @@ import { IProjectV1, IProjectV2 } from "./project.interface";
  * - Mantiene compatibilidad con la colección original.
  */
 export const ProjectV1 =
-  (mongoose.models.Project as mongoose.Model<IProjectV1>) ||
-  mongoose.model<IProjectV1>("Project", projectV1Schema);
+(mongoose.models.Project as mongoose.Model<IProjectV1>) ||
+mongoose.model<IProjectV1>("Project", projectV1Schema);
 
 /* ============================================================
    ======================= PROJECT V2 =========================
@@ -28,9 +28,5 @@ export const ProjectV1 =
  * - Estructura orientada a dominio.
  */
 export const ProjectV2 =
-  (mongoose.models.ProjectV2 as mongoose.Model<IProjectV2>) ||
-  mongoose.model<IProjectV2>(
-    "ProjectV2",
-    ProjectV2Schema,
-    "projectsV2"
-  );
+mongoose.models.ProjectV2 ||
+mongoose.model("ProjectV2", ProjectV2Schema, "projectsV2");

@@ -3,6 +3,8 @@ import { text } from "stream/consumers";
 export const profile = {
   hero: {
     title: '',
+    subtitle: '',
+    cta: '',
 
     quote: {
       text: '',

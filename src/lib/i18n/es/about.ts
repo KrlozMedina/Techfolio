@@ -1,6 +1,8 @@
 export const about = {
   hero: {
     title: "Sobre mi",
+    subtitle: '',
+    cta: '',
     
     quote: {
       text: "Conocer a otros es inteligencia, conocerse a sí mismos es sabiduría. Manejar a otros es fuerza, manejarse a sí mismos es verdadero poder.",

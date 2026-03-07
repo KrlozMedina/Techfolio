@@ -1,6 +1,8 @@
 export const service = {
   hero: {
     title: 'Servicios Ofrecidos',
+    subtitle: '',
+    cta: '',
 
     quote: {
       text: '',

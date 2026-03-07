@@ -1,0 +1,116 @@
+.page {
+  padding: 3rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.caseList {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.caseItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .caseItem {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .caseItem--reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+.caseImage {
+  width: 100%;
+  max-width: 40rem;
+  max-height: 30rem;
+  flex: 1;
+  object-fit: contain;
+}
+
+.image {
+  width: 100%;
+  border-radius: 1rem;
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.caseContent {
+  flex: 1;
+}
+
+.caseTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.caseDescription {
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.caseResult {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #317d38;
+  margin-bottom: 1rem;
+}
+
+.caseQuote {
+  font-size: 0.875rem;
+  color: #555;
+  padding-left: 1rem;
+  border-left: 4px solid #90cdf4;
+}
+
+.cta {
+  margin-top: 6rem;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.ctaBtnPrimary {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.ctaBtnPrimary:hover {
+  background-color: #1e40af;
+}
+
+.ctaBtnSecondary {
+  border: 2px solid #2563eb;
+  color: #2563eb;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.ctaBtnSecondary:hover {
+  background-color: #eff6ff;
+}
