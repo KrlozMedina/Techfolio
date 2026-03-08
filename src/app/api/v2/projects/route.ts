@@ -1,302 +1,193 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GetProjectsV2Dto, CreateProjectV2Dto } from "@/lib/dtos/projects.dto";
-import connectDB from "@/lib/db/connectDB";
-import { ProjectV2 } from "@/models/project/Project.model";
-import { ZodError } from "zod";
-import { getSession } from "@/lib/auth/session";
+import {
+  createProject,
+  getProjects,
+  getTotalProjects
+} from "@/services/projects/projects.service";
+import { Platform, Status } from "@/shared/enums";
+import { toProjectListDTO } from "@/infrastructure/project/project.mapper";
+import { handleApiError } from "@/lib/http/handle-api-error";
+import { PERMISSIONS, withAuthorization } from "@/lib/auth";
+import { createProjectSchema } from "@/infrastructure/project/project.create.dto";
+import { sanitizeRegex } from "@/lib/db/sanitize-regex";
+import { Technology } from "@/models/technology/technology.model";
+import { Feature } from "@/models/features/feature.model";
+import "@/models";
+import { querySchema } from "@/shared/interfaces/query.schema";
+import z from "zod";
+import { LANGUAGES } from "@/lib/i18n/language";
 
 /**
- * Centralized validation for GET requests
+ * Extiende el schema base de query para permitir:
+ * - status
+ * - technology (slug)
+ * - platform
+ * - feature (slug)
  */
-function validateGetProjects(query: Record<string, string>) {
-  const parseResult = GetProjectsV2Dto.safeParse(query);
-  if (!parseResult.success) {
-    console.error("Validation error:", parseResult.error.format());
-    throw new Error("Invalid query parameters");
-  }
-  return parseResult.data;
-}
+const projectQuerySchema = querySchema.extend({
+  status: z.enum(Status).optional(),
+  technology: z.string().optional(),
+  platform: z.enum(Platform).optional(),
+  feature: z.string().optional(),
+});
 
 /**
- * Centralized validation for POST requests
+ * Construye dinámicamente el filtro Mongo en base
+ * a los parámetros de query recibidos.
+ *
+ * - Convierte slugs (technology, feature) a ObjectId.
+ * - Aplica filtro por status y platform.
+ * - Aplica búsqueda textual segura usando regex sanitizada.
  */
-function validateCreateProject(body: unknown) {
-  const parseResult = CreateProjectV2Dto.safeParse(body);
-  if (!parseResult.success) {
-    console.error("Validation error:", parseResult.error.format());
-    throw new ZodError(parseResult.error.issues);
-  }
-  return parseResult.data;
-}
-
-/**
- * Builds a dynamic filter for projects
- */
-function buildProjectFilter(status?: string, search?: string): Record<string, unknown> {
+async function buildProjectFilter(
+  status?: Status,
+  search?: string,
+  technology?: string,
+  platform?: Platform,
+  feature?: string,
+) {
   const filter: Record<string, unknown> = {};
+
+  if (technology) {
+    const tech = await Technology.findOne({ slug: technology }).select("_id");
+
+    if (!tech) {
+      filter._id = null;
+      return filter;
+    }
+
+    filter["relations.technologyIds"] = tech._id;
+  }
+
+  if (feature) {
+    const feat = await Feature.findOne({ slug: feature }).select("_id");
+
+    if (!feat) {
+      filter._id = null;
+      return filter;
+    }
+
+    filter["relations.featureIds"] = feat._id;
+  }
+
   if (status) filter.status = status;
+  if (platform) filter.platform = platform;
+
   if (search) {
-    filter["$or"] = [
-      { "projectInfo.es.title": { $regex: search, $options: "i" } },
-      { "projectInfo.en.title": { $regex: search, $options: "i" } },
-      { "projectInfo.es.description": { $regex: search, $options: "i" } },
-      { "projectInfo.en.description": { $regex: search, $options: "i" } },
+    const safeSearch = sanitizeRegex(search);
+    filter.$or = [
+      { "content.es.title": { $regex: safeSearch, $options: "i" } },
+      { "content.en.title": { $regex: safeSearch, $options: "i" } },
+      { "content.es.description": { $regex: safeSearch, $options: "i" } },
+      { "content.en.description": { $regex: safeSearch, $options: "i" } },
     ];
   }
+
   return filter;
 }
 
 /**
- * Determines which fields to select
- */
-function getFieldSelection(data: string, language: string): string[] {
-  if (data === "simple") {
-    return [`projectInfo.${language}`, "tags", "urls", "assets", "updatedAt"];
-  }
-  return [];
-}
-
-/**
- * GET handler
+ * GET /api/projects
+ *
+ * Lista proyectos con:
+ * - Filtros dinámicos
+ * - Búsqueda textual
+ * - Paginación
+ * - Selección de idioma
+ *
+ * Query params:
+ * - status (opcional)
+ * - technology (slug, opcional)
+ * - feature (slug, opcional)
+ * - platform (opcional)
+ * - search (opcional)
+ * - page (default 1)
+ * - limit (default 10, max 100)
+ * - language (opcional)
+ *
+ * Respuesta:
+ * {
+ *   data: ProjectListDTO[],
+ *   pagination: {
+ *     total: number,
+ *     limit: number,
+ *     currentPage: number,
+ *     totalPages: number
+ *   }
+ * }
  */
 export async function GET(req: NextRequest) {
-  // const session = await getSession();
-  // if (!session) {
-  //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  // }
-
-  const { searchParams } = new URL(req.url);
-  const query = Object.fromEntries(searchParams.entries());
-
   try {
-    const { status, search, limit = 10, page = 1, data = "all", language = "es" } =
-      validateGetProjects(query);
+    const query = Object.fromEntries(req.nextUrl.searchParams.entries());
 
-    await connectDB();
+    const {
+      status,
+      search,
+      technology,
+      platform,
+      feature,
+      limit = 10,
+      page = 1,
+      language = LANGUAGES.ES,
+    } = projectQuerySchema.parse(query);
 
-    const filter = buildProjectFilter(status, search);
-    const safeLimit = Math.min(Number(limit), 100);
-    const safePage = Math.max(Number(page), 1);
-    const fields = getFieldSelection(data, language);
+    const safeLimit = Math.min(limit, 100);
+    const safePage = Math.min(Math.max(page, 1), 1000);
 
-    const projectQuery = ProjectV2.find(filter)
-      .skip((safePage - 1) * safeLimit)
-      .limit(safeLimit)
-      .sort("-importanceScore");
-
-    if (fields.length > 0) projectQuery.select(fields);
+    const filter = await buildProjectFilter(
+      status,
+      search,
+      technology,
+      platform,
+      feature
+    );
 
     const [projects, total] = await Promise.all([
-      projectQuery.exec(),
-      ProjectV2.countDocuments(filter),
+      getProjects(filter, safePage, safeLimit),
+      getTotalProjects(filter),
     ]);
 
-    const totalPages = Math.ceil(total / safeLimit);
+    const response = {
+      data: projects.map(p => toProjectListDTO(p, language)),
+      pagination: {
+        total,
+        limit: safeLimit,
+        currentPage: safePage,
+        totalPages: Math.ceil(total / safeLimit),
+      },
+    };
 
-    return NextResponse.json({
-      data: projects,
-      pagination: { total, limit: safeLimit, currentPage: safePage, totalPages },
-    });
+    return NextResponse.json(response, { status: 200 });
   } catch (error) {
-    console.error("GET /v2/projects error:", error);
-    return NextResponse.json(
-      { error: "An error occurred while fetching projects." },
-      { status: 500 }
-    );
+    return handleApiError(error);
   }
 }
 
 /**
- * POST handler
+ * POST /api/projects
+ *
+ * Crea un nuevo proyecto.
+ * - Requiere permiso CREATE.
+ * - Valida body con schema Zod.
+ *
+ * Respuestas:
+ * - 201: Proyecto creado
+ * - 400: Body inválido
  */
-export async function POST(req: NextRequest) {
-  const session = await getSession();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+export const POST = withAuthorization(
+  PERMISSIONS.CREATE,
+  async (req: NextRequest) => {
+    try {
+      const body = await req.json();
+      const data = createProjectSchema.parse(body);
+      const created = await createProject(data);
 
-  try {
-    const body = await req.json();
-    const projectData = validateCreateProject(body);
-
-    await connectDB();
-    const createdProject = await ProjectV2.create(projectData);
-
-    return NextResponse.json(createdProject, { status: 201 });
-  } catch (error) {
-    if (error instanceof ZodError) {
-      return NextResponse.json({ error }, { status: 400 });
+      return NextResponse.json(
+        { id: created._id },
+        { status: 201 }
+      );
+    } catch (error) {
+      return handleApiError(error);
     }
-    console.error("POST /v2/projects error:", error);
-    return NextResponse.json({ error: "Failed to create project." }, { status: 500 });
   }
-}
-
-
-// import { NextRequest, NextResponse } from "next/server";
-// import { GetProjectsV2Dto, CreateProjectV2Dto } from "@/lib/dtos/projects.dto";
-// import connectDB from "@/lib/db/connectDB";
-// import { ProjectV2 } from "@/models/project/Project.model";
-// import { ZodError } from "zod";
-// import { verifyOrClearToken } from "@/lib/utils";
-
-// /**
-//  * Centralized validation for GET requests
-//  * @param query - Query parameters from the request
-//  * @returns Validated query parameters
-//  * @throws {Error} If validation fails
-//  */
-// function validateGetProjects(query: Record<string, string>) {
-//   const parseResult = GetProjectsV2Dto.safeParse(query);
-//   if (!parseResult.success) {
-//     console.error("Validation error:", parseResult.error.format());
-//     throw new Error("Invalid query parameters");
-//   }
-//   return parseResult.data;
-// }
-
-// /**
-//  * Centralized validation for POST requests
-//  * @param body - Request body
-//  * @returns Validated body
-//  * @throws {ZodError} If validation fails
-//  */
-// function validateCreateProject(body: unknown) {
-//   const parseResult = CreateProjectV2Dto.safeParse(body);
-//   if (!parseResult.success) {
-//     console.error("Validation error:", parseResult.error.format());
-//     throw new ZodError(parseResult.error.issues);
-//   }
-//   return parseResult.data;
-// }
-
-// /**
-//  * Builds a dynamic filter for projects based on status and search terms
-//  * @param status - The status filter (optional)
-//  * @param search - The search query (optional)
-//  * @returns A filter object for MongoDB query
-//  */
-// function buildProjectFilter(status?: string, search?: string): Record<string, unknown> {
-//   const filter: Record<string, unknown> = {};
-//   if (status) {
-//     filter.status = status;
-//   }
-//   if (search) {
-//     // Apply search across project titles and descriptions in both languages
-//     filter["$or"] = [
-//       { "projectInfo.es.title": { $regex: search, $options: "i" } },
-//       { "projectInfo.en.title": { $regex: search, $options: "i" } },
-//       { "projectInfo.es.description": { $regex: search, $options: "i" } },
-//       { "projectInfo.en.description": { $regex: search, $options: "i" } },
-//     ];
-//   }
-//   return filter;
-// }
-
-// /**
-//  * Determines which fields to select for the response based on the 'data' parameter
-//  * @param data - The 'data' query parameter (simple or all)
-//  * @param language - The language for the project content (default is 'es')
-//  * @returns Array of selected fields for MongoDB projection
-//  */
-// function getFieldSelection(data: string, language: string): string[] {
-//   if (data === "simple") {
-//     return [`projectInfo.${language}`, "tags", "urls", "assets", "updatedAt"];
-//   }
-//   return [];
-// }
-
-// /**
-//  * GET handler for fetching projects
-//  * @param req - The incoming request
-//  * @returns JSON response containing the projects and pagination info
-//  */
-// export async function GET(req: NextRequest) {
-//   const { searchParams } = new URL(req.url);
-//   const query = Object.fromEntries(searchParams.entries());
-
-//   try {
-//     const {
-//       status,
-//       search,
-//       limit = 10,
-//       page = 1,
-//       data = "all",
-//       language = "es",
-//     } = validateGetProjects(query);
-
-//     await connectDB();
-
-//     const filter = buildProjectFilter(status, search);
-
-//     const safeLimit = Math.min(Number(limit), 100);
-//     const safePage = Math.max(Number(page), 1);
-//     const fields = getFieldSelection(data, language);
-
-//     const projectQuery = ProjectV2.find(filter)
-//       .skip((safePage - 1) * safeLimit)
-//       .limit(safeLimit)
-//       .sort("-importanceScore");
-
-//     if (fields.length > 0) {
-//       projectQuery.select(fields);
-//     }
-
-//     const [projects, total] = await Promise.all([
-//       projectQuery.exec(),
-//       ProjectV2.countDocuments(filter),
-//     ]);
-
-//     const totalPages = Math.ceil(total / safeLimit);
-
-//     const res = NextResponse.json(
-//       {
-//         data: projects,
-//         pagination: {
-//           total,
-//           limit: safeLimit,
-//           currentPage: safePage,
-//           totalPages,
-//         },
-//       },
-//       { status: 200 }
-//     );
-
-//     return verifyOrClearToken(req, res);
-//   } catch (error) {
-//     console.error("GET /v2/projects error:", error);
-//     return NextResponse.json(
-//       { error: "An error occurred while fetching projects." },
-//       { status: 500 }
-//     );
-//   }
-// }
-
-// /**
-//  * POST handler for creating a new project
-//  * @param req - The incoming request
-//  * @returns JSON response with the created project or error message
-//  */
-// export async function POST(req: NextRequest) {
-//   try {
-//     const body = await req.json();
-//     const projectData = validateCreateProject(body);
-
-//     await connectDB();
-
-//     const createdProject = await ProjectV2.create(projectData);
-
-//     const res = NextResponse.json(createdProject, { status: 201 });
-//     return verifyOrClearToken(req, res);
-//   } catch (error) {
-//     if (error instanceof ZodError) {
-//       // console.error("Validation failed:", error.errors);
-//       return NextResponse.json({ error: error }, { status: 400 });
-//     }
-//     console.error("POST /v2/projects error:", error);
-//     return NextResponse.json(
-//       { error: "Failed to create project." },
-//       { status: 500 }
-//     );
-//   }
-// }
+);

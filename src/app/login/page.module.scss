@@ -1,0 +1,179 @@
+/**
+ * =========================================================
+ * LOGIN (BLOCK)
+ * ---------------------------------------------------------
+ * Estilos para la página de autenticación del sistema.
+ *
+ * Este bloque define la estructura visual del formulario
+ * de login incluyendo:
+ * - Contenedor principal
+ * - Formulario
+ * - Título
+ * - Campos de entrada
+ * - Mensajes de error
+ *
+ * El diseño está pensado para:
+ * - Centrar el formulario en la pantalla
+ * - Mantener una interfaz clara y accesible
+ * - Adaptarse a dispositivos móviles
+ * =========================================================
+ */
+
+.login {
+
+  /**
+   * -------------------------------------------------------
+   * CONTAINER
+   * -------------------------------------------------------
+   * Contenedor principal que centra el formulario
+   * vertical y horizontalmente.
+   */
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: var(--space-lg);
+
+    min-height: 80vh;
+  }
+
+  /**
+   * -------------------------------------------------------
+   * FORM
+   * -------------------------------------------------------
+   * Caja que contiene el formulario de autenticación.
+   */
+  &__form {
+    width: 100%;
+    max-width: 40rem;
+    min-width: 28rem;
+
+    padding: var(--space-lg);
+
+    background-color: var(--color-bg-container);
+
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * TITLE
+   * -------------------------------------------------------
+   * Título del formulario de login.
+   */
+  &__title {
+    font-size: var(--font-size-heading-sm);
+    font-weight: var(--font-weight-bold);
+
+    margin-bottom: var(--space-lg);
+
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /**
+   * -------------------------------------------------------
+   * ERROR MESSAGE
+   * -------------------------------------------------------
+   * Mensaje de error general del formulario
+   * (ej: credenciales incorrectas).
+   */
+  &__error-message {
+    color: var(--color-text-error);
+
+    font-size: var(--font-size-body-sm);
+
+    margin: var(--space-lg) 0;
+    text-align: center;
+  }
+
+  /**
+   * -------------------------------------------------------
+   * LABEL
+   * -------------------------------------------------------
+   * Contenedor del label y posibles acciones auxiliares
+   * (ej: enlace "forgot password").
+   */
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+
+    font-size: var(--font-size-body-md);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * INPUT
+   * -------------------------------------------------------
+   * Variantes visuales para campos del formulario.
+   */
+  &__input {
+
+    /**
+     * Estado visual cuando el input contiene un error
+     */
+    &--error {
+      border-color: var(--color-border-error);
+      background-color: var(--color-bg-error);
+    }
+
+    /**
+     * Mensaje de error asociado al campo
+     */
+    &--message-error {
+      color: var(--color-text-error);
+
+      font-size: var(--font-size-body-xs);
+
+      margin-top: var(--space-xs);
+      text-align: center;
+    }
+
+  }
+
+}
+
+
+/**
+ * =========================================================
+ * MOBILE STYLES
+ * ---------------------------------------------------------
+ * Ajustes para pantallas pequeñas.
+ *
+ * Cambios:
+ * - Reduce tamaño del título
+ * - Labels se apilan verticalmente
+ * - Ajuste en alineación de mensajes de error
+ * =========================================================
+ */
+
+@media (max-width: 480px) {
+
+  .login {
+
+    &__title {
+      font-size: var(--font-size-body-md);
+    }
+
+    &__label {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__input {
+
+      &--message-error {
+        text-align: end;
+      }
+
+    }
+
+  }
+
+}

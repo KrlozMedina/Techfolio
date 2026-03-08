@@ -1,7 +1,72 @@
+/* ==================================================
+  🌐 SOCIAL LINKS COMPONENT
+  --------------------------------------------------
+  Contenedor de enlaces sociales (icon-based).
+  Implementado con:
+  - Flexbox responsive
+  - Design tokens
+  - Metodología BEM
+  - Estados accesibles (hover / focus-visible)
+================================================== */
+
 .social {
+
+  /* ==================================================
+    CONTAINER
+    --------------------------------------------------
+    - Distribución horizontal
+    - Espaciado consistente
+    - Soporte para wrap en pantallas pequeñas
+  ================================================== */
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 48rem;
-  margin-inline: auto;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+
+
+  /* ==================================================
+    🔗 LINK BASE
+    --------------------------------------------------
+    - Área interactiva circular
+    - Centrado del icono
+    - Estados hover y focus accesibles
+  ================================================== */
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: var(--space-sm);
+    border-radius: var(--radius-full);
+
+    color: var(--color-text-soft);
+    transition: var(--transition-default);
+
+
+    /* Hover interaction */
+    &:hover {
+      color: var(--color-primary-500);
+      background-color: var(--color-bg-container);
+      transform: translateY(-2px);
+    }
+
+    /* Keyboard accessibility */
+    &:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+
+  /* ==================================================
+    🧩 ICON
+    --------------------------------------------------
+    - Tamaño controlado por token tipográfico
+    - Evita line-height extra
+  ================================================== */
+  &__icon {
+    font-size: var(--font-size-heading-md);
+    line-height: 1;
+  }
 }

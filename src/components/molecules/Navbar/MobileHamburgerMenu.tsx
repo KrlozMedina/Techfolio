@@ -5,33 +5,71 @@ import { AiOutlineClose } from 'react-icons/ai';
 import styles from './Navbar.module.scss';
 import { MenuLinks } from './MenuLinks';
 import SettingsButton from '@/components/organisms/settings/SettingsButton';
-import Logout from '@/components/atom/buttons/Logout';
-import { useLanguage } from '@/hooks/useLanguage';
+import Logout from '@/components/atom/Button/Logout';
 import { NavLink } from '@/lib/types/navigation';
 
+/**
+ * Props del componente MobileHamburgerMenu
+ */
 interface Props {
-  /** Enlaces secundarios (settings, legales, etc.) */
+  /**
+   * Enlaces secundarios de navegación.
+   * Ejemplo: configuración, legales, adicionales.
+   */
   links?: NavLink[];
-  /** Indica si el usuario es admin (habilita logout) */
+
+  /**
+   * Indica si el usuario tiene rol administrador.
+   * Si es true, se habilita el botón de cierre de sesión.
+   */
   isAdmin?: boolean;
 }
 
 /**
+ * =========================================================
  * MobileHamburgerMenu
- * Menú de navegación para dispositivos móviles.
+ * ---------------------------------------------------------
+ * Componente de navegación responsive diseñado
+ * exclusivamente para dispositivos móviles.
+ *
+ * Responsabilidades:
+ * - Mostrar icono hamburguesa cuando el menú está cerrado.
+ * - Mostrar menú lateral cuando está abierto.
+ * - Renderizar enlaces principales.
+ * - Permitir acceso a configuración.
+ * - Mostrar botón de logout si el usuario es admin.
+ *
+ * Estado interno:
+ * - menuOpen: controla visibilidad del menú.
+ *
+ * Dependencias:
+ * - useLanguage: para obtener el idioma actual.
+ * - MenuLinks: renderiza enlaces de navegación.
+ * - SettingsButton: acceso rápido a configuración.
+ * - Logout: cierre de sesión condicional.
+ * =========================================================
  */
 export const MobileHamburgerMenu: React.FC<Props> = ({
   links = [],
   isAdmin = false,
 }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const { language } = useLanguage();
 
-  /** Alterna el estado del menú */
+  /**
+   * Estado que controla si el menú móvil está abierto o cerrado.
+   */
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  /**
+   * Alterna el estado de visibilidad del menú.
+   * Utiliza actualización funcional para evitar estados obsoletos.
+   */
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (
     <>
+      {/* ======================================================
+          ÍCONO HAMBURGUESA (menú cerrado)
+        ====================================================== */}
       {!menuOpen ? (
         <TfiMenuAlt
           className={styles['menu__icon-toggle']}
@@ -39,21 +77,26 @@ export const MobileHamburgerMenu: React.FC<Props> = ({
           aria-label="Open menu"
         />
       ) : (
-        <section className={styles['menu-phone__container']}>
+        /* ======================================================
+          CONTENEDOR MENÚ MÓVIL (menú abierto)
+        ====================================================== */
+        <section className={styles['menu--phone__container']}>
+
+          {/* Botón para cerrar el menú */}
           <AiOutlineClose
             className={styles['menu__icon-toggle']}
             onClick={toggleMenu}
             aria-label="Close menu"
           />
 
-          {/* Navegación principal */}
+          {/* Navegación principal (modo móvil) */}
           <MenuLinks isPhone links={links} />
 
-          {/* Acceso a configuración */}
+          {/* Acceso a configuración (modo flotante) */}
           <SettingsButton className="visible" isFloating />
 
-          {/* Cierre de sesión solo para admin */}
-          {isAdmin && <Logout lang={language} />}
+          {/* Cierre de sesión visible únicamente para administradores */}
+          {isAdmin && <Logout />}
         </section>
       )}
     </>

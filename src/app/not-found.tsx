@@ -1,56 +1,90 @@
-'use client';
-
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import ErrorTemplate from '@/components/templates/ErrorTemplate/ErrorTemplate';
-
 /**
- * Página personalizada para errores 404.
- * Muestra un mensaje de "Página no encontrada" junto con una imagen ilustrativa.
+ * ==================================================
+ * 🚫 404 - Not Found Page
+ * --------------------------------------------------
+ * Página personalizada para rutas inexistentes.
+ *
+ * Responsabilidades:
+ * - Renderizar mensaje 404 estilizado
+ * - Usar StatusTemplate como layout base
+ * - Ofrecer navegación de regreso al home
+ *
+ * No contiene:
+ * - Lógica de datos
+ * - Fetch
+ * - Estado
+ *
+ * SEO:
+ * - Next.js maneja automáticamente el status 404
+ *   cuando este archivo se llama not-found.tsx
+ * ==================================================
  */
+
+import React from 'react';
+import Link from 'next/link';
+import StatusTemplate from '@/components/templates/StatusTemplate/StatusTemplate';
+import styles from './not-found.module.scss';
+
 const NotFound: React.FC = () => {
-  useEffect(() => {
-    document.title = "Not Found";
-  }, []);
-
   return (
-    <ErrorTemplate status='notFound' withBackground>
-      <h1 className="not-found__title">{"<404/>"}</h1>
+    <StatusTemplate status="notFound" withBackground>
+      
+      {/* Código visual tipo "<404/>" */}
+      <h1 className={styles["not-found__title"]}>
+        {"<404/>"}
+      </h1>
 
-      <div className="not-found__p">
-        <span className="not-found__sign">&lt;</span>
-        <span className="not-found__tag">p</span>
-        <span className="not-found__sign">&gt;</span>
+      {/* Simulación de etiqueta <p> */}
+      <div className={styles["not-found__paragraph"]}>
+        <span className={styles["not-found__sign"]}>&lt;</span>
+        <span className={styles["not-found__tag"]}>p</span>
+        <span className={styles["not-found__sign"]}>&gt;</span>
       </div>
 
-      <p className="not-found__text">Page not found!!</p>
-
-      <div className="not-found__p">
-        <span className="not-found__sign">&lt;/</span>
-        <span className="not-found__tag">p</span>
-        <span className="not-found__sign">&gt;</span>
-      </div>
-
-      <div className="not-found__p">
-        <span className="not-found__sign">&lt;</span>
-        <span className="not-found__tag">Link</span>
-        <span className="not-found__ref">href</span>=
-        <span className="not-found__tag">{'{'}</span>
-        <Link className="not-found__link" href="/">/</Link>
-        <span className="not-found__tag">{'}'}</span>
-        <span className="not-found__sign">&gt;</span>
-      </div>
-
-      <p className="not-found__text">
-        <Link className="not-found__link" href="/">Return to home</Link>
+      <p className={styles["not-found__text"]}>
+        Page not found!!
       </p>
 
-      <div className="not-found__p">
-        <span className="not-found__sign">&lt;/</span>
-        <span className="not-found__tag">Link</span>
-        <span className="not-found__sign">&gt;</span>
+      <div className={styles["not-found__paragraph"]}>
+        <span className={styles["not-found__sign"]}>&lt;/</span>
+        <span className={styles["not-found__tag"]}>p</span>
+        <span className={styles["not-found__sign"]}>&gt;</span>
       </div>
-    </ErrorTemplate>
+
+      {/* Simulación de etiqueta <Link> */}
+      <div className={styles["not-found__paragraph"]}>
+        <span className={styles["not-found__sign"]}>&lt;</span>
+        <span className={styles["not-found__tag"]}>Link</span>
+        <span className={styles["not-found__ref"]}>href</span>=
+        <span className={styles["not-found__tag"]}>{'{'}</span>
+
+        <Link
+          className={styles["not-found__link"]}
+          href="/"
+        >
+          /
+        </Link>
+
+        <span className={styles["not-found__tag"]}>{'}'}</span>
+        <span className={styles["not-found__sign"]}>&gt;</span>
+      </div>
+
+      <p className={styles["not-found__text"]}>
+        <Link
+          className={styles["not-found__link"]}
+          href="/"
+        >
+          Return to home
+        </Link>
+      </p>
+
+      <div className={styles["not-found__paragraph"]}>
+        <span className={styles["not-found__sign"]}>&lt;/</span>
+        <span className={styles["not-found__tag"]}>Link</span>
+        <span className={styles["not-found__sign"]}>&gt;</span>
+      </div>
+
+    </StatusTemplate>
   );
 };
 

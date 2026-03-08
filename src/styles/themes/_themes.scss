@@ -1,0 +1,54 @@
+/* ==================================================
+  🎛 THEME CONTROLLER
+  Controla el modo claro/oscuro del sistema.
+  
+  Prioridad:
+  1. Override manual mediante data-theme
+  2. Preferencia del sistema (prefers-color-scheme)
+  3. Light por defecto
+================================================== */
+
+
+/* 🌞 Default (fallback)
+  Se aplica si no hay preferencia del sistema
+  ni override manual */
+:root {
+  color-scheme: light;
+}
+
+
+/* 🌙 Sistema operativo
+  Solo aplica si NO existe override manual */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+
+/* 🕹️ Override manual
+  Tiene mayor prioridad que prefers-color-scheme.
+  Se activa con:
+  <html data-theme="dark">
+*/
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+
+/* 🌐 Base layout
+  Usa tokens semánticos definidos en light/dark theme.
+  No usa colores hardcodeados.
+*/
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition:
+    background-color var(--transition-default),
+    color var(--transition-default);
+}

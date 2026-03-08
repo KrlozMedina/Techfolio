@@ -1,0 +1,147 @@
+/* ==================================================
+  🧱 GLOBAL RESET & BASE STYLES
+  --------------------------------------------------
+  - Normaliza box model
+  - Elimina márgenes y paddings por defecto
+  - Define base tipográfica
+  - Usa design tokens (no valores hardcodeados)
+================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit; /* Hereda modelo de caja definido en html */
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box; /* Border-box global */
+  font-size: 62.5%; /* 1rem = 10px para facilitar cálculo */
+}
+
+body {
+  width: 100%;
+  font-family: var(--font-family-text); /* Fuente principal del sistema */
+  color: var(--color-text); /* Token semántico */
+}
+
+
+/* ==================================================
+  🔗 ELEMENTOS BASE
+================================================== */
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease; /* Transición básica */
+}
+
+a:hover {
+  color: var(--color-button-hover); /* Token de estado hover */
+}
+
+label {
+  font-weight: bold;
+  font-size: var(--font-size-sm);
+}
+
+
+/* ==================================================
+  📐 LAYOUT & CONTAINERS
+  --------------------------------------------------
+  Define estructura principal de layout.
+  No contiene estilos visuales específicos de páginas.
+================================================== */
+
+.container {
+  width: var(--width-container);
+  min-width: 32rem;
+  max-width: var(--max-width-container);
+  height: 100vh;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.background__image {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+
+  width: 100%;
+  height: 100vh;
+
+  opacity: 0.75;
+
+  background: url("/assets/background.png") bottom / cover no-repeat;
+  transform: rotate(180deg);
+}
+
+fieldset {
+  width: 100%;
+  padding: var(--space-sm) var(--space-xl);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ==================================================
+  📱 RESPONSIVE RULES
+  --------------------------------------------------
+  Ajustes específicos para tablet y mobile.
+================================================== */
+
+@media (max-width: 768px) {
+  .logo-imagen {
+    width: 60%;
+  }
+
+  .not-found__title {
+    font-size: var(--font-size-3xl);
+    margin: var(--space-md) auto;
+  }
+
+  .error__title {
+    font-size: var(--font-size-lg);
+  }
+
+  .error__message {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 425px) {
+  button {
+    font-size: var(--font-size-lg);
+    padding: var(--space-xs) var(--space-md);
+  }
+
+  fieldset {
+    padding: var(--space-xxs) var(--space-md);
+  }
+}
+
+
+/* ==================================================
+  🧰 UTILITIES
+  --------------------------------------------------
+  Clases utilitarias rápidas.
+  Usar con moderación.
+================================================== */
+
+.none {
+  display: none !important;
+}
+
+.visible {
+  display: flex !important;
+}

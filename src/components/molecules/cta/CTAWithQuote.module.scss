@@ -1,0 +1,145 @@
+/* =====================================================
+  CTA SECTION
+  -----------------------------------------------------
+  Sección Call To Action reutilizable.
+  Incluye:
+  - Título principal
+  - Card contenedora
+  - Cita (quote)
+  - Botones de acción
+  Basado en metodología BEM.
+  ===================================================== */
+
+/* ======================
+  CTA SECTION (BLOCK)
+====================== */
+
+.cta {
+  padding: var(--space-4xl) var(--space-xl);
+  text-align: center;
+}
+
+/* =====================================================
+  TITLE
+  -----------------------------------------------------
+  Encabezado principal de la sección.
+  ===================================================== */
+
+.cta__title {
+  font-size: var(--font-size-heading-md);
+  margin-bottom: var(--space-2xl);
+  color: var(--color-text);
+}
+
+
+/* =====================================================
+  CARD
+  -----------------------------------------------------
+  Contenedor visual principal.
+  - Centrado horizontalmente.
+  - Fondo y borde coherentes con design system.
+  - Sombra basada en token.
+  ===================================================== */
+
+.cta__card {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-2xl);
+  border-radius: var(--radius-lg);
+
+  background-color: var(--color-bg-container);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 var(--space-md) var(--space-2xl) var(--color-shadow);
+}
+
+
+/* =====================================================
+  QUOTE
+  -----------------------------------------------------
+  Bloque de cita destacada dentro del CTA.
+  ===================================================== */
+
+.cta__quote {
+  max-width: 64rem;
+  margin: 0 auto var(--space-3xl);
+}
+
+.cta__quote-text {
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-soft);
+}
+
+.cta__quote-author {
+  margin-top: var(--space-md);
+  font-size: var(--font-size-body-sm);
+  font-style: italic;
+  color: var(--color-text-soft);
+}
+
+
+/* =====================================================
+  ACTIONS
+  -----------------------------------------------------
+  Contenedor de botones primario y secundario.
+  ===================================================== */
+
+.cta__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.cta__button {
+  padding: var(--space-sm) var(--space-xl);
+  font-size: var(--font-size-body-md);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+  transition: var(--transition-default);
+}
+
+
+/* ======================
+  PRIMARY BUTTON
+====================== */
+
+.cta__button--primary {
+  background-color: var(--color-button-primary-bg);
+  color: var(--color-button-primary-text);
+
+  &:hover {
+    background-color: var(--color-button-primary-hover);
+    transform: translateY(-2px);
+  }
+}
+
+
+/* ======================
+  SECONDARY BUTTON
+====================== */
+
+.cta__button--secondary {
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+
+  &:hover {
+    border-color: var(--color-primary-500);
+    color: var(--color-primary-500);
+  }
+}
+
+
+/* =====================================================
+  RESPONSIVE (≥ 768px)
+  -----------------------------------------------------
+  Ajusta tamaño del título en pantallas grandes.
+  ===================================================== */
+
+@media (min-width: 768px) {
+  .cta__title {
+    font-size: var(--font-size-heading-lg);
+  }
+}

@@ -1,0 +1,77 @@
+/* =====================================================
+  MENU ASIDE STYLES
+  -----------------------------------------------------
+  Estilos del menú lateral de navegación.
+  Sigue convención BEM:
+  .menu-aside
+  .menu-aside__link
+  .menu-aside__text
+  .menu-aside__icon
+  ===================================================== */
+
+.menu-aside {
+
+  /* ===================================================
+    LINK CONTAINER
+    ---------------------------------------------------
+    Contenedor inline-flex que centra icono y texto.
+    =================================================== */
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ===================================================
+    LINK TEXT
+    ---------------------------------------------------
+    Estilo tipográfico del texto del enlace.
+    - Usa tokens del sistema de diseño.
+    - Peso en bold para destacar navegación principal.
+    =================================================== */
+  &__text {
+    font-size: var(--font-size-body-lg);
+    color: var(--color-text);
+    padding: var(--space-sm);
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--border-radius);
+    width: max-content;
+  }
+
+  /* ===================================================
+    LINK ICON
+    ---------------------------------------------------
+    Icono asociado al enlace.
+    - Transición suave al hacer hover.
+    - Escalado ligero para feedback visual.
+    =================================================== */
+  &__icon {
+    font-size: var(--font-size-body-lg);
+    color: var(--color-text);
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+/* =====================================================
+  RESPONSIVE (Mobile ≤ 425px)
+  -----------------------------------------------------
+  Aumenta el tamaño de iconos y texto para mejorar
+  legibilidad en pantallas pequeñas.
+  ===================================================== */
+@media (max-width: 425px) {
+  .menu-aside {
+
+    &__icon {
+      font-size: var(--font-size-xl);
+    }
+
+    &__text {
+      font-size: var(--font-size-xl);
+    }
+
+  }
+}

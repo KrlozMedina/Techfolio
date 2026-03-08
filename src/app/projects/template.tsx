@@ -1,17 +1,22 @@
 'use client';
 
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 
 import MainLayout from '@/components/templates/MainLayout/MainLayout';
 import StatusNotice from '@/components/organisms/Notice/StatusNotice';
 
-import { useLanguage } from '@/hooks';
 import { NoticeType, ROUTES_LIST } from '@/lib/config';
 import { useTranslation } from '@/hooks/useTranslation';
 
 /**
- * Representa un texto multilingüe.
+ * =========================================================
+ * Tipos auxiliares
+ * =========================================================
+ */
+
+/**
+ * Representa un texto multilingüe básico.
  */
 type LocaleText = {
   es: string;
@@ -19,29 +24,30 @@ type LocaleText = {
 };
 
 /**
- * Estructura de un enlace de navegación multilingüe.
+ * Estructura base de un enlace de navegación.
  */
 type NavLink = {
   title: LocaleText;
   path: string;
-  // isActive: boolean;
 };
 
 /**
- * Crea un enlace de navegación multilingüe.
- * @param es - Título en español
- * @param en - Título en inglés
- * @param href - Ruta del enlace
- * @returns Objeto tipo NavLink
+ * =========================================================
+ * Utilidad para crear enlaces multilingües
+ * ---------------------------------------------------------
+ * Centraliza la creación de objetos NavLink
+ * evitando repetición manual de estructura.
+ * =========================================================
  */
 const createNavLink = (es: string, en: string, path: string): NavLink => ({
   title: { es, en },
   path,
-  // isActive: false,
 });
 
 /**
- * Enlaces de navegación para la sección de proyectos.
+ * =========================================================
+ * Enlaces específicos de la sección Projects
+ * =========================================================
  */
 const NAV_LINKS_PROJECT: NavLink[] = [
   createNavLink("Servicios", "Services", "/projects/services"),
@@ -50,21 +56,48 @@ const NAV_LINKS_PROJECT: NavLink[] = [
 ];
 
 /**
- * Plantilla de layout para páginas de proyectos.
- * Determina el idioma, navegación activa, estado de admin y avisos.
+ * =========================================================
+ * Template (Projects Layout Wrapper)
+ * ---------------------------------------------------------
+ * Plantilla específica para páginas dentro de la sección
+ * de proyectos.
  *
- * @param children - Contenido hijo renderizado dentro del layout
+ * Responsabilidades:
+ * - Determinar la ruta actual.
+ * - Resolver idioma activo.
+ * - Construir navegación con estado activo.
+ * - Determinar si la ruta requiere permisos.
+ * - Renderizar avisos (StatusNotice) definidos por la ruta.
+ * - Delegar estructura principal a MainLayout.
+ *
+ * Arquitectura:
+ * - ROUTES_LIST → fuente de verdad de rutas.
+ * - StatusNotice → renderizado dinámico por metadata.
+ * - MainLayout → layout estructural reutilizable.
+ * =========================================================
  */
 export default function Template({ children }: { children: ReactNode }) {
-  // const { isSpanish } = useLanguage();
+
+  /**
+   * Ruta actual desde el router de Next.js.
+   */
   const path = usePathname();
-  // const language = isSpanish ? 'es' : 'en';
+
+  /**
+   * Idioma activo del sistema.
+   */
   const { language } = useTranslation();
 
-  // Ruta actual encontrada en la configuración global
+  /**
+   * Busca configuración de la ruta actual
+   * dentro del listado global.
+   */
   const currentRoute = ROUTES_LIST.find(route => route.path === path);
 
-  // Mapear enlaces con estado activo basado en la ruta actual
+  /**
+   * Genera navegación con bandera isActive
+   * comparando contra la ruta actual.
+   */
   const linksWithActive = NAV_LINKS_PROJECT.map(link => ({
     ...link,
     isActive: link.path === path,
@@ -76,15 +109,18 @@ export default function Template({ children }: { children: ReactNode }) {
       links={linksWithActive}
       isAdmin={currentRoute?.isProtected ?? false}
     >
+
+      {/* Renderiza avisos definidos por la ruta */}
       {currentRoute?.notice?.map((notice, index) => (
         <StatusNotice
           key={index}
           type={notice as NoticeType}
-          language={language}
         />
       ))}
 
+      {/* Contenido principal de la página */}
       {children}
+
     </MainLayout>
   );
 }

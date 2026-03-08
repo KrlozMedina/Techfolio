@@ -1,41 +1,73 @@
-@use '@/styles/abstract/mixins' as *;
+@use '@/styles/abstracts/mixins' as *;
 
-/* ================= VARIABLES SWITCH ================= */
-$button-size: 48px;       // ancho total del switch
-$switch-height: 26px;     // altura del switch
-$switch-knob-size: 20px;  // diámetro del knob
-$knob-offset: 4px;        // espacio entre knob y borde
+/* ==================================================
+   ⚙ SETTINGS PANEL SYSTEM
+   --------------------------------------------------
+   Incluye:
+   - Botón flotante de configuración
+   - Panel desplegable
+   - Switch personalizado
+   - Formularios internos
+   Implementado con:
+   - Placeholders reutilizables
+   - Design tokens
+   - Mixins del sistema
+================================================== */
 
-/* ================= PLACEHOLDERS REUTILIZABLES ================= */
+
+/* ===============================
+   🎛 SWITCH VARIABLES
+   --------------------------------------------------
+   Dimensiones internas del switch.
+================================= */
+$button-size: 4.8rem;          // 48px
+$switch-height: 2.6rem;        // 26px
+$switch-knob-size: 2rem;       // 20px
+$knob-offset: var(--space-xxs); // 4px
+
+
+/* ===============================
+   ♻ PLACEHOLDERS (Reusable)
+================================= */
+
+/* Base para contenedores tipo panel */
 %panel-container-base {
   position: absolute;
   right: 0;
+
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+
   padding: var(--space-md);
-  background: var(--color-background-container);
+  background: var(--color-bg-container);
   border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-lg);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-lg);
+
+  box-shadow: 0 var(--space-xs) var(--space-lg) rgba(0, 0, 0, 0.15);
 }
 
+/* Base para formularios internos */
 %form-base {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
+  @include flex-column(flex-start, flex-start, var(--space-xs));
 }
 
+/* Base para slider del switch */
 %switch-slider-base {
   position: absolute;
   inset: 0;
   cursor: pointer;
-  background-color: var(--color-background-container-soft);
-  border-radius: var(--border-radius-full);
-  transition: 0.4s;
+
+  background-color: var(--color-bg);
+  border-radius: var(--radius-full);
+
+  transition: var(--transition-default);
 }
 
-/* ================= SETTINGS ================= */
+
+/* ===============================
+   ⚙ SETTINGS FLOATING BUTTON
+================================= */
 .settings {
   position: fixed;
   z-index: 9999;
@@ -51,26 +83,32 @@ $knob-offset: 4px;        // espacio entre knob y borde
   }
 
   &__button {
-    background-color: var(--color-background-container);
+    background-color: var(--color-bg-container);
+    color: var(--color-text);
   }
 }
 
-/* ================= PANEL ================= */
+
+/* ===============================
+   📦 PANEL
+================================= */
 .panel {
+
   &__container {
     @extend %panel-container-base;
 
     &-button {
-      bottom: 5rem;
+      bottom: var(--space-4xl);
     }
 
     &-menu {
-      top: 5rem;
+      top: var(--space-4xl);
     }
   }
 
   &__form {
     @extend %form-base;
+    font-size: var(--font-size-caption);
   }
 
   &__switchWrapper {
@@ -80,54 +118,17 @@ $knob-offset: 4px;        // espacio entre knob y borde
   }
 
   &__icon {
-    font-size: var(--font-size-sm);
-    color: var(--color-icon);
+    font-size: var(--font-size-body-md);
+    color: var(--color-text-soft);
   }
 }
 
-/* ================= SWITCH ================= */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: $button-size;
-  height: $switch-height;
 
-  input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-
-    &:checked + .slider {
-      background-color: var(--color-background-container-soft);
-
-      &::before {
-        transform: translateX(
-          $button-size - $switch-knob-size - $knob-offset
-        );
-      }
-    }
-  }
-}
-
-.slider {
-  @extend %switch-slider-base;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: $knob-offset;
-    bottom: 3px;
-    width: $switch-knob-size;
-    height: $switch-knob-size;
-    background-color: #fff;
-    border-radius: var(--border-radius-full);
-    transition: 0.4s;
-  }
-}
-
-/* ================= MEDIA QUERIES ================= */
+/* ===============================
+   📱 RESPONSIVE
+================================= */
 @include respond-mobile {
   .settings {
-    display: none; // oculta settings en mobile
+    display: none;
   }
 }

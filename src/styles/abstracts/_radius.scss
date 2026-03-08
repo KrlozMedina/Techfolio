@@ -1,0 +1,33 @@
+/* ==================================================
+  🔲 RADIUS DESIGN TOKENS
+  --------------------------------------------------
+  Define el sistema de bordes redondeados
+  para mantener consistencia visual en:
+
+  - Botones
+  - Cards
+  - Inputs
+  - Contenedores
+  - Elementos circulares
+
+  No usar valores hardcodeados como 6px o 12px.
+  Siempre consumir estos tokens.
+================================================== */
+
+:root {
+
+  /* Bordes pequeños – inputs, tags, badges */
+  --radius-sm: 0.25rem;   /* 4px */
+
+  /* Bordes estándar – botones y cards */
+  --radius-md: 0.5rem;    /* 8px */
+
+  /* Bordes amplios – contenedores destacados */
+  --radius-lg: 1rem;      /* 16px */
+
+  /* Bordes muy pronunciados – UI moderna / hero blocks */
+  --radius-xl: 3.2rem;    /* 32px */
+
+  /* Bordes circulares – avatares, iconos redondos */
+  --radius-full: 9999px;
+}

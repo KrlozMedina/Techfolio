@@ -38,7 +38,7 @@
     "src/app/api/v1/page.jsx",
     "src/test/api/auth/login.test.js",
     ".next/dev/types/**/*.ts"
-  ],
+, "vitest.config.mts", "src/lib/db/connectDB.ts"  ],
   "exclude": [
     "node_modules"
   ]

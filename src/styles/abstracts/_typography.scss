@@ -1,0 +1,64 @@
+/* ==================================================
+  🔤 TYPOGRAPHY DESIGN TOKENS
+  --------------------------------------------------
+  Sistema tipográfico basado en:
+  - Escala fluida con clamp()
+  - REM como unidad base (1rem = 10px)
+  - Separación entre:
+      • Font families
+      • Size scale
+      • Font weights
+      • Line heights
+  Estos tokens deben ser consumidos por componentes,
+  no usarse valores hardcodeados.
+================================================== */
+
+:root {
+
+  /* ========================
+    FONT FAMILIES
+    Definen identidad tipográfica del sistema.
+    Se asignan en elementos base (body, headings).
+  ======================== */
+  --font-family-heading: 'Inter', sans-serif;
+  --font-family-text: 'Inter', sans-serif;
+
+
+  /* ========================
+    TYPE SCALE (Fluid)
+    ------------------------------------------------
+    Base construida sobre rem.
+    Headings usan clamp() para adaptación fluida
+    entre viewport pequeño y grande.
+  ======================== */
+
+  /* Body */
+  --font-size-body-sm: 1.2rem;  /* 12px */
+  --font-size-body-md: 1.6rem;  /* 16px */
+  --font-size-body-lg: 1.8rem;  /* 18px */
+  --font-size-caption: 1.3rem;  /* 13px */
+
+  /* Headings (responsive fluid scale) */
+  --font-size-heading-sm: clamp(1.6rem, 1.2vw, 1.8rem);
+  --font-size-heading-md: clamp(2rem, 1.6vw, 2.2rem);
+  --font-size-heading-lg: clamp(2.4rem, 2vw, 2.8rem);
+  --font-size-display: clamp(3rem, 3vw, 3.6rem);
+
+
+  /* ========================
+    FONT WEIGHTS
+    Mantiene consistencia semántica.
+  ======================== */
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+
+  /* ========================
+    LINE HEIGHT
+    Separado por intención semántica.
+  ======================== */
+  --line-height-tight: 1.25;     /* Títulos */
+  --line-height-normal: 1.6;     /* Texto base */
+  --line-height-relaxed: 1.75;   /* Lectura larga */
+}

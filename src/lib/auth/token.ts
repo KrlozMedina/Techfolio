@@ -1,58 +1,57 @@
-import jwt from 'jsonwebtoken';
-import { AUTH_CONFIG, JWT_SECRET } from './config';
-
-export interface SessionPayload {
-  username: string;
-  isDummy: boolean;
-}
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { AUTH_CONFIG, JWT_SECRET } from "./config";
+import { z } from "zod";
+import { UserRole } from "./types";
 
 /**
- * Crea un token JWT
+ * Schema Zod para validar la carga útil (payload) del JWT.
+ * Garantiza que el token siempre contenga:
+ * - username: nombre del usuario
+ * - role: rol del usuario ('admin' | 'editor' | 'viewer')
  */
-export function createToken(username: string, isDummy = false): string {
+const SessionPayloadSchema = z.object({
+  username: z.string(),
+  role: z.enum(["admin", "editor", "viewer"]),
+});
+
+/** Tipo TypeScript inferido de la carga útil del JWT */
+export type SessionPayload = z.infer<typeof SessionPayloadSchema>;
+
+/**
+ * Crea un token JWT firmado para un usuario dado.
+ * 
+ * @param username - Nombre del usuario
+ * @param role - Rol del usuario (admin, editor, viewer)
+ * @returns Token JWT como string
+ */
+export function createToken(
+  username: string,
+  role: UserRole
+): string {
   return jwt.sign(
-    { username, isDummy },
-    JWT_SECRET,
-    { expiresIn: AUTH_CONFIG.TOKEN_EXPIRATION } // en segundos
+    { username, role },         // Payload del token
+    JWT_SECRET,                 // Secreto para firmar
+    {
+      expiresIn: AUTH_CONFIG.TOKEN_EXPIRATION, // Expiración del token (segundos)
+      algorithm: "HS256",                      // Algoritmo de firma
+    }
   );
 }
 
 /**
- * Verifica un token JWT
+ * Verifica y decodifica un token JWT.
+ * Valida que el payload cumpla con la estructura esperada.
+ * 
+ * @param token - Token JWT a verificar
+ * @returns Payload del token tipado como SessionPayload
+ * @throws Error si el token no es válido o la estructura es incorrecta
  */
 export function verifyToken(token: string): SessionPayload {
-  try {
-    return jwt.verify(token, JWT_SECRET) as SessionPayload;
-  } catch (e) {
-    console.log('Token verification error:', e);
-    throw new Error('Invalid or expired token');
-  }
+  // Decodifica el token usando el secreto
+  const decoded = jwt.verify(token, JWT_SECRET, {
+    algorithms: ["HS256"],
+  }) as JwtPayload;
+
+  // Valida que el payload tenga la estructura correcta
+  return SessionPayloadSchema.parse(decoded);
 }
-
-
-// import jwt from 'jsonwebtoken';
-// import { AUTH_CONFIG, JWT_SECRET } from './config';
-// import { AuthUser } from './types';
-
-// export interface SessionPayload {
-//   username: string;
-//   isDummy: boolean;
-// }
-
-// export function createToken(username: string, isDummy = false): string {
-//   return jwt.sign(
-//     { username, isDummy },
-//     JWT_SECRET,
-//     { expiresIn: AUTH_CONFIG.TOKEN_EXPIRATION } // o usa AUTH_CONFIG.TOKEN_EXPIRATION si quieres segundos
-//   );
-// }
-
-// export function verifyToken(token: string): SessionPayload {
-//   try {
-//     // console.log(jwt.verify(token, JWT_SECRET))
-//     return jwt.verify(token, JWT_SECRET) as SessionPayload;
-//   } catch (e) {
-//     console.log(e)
-//     throw new Error('Invalid or expired token');
-//   }
-// }

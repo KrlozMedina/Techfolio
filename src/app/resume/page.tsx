@@ -71,7 +71,7 @@ const ResumePage: React.FC = () => {
   return (
     <section className={styles.container}>
       <p className={styles.phrase}>
-        {t.phrases.resume}
+        {/* {t.phrases.resume} */}
         {/* {isSpanish
           ? 'El éxito no es la clave de la felicidad. La felicidad es la clave del éxito.'
           : 'Success is not the key to happiness. Happiness is the key to success.'} */}
@@ -79,10 +79,10 @@ const ResumePage: React.FC = () => {
       <p className={styles.author}>Albert Schweitzer</p>
 
       <h2 className={styles.title}>
-        {t.resume.title}
+        {t.resume.hero.title}
         {/* {isSpanish ? "Curriculum Vitae" : "Resume"} */}
         <button onClick={downloadCV} style={{ marginLeft: '1rem' }}>
-          <FaFileDownload /> {t.resume.download}
+          <FaFileDownload /> Download
         </button>
       </h2>
 

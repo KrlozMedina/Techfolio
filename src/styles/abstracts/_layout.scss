@@ -1,0 +1,22 @@
+/* ==================================================
+  📐 LAYOUT DESIGN TOKENS
+  --------------------------------------------------
+  Define límites estructurales del layout principal.
+
+  Controla:
+  - Ancho fluido del contenedor
+  - Máximo ancho en pantallas grandes
+  - Centrado horizontal consistente
+
+  Estos tokens deben ser consumidos por clases
+  como `.container` u otros wrappers principales.
+================================================== */
+
+:root {
+
+  /* Ancho relativo (responsive) */
+  --container-width: 90%;
+
+  /* Límite máximo en pantallas grandes */
+  --container-max-width: 110rem; /* 1100px si 1rem = 10px */
+}

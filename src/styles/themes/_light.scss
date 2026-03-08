@@ -1,0 +1,58 @@
+/* ==================================================
+  🌞 LIGHT THEME (Semantic Tokens)
+  Define tokens consumidos por componentes.
+  No usar tokens base directamente en UI.
+================================================== */
+
+:root {
+
+  /* ========================
+    BACKGROUND
+  ======================== */
+  --color-bg: var(--color-gray-50);
+  --color-bg-container: rgba(255, 255, 255, 0.85);
+
+  /* ========================
+    TEXT
+  ======================== */
+  --color-text: var(--color-gray-800);
+  --color-text-soft: var(--color-gray-600);
+  --color-text-error: var(--color-error-500);
+
+  /* ========================
+    ICONS
+  ======================== */
+  --color-icon-muted: var(--color-gray-400);
+
+  /* ========================
+    BORDERS
+  ======================== */
+  --color-border: var(--color-gray-400);
+  --color-border-strong: var(--color-gray-800);
+
+  /* ========================
+    EFFECTS
+  ======================== */
+  --color-shadow: rgba(0, 0, 0, 0.08);
+  --color-focus: var(--color-primary-600);
+
+  /* ========================
+    BUTTON STATES
+  ======================== */
+  --color-button-focus: var(--color-primary-300);
+  --color-button-disable: var(--color-gray-200);
+
+  /* ========================
+    BUTTON - PRIMARY
+  ======================== */
+  --color-button-primary-bg: var(--color-primary-500);
+  --color-button-primary-hover: var(--color-primary-600);
+  --color-button-primary-text: var(--color-gray-50);
+
+  /* ========================
+    BUTTON - SECONDARY
+  ======================== */
+  --color-button-secondary-bg: var(--color-secondary-500);
+  --color-button-secondary-hover: var(--color-secondary-600);
+  --color-button-secondary-text: var(--color-gray-50);
+}

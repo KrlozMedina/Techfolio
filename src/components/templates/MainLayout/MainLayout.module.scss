@@ -1,0 +1,131 @@
+@use '@/styles/abstracts/mixins' as *;
+
+/* =====================================================
+  TEMPLATE LAYOUT
+  -----------------------------------------------------
+  Estructura base del layout principal de la aplicación.
+  Sigue metodología BEM:
+  .template
+  .template__layout
+  .template__container
+  .template__main
+  .template__aside
+  ===================================================== */
+
+/* ============ TEMPLATE ROOT ============ */
+.template {
+  display: flex;
+  flex-direction: column;
+  margin-inline: var(--space-xs);
+
+  /* ===================================================
+    LAYOUT WRAPPER
+    ---------------------------------------------------
+    Contenedor principal centrado.
+    - Limita ancho máximo.
+    - Ocupa 100dvh (viewport dinámico).
+    - Aplica fondo del sistema de diseño.
+    =================================================== */
+  &__layout {
+    width: 100%;
+    max-width: var(--container-max-width);
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    margin-inline: auto;
+    background-color: var(--color-bg-container);
+  }
+
+  /* ===================================================
+    MAIN SCROLL CONTAINER
+    ---------------------------------------------------
+    Contenedor que maneja el scroll vertical.
+    - Scroll suave.
+    - Scroll snap vertical.
+    - Previene overscroll externo.
+    - Oculta scrollbar en WebKit.
+    =================================================== */
+  &__container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+    overscroll-behavior-y: contain;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+
+  /* ===================================================
+    MAIN CONTENT
+    ---------------------------------------------------
+    Contenedor principal de contenido.
+    =================================================== */
+  &__main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===================================================
+    ASIDE (Menú lateral)
+    ---------------------------------------------------
+    Posicionado de forma absoluta al lado derecho.
+    - Altura completa del viewport.
+    - Alineado verticalmente al centro.
+    =================================================== */
+  &__aside {
+    width: 1%; // 👉 Valor fijo de layout
+    height: 100dvh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    right: 0;
+  }
+
+  /* ===================================================
+    MODIFIER: CONTROL PANEL
+    ---------------------------------------------------
+    Variante oculta por defecto.
+    Visible solo en pantallas mayores.
+    =================================================== */
+  &__main--control-panel {
+    display: none;
+  }
+}
+
+/* =====================================================
+  TABLET (≥ 768px)
+  -----------------------------------------------------
+  Ajustes para pantallas medianas en adelante.
+  ===================================================== */
+@media (min-width: 768px) {
+  .template {
+    &__aside {
+      display: flex;
+      width: 1%;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    &__main--control-panel {
+      display: flex;
+    }
+  }
+}
+
+/* =====================================================
+  LARGE SCREENS (≥ 1800px)
+  -----------------------------------------------------
+  Centrado adicional en pantallas ultra anchas.
+  ===================================================== */
+@media (min-width: 1800px) {
+  .template__layout {
+    margin-inline: auto;
+  }
+}

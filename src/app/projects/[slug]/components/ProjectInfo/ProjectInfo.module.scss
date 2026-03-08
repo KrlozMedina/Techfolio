@@ -1,0 +1,164 @@
+/**
+ * =========================================================
+ * PROJECT INFO (BLOCK)
+ * ---------------------------------------------------------
+ * Sección utilizada para mostrar información adicional del
+ * proyecto como:
+ *
+ * - Impacto del proyecto
+ * - Aprendizajes obtenidos
+ * - Información del equipo
+ * - Metadatos relevantes
+ *
+ * Layout:
+ * - Mobile: columna única
+ * - Desktop: layout de dos columnas
+ * =========================================================
+ */
+
+.info {
+
+  /**
+   * Contenedor principal de la sección
+   */
+  display: grid;
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-4xl);
+
+  /**
+   * -------------------------------------------------------
+   * LEFT COLUMN
+   * -------------------------------------------------------
+   * Contenedor para tarjetas principales (impacto, learnings)
+   */
+  &__left {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * CARD
+   * -------------------------------------------------------
+   * Tarjeta de información del proyecto.
+   */
+  &__card {
+    padding: var(--space-xl);
+
+    background-color: var(--color-bg-container);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+
+    min-height: 18rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * TITLE
+   * -------------------------------------------------------
+   * Título de la tarjeta informativa.
+   */
+  &__title {
+    font-size: var(--font-size-heading-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * IMPACT
+   * -------------------------------------------------------
+   * Valor destacado que representa el impacto del proyecto.
+   * Generalmente usado para métricas o resultados.
+   */
+  &__impact {
+    font-size: var(--font-size-heading-xl);
+    font-weight: var(--font-weight-bold);
+
+    margin-top: auto;
+  }
+
+  /**
+   * -------------------------------------------------------
+   * LIST
+   * -------------------------------------------------------
+   * Lista de elementos informativos (ej: aprendizajes).
+   */
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+
+    padding-left: var(--space-sm);
+  }
+
+  /**
+   * Elemento individual de la lista
+   */
+  &__list-item {
+    font-size: var(--font-size-body-sm);
+    color: var(--color-text-soft);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * META
+   * -------------------------------------------------------
+   * Información estructurada del proyecto
+   * (ej: duración, tamaño del equipo, rol).
+   */
+  &__meta {
+    display: grid;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+  }
+
+  /**
+   * Fila de metadatos
+   */
+  &__meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /**
+   * Etiqueta del metadato
+   */
+  &__label {
+    font-size: var(--font-size-body-xs);
+    color: var(--color-text-muted);
+  }
+
+  /**
+   * Valor del metadato
+   */
+  &__value {
+    font-size: var(--font-size-body-sm);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+
+/**
+ * =========================================================
+ * RESPONSIVE - DESKTOP
+ * ---------------------------------------------------------
+ * En pantallas grandes la sección se divide en dos columnas:
+ *
+ * - Columna principal (contenido)
+ * - Columna secundaria (metadatos)
+ * =========================================================
+ */
+
+@media (min-width: 900px) {
+
+  .info {
+    grid-template-columns: 2fr 1fr;
+    align-items: stretch;
+  }
+
+}

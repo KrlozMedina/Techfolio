@@ -1,47 +1,53 @@
 import React from 'react';
 import Image from 'next/image';
 
-interface AvatarProps {
+interface Props {
   /**
-   * Nombre del avatar (se usará para cargar la imagen desde `/assets/avatars/{name}.png`)
+   * Nombre del avatar.
+   * Se utiliza para construir la ruta:
+   * `/assets/avatars/{name}.png`
    */
   name: string;
 
   /**
-   * Ancho del avatar en píxeles. Por defecto: 40
-   */
-  width: number;
-
-  /**
-   * Alto del avatar en píxeles. Por defecto: 40
-   */
-  height: number;
-
-  /**
-   * Clase CSS opcional para aplicar estilos personalizados
+   * Clase CSS opcional para aplicar estilos personalizados.
    */
   className?: string;
 
   /**
-   * Estilos inline opcionales para el contenedor del avatar
+   * Estilos inline opcionales para el contenedor del avatar.
    */
   style?: React.CSSProperties;
 }
 
 /**
- * Componente Avatar que muestra una imagen del usuario basada en su nombre.
- * La imagen se busca en la ruta `/assets/avatars/{name}.png`.
+ * =========================================================
+ * Avatar
+ * ---------------------------------------------------------
+ * Componente visual que renderiza una imagen de avatar
+ * basada en el nombre recibido.
+ *
+ * Funcionamiento:
+ * - Construye dinámicamente la ruta del asset.
+ * - Usa Next.js <Image> para optimización automática.
+ *
+ * Responsabilidades:
+ * - Renderizar imagen optimizada.
+ * - Permitir personalización vía className y style.
+ * - Proveer atributos básicos de accesibilidad.
+ *
+ * Nota:
+ * Las dimensiones están actualmente fijas (220x330).
+ * =========================================================
  */
-const Avatar: React.FC<AvatarProps> = ({
+const Avatar: React.FC<Props> = ({
   name,
-  width,
-  height,
   className,
   style,
 }) => {
   return (
     <div
-      style={{ width, height, ...style }}
+      style={{ ...style }}
       className={className}
       aria-label={`Avatar de ${name}`}
       role="img"
@@ -49,9 +55,10 @@ const Avatar: React.FC<AvatarProps> = ({
       <Image
         src={`/assets/avatars/${name}.png`}
         alt={`Avatar de ${name}`}
-        width={width}
-        height={height}
-        loading="lazy"
+        width={220}
+        height={330}
+        style={{ objectFit: "contain" }}
+        loading="eager"
       />
     </div>
   );

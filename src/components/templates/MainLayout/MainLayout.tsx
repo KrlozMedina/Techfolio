@@ -1,62 +1,106 @@
 import React, { ReactNode } from 'react';
-import style from './MainLayout.module.css';
+import style from './MainLayout.module.scss';
 import Link from 'next/link';
 import SettingsButton from '@/components/organisms/settings/SettingsButton';
 import Headers from '@/components/organisms/Headers/Header';
-// import { MenuAside, MobileHamburgerMenu } from '@/components/molecules/navbar/';
 import Footer from '@/components/molecules/Footer/Footer';
 import MobileHamburgerMenu from '@/components/molecules/Navbar/MobileHamburgerMenu';
 import MenuAside from '@/components/molecules/Navbar/MenuAside';
+import { Language } from '@/lib/i18n';
 
-// Defining the structure of the links that can be passed as props
+/**
+ * Representa un enlace de navegación del layout principal.
+ */
 interface Link {
+  /** Ruta destino */
   path: string;
+
+  /** Títulos internacionalizados */
   title: {
     es: string;
     en: string;
   };
-  isActive: boolean; // Whether the link is active (used for highlighting)
+
+  /** Indica si el enlace está activo */
+  isActive: boolean;
 }
 
-// Props definition for MainLayout component
-interface MainLayoutProps {
-  children: ReactNode; // The child components to be rendered within the layout
-  links?: Link[]; // An optional array of links for navigation
-  isAdmin?: boolean; // Flag indicating if the user is an admin
-  language: 'es' | 'en'; // Language selection for content
+/**
+ * Props del componente MainLayout
+ */
+interface Props {
+  /** Contenido dinámico renderizado dentro del layout */
+  children: ReactNode;
+
+  /** Enlaces opcionales para navegación */
+  links?: Link[];
+
+  /** Indica si el usuario tiene permisos de administrador */
+  isAdmin?: boolean;
+
+  /** Idioma activo del sistema */
+  language: Language;
 }
 
-// MainLayout component
-const MainLayout: React.FC<MainLayoutProps> = ({
+/**
+ * =========================================================
+ * MainLayout
+ * ---------------------------------------------------------
+ * Layout estructural principal de la aplicación.
+ *
+ * Responsabilidades:
+ * - Proveer estructura base común a todas las páginas.
+ * - Integrar navegación mobile y desktop.
+ * - Renderizar header, footer y aside persistentes.
+ * - Controlar enlaces activos y rol de usuario.
+ *
+ * Arquitectura:
+ * - MobileHamburgerMenu → navegación móvil.
+ * - Header → navegación superior.
+ * - Main → contenido dinámico (children).
+ * - Footer → información global.
+ * - Aside → menú lateral + ajustes flotantes.
+ *
+ * Diseño:
+ * - Basado en estructura BEM definida en SCSS.
+ * - Layout centralizado con ancho máximo configurable.
+ * =========================================================
+ */
+const MainLayout: React.FC<Props> = ({
   children,
-  links = [], // Default to an empty array if no links are provided
+  links = [],
   isAdmin = false,
   language,
 }) => {
   return (
     <div className={style.template}>
-      {/* Mobile menu for smaller devices */}
+
+      {/* Navegación móvil */}
       <MobileHamburgerMenu links={links} isAdmin={isAdmin} />
 
-      <div className={style['template-container']}>
+      <div className={style['template__layout']}>
+
+        {/* Header principal */}
         <Headers language={language} links={links} isAdmin={isAdmin} />
 
+        {/* Contenedor principal con scroll */}
         <section className={style['template__container']}>
+
+          {/* Contenido dinámico */}
           <main className={style['template__main']}>
-            {children} {/* Render children components here */}
+            {children}
           </main>
 
-          {/* Footer section with social links */}
-          
-          <Footer lang={language} />
+          {/* Footer global */}
+          <Footer />
         </section>
-      </div>
 
-      {/* Sidebar with additional elements like the menu, language selector, and theme toggle */}
-      <aside className={style['template__aside']}>
-        <MenuAside />
-        <SettingsButton isFloating />
-      </aside>
+        {/* Aside lateral persistente */}
+        <aside className={style['template__aside']}>
+          <MenuAside />
+          <SettingsButton isFloating />
+        </aside>
+      </div>
     </div>
   );
 };

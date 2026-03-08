@@ -1,23 +1,36 @@
 'use client';
 
-import Spinner from '@/components/atom/feedback/Spinner';
-import ErrorTemplate from '@/components/templates/ErrorTemplate/ErrorTemplate';
-// import { useLanguage } from '@/hooks';
-import { useTranslation } from '@/hooks/useTranslation';
-// import React from 'react';
-
 /**
- * Componente que representa una pantalla de carga.
- * Se muestra mientras el contenido principal está siendo procesado o cargado.
+ * ==================================================
+ * ⏳ Loading Route (App Router)
+ * --------------------------------------------------
+ * Componente especial de Next.js que se renderiza
+ * automáticamente mientras la página o segmento
+ * está cargando datos.
+ *
+ * Responsabilidades:
+ * - Mostrar estado visual de carga
+ * - Reutilizar StatusTemplate como layout base
+ * - Renderizar Spinner accesible
+ *
+ * No contiene:
+ * - Lógica de negocio
+ * - Fetch
+ * - Estado interno
+ *
+ * Nota:
+ * Se marca como "use client" porque Spinner usa
+ * hooks (useTranslation) y requiere entorno cliente.
+ * ==================================================
  */
-export default function Loading() {
-  // const { isSpanish } = useLanguage();
-  const { language } = useTranslation();
 
+import Spinner from '@/components/atom/feedback/Spinner';
+import StatusTemplate from '@/components/templates/StatusTemplate/StatusTemplate';
+
+export default function Loading() {
   return (
-    <ErrorTemplate status='loading' withBackground>
-      {/* Spinner animado */}
-      <Spinner language={language} />
-    </ErrorTemplate>
+    <StatusTemplate status="loading" withBackground>
+      <Spinner />
+    </StatusTemplate>
   );
 }

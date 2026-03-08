@@ -1,0 +1,104 @@
+/**
+ * =========================================================
+ * FEATURES (BLOCK)
+ * ---------------------------------------------------------
+ * Sección utilizada para mostrar las funcionalidades o
+ * características principales de un proyecto.
+ *
+ * Cada feature se presenta como una tarjeta dentro de una
+ * grilla adaptable.
+ *
+ * Layout:
+ * - Mobile: una columna
+ * - Tablet+: grid adaptable
+ * =========================================================
+ */
+
+.features {
+
+  /**
+   * Espaciado inferior de la sección
+   */
+  margin-bottom: var(--space-4xl);
+
+  /**
+   * -------------------------------------------------------
+   * GRID
+   * -------------------------------------------------------
+   * Contenedor principal de las tarjetas de features.
+   */
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * CARD
+   * -------------------------------------------------------
+   * Tarjeta individual que representa una característica
+   * o funcionalidad del proyecto.
+   */
+  &__card {
+    padding: var(--space-lg);
+
+    background-color: var(--color-bg-container);
+    border-radius: var(--radius-md);
+
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast);
+
+    /**
+     * Efecto hover para elevar visualmente la tarjeta
+     */
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+  }
+
+  /**
+   * -------------------------------------------------------
+   * CARD TITLE
+   * -------------------------------------------------------
+   * Título de la funcionalidad o característica.
+   */
+  &__card-title {
+    font-size: var(--font-size-heading-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * CARD DESCRIPTION
+   * -------------------------------------------------------
+   * Descripción detallada de la característica.
+   */
+  &__card-description {
+    color: var(--color-text-soft);
+    line-height: var(--line-height-relaxed);
+  }
+}
+
+
+/**
+ * =========================================================
+ * RESPONSIVE - TABLET
+ * ---------------------------------------------------------
+ * En pantallas tablet y superiores:
+ * - Las tarjetas se organizan en una grilla adaptable
+ * - Cada columna tiene un mínimo de 26rem
+ * =========================================================
+ */
+
+@media (min-width: 768px) {
+  .features {
+
+    &__grid {
+      grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+    }
+
+  }
+}

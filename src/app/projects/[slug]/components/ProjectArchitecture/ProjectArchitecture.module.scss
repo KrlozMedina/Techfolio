@@ -1,0 +1,177 @@
+/**
+ * =========================================================
+ * ARCHITECTURE (BLOCK)
+ * ---------------------------------------------------------
+ * Sección que muestra la arquitectura del proyecto.
+ *
+ * Presenta información técnica como:
+ * - Tipo de arquitectura
+ * - Estilo arquitectónico
+ * - Modelo de base de datos
+ * - Comunicación interna y externa
+ *
+ * Layout:
+ * - Mobile: 1 columna
+ * - Tablet: 2 columnas
+ * - Desktop: 4 columnas
+ *
+ * Cada elemento se muestra como una tarjeta informativa.
+ * =========================================================
+ */
+
+.architecture {
+  position: relative;
+
+  /* Espaciado interno del bloque */
+  padding: var(--space-2xl) var(--space-lg);
+
+  /**
+   * -------------------------------------------------------
+   * TITLE
+   * -------------------------------------------------------
+   * Título principal de la sección.
+   */
+  &__title {
+    font-size: var(--font-size-heading-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * GRID
+   * -------------------------------------------------------
+   * Contenedor principal de las tarjetas de arquitectura.
+   */
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+
+    position: relative;
+    // z-index: 2;
+  }
+
+  /**
+   * -------------------------------------------------------
+   * CARD
+   * -------------------------------------------------------
+   * Tarjeta que representa un aspecto de la arquitectura.
+   */
+  &__card {
+    background-color: var(--color-bg-container);
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    padding: var(--space-lg);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+
+    text-align: center;
+
+    box-shadow: var(--shadow-md);
+  }
+
+  /**
+   * Categoría de la arquitectura
+   * Ej: Architecture Type, Style, Database Model
+   */
+  &__category {
+    font-size: var(--font-size-body-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+
+  /**
+   * Nombre del elemento arquitectónico
+   */
+  &__name {
+    font-size: var(--font-size-heading-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /**
+   * Descripción corta del elemento arquitectónico
+   */
+  &__description {
+    font-size: var(--font-size-body-sm);
+    color: var(--color-text-soft);
+  }
+
+  /**
+   * Icono representativo de la arquitectura
+   */
+  &__icon {
+    margin: 0 auto;
+  }
+
+  /**
+   * -------------------------------------------------------
+   * COMMUNICATION
+   * -------------------------------------------------------
+   * Contenedor para mostrar los tipos de comunicación
+   * (ej: REST, WebSocket, Event Driven, etc.)
+   */
+  &__communication {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    gap: var(--space-xs);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * BADGE
+   * -------------------------------------------------------
+   * Elemento visual que representa un tipo de comunicación.
+   */
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: var(--space-xxs) var(--space-xs);
+
+    border-radius: var(--radius-full);
+
+    font-size: var(--font-size-body-md);
+
+    background-color: var(--color-bg-container);
+    border: 1px solid var(--color-border);
+  }
+}
+
+
+/**
+ * =========================================================
+ * RESPONSIVE - TABLET
+ * ---------------------------------------------------------
+ * En tablet se muestran 2 columnas de tarjetas.
+ * =========================================================
+ */
+@media (min-width: 768px) {
+  .architecture {
+    &__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+
+/**
+ * =========================================================
+ * RESPONSIVE - DESKTOP
+ * ---------------------------------------------------------
+ * En pantallas grandes se muestran 4 columnas.
+ * =========================================================
+ */
+@media (min-width: 1024px) {
+  .architecture {
+    &__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}

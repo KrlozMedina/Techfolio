@@ -1,68 +1,51 @@
-import React from 'react'
-
-type SupportedLanguage = 'es' | 'en';
-
-interface LoadingProps {
-  language: SupportedLanguage;
-}
-
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center' as const,
-    padding: '2rem',
-    fontFamily: 'Arial, sans-serif'
-  },
-  spinner: {
-    width: '60px',
-    height: '60px',
-    border: '8px solid var(--color-text)',
-    borderTop: '8px solid var(--color-background-container)',
-    borderRadius: '50%',
-    animation: 'spin 1s linear infinite'
-  },
-  text: {
-    marginTop: '1rem',
-    fontSize: '1.2rem',
-    color: '#555'
-  }
-}
-
-// Textos en múltiples idiomas
-const texts = {
-  loading: {
-    es: 'Cargando, por favor espera...',
-    en: 'Loading, please wait...'
-  },
-}
+import React from 'react';
+import styles from './Spinner.module.scss';
+import { useTranslation } from '@/hooks/useTranslation';
 
 /**
- * Spinner (átomo): Muestra un indicador de carga circular con texto.
+ * ==================================================
+ * 🔄 Spinner Component
+ * --------------------------------------------------
+ * Indicador visual de estado de carga.
  *
- * @param language Idioma para el texto mostrado ('es' o 'en')
- * @returns JSX.Element
+ * Responsabilidades:
+ * - Mostrar animación circular CSS
+ * - Mostrar mensaje traducido
+ * - Proveer accesibilidad mediante ARIA
+ *
+ * Accesibilidad:
+ * - role="status" informa a lectores de pantalla
+ * - aria-live="polite" anuncia cambios sin interrumpir
+ *
+ * Dependencias:
+ * - useTranslation → obtiene textos i18n
+ * - Spinner.module.scss → estilos encapsulados
+ * ==================================================
  */
-const Spinner: React.FC<LoadingProps> = ({ language }) => {
+
+const Spinner: React.FC = () => {
+
+  /**
+   * Obtiene textos localizados desde el hook
+   */
+  const { t } = useTranslation();
+  const texts = t.common.spinner;
+
   return (
-    <div style={styles['container']}>
-      <div style={styles.spinner} />
+    <div
+      className={styles.spinner}
+      role="status"
+      aria-live="polite"
+    >
+      {/* Círculo animado */}
+      <div className={styles["spinner__circle"]} />
 
-      <p style={styles['text']}>
-        {texts.loading[language]}
+      {/* Texto descriptivo */}
+      <p className={styles["spinner__text"]}>
+        {texts.message}
       </p>
-
-      {/* Animación de giro */}
-      <style jsx>{`
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default Spinner
+export default Spinner;

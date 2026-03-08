@@ -1,0 +1,66 @@
+/**
+* =========================================================
+* BLOCK (LAYOUT COMPONENT)
+* ---------------------------------------------------------
+* Contenedor de bloques de información utilizado para
+* mostrar secciones de contenido agrupadas.
+*
+* Características:
+* - Layout basado en CSS Grid.
+* - Responsive: 1 columna en mobile, 2 en desktop.
+* - Uso de design tokens para spacing y tipografía.
+* =========================================================
+*/
+
+.block {
+  /* Grid layout */
+  display: grid;
+
+  /* Separación entre items */
+  gap: var(--space-2xl);
+
+  /* Margen exterior */
+  margin: var(--space-lg);
+  margin-bottom: var(--space-4xl);
+}
+
+
+/* =========================================================
+  ITEM
+  ---------------------------------------------------------
+  Contenedor individual dentro del bloque.
+  ========================================================= */
+
+.block__item {
+  padding: var(--space-xl);
+
+  background-color: var(--color-bg-container);
+  border-radius: var(--radius-md);
+
+  font-size: var(--font-size-body-sm);
+}
+
+
+/* =========================================================
+  TITLE
+  ---------------------------------------------------------
+  Título de cada item del bloque.
+  ========================================================= */
+
+.block__title {
+  font-size: var(--font-size-heading-sm);
+  margin-bottom: var(--space-sm);
+}
+
+
+/* =========================================================
+  RESPONSIVE
+  ---------------------------------------------------------
+  A partir de 900px se muestran dos columnas.
+  ========================================================= */
+
+@media (min-width: 900px) {
+  .block {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

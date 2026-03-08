@@ -3,16 +3,17 @@
  * Exporta todos los idiomas disponibles y define el tipo Language.
  */
 
-import { es } from './es';
-import { en } from './en';
+import { en } from './en/index';
+import { es } from './es/index';
 
 /**
  * Objeto con todos los idiomas disponibles en la aplicación
  */
-export const i18n = { es, en };
+export const i18n = { en, es };
 
 /**
  * Tipo que representa los códigos de idioma disponibles
  * Usado en hooks y contextos para tipado seguro
  */
-export type Language = keyof typeof i18n; // 'es' | 'en'
+export type Language = keyof typeof i18n; // 'en' | 'es'
+export type Locale = typeof en;

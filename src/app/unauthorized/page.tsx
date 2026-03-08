@@ -4,76 +4,115 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
 
-import ErrorTemplate from '@/components/templates/ErrorTemplate/ErrorTemplate';
-import { useLanguage } from '@/hooks';
+import StatusTemplate from '@/components/templates/StatusTemplate/StatusTemplate';
 
-import style from './page.module.scss';
+import styles from './page.module.scss';
+import { Button } from '@/components/atom/Button/Button';
+import { useTranslation } from '@/hooks/useTranslation';
 
-// 🔤 Textos multilenguaje organizados por contexto
-const texts = {
-  Unauthorized: {
-    title: {
-      es: 'Sesión expirada',
-      en: 'Session Expired',
-    },
-    message: {
-      es: 'Tu sesión ha caducado o no tienes autorización para acceder a esta página.',
-      en: 'Your session has expired or you are not authorized to access this page.',
-    },
-    redirect: {
-      es: 'Redirigiendo al inicio de sesión...',
-      en: 'Redirecting to login...',
-    },
-    goToLogin: {
-      es: 'Ir al login ahora',
-      en: 'Go to login now',
-    },
-  },
-};
-
+/**
+ * =========================================================
+ * UnauthorizedPage
+ * ---------------------------------------------------------
+ * Página que se muestra cuando el usuario intenta acceder
+ * a un recurso o ruta protegida sin los permisos necesarios.
+ *
+ * Funcionalidades:
+ * - Muestra un mensaje informando que el acceso no está permitido.
+ * - Explica al usuario que será redirigido automáticamente.
+ * - Permite redirigir manualmente al login mediante un botón.
+ * - Realiza una redirección automática después de 10 segundos.
+ *
+ * Dependencias:
+ * - useRouter → para redirección programática.
+ * - useTranslation → para obtener textos según idioma.
+ * - StatusTemplate → layout estándar para páginas de estado.
+ *
+ * Flujo:
+ * 1. Se renderiza el mensaje de acceso no autorizado.
+ * 2. Se inicia un temporizador de 10 segundos.
+ * 3. Si el usuario no interactúa, se redirige a `/login`.
+ * 4. El usuario también puede ir manualmente mediante el botón.
+ * =========================================================
+ */
 export default function UnauthorizedPage() {
-  const router = useRouter();
-  // const { isSpanish } = useLanguage();
-  // const lang = isSpanish ? 'es' : 'en';
-  const { language } = useLanguage();
 
-  // ⏳ Redirección automática tras 5 segundos
+  /**
+   * Router de Next.js para navegación programática
+   */
+  const router = useRouter();
+
+  /**
+   * Hook de internacionalización
+   */
+  const { t } = useTranslation();
+
+  /**
+   * Textos traducidos de la sección unauthorized
+   */
+  const texts = t.unauthorized;
+
+  /**
+   * Redirección automática al login después de 10 segundos
+   */
   useEffect(() => {
+
     const timeoutId = setTimeout(() => {
       router.push('/login');
-    }, 5000);
+    }, 10000);
 
-    return () => clearTimeout(timeoutId); // ✅ Limpieza al desmontar
+    /**
+     * Limpieza del temporizador si el componente se desmonta
+     */
+    return () => clearTimeout(timeoutId);
+
   }, [router]);
 
   return (
-    <ErrorTemplate status="unauthorized" withBackground>
-      <div className={style.unauthorized}>
-        {/* 🔐 Título */}
-        <h1 className={style.unauthorized__title}>
-          🔐 {texts.Unauthorized.title[language]}
+    <StatusTemplate status="unauthorized" withBackground>
+
+      <div className={styles.unauthorized}>
+
+        {/* =================================================
+            TITLE
+           ================================================= */}
+        <h1 className={styles['unauthorized__title']}>
+          🔐 {texts.title}
         </h1>
 
-        {/* 💬 Mensaje principal */}
-        <p className={style.unauthorized__text}>
-          {texts.Unauthorized.message[language]}
+        {/* =================================================
+            MAIN MESSAGE
+           ================================================= */}
+        <p className={styles['unauthorized__text']}>
+          {texts.message}
         </p>
 
-        {/* ⏱️ Aviso de redirección */}
+        {/* =================================================
+            REDIRECT MESSAGE
+           ================================================= */}
         <p
           className={clsx(
-            style.unauthorized__text,
-            style['unauthorized__text--muted']
+            styles['unauthorized__text'],
+            styles['unauthorized__text--muted']
           )}
         >
-          {texts.Unauthorized.redirect[language]}
+          {texts.redirect}
         </p>
 
-        {/* 🔁 Botón para ir al login manualmente */}
-        <button onClick={() => router.push('/login')}>
-          {texts.Unauthorized.goToLogin[language]}
-        </button>
+        {/* =================================================
+            MANUAL REDIRECT BUTTON
+           ================================================= */}
+        <Button
+          variant="primary"
+          size="md"
+          className={styles["unauthorized__button"]}
+          onClick={() => router.push("/login")}
+        >
+          {texts.goToLogin}
+        </Button>
+
       </div>
-    </ErrorTemplate>
+
+    </StatusTemplate>
   );
 }

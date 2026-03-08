@@ -3,7 +3,7 @@
 import React, { useContext } from 'react'
 // import LanguageContext from '@/context/LanguageContext'
 // import MainLayout from '@/components/layouts/MainLayout/MainLayout'
-import '@/styles/pages/ContactMe.css'
+import './ContactMe.css'
 import emailjs from '@emailjs/browser';
 import { ImWhatsapp } from 'react-icons/im'
 import { MdEmail, MdLocationOn } from 'react-icons/md'
@@ -44,7 +44,7 @@ const ContactMe: React.FC = () => {
     <>
       <p className='phrase'>
         {
-          t.phrases.contact
+          // t.phrases.contact
           // isSpanish
           //   ? "Aprendí que la gente olvidará lo que dijiste, olvidará lo que hiciste... pero nunca olvidará lo que le hiciste sentir."
           //   : "I learned that people will forget what you said, they will forget what you did... but they will never forget how you made them feel."
@@ -57,7 +57,7 @@ const ContactMe: React.FC = () => {
 
       <form id='contact' className='contact-form' onSubmit={sendEmail}>
         <fieldset className="main-contact-container">
-          <legend className='title'>{t.contact.title}</legend>
+          <legend className='title'>{t.contact.hero.title}</legend>
 
           <section className='contact--data'>
             <span><ImWhatsapp className='icon' /> +57 3504312615</span>
@@ -69,23 +69,23 @@ const ContactMe: React.FC = () => {
 
           <div className='contact--info-container'>
             <div>
-              <label htmlFor="name">{t.contact.name}</label>
+              <label htmlFor="name">{t.contact.hero.title}</label>
               <input name='user_name' type="text" required />
             </div>
 
             <div>
-              <label htmlFor="email">{t.contact.email}</label>
+              <label htmlFor="email">Email</label>
               <input name='user_email' type="email" required />
             </div>
 
             <div>
-              <label htmlFor="subject">{t.contact.subject}</label>
+              <label htmlFor="subject">Subject</label>
               <input name='subject' type="text" required />
             </div>
 
             <textarea name="message" id="" cols={30} rows={10}></textarea>
 
-            <input type="submit" value={t.contact.send} />
+            <input type="submit" value={t.common.actions.submit} />
           </div>
         </fieldset>
       </form>

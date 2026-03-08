@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { IntroTemplate } from '@/components/templates/IntroTemplate/IntroTemplate';
-import { QuoteBlock } from '@/components/molecules/Block/QuoteBlock';
+import { SectionTemplate } from '@/components/templates/sectionTemplate/SectionTemplate';
+// import { QuoteBlock } from '@/components/molecules/Block/QuoteBlock';
 import Spinner from '@/components/atom/feedback/Spinner';
 import style from './page.module.css';
 import Image from 'next/image';
@@ -82,13 +82,13 @@ const BlogPage: React.FC = () => {
 
   return (
     <>
-      <QuoteBlock page="blog" lang={language} />
+      {/* <QuoteBlock page="blog" lang={language} /> */}
 
-      <IntroTemplate
-        title={t.blog.title}
-        intro={t.blog.intro}
+      <SectionTemplate
+        title={t.blog.hero.title}
+        intro={t.blog.hero.subtitle}
       >
-        {articles.length === 0 && loading && <Spinner language={language} />}
+        {articles.length === 0 && loading && <Spinner />}
         {error && <p>Error: {error}</p>}
 
         <section className={style["article__container"]}>
@@ -112,9 +112,9 @@ const BlogPage: React.FC = () => {
           ))}
         </section>
 
-        {loading && articles.length > 0 && <Spinner language={language} />}
+        {loading && articles.length > 0 && <Spinner />}
         <div ref={observerRef}></div> {/* Sentinel para scroll infinito */}
-      </IntroTemplate>
+      </SectionTemplate>
     </>
   );
 };

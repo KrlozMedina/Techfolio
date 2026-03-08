@@ -1,0 +1,94 @@
+/**
+ * =========================================================
+ * INPUT (ATOM)
+ * ---------------------------------------------------------
+ * Estilos base para el componente Input utilizado en
+ * formularios de la aplicación.
+ *
+ * Características:
+ * - Adaptable a diferentes tamaños
+ * - Estados de foco accesibles
+ * - Soporte para estado deshabilitado
+ * - Integración con variables del sistema de diseño
+ * =========================================================
+ */
+
+.input {
+
+  /**
+   * Estilos base del campo de entrada
+   */
+  width: 100%;
+  padding: var(--space-xs) var(--space-sm);
+  font-family: inherit;
+
+  background-color: var(--color-background-container);
+  color: var(--color-text);
+
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+
+  /**
+   * -------------------------------------------------------
+   * FOCUS STATE
+   * -------------------------------------------------------
+   * Estilos aplicados cuando el input recibe foco.
+   * Mejora accesibilidad y visibilidad del elemento activo.
+   */
+  &:focus {
+    outline: none;
+    border-color: var(--color-border-focus);
+    box-shadow: 0 0 0 2px var(--color-border-shadow);
+  }
+
+  /**
+   * -------------------------------------------------------
+   * DISABLED STATE
+   * -------------------------------------------------------
+   * Estilos aplicados cuando el input está deshabilitado.
+   */
+  &:disabled {
+    background-color: var(--color-bg-disable);
+    color: var(--color-secondary-text);
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+}
+
+
+/**
+ * =========================================================
+ * INPUT SIZES
+ * ---------------------------------------------------------
+ * Variantes de tamaño disponibles para el componente Input.
+ *
+ * sm → pequeño
+ * md → mediano (default)
+ * lg → grande
+ * =========================================================
+ */
+
+/**
+ * Small input
+ */
+.sm {
+  font-size: var(--font-size-xs);
+}
+
+/**
+ * Medium input
+ */
+.md {
+  font-size: var(--font-size-sm);
+}
+
+/**
+ * Large input
+ */
+.lg {
+  font-size: var(--font-size-base);
+}

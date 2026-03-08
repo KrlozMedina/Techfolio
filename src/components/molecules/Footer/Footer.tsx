@@ -1,96 +1,150 @@
 import React from 'react';
 import styles from './Footer.module.scss';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-
-interface FooterProps {
-  lang: 'es' | 'en';
-}
+import { useTranslation } from '@/hooks/useTranslation';
+import Link from 'next/link';
+import SocialLinks from '../social/SocialLinks';
 
 /**
- * Text content for the footer component, localized in Spanish and English.
+ * =========================================================
+ * Footer
+ * ---------------------------------------------------------
+ * Componente de pie de página principal.
+ *
+ * Responsabilidades:
+ * - Mostrar identidad del proyecto.
+ * - Exponer información de contacto.
+ * - Renderizar enlaces útiles externos.
+ * - Mostrar redes sociales.
+ * - Integrar textos internacionalizados.
+ *
+ * Arquitectura:
+ * - Sección superior (3 columnas).
+ * - Sección inferior (social + info legal).
+ * - Soporte i18n vía useTranslation().
+ *
+ * Dependencias:
+ * - useTranslation → textos dinámicos.
+ * - SocialLinks → redes sociales reutilizables.
+ * - Next Link → navegación interna/externa.
+ * =========================================================
  */
-const texts = {
-  project: {
-    title: 'Techfolio - KrlozMedina',
-    slogan: {
-      es: 'Transformamos ideas en sistemas reales mediante ingeniería, diseño, desarrollo ágil y tecnología moderna escalable.',
-      en: 'We transform ideas into real systems through engineering, design, agile development, and modern scalable technology.',
-    },
-  },
-  contact: {
-    title: {
-      es: 'Contacto',
-      en: 'Contact',
-    },
-  },
-  links: {
-    title: {
-      es: 'Enlaces útiles',
-      en: 'Useful links',
-    },
-    items: [
-      { href: 'https://github.com/KrlozMedina/Techfolio/wiki', label: { es: 'Documentación', en: 'Documentation' } },
-      { href: 'https://github.com/KrlozMedina/Techfolio/blob/main/LICENSE.md', label: { es: 'Licencia CC BY-NC 4.0', en: 'License CC BY-NC 4.0' } },
-      { href: '/api', label: { es: 'API V2', en: 'API V2' } },
-    ],
-  },
-};
+const Footer: React.FC = () => {
 
-/**
- * Footer component displays project info, contact, useful links,
- * and social media icons with localized texts.
- */
-const Footer: React.FC<FooterProps> = ({ lang }) => {
+  /**
+   * Hook de traducción.
+   * Extrae diccionario correspondiente al idioma activo.
+   */
+  const { t } = useTranslation();
+  const texts = t.footer;
+
+  /**
+   * Lista de enlaces útiles del footer.
+   * Se construye dinámicamente usando textos traducidos.
+   */
+  const linkItems = [
+    {
+      href: 'https://github.com/KrlozMedina/Techfolio/wiki',
+      label: texts.links.documentation
+    },
+    {
+      href: 'https://github.com/KrlozMedina/Techfolio/blob/main/LICENSE.md',
+      label: texts.links.license
+    },
+    {
+      href: '/api',
+      label: texts.links.api
+    },
+  ];
+  
   return (
-    <footer className={styles['footer']}>
-      {/* Top section with project info, contact, and useful links */}
-      <div className={styles['footer__top']}>
-        {/* Project Info */}
-        <div className={styles['footer__top-column']}>
-          <h4>{texts.project.title}</h4>
-          <p>{texts.project.slogan[lang]}</p>
+    <footer className={styles.footer}>
+
+      {/* ===================================================
+        TOP SECTION
+        - Proyecto
+        - Contacto
+        - Enlaces útiles
+        =================================================== */}
+      <div className={styles.footer__top}>
+
+        {/* ================= PROJECT ================= */}
+        <div className={styles.footer__column}>
+          <h4 className={styles.footer__title}>
+            {texts.project.title}
+          </h4>
+          <p>{texts.project.slogan}</p>
         </div>
 
-        {/* Contact Info */}
-        <div className={styles['footer__top-column']}>
-          <h4>{texts.contact.title[lang]}</h4>
-          <p>Email: <a href="mailto:kamedinal16@outlook.com">kamedinal16@outlook.com</a></p>
+        {/* ================= CONTACT ================= */}
+        <div className={styles.footer__column}>
+          <h4 className={styles.footer__title}>
+            {texts.contact.title}
+          </h4>
+
           <p>
-            WhatsApp: <a href="https://wa.me/573504312615" target="_blank" rel="noopener noreferrer" >+57 350 431 2615</a>
+            {texts.contact.email}:{' '}
+            <Link
+              href="mailto:kamedinal16@outlook.com"
+              className={styles.footer__link}
+            >
+              kamedinal16@outlook.com
+            </Link>
+          </p>
+
+          <p>
+            {texts.contact.whatsApp}:{' '}
+            <Link
+              href="https://wa.me/573504312615"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footer__link}
+            >
+              +57 350 431 2615
+            </Link>
           </p>
         </div>
 
-        {/* Useful Links */}
-        <div className={styles['footer__top-column']}>
-          <h4>{texts.links.title[lang]}</h4>
-          <ul>
-            {texts.links.items.map(({ href, label }) => (
-              <li key={href}>
-                <a href={href} target="_blank" rel="noopener noreferrer">
-                  {label[lang]}
-                </a>
+        {/* ================= USEFUL LINKS ================= */}
+        <div className={styles.footer__column}>
+          <h4 className={styles.footer__title}>
+            {texts.links.title}
+          </h4>
+
+          <ul className={styles.footer__list}>
+            {linkItems.map(({ href, label }) => (
+              <li key={href} className={styles.footer__item}>
+                <Link
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.footer__link}
+                >
+                  {label}
+                </Link>
               </li>
             ))}
           </ul>
         </div>
       </div>
 
-      {/* Bottom section with social media icons and copyright */}
-      <div className={styles['footer__bottom']}>
-        <div className={styles['footer__bottom-social']}>
-          <a href="https://github.com/KrlozMedina" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <FaGithub />
-          </a>
-          <a href="https://linkedin.com/in/krlozmedina" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <FaLinkedin />
-          </a>
-          <a href="mailto:kamedinal16@outlook.com" aria-label="Email">
-            <FaEnvelope />
-          </a>
+      {/* ===================================================
+        BOTTOM SECTION
+        - Redes sociales
+        - Copyright
+        - Versión
+        =================================================== */}
+      <div className={styles.footer__bottom}>
+        <div className={styles.footer__social}>
+          <SocialLinks />
         </div>
 
-        <p>© 2025 Techfolio KrlozMedina — Todos los derechos reservados.</p>
-        <p>Versión 2.1.0</p>
+        <p className={styles.footer__copyright}>
+          {texts.bottom.copyright}
+        </p>
+
+        <p className={styles.footer__copyright}>
+          {texts.bottom.version}
+        </p>
       </div>
     </footer>
   );

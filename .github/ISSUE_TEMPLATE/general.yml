@@ -1,0 +1,78 @@
+name: 📝 Issue general
+description: Reporta un bug, propone una mejora o plantea una tarea del portafolio
+title: "[ISSUE] - descripción corta"
+labels: ["triage"]
+assignees:
+  - KrlozMedina
+
+body:
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo de issue
+      options:
+        - Bug
+        - Feature
+        - Mejora
+        - Documentación
+        - Tarea técnica
+    validations:
+      required: true
+
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Descripción (Markdown)
+      description: Describe claramente el problema, idea o tarea.
+      value: |
+        ## Alcance
+
+        ## Checklist general
+        - [ ] Objetivo claro
+        - [ ] Contenido breve y técnico
+        - [ ] Aporta valor a cliente freelance
+        - [ ] Responsive
+        - [ ] ES / EN implementado
+        - [ ] Navegación consistente
+        - [ ] Revisión final
+
+        ## Checklist específico
+        - [ ] Definir según el tipo de issue
+    validations:
+      required: true
+
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto adicional
+      description: Información técnica, decisiones, referencias o capturas.
+      placeholder: Logs, links, screenshots, notas técnicas…
+
+  - type: dropdown
+    id: prioridad
+    attributes:
+      label: Prioridad
+      options:
+        - Baja
+        - Media
+        - Alta
+        - Crítica
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: impacto
+    attributes:
+      label: Impacto
+      options:
+        - label: Afecta funcionalidad
+        - label: Afecta UX/UI
+        - label: Afecta rendimiento
+        - label: Afecta seguridad
+
+  - type: input
+    id: milestone
+    attributes:
+      label: Milestone
+      description: Asignar una etapa del proyecto
+      placeholder: Etapa 1 – Base del Portafolio (Core)

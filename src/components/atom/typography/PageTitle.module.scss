@@ -1,0 +1,189 @@
+/**
+ * =========================================================
+ * Page Title Component Styles
+ * ---------------------------------------------------------
+ * Estilos del componente Page Title utilizado para mostrar
+ * encabezados de página junto con una descripción opcional
+ * y acciones relacionadas.
+ *
+ * Arquitectura:
+ * - Convención BEM
+ * - Block: .page-title
+ * - Elements:
+ *   - __heading
+ *   - __description
+ *   - __action
+ *
+ * Responsabilidades:
+ * - Mostrar el título principal de la página
+ * - Mostrar una descripción contextual opcional
+ * - Permitir acciones asociadas (botones, links, etc.)
+ * - Adaptarse responsivamente a diferentes tamaños
+ *   de pantalla
+ *
+ * Dependencias:
+ * - spacing tokens
+ * - typography tokens
+ * - color tokens
+ *
+ * Utilizado en:
+ * - encabezados de páginas
+ * - secciones principales de vistas
+ * - dashboards o pantallas de detalle
+ * =========================================================
+ */
+
+
+/* =========================================================
+   PAGE TITLE (BLOCK)
+   ---------------------------------------------------------
+   Contenedor principal del encabezado de página.
+   Organiza el título, descripción y acciones.
+   ========================================================= */
+
+.page-title {
+
+  /**
+   * Layout base en columna para dispositivos móviles.
+   */
+  display: flex;
+  flex-direction: column;
+
+  /**
+   * Espaciado entre los elementos internos.
+   */
+  gap: var(--space-sm);
+
+  /**
+   * Espaciado interno del contenedor.
+   */
+  padding: var(--space-sm) var(--space-md);
+
+
+  /* ======================================================
+     HEADING
+     ------------------------------------------------------
+     Título principal de la página.
+     ====================================================== */
+
+  &__heading {
+
+    /**
+     * Tamaño fluido del título basado en viewport width.
+     * Permite escalar entre 2rem y 6rem.
+     */
+    font-size: clamp(2rem, 10vw, 6rem);
+
+    /**
+     * Altura de línea compacta para títulos grandes.
+     */
+    line-height: 1;
+
+    /**
+     * Peso tipográfico medio para destacar el título.
+     */
+    font-weight: var(--font-weight-medium);
+
+    /**
+     * Familia tipográfica utilizada para títulos.
+     */
+    font-family: var(--font-family-title);
+
+    /**
+     * Color principal del texto.
+     */
+    color: var(--color-text);
+
+    /**
+     * Elimina margen por defecto del elemento h1/h2.
+     */
+    margin: 0;
+  }
+
+
+  /* ======================================================
+     DESCRIPTION
+     ------------------------------------------------------
+     Texto descriptivo opcional que acompaña al título.
+     ====================================================== */
+
+  &__description {
+
+    /**
+     * Tamaño de texto estándar para contenido descriptivo.
+     */
+    font-size: var(--font-size-body-md);
+
+    /**
+     * Color suavizado para jerarquía visual.
+     */
+    color: var(--color-text-soft);
+
+    /**
+     * Limita el ancho del texto para mejorar legibilidad.
+     */
+    max-width: 60ch;
+  }
+
+
+  /* ======================================================
+     ACTION
+     ------------------------------------------------------
+     Contenedor para botones o acciones relacionadas
+     con el título de la página.
+     ====================================================== */
+
+  &__action {
+
+    /**
+     * Layout horizontal para acciones.
+     */
+    display: flex;
+    align-items: center;
+
+    /**
+     * Espaciado entre botones o elementos interactivos.
+     */
+    gap: var(--space-xs);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET / DESKTOP
+   ---------------------------------------------------------
+   A partir de 768px el layout cambia a una estructura
+   horizontal para aprovechar mejor el espacio disponible.
+   ========================================================= */
+
+@media (min-width: 768px) {
+
+  .page-title {
+
+    /**
+     * Cambia el layout a fila.
+     */
+    flex-direction: row;
+
+    /**
+     * Separa el título/descripción de las acciones.
+     */
+    justify-content: space-between;
+
+    /**
+     * Alinea verticalmente los elementos.
+     */
+    align-items: center;
+
+
+    &__action {
+
+      /**
+       * Alinea las acciones hacia la derecha
+       * cuando el layout es horizontal.
+       */
+      justify-content: flex-end;
+    }
+  }
+
+}

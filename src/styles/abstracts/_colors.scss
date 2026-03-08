@@ -1,0 +1,68 @@
+/* ==================================================
+  🎨 COLOR FOUNDATION TOKENS
+  --------------------------------------------------
+  Paleta base del sistema.
+
+  Contiene:
+  - Escalas de marca (primary / secondary)
+  - Escala neutra (gray)
+  - Colores semánticos base (error, warning, success)
+
+  ⚠️ Estos tokens NO deben usarse directamente
+  en componentes.
+  Deben mapearse a tokens semánticos en light/dark.
+================================================== */
+
+:root {
+
+  /* ==================================================
+    🔵 PRIMARY SCALE (Brand)
+    Uso: identidad principal del sistema.
+    Escala: 50 (lightest) → 700 (darkest)
+  ================================================== */
+
+  --color-primary-50:  #e6f0f5;
+  --color-primary-100: #c2d9e4;
+  --color-primary-300: #7aaac4;
+  --color-primary-500: #3f6f8a;
+  --color-primary-600: #355f75;
+  --color-primary-700: #2b4f60;
+
+
+  /* ==================================================
+    🟣 SECONDARY SCALE
+    Uso: acciones secundarias, acentos.
+  ================================================== */
+
+  --color-secondary-50:  #f2ecff;
+  --color-secondary-100: #ddd2ff;
+  --color-secondary-300: #b39afc;
+  --color-secondary-500: #7c5cff;
+  --color-secondary-600: #6a4de0;
+  --color-secondary-700: #563fc2;
+
+
+  /* ==================================================
+    ⚪ NEUTRAL SCALE (Gray)
+    Uso: texto, fondos, bordes, superficies.
+  ================================================== */
+
+  --color-gray-50:  #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-400: #9ca3af;
+  --color-gray-600: #4b5563;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+
+  /* ==================================================
+    🚦 SEMANTIC BASE COLORS
+    Uso: estados globales.
+    No dependen de tema.
+  ================================================== */
+
+  --color-error-500:   #dc2626;
+  --color-warning-500: #f59e0b;
+  --color-success-500: #16a34a;
+}

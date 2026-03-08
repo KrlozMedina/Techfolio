@@ -30,6 +30,7 @@ export default function GalleryPage() {
           <button
             key={c}
             onClick={() => setCategory(c === 'all' ? null : c)}
+            className='btn'
           >
             {c}
           </button>

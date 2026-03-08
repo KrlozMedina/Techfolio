@@ -11,19 +11,19 @@
   "icons": [
     {
       "src": "/favicon.ico",
-      "type": "image/png",
+      "type": "image/ico",
       "sizes": "192x192",
       "purpose": "any"
     },
     {
       "src": "/favicon.ico",
-      "type": "image/png",
+      "type": "image/ico",
       "sizes": "512x512",
       "purpose": "any"
     },
     {
       "src": "/favicon.ico",
-      "type": "image/png",
+      "type": "image/ico",
       "sizes": "512x512",
       "purpose": "maskable"
     }

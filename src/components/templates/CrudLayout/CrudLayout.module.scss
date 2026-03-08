@@ -1,0 +1,226 @@
+/* =====================================================
+  DASHBOARD
+  -----------------------------------------------------
+  Estilos principales del módulo Dashboard.
+  Basado en metodología BEM:
+  .dashboard
+  .dashboard__header
+  .dashboard__grid
+  .dashboard__card
+  etc.
+  ===================================================== */
+
+.dashboard {
+  padding: var(--space-3xl);
+  min-height: 100dvh;
+
+  background-color: var(--color-bg);
+  color: var(--color-text);
+
+  /* ===================================================
+    HEADER
+    =================================================== */
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  &__title {
+    font-size: var(--font-size-heading-md);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* Botón principal de creación */
+  &__create-btn {
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+
+    background-color: var(--color-button-primary-bg);
+    color: var(--color-button-primary-text);
+
+    transition: var(--transition-fast);
+
+    &:hover {
+      background-color: var(--color-button-primary-hover);
+    }
+  }
+
+  /* ===================================================
+    FILTERS
+    =================================================== */
+
+  &__filters {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+  }
+
+  &__input {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+
+    background-color: var(--color-bg-container);
+    color: var(--color-text);
+
+    transition: var(--transition-fast);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-focus);
+    }
+  }
+
+  /* Filtros adicionales tipo chips */
+  &__extra-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    justify-content: center;
+
+    button {
+      background: #1e1f26; // ⚠ Hardcoded
+      border: 1px solid #2f313a; // ⚠ Hardcoded
+      padding: 6px 14px; // ⚠ No usa tokens
+      border-radius: 20px;
+      cursor: pointer;
+      color: white;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: #4c9aff; // ⚠ Hardcoded
+      }
+    }
+  }
+
+  &__filter-btn {
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-container);
+    cursor: pointer;
+    transition: var(--transition-fast);
+
+    &:hover {
+      border-color: var(--color-primary-500);
+    }
+
+    &--active {
+      background-color: var(--color-primary-500);
+      color: var(--color-button-primary-text);
+      border-color: var(--color-primary-500);
+    }
+  }
+
+  /* ===================================================
+    GRID
+    =================================================== */
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+    gap: var(--space-xl);
+  }
+
+  /* ===================================================
+    CARD
+    =================================================== */
+
+  &__card {
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-container);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  &__badge {
+    align-self: flex-start;
+    padding: var(--space-xxs) var(--space-sm);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-caption);
+    background-color: var(--color-bg);
+  }
+
+  /* ===================================================
+    ACTIONS
+    =================================================== */
+
+  &__actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: auto;
+  }
+
+  &__action-btn {
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background-color: transparent;
+    cursor: pointer;
+    transition: var(--transition-fast);
+
+    &:hover {
+      border-color: var(--color-primary-500);
+    }
+
+    &--delete {
+      border-color: var(--color-error-500);
+      color: var(--color-error-500);
+
+      &:hover {
+        background-color: rgba(220, 38, 38, 0.1);
+      }
+    }
+  }
+
+  /* ===================================================
+    PAGINATION
+    =================================================== */
+
+  &__pagination {
+    margin-top: var(--space-3xl);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  &__pagination-btn {
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-container);
+    cursor: pointer;
+    transition: var(--transition-fast);
+
+    &:hover:not(:disabled) {
+      border-color: var(--color-primary-500);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  /* ===================================================
+    STATES
+    =================================================== */
+
+  &__loading,
+  &__error {
+    padding: var(--space-3xl);
+    text-align: center;
+    font-size: var(--font-size-body-md);
+  }
+}

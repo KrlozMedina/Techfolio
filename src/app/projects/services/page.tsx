@@ -3,7 +3,7 @@
 import React from 'react';
 // import { useLanguage } from '@/hooks';
 import { servicesData } from '@/mocks/services.mock';
-import styles from './page.module.css';
+import styles from './page.module.scss';
 import { useTranslation } from '@/hooks/useTranslation';
 
 const ServicesPage: React.FC = () => {
@@ -14,7 +14,7 @@ const ServicesPage: React.FC = () => {
   return (
     <section className={styles.page}>
       <header className={styles.header}>
-        <h1>{t.service.title}</h1>
+        <h1>{t.service.hero.title}</h1>
       </header>
 
       <ul className={styles.servicesList}>

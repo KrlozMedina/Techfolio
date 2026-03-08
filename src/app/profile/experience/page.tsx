@@ -12,7 +12,7 @@ export default function ExperiencePage() {
   return (
     <section style={{ padding: '20px' }}>
       <h1>
-        {t.experience.title}
+        {t.experience.hero.title}
         {/* {isSpanish ? 'Experiencia Profesional' : 'Professional Experience'} */}
       </h1>
 
