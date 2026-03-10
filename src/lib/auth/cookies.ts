@@ -1,25 +1,35 @@
 import { cookies } from 'next/headers';
 import { AUTH_CONFIG } from './config';
 
-/** Nombre de la cookie usada para almacenar el JWT */
+/**
+ * Nombre de la cookie utilizada para almacenar
+ * el token de autenticación del usuario.
+ */
 const COOKIE_NAME = 'authToken';
 
 /**
+ * =========================================================
  * setAuthToken
- * --------------------------------------------------
- * Guarda el token JWT en las cookies del navegador.
+ * ---------------------------------------------------------
+ * Guarda el token JWT de autenticación en una cookie segura.
  *
- * @param token - JWT generado tras login exitoso
+ * Configuración de seguridad aplicada:
+ * - httpOnly → evita acceso desde JavaScript en el navegador
+ * - secure → solo se envía sobre HTTPS en producción
+ * - sameSite strict → previene ataques CSRF
+ * - path "/" → disponible en toda la aplicación
+ * - maxAge → duración definida en AUTH_CONFIG
  *
- * Opciones:
- * - httpOnly: evita acceso desde JS del cliente
- * - secure: solo en HTTPS en producción
- * - sameSite: 'strict' para evitar CSRF
- * - path: '/' para que la cookie sea accesible en toda la app
- * - maxAge: duración de la cookie (segundos)
+ * Esta función se usa normalmente después de:
+ * - login exitoso
+ * - renovación de sesión
+ *
+ * @param token Token JWT generado para la sesión
+ * =========================================================
  */
 export async function setAuthToken(token: string) {
   const store = await cookies();
+
   store.set(COOKIE_NAME, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
@@ -30,12 +40,29 @@ export async function setAuthToken(token: string) {
 }
 
 /**
+ * =========================================================
  * deleteAuthToken
- * --------------------------------------------------
- * Elimina la cookie de autenticación del usuario.
- * Se usa para logout o invalidación de sesión.
+ * ---------------------------------------------------------
+ * Elimina la cookie de autenticación.
+ *
+ * Se utiliza principalmente en:
+ * - logout del usuario
+ * - invalidación de sesión
+ *
+ * Estrategia:
+ * - Se establece la cookie con valor vacío
+ * - maxAge = 0 para forzar su expiración inmediata
+ *
+ * =========================================================
  */
 export async function deleteAuthToken() {
   const store = await cookies();
-  store.delete(COOKIE_NAME);
+
+  store.set(COOKIE_NAME, "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    path: "/",
+    maxAge: 0,
+  });
 }

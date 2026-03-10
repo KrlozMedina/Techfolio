@@ -3,54 +3,103 @@ import { NextRequest } from "next/server";
 import { verifyToken, SessionPayload } from "./token";
 
 /**
- * Type guard para validar que un objeto tenga la forma de SessionPayload.
- * Esto es útil porque `verifyToken` podría devolver algo inesperado
- * si el token es manipulado.
- * 
- * @param payload - Objeto a verificar
- * @returns true si el objeto cumple la estructura de SessionPayload
+ * =========================================================
+ * isValidSessionPayload
+ * ---------------------------------------------------------
+ * Type guard que valida que el payload decodificado del
+ * JWT tenga la estructura esperada para una sesión.
+ *
+ * Se utiliza como verificación adicional después de
+ * validar el token para evitar estructuras inválidas.
+ *
+ * @param payload Payload decodificado del token
+ * @returns true si cumple la estructura de SessionPayload
+ * =========================================================
  */
 function isValidSessionPayload(
   payload: unknown
 ): payload is SessionPayload {
+
+  /** Verifica que el payload exista y sea un objeto */
   if (!payload || typeof payload !== "object") return false;
 
   const p = payload as Record<string, unknown>;
 
-  // Verifica que la propiedad role exista y sea string
+  /** Validación mínima de campos esperados */
   if (typeof p.role !== "string") return false;
+  if (typeof p.username !== "string") return false;
 
   return true;
 }
 
 /**
- * Obtiene la sesión del usuario a partir de la cookie 'authToken'.
- * Funciona tanto en Server Components como en middlewares o APIs.
- * 
- * @param req - Opcional. Request de Next.js. Si no se pasa, usa cookies del contexto actual.
- * @returns La carga útil del token si es válida, o null si no hay sesión
+ * =========================================================
+ * getSession
+ * ---------------------------------------------------------
+ * Obtiene la sesión del usuario a partir del token
+ * almacenado en cookies.
+ *
+ * Flujo de ejecución:
+ *
+ * 1️⃣ Obtiene el token desde cookies
+ * 2️⃣ Verifica el JWT mediante `verifyToken`
+ * 3️⃣ Valida la estructura del payload
+ * 4️⃣ Devuelve la sesión si es válida
+ *
+ * Si ocurre algún error o el token no es válido,
+ * retorna `null`.
+ *
+ * Soporta dos contextos:
+ * - Request directa (`NextRequest`)
+ * - Server Components / Server Actions (`cookies()`)
+ *
+ * @param req Request opcional de Next.js
+ * @returns SessionPayload válido o null
+ * =========================================================
  */
 export async function getSession(
   req?: NextRequest
 ): Promise<SessionPayload | null> {
   try {
-    // Obtiene la tienda de cookies
+
+    /**
+     * Obtiene el store de cookies.
+     * - Si se recibe request → usa req.cookies
+     * - Si no → usa cookies() de Next.js
+     */
     const store = req ? req.cookies : await cookies();
 
-    // Obtiene el valor de la cookie 'authToken'
+    /**
+     * Obtiene el token de autenticación.
+     */
     const token = store.get("authToken")?.value;
 
-    if (!token) return null; // No hay token, no hay sesión
+    /** Si no existe token no hay sesión */
+    if (!token) return null;
 
-    // Verifica y decodifica el token
-    const payload = verifyToken(token);
+    /**
+     * Verifica el token JWT.
+     */
+    const payload = await verifyToken(token);
 
-    // Valida que la carga útil tenga la forma correcta
-    if (!isValidSessionPayload(payload)) return null;
+    /**
+     * Verifica que el payload tenga la estructura correcta.
+     */
+    if (!isValidSessionPayload(payload)) {
+      return null;
+    }
 
-    return payload; // Sesión válida
-  } catch {
-    // Cualquier error (token inválido, expirado, etc.) devuelve null
+    /** Devuelve la sesión validada */
+    return payload;
+
+  } catch (error) {
+
+    /**
+     * Manejo de errores en token inválido,
+     * expirado o corrupto.
+     */
+    console.error("[AUTH] Invalid session token");
+
     return null;
   }
 }

@@ -1,5 +1,5 @@
 import { updateSuccessCaseSchema } from "@/infrastructure/success-case/success-case.update.dto";
-import { PERMISSIONS, withAuthorization } from "@/lib/auth";
+import { withAuthorization } from "@/lib/auth";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { toSuccessCaseEntityDTO } from "@/infrastructure/success-case/success-case.mapper";
 import {
@@ -11,6 +11,7 @@ import { querySchema } from "@/shared/interfaces/query.schema";
 import { Types } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 import { LANGUAGES } from "@/lib/i18n/language";
+import { PERMISSIONS } from "@/shared/auth/permissions";
 
 /**
  * Valida si un string es un ObjectId válido de MongoDB.
@@ -28,7 +29,7 @@ export const GET = withAuthorization(
   PERMISSIONS.READ,
   async (
     req: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: any
   ) => {
     try {
       const { id } = await params;
@@ -76,7 +77,7 @@ export const PUT = withAuthorization(
   PERMISSIONS.UPDATE,
   async (
     req: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: any
   ) => {
     try {
       const { id } = await params;
@@ -110,7 +111,7 @@ export const DELETE = withAuthorization(
   PERMISSIONS.DELETE,
   async (
     _: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: any
   ) => {
     try {
       const { id } = await params;

@@ -1,5 +1,4 @@
 import { createCategorySchema } from "@/infrastructure/category/category.create.dto";
-import { PERMISSIONS } from "@/lib/auth/permissions";
 import { withAuthorization } from "@/lib/auth/withAuthorization";
 import { sanitizeRegex } from "@/lib/db/sanitize-regex";
 import { handleApiError } from "@/lib/http/handle-api-error";
@@ -12,6 +11,7 @@ import {
 import { querySchema } from "@/shared/interfaces/query.schema";
 import { NextRequest, NextResponse } from "next/server";
 import { LANGUAGES } from "@/lib/i18n/language";
+import { PERMISSIONS } from "@/shared/auth/permissions";
 
 /**
  * Construye el filtro dinámico para búsqueda.

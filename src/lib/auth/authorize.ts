@@ -1,4 +1,4 @@
-import { Permission } from "./permissions";
+import { Permission } from "@/shared/auth/permissions";
 import { UserRole } from "./types";
 
 /**
@@ -8,9 +8,9 @@ import { UserRole } from "./types";
  * - viewer: solo puede leer
  */
 const rolePermissions: Record<UserRole, Permission[]> = {
-  admin: ["read", "create", "update", "delete"],
-  editor: ["read", "create", "update"],
-  viewer: ["read"],
+  ADMIN: ["READ", "CREATE", "UPDATE", "DELETE"],
+  EDITOR: ["READ", "CREATE", "UPDATE"],
+  VIEWER: ["READ"],
 };
 
 /**

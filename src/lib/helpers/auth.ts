@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import { createToken } from '@/lib/auth/token';
-import { AUTH_CONFIG } from '@/lib/auth/config';
-import { AuthUser } from '@/lib/auth/types';
+import connectDB from '../db/connectDB';
+import { getUserByUsername } from '@/services/users/users.service';
 
 /**
  * LoginSchema
@@ -44,17 +44,21 @@ export const parseCookies = (cookieHeader: string | null): Record<string, string
  * @param password - Contraseña en texto plano
  * @returns token JWT como string | null si falla autenticación
  */
-export const loginUser = (username: string, password: string): string | null => {
-  const users: AuthUser[] = AUTH_CONFIG.USERS;
-  const passwordHash = AUTH_CONFIG.PASSWORD_HASH;
 
-  const user = users.find(u => u.username === username);
+export const loginUser = async (
+  username: string,
+  password: string
+): Promise<string | null> => {
+
+  await connectDB();
+
+  const user = await getUserByUsername(username);
+
   if (!user) return null;
 
-  // ⚠️ Condición extra: si no tiene rol y la contraseña no coincide, falla
-  if (!user.role && !bcrypt.compareSync(password, passwordHash)) {
-    return null;
-  }
+  const valid = await bcrypt.compare(password, user.passwordHash);
 
-  return createToken(username, user.role);
+  if (!valid) return null;
+
+  return createToken(user._id, user.username, user.role);
 };

@@ -31,7 +31,7 @@
 
 import { CreateFeatureDTO } from "@/infrastructure/feature/feature.create.dto";
 import { UpdateFeatureDTO } from "@/infrastructure/feature/feature.update.dto";
-import { Feature } from "@/models/features/feature.model";
+import { Feature } from "@/models/feature/feature.model";
 
 /**
  * =========================================================

@@ -29,7 +29,7 @@
 
 import { Language } from "@/lib/i18n";
 import { LANGUAGES } from "@/lib/i18n/language";
-import { IFeature, IFeaturePaginated } from "@/models/features/feature.interface";
+import { IFeature, IFeaturePaginated } from "@/models/feature/feature.interface";
 import { FeatureDomain } from "@/shared/enums/feature-domain.enum";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 

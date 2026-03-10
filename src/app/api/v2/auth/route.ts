@@ -2,122 +2,186 @@ import { NextRequest, NextResponse } from 'next/server';
 import { LoginSchema, loginUser } from '@/lib/helpers/auth';
 import { deleteAuthToken, setAuthToken } from '@/lib/auth/cookies';
 import { getSession } from '@/lib/auth/session';
+import { handleApiError } from '@/lib/http/handle-api-error';
 
 /**
+ * Headers utilizados para evitar cache en respuestas
+ * relacionadas con autenticación.
+ *
+ * Esto previene que proxies o navegadores almacenen
+ * respuestas sensibles como estado de sesión.
+ */
+const NO_STORE_HEADERS = {
+  'Cache-Control': 'no-store',
+};
+
+/**
+ * =========================================================
  * GET /api/auth
- * --------------------------------------------------
+ * ---------------------------------------------------------
  * Verifica si existe una sesión activa basada en el
- * token almacenado en cookies.
+ * token JWT almacenado en cookies.
  *
  * Flujo:
- * - Obtiene la sesión desde el helper `getSession`
- * - Si no hay sesión:
- *   - Elimina la cookie de autenticación
- *   - Retorna 401 con isAuth = false
- * - Si hay sesión:
- *   - Retorna estado autenticado
- *   - Incluye username y role
+ *
+ * 1. Obtiene la sesión mediante `getSession`
+ * 2. Si no existe sesión:
+ *    - Elimina la cookie de autenticación
+ *    - Retorna estado 401
+ *    - isAuth = false
+ * 3. Si existe sesión:
+ *    - Retorna información básica del usuario
+ *
+ * Respuesta exitosa:
+ * {
+ *   isAuth: true,
+ *   username: string,
+ *   role: Role
+ * }
+ * =========================================================
  */
 export async function GET() {
   const session = await getSession();
 
+  /**
+   * Si no hay sesión válida:
+   * - Se limpia la cookie de autenticación
+   * - Se informa que el usuario no está autenticado
+   */
   if (!session) {
-    const res = NextResponse.json(
-      { isAuth: false },
-      { status: 401 }
-    );
     await deleteAuthToken();
-    return res;
+
+    return NextResponse.json(
+      { isAuth: false },
+      { status: 401, headers: NO_STORE_HEADERS }
+    );
   }
 
-  return NextResponse.json({
-    isAuth: true,
-    username: session.username,
-    role: session.role, // Rol obligatorio para control de acceso
-  });
+  /**
+   * Si existe sesión activa, se devuelve
+   * la información básica del usuario.
+   */
+  return NextResponse.json(
+    {
+      isAuth: true,
+      username: session.username,
+      role: session.role,
+    },
+    { headers: NO_STORE_HEADERS }
+  );
 }
 
 /**
+ * =========================================================
  * POST /api/auth
- * --------------------------------------------------
- * Autentica al usuario y genera una sesión.
+ * ---------------------------------------------------------
+ * Autentica al usuario utilizando credenciales
+ * y genera una sesión basada en JWT.
  *
  * Flujo:
- * - Valida el body usando LoginSchema (Zod)
- * - Ejecuta loginUser:
- *   - Valida credenciales
- *   - Obtiene el rol desde backend
- *   - Genera y firma un JWT
- * - Si las credenciales son inválidas:
- *   - Retorna 401
- * - Si es exitoso:
- *   - Guarda el token en cookies
- *   - Retorna confirmación
+ *
+ * 1. Se valida el body con `LoginSchema`
+ * 2. Se ejecuta `loginUser`
+ *    - Verifica credenciales
+ *    - Genera token JWT
+ * 3. Si las credenciales son inválidas:
+ *    - Retorna 401
+ * 4. Si son válidas:
+ *    - Se guarda el token en cookie segura
+ *    - Se confirma el login
+ *
+ * Respuesta exitosa:
+ * {
+ *   message: "Login successful"
+ * }
+ * =========================================================
  */
 export async function POST(req: NextRequest) {
   try {
+
+    /**
+     * Obtiene y valida las credenciales
+     * enviadas en el body de la petición.
+     */
     const credentials = LoginSchema.parse(await req.json());
 
-    const token = loginUser(
+    /**
+     * Ejecuta proceso de autenticación.
+     * Si las credenciales son válidas,
+     * retorna un token JWT.
+     */
+    const token = await loginUser(
       credentials.username,
       credentials.password
     );
 
+    /**
+     * Si el login falla, se devuelve error 401.
+     */
     if (!token) {
       return NextResponse.json(
         { error: 'Invalid credentials' },
-        { status: 401 }
+        { status: 401, headers: NO_STORE_HEADERS }
       );
     }
 
-    const response = NextResponse.json({
-      message: 'Login successful',
-    });
-
+    /**
+     * Guarda el token en cookie httpOnly segura.
+     */
     await setAuthToken(token);
 
-    return response;
-  } catch {
-    // Error de validación o body inválido
+    /**
+     * Respuesta exitosa de autenticación.
+     */
     return NextResponse.json(
-      { error: 'Invalid request' },
-      { status: 400 }
+      { message: 'Login successful' },
+      { status: 200, headers: NO_STORE_HEADERS }
     );
+  } catch (error) {
+
+    /**
+     * Manejo centralizado de errores
+     * (validación, errores de aplicación, etc).
+     */
+    return handleApiError(error);
   }
 }
 
 /**
+ * =========================================================
  * DELETE /api/auth
- * --------------------------------------------------
- * Cierra la sesión del usuario.
+ * ---------------------------------------------------------
+ * Cierra la sesión del usuario eliminando el token
+ * almacenado en cookies.
  *
  * Flujo:
- * - Verifica si existe una sesión activa
- * - Si no existe:
- *   - Retorna 401
- * - Si existe:
- *   - Elimina el token de autenticación
- *   - Retorna confirmación de logout
+ *
+ * 1. Elimina la cookie de autenticación
+ * 2. Retorna confirmación de logout
+ *
+ * Respuesta:
+ * {
+ *   message: "Logout successful"
+ * }
  *
  * Nota:
- * - Si el JWT maneja jti, aquí debería revocarse
- *   explícitamente en backend (blacklist).
+ * Si el sistema implementa revocación de tokens
+ * (blacklist de JWT), este endpoint debería
+ * registrar el token como revocado.
+ * =========================================================
  */
 export async function DELETE() {
-  const session = await getSession();
 
-  if (!session) {
-    return NextResponse.json(
-      { error: 'No active session' },
-      { status: 401 }
-    );
-  }
-
-  const response = NextResponse.json({
-    message: 'Logout successful',
-  });
-
+  /**
+   * Elimina la cookie que contiene el token JWT.
+   */
   await deleteAuthToken();
 
-  return response;
+  /**
+   * Respuesta confirmando cierre de sesión.
+   */
+  return NextResponse.json(
+    { message: 'Logout successful' },
+    { status: 200, headers: NO_STORE_HEADERS }
+  );
 }

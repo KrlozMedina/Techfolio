@@ -1,6 +1,5 @@
 import { withAuthorization } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
-import { PERMISSIONS } from "@/lib/auth";
 import { Status, Visibility } from "@/shared/enums";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { querySchema } from "@/shared/interfaces/query.schema";
@@ -15,6 +14,7 @@ import { toSuccessCaseListDTO } from "@/infrastructure/success-case/success-case
 import { createSuccessCaseSchema } from "@/infrastructure/success-case/success-case.create.dto";
 import "@/models";
 import { LANGUAGES } from "@/lib/i18n/language";
+import { PERMISSIONS } from "@/shared/auth/permissions";
 
 /**
  * Extiende el esquema base de query agregando filtros específicos

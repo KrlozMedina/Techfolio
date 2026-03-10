@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { withAuthorization } from "@/lib/auth/withAuthorization";
-import { PERMISSIONS } from "@/lib/auth/permissions";
+// import { PERMISSIONS } from "@/lib/auth/permissions";
 import { Types } from "mongoose";
 import {
   deleteCategory,
@@ -10,6 +10,7 @@ import {
 import { toCategoryEntityDTO } from "@/infrastructure/category/category.mapper";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { updateCategorySchema } from "@/infrastructure/category/category.update.dto";
+import { PERMISSIONS } from "@/shared/auth/permissions";
 
 /**
  * Valida que el id sea un ObjectId válido de MongoDB.
@@ -24,7 +25,7 @@ const isValidObjectId = (id: string) => Types.ObjectId.isValid(id);
  */
 export const GET = withAuthorization(
   PERMISSIONS.READ,
-  async (_: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
+  async (_: NextRequest, { params }: any) => {
     try {
       const { id } = await params;
 
@@ -57,7 +58,7 @@ export const GET = withAuthorization(
  */
 export const PUT = withAuthorization(
   PERMISSIONS.UPDATE,
-  async (req: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
+  async (req: NextRequest, { params }: any) => {
     try {
       const { id } = await params;
 
@@ -89,7 +90,7 @@ export const PUT = withAuthorization(
  */
 export const DELETE = withAuthorization(
   PERMISSIONS.DELETE,
-  async (_: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
+  async (_: NextRequest, { params }: any) => {
     try {
       const { id } = await params;
 

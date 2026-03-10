@@ -1,60 +1,93 @@
 import { AuthUser } from "./types";
-import { z } from "zod";
 
 /**
- * Validaciones de entorno necesarias para la autenticación.
- * Si alguna variable crítica no está definida, el proceso falla al iniciar.
+ * =========================================================
+ * Environment Validation
+ * ---------------------------------------------------------
+ * Validaciones críticas de variables de entorno necesarias
+ * para el sistema de autenticación.
+ *
+ * Si alguna de estas variables no está definida o no cumple
+ * los requisitos de seguridad, el proceso se detiene al
+ * iniciar la aplicación.
+ * =========================================================
+ */
+
+/**
+ * Hash de contraseña global utilizado para validar
+ * autenticación de usuarios estáticos.
  */
 if (!process.env.PASSWORD_HASH)
   throw new Error("PASSWORD_HASH not set");
 
+/**
+ * Secreto utilizado para firmar y verificar tokens JWT.
+ */
 if (!process.env.JWT_SECRET)
   throw new Error("JWT_SECRET not set");
 
+/**
+ * Validación de seguridad mínima del secreto JWT.
+ * Se recomienda al menos 32 caracteres para evitar
+ * ataques de fuerza bruta.
+ */
 if (process.env.JWT_SECRET.length < 32)
   throw new Error("JWT_SECRET must be at least 32 characters long");
 
 /**
- * Schema Zod para validar cada usuario estático.
- * - username: nombre de usuario obligatorio
- * - role: rol del usuario, solo puede ser 'admin', 'editor' o 'viewer'
- */
-const AuthUserSchema = z.object({
-  username: z.string(),
-  role: z.enum(["admin", "editor", "viewer"]),
-});
-
-/**
- * Schema Zod para validar el arreglo completo de usuarios estáticos.
- */
-const StaticUsersSchema = z.array(AuthUserSchema);
-
-/**
- * Array tipado de usuarios autenticados.
- * Se llena al parsear la variable de entorno STATIC_USERS.
+ * =========================================================
+ * Static Users
+ * ---------------------------------------------------------
+ * Lista tipada de usuarios autenticados definidos
+ * estáticamente (por ejemplo desde variables de entorno).
+ *
+ * Este array puede ser llenado durante la inicialización
+ * de la aplicación al parsear configuraciones externas.
+ * =========================================================
  */
 let parsedUsers: AuthUser[] = [];
 
-try {
-  parsedUsers = StaticUsersSchema.parse(
-    JSON.parse(process.env.STATIC_USERS || "[]")
-  );
-} catch {
-  throw new Error("STATIC_USERS must be valid JSON with correct structure");
-}
-
 /**
- * Configuración de autenticación exportada para usar en la aplicación.
+ * =========================================================
+ * Authentication Configuration
+ * ---------------------------------------------------------
+ * Configuración central del módulo de autenticación.
+ *
+ * Incluye:
+ * - Nombre de la cookie de sesión
+ * - Tiempo de expiración del token
+ * - Lista de usuarios permitidos
+ * - Hash de contraseña global
+ *
+ * Esta configuración se utiliza en múltiples partes
+ * del sistema de autenticación.
+ * =========================================================
  */
 export const AUTH_CONFIG = {
-  COOKIE_NAME: "authToken",        // Nombre de la cookie para almacenar JWT
-  TOKEN_EXPIRATION: 60 * 60,       // Expiración del token en segundos (1 hora)
-  USERS: parsedUsers,              // Usuarios estáticos validados
-  PASSWORD_HASH: process.env.PASSWORD_HASH, // Hash de contraseña global
+
+  /** Nombre de la cookie donde se almacena el JWT */
+  COOKIE_NAME: "authToken",
+
+  /** Tiempo de expiración del token en segundos (1 hora) */
+  TOKEN_EXPIRATION: 60 * 60,
+
+  /** Lista de usuarios estáticos permitidos */
+  USERS: parsedUsers,
+
+  /** Hash de contraseña global para autenticación */
+  PASSWORD_HASH: process.env.PASSWORD_HASH,
 };
 
 /**
- * Secreto usado para firmar y verificar JWTs.
- * Debe ser seguro (mínimo 32 caracteres).
+ * =========================================================
+ * JWT Secret
+ * ---------------------------------------------------------
+ * Secreto utilizado para:
+ * - Firmar tokens JWT
+ * - Verificar tokens JWT
+ *
+ * Este valor debe mantenerse seguro y nunca exponerse
+ * en el cliente.
+ * =========================================================
  */
 export const JWT_SECRET: string = process.env.JWT_SECRET;

@@ -1,11 +1,12 @@
 import { updateFeatureSchema } from "@/infrastructure/feature/feature.update.dto";
-import { PERMISSIONS } from "@/lib/auth/permissions";
+// import { PERMISSIONS } from "@/lib/auth/permissions";
 import { withAuthorization } from "@/lib/auth/withAuthorization";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { toFeatureEntityDTO } from "@/infrastructure/feature/feature.mapper";
 import { deleteFeature, getFeatureById, updateFeature } from "@/services/features/features.service";
 import { Types } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
+import { PERMISSIONS } from "@/shared/auth/permissions";
 
 /**
  * Valida que un string sea un ObjectId válido de MongoDB
@@ -21,7 +22,7 @@ const isValidObjectId = (id: string) => Types.ObjectId.isValid(id);
  */
 export const GET = withAuthorization(
   PERMISSIONS.READ,
-  async (_: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
+  async (_: NextRequest, { params }: any) => {
     try {
       const { id } = await params;
 
@@ -49,7 +50,7 @@ export const GET = withAuthorization(
  */
 export const PUT = withAuthorization(
   PERMISSIONS.UPDATE,
-  async (req: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
+  async (req: NextRequest, { params }: any) => {
     try {
       const { id } = await params;
 
@@ -80,7 +81,7 @@ export const PUT = withAuthorization(
  */
 export const DELETE = withAuthorization(
   PERMISSIONS.DELETE,
-  async (_: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
+  async (_: NextRequest, { params }: any) => {
     try {
       const { id } = await params;
 

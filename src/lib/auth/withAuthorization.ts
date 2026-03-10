@@ -1,20 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth/session";
 import { authorize } from "@/lib/auth/authorize";
-import { Permission } from "@/lib/auth/permissions";
+import { Permission } from "@/shared/auth/permissions";
 
 /**
- * Contexto opcional que puede incluir parámetros de la ruta
+ * Contexto del handler de la API.
+ *
+ * Permite tipar los parámetros dinámicos de rutas
+ * en endpoints de Next.js.
+ *
+ * Ejemplo:
+ * /api/projects/[id]
  */
 type HandlerContext<P = unknown> = {
-  params: P;
+  params?: P;
 };
 
 /**
- * Tipo de función handler de API Route o Middleware protegido
- * - req: objeto NextRequest
- * - context: contexto adicional con parámetros opcionales
- * - devuelve un NextResponse
+ * Tipo base para handlers de API protegidos.
+ *
+ * Representa una función que:
+ * - recibe la request
+ * - recibe el contexto con parámetros
+ * - devuelve una respuesta NextResponse
  */
 type Handler<P = unknown> = (
   req: NextRequest,
@@ -22,15 +30,29 @@ type Handler<P = unknown> = (
 ) => Promise<NextResponse>;
 
 /**
- * Middleware de autorización para API routes de Next.js
- * 
- * Envuelve un handler y verifica:
- * 1. Que exista sesión de usuario (cookie JWT válida)
- * 2. Que el rol del usuario tenga el permiso requerido
- * 
- * @param permission - Permiso requerido para ejecutar la acción
- * @param handler - Función handler original que se ejecutará si la autorización pasa
- * @returns Nuevo handler que realiza la verificación de sesión y permisos
+ * =========================================================
+ * withAuthorization
+ * ---------------------------------------------------------
+ * Higher Order Function (HOF) que protege endpoints de API
+ * mediante control de permisos basado en roles.
+ *
+ * Funcionalidad:
+ * 1️⃣ Obtiene la sesión del usuario
+ * 2️⃣ Verifica que exista un rol válido
+ * 3️⃣ Evalúa si el rol tiene el permiso requerido
+ * 4️⃣ Si pasa la validación ejecuta el handler original
+ *
+ * En caso contrario:
+ * - Devuelve 401 → usuario no autenticado
+ * - Devuelve 403 → usuario autenticado sin permisos
+ *
+ * Esto permite centralizar la lógica de autorización
+ * y mantener los handlers de API más limpios.
+ *
+ * @param permission Permiso requerido para ejecutar el endpoint
+ * @param handler Handler original de la ruta
+ * @returns Handler protegido con control de acceso
+ * =========================================================
  */
 export function withAuthorization<P>(
   permission: Permission,
@@ -38,10 +60,14 @@ export function withAuthorization<P>(
 ): Handler<P> {
   return async (req, context) => {
     try {
-      // Obtiene la sesión del usuario a partir de la cookie
+      /**
+       * Obtiene la sesión del usuario a partir de la request.
+       */
       const session = await getSession(req);
 
-      // Si no hay sesión o no tiene rol definido, devuelve 401
+      /**
+       * Verifica que exista sesión y rol asociado.
+       */
       if (!session?.role) {
         return NextResponse.json(
           { error: "Unauthorized" },
@@ -49,21 +75,27 @@ export function withAuthorization<P>(
         );
       }
 
-      // Verifica si el rol tiene el permiso requerido
-      const isAuthorized = authorize(session.role, permission);
-
-      // Si no tiene permiso, devuelve 403
-      if (!isAuthorized) {
+      /**
+       * Verifica si el rol del usuario tiene el permiso requerido.
+       */
+      if (!authorize(session.role, permission)) {
         return NextResponse.json(
           { error: "Forbidden" },
           { status: 403 }
         );
       }
 
-      // Usuario autorizado, ejecuta el handler original
+      /**
+       * Si pasa todas las validaciones,
+       * ejecuta el handler original.
+       */
       return handler(req, context);
-    } catch (error) {
-      // Cualquier error en el proceso de autorización devuelve 401
+
+    } catch {
+      /**
+       * Manejo de errores inesperados relacionados
+       * con autenticación o sesión.
+       */
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
