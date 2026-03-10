@@ -61,7 +61,8 @@ const Logout: React.FC = () => {
       const { data: logoutSuccess, error } = await logout(null);
 
       if (logoutSuccess) {
-        router.push("/login");
+        router.replace("/login");
+        router.refresh();
       } else {
         console.warn("Logout error:", error);
       }

@@ -10,7 +10,8 @@
  */
 
 export * from "./category/category.model";
-export * from "./features/feature.model";
+export * from "./feature/feature.model";
 export * from "./project/project.model";
 export * from "./success-case/success-case.model";
 export * from "./technology/technology.model";
+export * from "./user/user.model"

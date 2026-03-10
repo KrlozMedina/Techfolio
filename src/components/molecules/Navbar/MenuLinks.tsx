@@ -8,16 +8,16 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { MenuProps, NavItem } from '@/lib/types/navigation';
 
 /* ==================================================
-   🧭 NAVBAR - MenuLinks Component
-   --------------------------------------------------
-   Navegación principal reutilizable.
+  🧭 NAVBAR - MenuLinks Component
+  --------------------------------------------------
+  Navegación principal reutilizable.
 
-   Características:
-   - Detecta ruta activa
-   - Adapta menú según autenticación
-   - Soporta layout móvil
-   - Soporta modo solo iconos
-   - Internacionalización integrada
+  Características:
+  - Detecta ruta activa
+  - Adapta menú según autenticación
+  - Soporta layout móvil
+  - Soporta modo solo iconos
+  - Internacionalización integrada
 ================================================== */
 
 const ACTIVE_STYLE = { color: 'var(--color-button-hover)' };
@@ -38,8 +38,16 @@ const useActivePath = (): string => {
  * Retorna los ítems del menú según estado de autenticación.
  */
 const useNavItems = (): NavItem[] => {
-  const { data } = useVerifyProfileQuery(null);
-  return navItems(data?.isAuth ?? false) as NavItem[];
+  const { data } = useVerifyProfileQuery(null, {
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true
+  });
+
+  return navItems(
+    data?.isAuth ?? false,
+    data?.role
+  ) as NavItem[];
+
 };
 
 /**

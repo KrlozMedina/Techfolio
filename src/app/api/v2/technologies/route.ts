@@ -1,4 +1,3 @@
-import { PERMISSIONS } from "@/lib/auth";
 import { withAuthorization } from "@/lib/auth/withAuthorization";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
@@ -14,6 +13,7 @@ import { Category } from "@/models/category/category.model";
 import { sanitizeRegex } from "@/lib/db/sanitize-regex";
 import { handleApiError } from "@/lib/http/handle-api-error";
 import { createTechnologySchema } from "@/infrastructure/technology/technology.create.dto";
+import { PERMISSIONS } from "@/shared/auth/permissions";
 
 /**
  * Extensión del query schema base para el endpoint de tecnologías.

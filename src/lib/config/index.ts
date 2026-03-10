@@ -9,4 +9,4 @@
  * - routes: Definiciones y rutas usadas en la navegación de la aplicación.
  */
 
-export * from './routes';
+export * from './routes.config';

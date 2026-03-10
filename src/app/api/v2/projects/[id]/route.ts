@@ -7,10 +7,11 @@ import {
   updateProject,
 } from "@/services/projects/projects.service";
 import { handleApiError } from "@/lib/http/handle-api-error";
-import { PERMISSIONS, withAuthorization } from "@/lib/auth";
+import { withAuthorization } from "@/lib/auth";
 import { querySchema } from "@/shared/interfaces/query.schema";
 import { updateProjectSchema } from "@/infrastructure/project/project.update.dto";
 import { LANGUAGES } from "@/lib/i18n/language";
+import { PERMISSIONS } from "@/shared/auth/permissions";
 
 const isValidObjectId = (id: string) => Types.ObjectId.isValid(id);
 
@@ -78,7 +79,7 @@ export const PUT = withAuthorization(
   PERMISSIONS.UPDATE,
   async (
     req: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: any
   ) => {
     try {
       const { id } = await params;
@@ -117,7 +118,7 @@ export const DELETE = withAuthorization(
   PERMISSIONS.DELETE,
   async (
     _: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: any
   ) => {
     try {
       const { id } = await params;

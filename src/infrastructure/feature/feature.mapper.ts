@@ -35,7 +35,7 @@ import { FeatureEntityDTO } from "@/infrastructure/feature/feature.entity.dto";
 import { FeatureListDTO } from "@/infrastructure/feature/feature.list.dto";
 import { Language } from "@/lib/i18n";
 import { LANGUAGES } from "@/lib/i18n/language";
-import { FeatureDocument } from "@/models/features/feature.document";
+import { FeatureDocument } from "@/models/feature/feature.document";
 
 /**
  * =========================================================
