@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.0](https://github.com/KrlozMedina/Techfolio/compare/techfolio-v4.0.0...techfolio-v4.1.0) (2026-03-10)
+
+
+### Features
+
+* **auth:** implement RBAC and move user authentication to dedicated … ([2e599d2](https://github.com/KrlozMedina/Techfolio/commit/2e599d2862e1b4df5649c9a769d054e4077fabaa))
+* **auth:** implement RBAC and move user authentication to dedicated database ([d7f6da0](https://github.com/KrlozMedina/Techfolio/commit/d7f6da0729d0870c2c77d80aa2914a6b430802ea))
+
 ## [4.0.0](https://github.com/KrlozMedina/Techfolio/compare/techfolio-v3.1.0...techfolio-v4.0.0) (2026-03-08)
 
 
